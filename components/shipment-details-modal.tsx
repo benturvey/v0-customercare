@@ -1,0 +1,507 @@
+"use client"
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Button } from "@/components/ui/button"
+import { ChevronDown } from "lucide-react"
+import { useState } from "react"
+import type { ShipmentDetails } from "@/types/shipment"
+
+interface ShipmentDetailsModalProps {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  details: ShipmentDetails | null
+}
+
+export function ShipmentDetailsModal({
+  open,
+  onOpenChange,
+  details,
+}: ShipmentDetailsModalProps) {
+  const [collectionAddressOpen, setCollectionAddressOpen] = useState(false)
+  const [queryHistoryOpen, setQueryHistoryOpen] = useState(false)
+
+  if (!details) return null
+
+  const detailRows = [
+    [
+      { label: "Consignment No", value: details.consignmentNo },
+      { label: "Insert Date", value: details.insertDate },
+      { label: "Despatch Date", value: details.despatchDate },
+    ],
+    [
+      { label: "Customer", value: details.customer },
+      { label: "Carrier", value: details.carrier },
+      { label: "Service", value: details.service },
+    ],
+    [
+      { label: "Status", value: details.status },
+      { label: "Weight", value: details.weight.toString() },
+      { label: "Content", value: details.content },
+    ],
+    [
+      { label: "Account No", value: details.accountNo },
+      { label: "Contract No", value: details.contractNo },
+      { label: "Contract Comment", value: details.contractComment },
+    ],
+    [
+      { label: "Sender", value: details.sender },
+      { label: "Instructions", value: details.instructions || "-" },
+    ],
+    [
+      { label: "Shipment Ref", value: details.shipmentRef },
+      { label: "Consignment Ref", value: details.consignmentRef || "-" },
+      { label: "Tracking No", value: details.trackingNo || "-" },
+    ],
+    [
+      { label: "Collection ID", value: details.collectionId || "-" },
+      { label: "Origin Depot", value: details.originDepot },
+      { label: "Destination Depot", value: details.destinationDepot },
+    ],
+  ]
+
+  const deliveryAddressRows = details.deliveryAddress ? [
+    [
+      { label: "Contact", value: details.deliveryAddress.contact },
+      { label: "Contact Mobile", value: details.deliveryAddress.contactMobile || "-" },
+      { label: "Contact Phone", value: details.deliveryAddress.contactPhone },
+      { label: "Company", value: details.deliveryAddress.company },
+    ],
+    [
+      { label: "Address Line 1", value: details.deliveryAddress.addressLine1 },
+      { label: "Address Line 2", value: details.deliveryAddress.addressLine2 || "-" },
+      { label: "District", value: details.deliveryAddress.district || "-" },
+      { label: "County", value: details.deliveryAddress.county },
+    ],
+    [
+      { label: "Town", value: details.deliveryAddress.town },
+      { label: "Country", value: details.deliveryAddress.country || "-" },
+      { label: "Postcode", value: details.deliveryAddress.postcode },
+      { label: "Email", value: details.deliveryAddress.email },
+    ],
+  ] : []
+
+  const collectionAddressRows = details.collectionAddress ? [
+    [
+      { label: "Contact", value: details.collectionAddress.contact || "-" },
+      { label: "Contact Mobile", value: details.collectionAddress.contactMobile || "-" },
+      { label: "Contact Phone", value: details.collectionAddress.contactPhone || "-" },
+      { label: "Company", value: details.collectionAddress.company || "-" },
+    ],
+    [
+      { label: "Address Line 1", value: details.collectionAddress.addressLine1 || "-" },
+      { label: "Address Line 2", value: details.collectionAddress.addressLine2 || "-" },
+      { label: "District", value: details.collectionAddress.district || "-" },
+      { label: "County", value: details.collectionAddress.county || "-" },
+    ],
+    [
+      { label: "Town", value: details.collectionAddress.town || "-" },
+      { label: "Country", value: details.collectionAddress.country || "-" },
+      { label: "Postcode", value: details.collectionAddress.postcode || "-" },
+      { label: "Email", value: details.collectionAddress.email || "-" },
+    ],
+  ] : []
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="!w-[98vw] !max-w-[98vw] !h-[95vh] !max-h-[95vh] !translate-x-[-50%] !translate-y-[-50%] overflow-y-auto p-8">
+        <DialogHeader>
+          <DialogTitle className="text-xl font-semibold">
+            View Shipment Details
+          </DialogTitle>
+          <DialogDescription>
+            Shipment and delivery address information for consignment {details.consignmentNo}
+          </DialogDescription>
+        </DialogHeader>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
+          <div className="flex flex-col gap-4">
+            <Card>
+              <CardHeader className="pb-1">
+                <CardTitle className="text-lg font-medium">Shipment Details</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-col gap-4">
+                  {detailRows.map((row, rowIndex) => (
+                    <div key={rowIndex} className="grid grid-cols-3 gap-4">
+                      {row.map((item) => (
+                        <div key={item.label} className="flex flex-col gap-1">
+                          <span className="text-sm font-medium text-muted-foreground">
+                            {item.label}
+                          </span>
+                          <span className="text-sm whitespace-nowrap">
+                            {item.value}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+
+                  <div className="mt-4 pt-4 border-t">
+                    <h4 className="text-sm font-semibold mb-2">Related documents</h4>
+                    <div className="flex flex-col gap-1">
+                      <div className="text-sm">
+                        <span className="text-muted-foreground">Claim ID:</span> 9051562 <span className="text-muted-foreground ml-4">Status:</span> Claim Incomplete
+                      </div>
+                      <div className="text-sm">
+                        <span className="text-muted-foreground">Invoice No:</span> 1374819
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {details.deliveryAddress && (
+              <Card>
+                <CardHeader className="pb-1">
+                  <CardTitle className="text-lg font-medium">Delivery Address</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-col gap-4">
+                    {deliveryAddressRows.map((row, rowIndex) => (
+                      <div key={rowIndex} className="grid grid-cols-4 gap-4">
+                        {row.map((item) => (
+                          <div key={item.label} className="flex flex-col gap-1">
+                            <span className="text-sm font-medium text-muted-foreground">
+                              {item.label}
+                            </span>
+                            <span className="text-sm whitespace-nowrap">
+                              {item.value}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {details.collectionAddress && (
+              <Collapsible open={collectionAddressOpen} onOpenChange={setCollectionAddressOpen}>
+                <Card>
+                  <CardHeader className="pb-1">
+                    <CollapsibleTrigger asChild>
+                      <button className="flex items-center justify-between w-full text-left">
+                        <CardTitle className="text-lg font-medium">Collection Address</CardTitle>
+                        <ChevronDown className={`h-5 w-5 transition-transform ${collectionAddressOpen ? "rotate-180" : ""}`} />
+                      </button>
+                    </CollapsibleTrigger>
+                  </CardHeader>
+                  <CollapsibleContent>
+                    <CardContent>
+                      <div className="flex flex-col gap-4">
+                        {collectionAddressRows.map((row, rowIndex) => (
+                          <div key={rowIndex} className="grid grid-cols-4 gap-4">
+                            {row.map((item) => (
+                              <div key={item.label} className="flex flex-col gap-1">
+                                <span className="text-sm font-medium text-muted-foreground">
+                                  {item.label}
+                                </span>
+                                <span className="text-sm whitespace-nowrap">
+                                  {item.value}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </CollapsibleContent>
+                </Card>
+              </Collapsible>
+            )}
+
+            {details.customsDetails && (
+              <Card>
+                <CardHeader className="pb-1">
+                  <CardTitle className="text-lg font-medium">Customs Details</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-3 gap-4 mb-4">
+                    <div className="flex flex-col gap-1">
+                      <span className="text-sm font-medium text-muted-foreground">EORI Number</span>
+                      <span className="text-sm whitespace-nowrap">{details.customsDetails.eoriNumber || "-"}</span>
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <span className="text-sm font-medium text-muted-foreground">Ioss Number</span>
+                      <span className="text-sm whitespace-nowrap">{details.customsDetails.iossNumber || "-"}</span>
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <span className="text-sm font-medium text-muted-foreground">Consignment Value</span>
+                      <span className="text-sm whitespace-nowrap">{details.customsDetails.consignmentValue || "-"}</span>
+                    </div>
+                  </div>
+                  <div className="rounded-md border overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="whitespace-nowrap">Item</TableHead>
+                          <TableHead className="whitespace-nowrap">Product Description</TableHead>
+                          <TableHead className="whitespace-nowrap">Country of Manufacture</TableHead>
+                          <TableHead className="whitespace-nowrap">Value</TableHead>
+                          <TableHead className="whitespace-nowrap">HS Code</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {details.customsDetails.items && details.customsDetails.items.length > 0 ? (
+                          details.customsDetails.items.map((item) => (
+                            <TableRow key={item.item}>
+                              <TableCell>{item.item}</TableCell>
+                              <TableCell>{item.productDescription || "-"}</TableCell>
+                              <TableCell>{item.countryOfManufacture || "-"}</TableCell>
+                              <TableCell>{item.value || "-"}</TableCell>
+                              <TableCell>{item.hsCode || "-"}</TableCell>
+                            </TableRow>
+                          ))
+                        ) : (
+                          <TableRow>
+                            <TableCell colSpan={5} className="text-center py-4 text-muted-foreground">
+                              No customs items found.
+                            </TableCell>
+                          </TableRow>
+                        )}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+
+          <div className="flex flex-col gap-4">
+            {details.pieces && details.pieces.length > 0 && (
+              <Card>
+                <CardHeader className="pb-1">
+                  <CardTitle className="text-lg font-medium">Pieces</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="rounded-md border overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="whitespace-nowrap">Item No</TableHead>
+                          <TableHead className="whitespace-nowrap">Parcel No</TableHead>
+                          <TableHead className="whitespace-nowrap">Carrier Scan Date</TableHead>
+                          <TableHead className="whitespace-nowrap">Carrier Text</TableHead>
+                          <TableHead className="whitespace-nowrap">Swap</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {details.pieces.map((piece) => (
+                          <TableRow key={piece.itemNo}>
+                            <TableCell>{piece.itemNo}</TableCell>
+                            <TableCell className="font-mono text-sm">{piece.parcelNo}</TableCell>
+                            <TableCell>{piece.carrierScanDate}</TableCell>
+                            <TableCell>{piece.carrierText}</TableCell>
+                            <TableCell>{piece.swap || "-"}</TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {details.pieceHistory && details.pieceHistory.length > 0 && (
+              <Card>
+                <CardHeader className="pb-1">
+                  <CardTitle className="text-lg font-medium">Piece History</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className={`relative ${details.pieceHistory.length > 5 ? "max-h-[400px] overflow-y-auto pr-2" : ""}`}>
+                    {details.pieceHistory.map((history, index) => (
+                      <div key={index} className="flex gap-4 pb-6 last:pb-0">
+                        <div className="flex flex-col items-center">
+                          <div className="w-3 h-3 rounded-full bg-[#98d9ff] shrink-0" />
+                          {index < details.pieceHistory!.length - 1 && (
+                            <div className="w-0.5 h-full bg-border mt-1" />
+                          )}
+                        </div>
+                        <div className="flex-1 pb-2">
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <span>{history.carrierScanDate}</span>
+                            {history.scanDepot && <span>· {history.scanDepot}</span>}
+                            {history.scanDeptName && <span>· {history.scanDeptName}</span>}
+                          </div>
+                          <div className="font-medium text-sm mt-1">
+                            {history.carrierScanText}
+                          </div>
+                          <div className="text-sm text-muted-foreground mt-0.5">
+                            {history.gfsScanText}
+                          </div>
+                          <div className="text-xs text-muted-foreground mt-1">
+                            Received by GFS: {history.receivedByGfs}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            <Card>
+              <CardHeader className="pb-1">
+                <CardTitle className="text-lg font-medium">Queries</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="rounded-md border overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="whitespace-nowrap">No</TableHead>
+                        <TableHead className="whitespace-nowrap">Query ID</TableHead>
+                        <TableHead className="whitespace-nowrap">State</TableHead>
+                        <TableHead className="whitespace-nowrap">Raised By</TableHead>
+                        <TableHead className="whitespace-nowrap">Created Date</TableHead>
+                        <TableHead className="whitespace-nowrap">Preferred Contact Type</TableHead>
+                        <TableHead className="whitespace-nowrap">Tel No</TableHead>
+                        <TableHead className="whitespace-nowrap">Email</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {details.queries && details.queries.length > 0 ? (
+                        details.queries.map((query) => (
+                          <TableRow key={query.no}>
+                            <TableCell>{query.no}</TableCell>
+                            <TableCell>{query.queryId || "-"}</TableCell>
+                            <TableCell>{query.state || "-"}</TableCell>
+                            <TableCell>{query.raisedBy || "-"}</TableCell>
+                            <TableCell>{query.createdDate || "-"}</TableCell>
+                            <TableCell>{query.preferredContactType || "-"}</TableCell>
+                            <TableCell>{query.telNo || "-"}</TableCell>
+                            <TableCell>{query.email || "-"}</TableCell>
+                          </TableRow>
+                        ))
+                      ) : (
+                        <TableRow>
+                          <TableCell colSpan={8} className="text-center py-4 text-muted-foreground">
+                            No queries found.
+                          </TableCell>
+                        </TableRow>
+                      )}
+                    </TableBody>
+                  </Table>
+                </div>
+                <div className="flex justify-end gap-2 mt-4">
+                  <Button 
+                    className="bg-[#009eff] hover:bg-[#007ecc] text-white"
+                    onClick={() => setQueryHistoryOpen(true)}
+                  >
+                    View Query
+                  </Button>
+                  <Button 
+                    className="bg-[#009eff] hover:bg-[#007ecc] text-white"
+                    onClick={() => alert("Raise Query functionality")}
+                  >
+                    Raise Query
+                  </Button>
+                  <Button 
+                    className="bg-[#009eff] hover:bg-[#007ecc] text-white"
+                    onClick={() => alert("Update Query functionality")}
+                  >
+                    Update Query
+                  </Button>
+                  <Button 
+                    className="bg-[#009eff] hover:bg-[#007ecc] text-white"
+                    onClick={() => alert("Resolve Query functionality")}
+                  >
+                    Resolve Query
+                  </Button>
+                  <Button 
+                    className="bg-[#009eff] hover:bg-[#007ecc] text-white"
+                    onClick={() => alert("Defer functionality")}
+                  >
+                    Defer
+                  </Button>
+                  <Button 
+                    className="bg-[#009eff] hover:bg-[#007ecc] text-white"
+                    onClick={() => alert("Review functionality")}
+                  >
+                    Review
+                  </Button>
+                  <Button 
+                    className="bg-[#009eff] hover:bg-[#007ecc] text-white"
+                    onClick={() => alert("Delegate functionality")}
+                  >
+                    Delegate
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </DialogContent>
+
+      <Sheet open={queryHistoryOpen} onOpenChange={setQueryHistoryOpen}>
+        <SheetContent className="w-[600px] sm:w-[800px] sm:max-w-[800px]">
+          <SheetHeader>
+            <SheetTitle className="text-xl font-semibold">Query History</SheetTitle>
+          </SheetHeader>
+          <div className="mt-6">
+            <div className="rounded-md border overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="whitespace-nowrap">Message Time</TableHead>
+                    <TableHead className="whitespace-nowrap">Message Text</TableHead>
+                    <TableHead className="whitespace-nowrap">Source</TableHead>
+                    <TableHead className="whitespace-nowrap">Life Cycle</TableHead>
+                    <TableHead className="whitespace-nowrap">User Name</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {details.queryHistory && details.queryHistory.length > 0 ? (
+                    details.queryHistory.map((item, index) => (
+                      <TableRow key={index}>
+                        <TableCell className="whitespace-nowrap">{item.messageTime}</TableCell>
+                        <TableCell>{item.messageText}</TableCell>
+                        <TableCell>{item.source}</TableCell>
+                        <TableCell>{item.lifeCycle}</TableCell>
+                        <TableCell>{item.userName}</TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={5} className="text-center py-4 text-muted-foreground">
+                        No query history found.
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+        </SheetContent>
+      </Sheet>
+    </Dialog>
+  )
+}
