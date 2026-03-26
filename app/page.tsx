@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { TopNavigation } from "@/components/top-navigation"
 import { ShipmentsView } from "@/components/shipments-view"
+import { OverviewView } from "@/components/overview-view"
 
 function PlaceholderView({ title }: { title: string }) {
   return (
@@ -31,9 +32,12 @@ const viewTitles: Record<string, string> = {
 }
 
 export default function MainPage() {
-  const [activeView, setActiveView] = useState("shipment-search")
+  const [activeView, setActiveView] = useState("overview")
 
   const renderView = () => {
+    if (activeView === "overview") {
+      return <OverviewView />
+    }
     if (activeView === "shipment-search") {
       return <ShipmentsView />
     }
