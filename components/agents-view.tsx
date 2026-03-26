@@ -26,7 +26,7 @@ interface Agent {
   id: string
   name: string
   email: string
-  role: "agent" | "senior" | "team-lead"
+  role: "agent" | "senior" | "team-lead" | "management"
   status: "active" | "inactive"
   currentTickets: number
   expanded: boolean
@@ -335,7 +335,7 @@ export function AgentsView() {
     ))
   }
 
-  const updateRole = (id: string, role: "agent" | "senior" | "team-lead") => {
+  const updateRole = (id: string, role: "agent" | "senior" | "team-lead" | "management") => {
     setAgents(agents.map(agent =>
       agent.id === id ? { ...agent, role } : agent
     ))
@@ -435,6 +435,7 @@ export function AgentsView() {
                     <SelectItem value="agent">Agent</SelectItem>
                     <SelectItem value="senior">Senior</SelectItem>
                     <SelectItem value="team-lead">Team Lead</SelectItem>
+                    <SelectItem value="management">Management</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -604,6 +605,7 @@ export function AgentsView() {
                 <SelectItem value="agent">Agent</SelectItem>
                 <SelectItem value="senior">Senior</SelectItem>
                 <SelectItem value="team-lead">Team Lead</SelectItem>
+                <SelectItem value="management">Management</SelectItem>
               </SelectContent>
             </Select>
           </div>
