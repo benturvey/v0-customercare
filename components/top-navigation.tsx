@@ -11,7 +11,6 @@ const navItems: NavItem[] = [
   { id: "overview", label: "Overview" },
   { id: "ticket-queue", label: "Ticket Queue" },
   { id: "shipment-search", label: "Shipment Search" },
-  { id: "ticket-search", label: "Ticket Search" },
   { id: "routing-rules", label: "Routing Rules" },
   { id: "agents", label: "Agents" },
   { id: "customers", label: "Customers" },
