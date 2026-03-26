@@ -22,9 +22,9 @@ const ticketData = [
   { id: "#4709696", category: "RETURN_TO_SENDER", customer: "HIGH STREET TV", carrier: "EVRI", agent: "Marcus Webb", status: "In Progress" },
   { id: "#4709691", category: "WHERE_IS_MY_PARCEL", customer: "BAKER ROSS LTD", carrier: "DPD", agent: "Sarah Chen", status: "In Progress" },
   { id: "#4709690", category: "WHERE_IS_MY_PARCEL", customer: "MAMAS & PAPAS", carrier: "DHL ECOMMERCE UK", agent: "Marcus Webb", status: "In Progress" },
-  { id: "#4709688", category: "RETURN_TO_SENDER", customer: "PROCOOK UK LTD", carrier: "", agent: "Sarah Chen", status: "In Progress" },
+  { id: "#4709688", category: "RETURN_TO_SENDER", customer: "PROCOOK UK LTD", carrier: "UPS", agent: "Sarah Chen", status: "In Progress" },
   { id: "#4709685", category: "RETURN_TO_SENDER", customer: "THE DUNE GROUP", carrier: "EVRI", agent: "Marcus Webb", status: "In Progress" },
-  { id: "#4709684", category: "RETURN_TO_SENDER", customer: "PROCOOK UK LTD", carrier: "", agent: "Sarah Chen", status: "In Progress" },
+  { id: "#4709684", category: "RETURN_TO_SENDER", customer: "PROCOOK UK LTD", carrier: "DPD LOCAL", agent: "Sarah Chen", status: "In Progress" },
   { id: "#4709683", category: "WHERE_IS_MY_PARCEL", customer: "WOODLAND GROUP LIMITED - WGAC", carrier: "EVRI", agent: "Marcus Webb", status: "In Progress" },
   { id: "#4709682", category: "WHERE_IS_MY_PARCEL", customer: "WOODLAND-DONCASTER2025", carrier: "EVRI", agent: "Sarah Chen", status: "In Progress" },
 ]
