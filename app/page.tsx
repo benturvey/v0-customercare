@@ -4,6 +4,7 @@ import { useState } from "react"
 import { TopNavigation } from "@/components/top-navigation"
 import { ShipmentsView } from "@/components/shipments-view"
 import { OverviewView } from "@/components/overview-view"
+import { TicketQueueView } from "@/components/ticket-queue-view"
 
 function PlaceholderView({ title }: { title: string }) {
   return (
@@ -37,6 +38,9 @@ export default function MainPage() {
   const renderView = () => {
     if (activeView === "overview") {
       return <OverviewView />
+    }
+    if (activeView === "ticket-queue") {
+      return <TicketQueueView />
     }
     if (activeView === "shipment-search") {
       return <ShipmentsView />
