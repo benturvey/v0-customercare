@@ -31,9 +31,9 @@ const ticketData = [
 
 const filters = [
   { label: "All Statuses", options: ["All Statuses", "In Progress", "Unassigned", "Deferred", "Resolved"] },
-  { label: "All Carriers", options: ["All Carriers", "UK MAIL", "hermes", "dpd", "gfs international", "nightfreight"] },
+  { label: "All Carriers", options: ["All Carriers", "DHL ECOMMERCE UK", "EVRI", "DPD", "GFS INTERNATIONAL", "DX FREIGHT", "UPS"] },
   { label: "All Customers", options: ["All Customers", "BRINDISA LIMITED", "ABBOTT LYON LTD", "MAMAS & PAPAS", "PROCOOK UK LTD"] },
-  { label: "All Agents", options: ["All Agents", "Sarah Chen", "Marcus Webb"] },
+  { label: "All Agents", options: ["All Agents", "Aaron Doherty", "Alex Lucy", "Andrei Costea"] },
   { label: "All Regions", options: ["All Regions", "UK", "EU", "US"] },
 ]
 
