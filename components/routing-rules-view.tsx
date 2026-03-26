@@ -29,10 +29,10 @@ interface RoutingRule {
 }
 
 const initialRules: RoutingRule[] = [
-  { id: "#82a5", agent: "Sarah Chen", tags: ["carrier:dpd", "region:domestic"], priority: 10, active: true },
-  { id: "#82a7", agent: "Marcus Webb", tags: ["carrier:royal-mail"], priority: 10, active: true },
-  { id: "#82a6", agent: "Sarah Chen", tags: ["region:international"], priority: 5, active: true },
-  { id: "#82a8", agent: "Marcus Webb", tags: ["type:collection"], priority: 8, active: true },
+  { id: "#82a5", agent: "Aaron Doherty", tags: ["carrier:evri", "region:domestic"], priority: 10, active: true },
+  { id: "#82a7", agent: "Alex Lucy", tags: ["carrier:evri"], priority: 10, active: true },
+  { id: "#82a6", agent: "Aaron Doherty", tags: ["carrier:dpd"], priority: 5, active: true },
+  { id: "#82a8", agent: "Alex Lucy", tags: ["customer:abbott lyon"], priority: 8, active: true },
 ]
 
 const availableTags = [
@@ -49,8 +49,8 @@ export function RoutingRulesView() {
   const [priority, setPriority] = useState("10")
 
   const handleTagToggle = (tagId: string) => {
-    setSelectedTags(prev => 
-      prev.includes(tagId) 
+    setSelectedTags(prev =>
+      prev.includes(tagId)
         ? prev.filter(t => t !== tagId)
         : [...prev, tagId]
     )
@@ -120,9 +120,9 @@ export function RoutingRulesView() {
                     <Button variant="outline" size="sm" className="h-8">
                       Edit
                     </Button>
-                    <Button 
-                      variant="destructive" 
-                      size="sm" 
+                    <Button
+                      variant="destructive"
+                      size="sm"
                       className="h-8 bg-red-600 hover:bg-red-700"
                       onClick={() => handleDelete(rule.id)}
                     >
@@ -139,7 +139,7 @@ export function RoutingRulesView() {
       {/* Add Routing Rule Form */}
       <div className="border border-border rounded-lg bg-card p-6">
         <h2 className="text-lg font-semibold text-[#1e3a5f] mb-4">Add Routing Rule</h2>
-        
+
         <div className="flex flex-wrap items-end gap-6">
           <div className="flex flex-col gap-2">
             <label className="text-sm text-muted-foreground">Agent</label>
@@ -185,7 +185,7 @@ export function RoutingRulesView() {
             />
           </div>
 
-          <Button 
+          <Button
             onClick={handleSaveRule}
             className="bg-[#1a1a1a] hover:bg-[#333] text-white"
           >
