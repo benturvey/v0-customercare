@@ -13,7 +13,7 @@ interface Customer {
 }
 
 const initialCustomers: Customer[] = [
-  { id: "1", company: "ABBOTT LYON LTD", tickets: 32, customTags: [] },
+  { id: "1", company: "ABBOTT LYON LTD", tickets: 32, customTags: [routing: focus] },
   { id: "2", company: "ACAI OUTDOORWEAR LTD", tickets: 2, customTags: [] },
   { id: "3", company: "AGTC LIMITED", tickets: 30, customTags: [] },
   { id: "4", company: "ANDERTONS MUSIC COMPANY", tickets: 8, customTags: [] },
@@ -35,8 +35,8 @@ export function CustomersView() {
 
   const handleSaveTags = (customerId: string) => {
     if (tagInput.trim()) {
-      setCustomers(customers.map(c => 
-        c.id === customerId 
+      setCustomers(customers.map(c =>
+        c.id === customerId
           ? { ...c, customTags: [...c.customTags, tagInput.trim()] }
           : c
       ))
@@ -45,8 +45,8 @@ export function CustomersView() {
   }
 
   const handleRemoveTag = (customerId: string, tagIndex: number) => {
-    setCustomers(customers.map(c => 
-      c.id === customerId 
+    setCustomers(customers.map(c =>
+      c.id === customerId
         ? { ...c, customTags: c.customTags.filter((_, i) => i !== tagIndex) }
         : c
     ))
@@ -85,12 +85,12 @@ export function CustomersView() {
                       {customer.customTags.length > 0 && (
                         <div className="flex flex-wrap gap-1">
                           {customer.customTags.map((tag, index) => (
-                            <span 
-                              key={index} 
+                            <span
+                              key={index}
                               className="inline-flex items-center gap-1 px-2 py-0.5 bg-muted rounded text-xs"
                             >
                               {tag}
-                              <button 
+                              <button
                                 onClick={() => handleRemoveTag(customer.id, index)}
                                 className="hover:text-destructive"
                               >
@@ -113,9 +113,9 @@ export function CustomersView() {
                             }
                           }}
                         />
-                        <Button 
-                          size="sm" 
-                          variant="outline" 
+                        <Button
+                          size="sm"
+                          variant="outline"
                           className="h-9 text-sm px-4"
                           onClick={() => handleSaveTags(customer.id)}
                         >
@@ -124,16 +124,16 @@ export function CustomersView() {
                       </div>
                       {/* Save and Cancel buttons */}
                       <div className="flex items-center gap-2">
-                        <Button 
-                          size="sm" 
+                        <Button
+                          size="sm"
                           className="h-9 text-sm px-4 bg-[#1a1a1a] hover:bg-[#2a2a2a] text-white"
                           onClick={handleCloseEdit}
                         >
                           Save
                         </Button>
-                        <Button 
-                          size="sm" 
-                          variant="outline" 
+                        <Button
+                          size="sm"
+                          variant="outline"
                           className="h-9 text-sm px-4"
                           onClick={handleCloseEdit}
                         >
@@ -143,15 +143,15 @@ export function CustomersView() {
                     </div>
                   ) : (
                     <span className="text-muted-foreground">
-                      {customer.customTags.length > 0 
-                        ? customer.customTags.join(", ") 
+                      {customer.customTags.length > 0
+                        ? customer.customTags.join(", ")
                         : "—"}
                     </span>
                   )}
                 </td>
                 <td className="py-4 px-4 text-center">
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     size="sm"
                     className="text-xs"
                     onClick={() => handleEditTags(customer.id)}
