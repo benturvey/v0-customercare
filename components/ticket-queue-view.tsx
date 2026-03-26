@@ -12,8 +12,8 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 const ticketData = [
-  { id: "#4709718", category: "WHERE_IS_MY_PARCEL", customer: "BRINDISA LIMITED", carrier: "DHL ECOMMERCE UK", agent: "Sarah Chen", status: "In Progress" },
-  { id: "#4709717", category: "DELIVERY_DISPUTED", customer: "ABBOTT LYON LTD", carrier: "GFS INTERNATIONAL", agent: "Marcus Webb", status: "In Progress" },
+  { id: "#4709718", category: "WHERE_IS_MY_PARCEL", customer: "BRINDISA LIMITED", carrier: "DHL ECOMMERCE UK", agent: "Sarah Chen", status: "Unassigned" },
+  { id: "#4709717", category: "DELIVERY_DISPUTED", customer: "ABBOTT LYON LTD", carrier: "GFS INTERNATIONAL", agent: "Marcus Webb", status: "Unassigned" },
   { id: "#4709709", category: "DELIVERY_DISPUTED", customer: "ABBOTT LYON LTD", carrier: "GFS INTERNATIONAL", agent: "Sarah Chen", status: "In Progress" },
   { id: "#4709708", category: "RETURN_TO_SENDER", customer: "ABBOTT LYON LTD", carrier: "EVRI", agent: "Marcus Webb", status: "In Progress" },
   { id: "#4709707", category: "WHERE_IS_MY_PARCEL", customer: "MILNER OFF ROAD", carrier: "EVRI", agent: "Sarah Chen", status: "In Progress" },
