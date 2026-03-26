@@ -5,6 +5,7 @@ import { TopNavigation } from "@/components/top-navigation"
 import { ShipmentsView } from "@/components/shipments-view"
 import { OverviewView } from "@/components/overview-view"
 import { TicketQueueView } from "@/components/ticket-queue-view"
+import { RoutingRulesView } from "@/components/routing-rules-view"
 
 function PlaceholderView({ title }: { title: string }) {
   return (
@@ -44,6 +45,9 @@ export default function MainPage() {
     }
     if (activeView === "shipment-search") {
       return <ShipmentsView />
+    }
+    if (activeView === "routing-rules") {
+      return <RoutingRulesView />
     }
     return <PlaceholderView title={viewTitles[activeView] || "Unknown"} />
   }
