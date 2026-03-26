@@ -13,7 +13,7 @@ interface Customer {
 }
 
 const initialCustomers: Customer[] = [
-  { id: "1", company: "ABBOTT LYON LTD", tickets: 32, customTags: [routing: focus] },
+  { id: "1", company: "ABBOTT LYON LTD", tickets: 32, customTags: ["routing: focus"] },
   { id: "2", company: "ACAI OUTDOORWEAR LTD", tickets: 2, customTags: [] },
   { id: "3", company: "AGTC LIMITED", tickets: 30, customTags: [] },
   { id: "4", company: "ANDERTONS MUSIC COMPANY", tickets: 8, customTags: [] },
