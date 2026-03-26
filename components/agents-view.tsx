@@ -26,7 +26,7 @@ interface Agent {
   id: string
   name: string
   email: string
-  role: "agent" | "team-lead"
+  role: "agent" | "senior" | "team-lead"
   status: "active" | "inactive"
   currentTickets: number
   expanded: boolean
@@ -92,7 +92,7 @@ export function AgentsView() {
     ))
   }
 
-  const updateRole = (id: string, role: "agent" | "team-lead") => {
+  const updateRole = (id: string, role: "agent" | "senior" | "team-lead") => {
     setAgents(agents.map(agent => 
       agent.id === id ? { ...agent, role } : agent
     ))
@@ -190,6 +190,7 @@ export function AgentsView() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="agent">Agent</SelectItem>
+                    <SelectItem value="senior">Senior</SelectItem>
                     <SelectItem value="team-lead">Team Lead</SelectItem>
                   </SelectContent>
                 </Select>
@@ -353,12 +354,13 @@ export function AgentsView() {
           </div>
           <div className="w-[140px]">
             <label className="block text-sm font-medium text-muted-foreground mb-1.5">Role</label>
-            <Select value={newAgent.role} onValueChange={(value: "agent" | "team-lead") => setNewAgent({ ...newAgent, role: value })}>
+            <Select value={newAgent.role} onValueChange={(value: "agent" | "senior" | "team-lead") => setNewAgent({ ...newAgent, role: value })}>
               <SelectTrigger className="bg-background">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="agent">Agent</SelectItem>
+                <SelectItem value="senior">Senior</SelectItem>
                 <SelectItem value="team-lead">Team Lead</SelectItem>
               </SelectContent>
             </Select>
