@@ -18,8 +18,36 @@ const stats = [
 ]
 
 const agents = [
-  { name: "Sarah Chen", currentTicket: null, status: "Idle" },
-  { name: "Marcus Webb", currentTicket: null, status: "Idle" },
+  { name: "Aaron Doherty", currentTicket: null, status: "Idle" },
+  { name: "Alex Lucy", currentTicket: null, status: "Idle" },
+  { name: "Andrei Costea", currentTicket: null, status: "Idle" },
+  { name: "Annette Davidson", currentTicket: null, status: "Idle" },
+  { name: "Apryl Watson", currentTicket: null, status: "Idle" },
+  { name: "Arlene Griffin", currentTicket: null, status: "Idle" },
+  { name: "Audrey Johnson", currentTicket: null, status: "Idle" },
+  { name: "Ben Lund", currentTicket: null, status: "Idle" },
+  { name: "Danielle Marcroft", currentTicket: null, status: "Idle" },
+  { name: "Francine Payne", currentTicket: null, status: "Idle" },
+  { name: "George Lilliston", currentTicket: null, status: "Idle" },
+  { name: "Georgia Collins", currentTicket: null, status: "Idle" },
+  { name: "Ibrahim Anidi", currentTicket: null, status: "Idle" },
+  { name: "Kimberley McCormick", currentTicket: null, status: "Idle" },
+  { name: "Kirsty Doyle", currentTicket: null, status: "Idle" },
+  { name: "Lee Higgins", currentTicket: null, status: "Idle" },
+  { name: "Lisa Yates", currentTicket: null, status: "Idle" },
+  { name: "Lucy King", currentTicket: null, status: "Idle" },
+  { name: "Lynn Forrest", currentTicket: null, status: "Idle" },
+  { name: "Olivia Liburd", currentTicket: null, status: "Idle" },
+  { name: "Patricia McGuire", currentTicket: null, status: "Idle" },
+  { name: "Rachel Martin", currentTicket: null, status: "Idle" },
+  { name: "Rebecca Gibson", currentTicket: null, status: "Idle" },
+  { name: "Sarah Adams", currentTicket: null, status: "Idle" },
+  { name: "Sarah Tshikuna", currentTicket: null, status: "Idle" },
+  { name: "Sharon Pearce", currentTicket: null, status: "Idle" },
+  { name: "Sue Foster", currentTicket: null, status: "Idle" },
+  { name: "Tracey Crooke", currentTicket: null, status: "Idle" },
+  { name: "Tracey Johnson", currentTicket: null, status: "Idle" },
+  { name: "Vicky Lomax", currentTicket: null, status: "Idle" },
 ]
 
 export function OverviewView() {
