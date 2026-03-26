@@ -44,8 +44,8 @@ const initialAgents: Agent[] = [
   },
   {
     id: "2",
-    name: "Marcus Webb",
-    email: "agent2@timbits.local",
+    name: "Alex Lucy",
+    email: "alex.lucy@gfsdeliver.com",
     role: "agent",
     status: "active",
     currentTickets: 0,
@@ -53,8 +53,8 @@ const initialAgents: Agent[] = [
   },
   {
     id: "3",
-    name: "Priya Patel",
-    email: "lead@timbits.local",
+    name: "Andrei Costea",
+    email: "andrei.costea@gfsdeliver.com",
     role: "team-lead",
     status: "active",
     currentTickets: 0,
@@ -64,9 +64,9 @@ const initialAgents: Agent[] = [
 
 const initialRoutingRules: RoutingRule[] = [
   { id: "#82a5", agentId: "1", agentName: "Aaron Doherty", tags: ["carrier:dpd", "region:domestic"], priority: 10, active: true },
-  { id: "#82a7", agentId: "2", agentName: "Marcus Webb", tags: ["carrier:royal-mail"], priority: 10, active: true },
+  { id: "#82a7", agentId: "2", agentName: "Alex Lucy", tags: ["carrier:royal-mail"], priority: 10, active: true },
   { id: "#82a6", agentId: "1", agentName: "Aaron Doherty", tags: ["region:international"], priority: 5, active: true },
-  { id: "#82a8", agentId: "2", agentName: "Marcus Webb", tags: ["type:collection"], priority: 8, active: true },
+  { id: "#82a8", agentId: "2", agentName: "Alex Lucy", tags: ["type:collection"], priority: 8, active: true },
 ]
 
 const availableTags = ["CONTACT", "first"]
