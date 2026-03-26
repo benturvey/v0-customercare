@@ -55,7 +55,115 @@ const initialAgents: Agent[] = [
     id: "3",
     name: "Andrei Costea",
     email: "andrei.costea@gfsdeliver.com",
-    role: "team-lead",
+    role: "agent",
+    status: "active",
+    currentTickets: 0,
+    expanded: false,
+  },
+  {
+    id: "4",
+    name: "Annette Davidson",
+    email: "annette.davidson@gfsdeliver.com",
+    role: "agent",
+    status: "active",
+    currentTickets: 0,
+    expanded: false,
+  },
+  {
+    id: "5",
+    name: "Apryl Watson",
+    email: "apryl.watson@gfsdeliver.com",
+    role: "agent",
+    status: "active",
+    currentTickets: 0,
+    expanded: false,
+  },
+  {
+    id: "6",
+    name: "Arlene Griffin",
+    email: "arlene.griffin@gfsdeliver.com",
+    role: "agent",
+    status: "active",
+    currentTickets: 0,
+    expanded: false,
+  },
+  {
+    id: "7",
+    name: "Audrey Johnson",
+    email: "audrey.johnson@gfsdeliver.com",
+    role: "agent",
+    status: "active",
+    currentTickets: 0,
+    expanded: false,
+  },
+  {
+    id: "8",
+    name: "Danielle Marcroft",
+    email: "danielle.marcroft@gfsdeliver.com",
+    role: "agent",
+    status: "active",
+    currentTickets: 0,
+    expanded: false,
+  },
+  {
+    id: "9",
+    name: "Francine Payne",
+    email: "francine.payne@gfsdeliver.com",
+    role: "team lead",
+    status: "active",
+    currentTickets: 0,
+    expanded: false,
+  },
+  {
+    id: "10",
+    name: "George Lilliston",
+    email: "george.lilliston@gfsdeliver.com",
+    role: "agent",
+    status: "active",
+    currentTickets: 0,
+    expanded: false,
+  },
+  {
+    id: "11",
+    name: "Georgia Collins",
+    email: "georgia.collins@gfsdeliver.com",
+    role: "agent",
+    status: "active",
+    currentTickets: 0,
+    expanded: false,
+  },
+  {
+    id: "12",
+    name: "Ibrahim Anidi",
+    email: "ibrahim.anidi@gfsdeliver.com",
+    role: "agent",
+    status: "active",
+    currentTickets: 0,
+    expanded: false,
+  },
+  {
+    id: "13",
+    name: "Kimberley McCormick",
+    email: "kimberley.mcCormick@gfsdeliver.com",
+    role: "team lead",
+    status: "active",
+    currentTickets: 0,
+    expanded: false,
+  },
+  {
+    id: "14",
+    name: "Kirsty Doyle",
+    email: "kirsty.doyle@gfsdeliver.com",
+    role: "agent",
+    status: "active",
+    currentTickets: 0,
+    expanded: false,
+  },
+  {
+    id: "15",
+    name: "Lee Higgins",
+    email: "lee.higgins@gfsdeliver.com",
+    role: "agent",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -87,19 +195,19 @@ export function AgentsView() {
   })
 
   const toggleExpand = (id: string) => {
-    setAgents(agents.map(agent => 
+    setAgents(agents.map(agent =>
       agent.id === id ? { ...agent, expanded: !agent.expanded } : agent
     ))
   }
 
   const updateRole = (id: string, role: "agent" | "senior" | "team-lead") => {
-    setAgents(agents.map(agent => 
+    setAgents(agents.map(agent =>
       agent.id === id ? { ...agent, role } : agent
     ))
   }
 
   const toggleStatus = (id: string) => {
-    setAgents(agents.map(agent => 
+    setAgents(agents.map(agent =>
       agent.id === id ? { ...agent, status: agent.status === "active" ? "inactive" : "active" } : agent
     ))
   }
@@ -142,7 +250,7 @@ export function AgentsView() {
   const toggleRuleTag = (tag: string) => {
     setNewRule(prev => ({
       ...prev,
-      tags: prev.tags.includes(tag) 
+      tags: prev.tags.includes(tag)
         ? prev.tags.filter(t => t !== tag)
         : [...prev.tags, tag]
     }))
@@ -175,7 +283,7 @@ export function AgentsView() {
         {agents.map((agent) => (
           <div key={agent.id} className="border-b border-border last:border-b-0">
             <div className="grid grid-cols-[40px_1fr_1fr_150px_100px_120px_120px] gap-4 px-4 py-3 items-center">
-              <button 
+              <button
                 onClick={() => toggleExpand(agent.id)}
                 className="flex items-center justify-center text-muted-foreground hover:text-foreground"
               >
@@ -196,18 +304,17 @@ export function AgentsView() {
                 </Select>
               </div>
               <div>
-                <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${
-                  agent.status === "active" 
-                    ? "bg-teal-100 text-teal-800" 
-                    : "bg-gray-100 text-gray-800"
-                }`}>
+                <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${agent.status === "active"
+                  ? "bg-teal-100 text-teal-800"
+                  : "bg-gray-100 text-gray-800"
+                  }`}>
                   {agent.status === "active" ? "Active" : "Inactive"}
                 </span>
               </div>
               <div className="text-sm text-foreground text-center">{agent.currentTickets}</div>
               <div>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   size="sm"
                   onClick={() => toggleStatus(agent.id)}
                   className="text-xs"
@@ -220,7 +327,7 @@ export function AgentsView() {
               <div className="px-4 py-6 bg-muted/20 border-t border-border">
                 {/* Routing Rules Section */}
                 <h3 className="text-xl font-semibold text-[#1e3a5f] mb-4">Routing Rules</h3>
-                
+
                 {/* Routing Rules Table */}
                 <div className="border border-border rounded-lg bg-card mb-6">
                   {/* Table Header */}
@@ -255,9 +362,9 @@ export function AgentsView() {
                         <Button variant="outline" size="sm" className="text-xs">
                           Edit
                         </Button>
-                        <Button 
-                          variant="destructive" 
-                          size="sm" 
+                        <Button
+                          variant="destructive"
+                          size="sm"
                           className="text-xs bg-red-600 hover:bg-red-700"
                           onClick={() => handleDeleteRule(rule.id)}
                         >
@@ -315,7 +422,7 @@ export function AgentsView() {
                         className="bg-background"
                       />
                     </div>
-                    <Button 
+                    <Button
                       onClick={() => handleAddRule(agent.id, agent.name)}
                       className="bg-[#1a1a1a] hover:bg-[#2a2a2a] text-white"
                     >
@@ -375,7 +482,7 @@ export function AgentsView() {
               className="bg-background"
             />
           </div>
-          <Button 
+          <Button
             onClick={handleCreateAgent}
             className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white"
           >
