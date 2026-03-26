@@ -80,29 +80,33 @@ export function CustomersView() {
                 <td className="py-4 px-4 text-sm text-center text-foreground">{customer.tickets}</td>
                 <td className="py-4 px-4 text-sm text-center">
                   {editingId === customer.id ? (
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="flex flex-wrap justify-center gap-1">
-                        {customer.customTags.map((tag, index) => (
-                          <span 
-                            key={index} 
-                            className="inline-flex items-center gap-1 px-2 py-0.5 bg-muted rounded text-xs"
-                          >
-                            {tag}
-                            <button 
-                              onClick={() => handleRemoveTag(customer.id, index)}
-                              className="hover:text-destructive"
+                    <div className="flex flex-col items-start gap-3">
+                      {/* Display existing tags */}
+                      {customer.customTags.length > 0 && (
+                        <div className="flex flex-wrap gap-1">
+                          {customer.customTags.map((tag, index) => (
+                            <span 
+                              key={index} 
+                              className="inline-flex items-center gap-1 px-2 py-0.5 bg-muted rounded text-xs"
                             >
-                              <X className="h-3 w-3" />
-                            </button>
-                          </span>
-                        ))}
-                      </div>
+                              {tag}
+                              <button 
+                                onClick={() => handleRemoveTag(customer.id, index)}
+                                className="hover:text-destructive"
+                              >
+                                <X className="h-3 w-3" />
+                              </button>
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                      {/* Input row with Add button */}
                       <div className="flex items-center gap-2">
                         <Input
                           value={tagInput}
                           onChange={(e) => setTagInput(e.target.value)}
-                          placeholder="Add tag..."
-                          className="h-7 w-32 text-xs"
+                          placeholder="e.g. custom:vip"
+                          className="h-9 w-48 text-sm rounded-full border-border"
                           onKeyDown={(e) => {
                             if (e.key === "Enter") {
                               handleSaveTags(customer.id)
@@ -112,18 +116,28 @@ export function CustomersView() {
                         <Button 
                           size="sm" 
                           variant="outline" 
-                          className="h-7 text-xs"
+                          className="h-9 text-sm px-4"
                           onClick={() => handleSaveTags(customer.id)}
                         >
                           Add
                         </Button>
+                      </div>
+                      {/* Save and Cancel buttons */}
+                      <div className="flex items-center gap-2">
                         <Button 
                           size="sm" 
-                          variant="ghost" 
-                          className="h-7 text-xs"
+                          className="h-9 text-sm px-4 bg-[#1a1a1a] hover:bg-[#2a2a2a] text-white"
                           onClick={handleCloseEdit}
                         >
-                          Done
+                          Save
+                        </Button>
+                        <Button 
+                          size="sm" 
+                          variant="outline" 
+                          className="h-9 text-sm px-4"
+                          onClick={handleCloseEdit}
+                        >
+                          Cancel
                         </Button>
                       </div>
                     </div>
