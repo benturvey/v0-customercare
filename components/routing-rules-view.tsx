@@ -40,7 +40,7 @@ const availableTags = [
   { id: "first", label: "first" },
 ]
 
-const agents = ["Sarah Chen", "Marcus Webb"]
+const agents = ["Aaron Doherty", "Alex Lucy", "Andrei Costea", "Annette Davidson", "Apryl Watson"]
 
 export function RoutingRulesView() {
   const [rules, setRules] = useState<RoutingRule[]>(initialRules)
