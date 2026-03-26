@@ -7,6 +7,7 @@ import { OverviewView } from "@/components/overview-view"
 import { TicketQueueView } from "@/components/ticket-queue-view"
 import { RoutingRulesView } from "@/components/routing-rules-view"
 import { AgentsView } from "@/components/agents-view"
+import { TaggingRulesView } from "@/components/tagging-rules-view"
 
 function PlaceholderView({ title }: { title: string }) {
   return (
@@ -52,6 +53,9 @@ export default function MainPage() {
     }
     if (activeView === "agents") {
       return <AgentsView />
+    }
+    if (activeView === "tagging-rules") {
+      return <TaggingRulesView />
     }
     return <PlaceholderView title={viewTitles[activeView] || "Unknown"} />
   }
