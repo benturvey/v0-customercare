@@ -285,6 +285,24 @@ const initialAgents: Agent[] = [
     currentTickets: 0,
     expanded: false,
   },
+  {
+    id: "28",
+    name: "Ben Lund",
+    email: "ben.lund@gfsdeliver.com",
+    role: "team-lead",
+    status: "active",
+    currentTickets: 0,
+    expanded: false,
+  },
+  {
+    id: "29",
+    name: "Vicky Lomax",
+    email: "vicky.lomax@gfsdeliver.com",
+    role: "team-lead",
+    status: "active",
+    currentTickets: 0,
+    expanded: false,
+  },
 ]
 
 const initialRoutingRules: RoutingRule[] = [
