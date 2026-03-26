@@ -12,21 +12,21 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 const ticketData = [
-  { id: "#4709718", category: "WHERE_IS_MY_PARCEL", customer: "BRINDISA LIMITED", carrier: "UK MAIL", agent: "Sarah Chen", status: "In Progress" },
-  { id: "#4709717", category: "DELIVERY_DISPUTED", customer: "ABBOTT LYON LTD", carrier: "gfs international", agent: "Marcus Webb", status: "In Progress" },
-  { id: "#4709709", category: "DELIVERY_DISPUTED", customer: "ABBOTT LYON LTD", carrier: "gfs international", agent: "Sarah Chen", status: "In Progress" },
-  { id: "#4709708", category: "RETURN_TO_SENDER", customer: "ABBOTT LYON LTD", carrier: "hermes", agent: "Marcus Webb", status: "In Progress" },
-  { id: "#4709707", category: "WHERE_IS_MY_PARCEL", customer: "MILNER OFF ROAD", carrier: "hermes", agent: "Sarah Chen", status: "In Progress" },
-  { id: "#4709706", category: "DELIVERY_DISPUTED", customer: "MAMAS & PAPAS", carrier: "uk mail", agent: "Marcus Webb", status: "In Progress" },
-  { id: "#4709697", category: "RETURN_TO_SENDER", customer: "GALLEON SUPPLIES LIMITED", carrier: "nightfreight", agent: "Sarah Chen", status: "In Progress" },
-  { id: "#4709696", category: "RETURN_TO_SENDER", customer: "HIGH STREET TV", carrier: "hermes", agent: "Marcus Webb", status: "In Progress" },
-  { id: "#4709691", category: "WHERE_IS_MY_PARCEL", customer: "BAKER ROSS LTD", carrier: "dpd", agent: "Sarah Chen", status: "In Progress" },
-  { id: "#4709690", category: "WHERE_IS_MY_PARCEL", customer: "MAMAS & PAPAS", carrier: "uk mail", agent: "Marcus Webb", status: "In Progress" },
+  { id: "#4709718", category: "WHERE_IS_MY_PARCEL", customer: "BRINDISA LIMITED", carrier: "DHL ECOMMERCE UK", agent: "Sarah Chen", status: "In Progress" },
+  { id: "#4709717", category: "DELIVERY_DISPUTED", customer: "ABBOTT LYON LTD", carrier: "GFS INTERNATIONAL", agent: "Marcus Webb", status: "In Progress" },
+  { id: "#4709709", category: "DELIVERY_DISPUTED", customer: "ABBOTT LYON LTD", carrier: "GFS INTERNATIONAL", agent: "Sarah Chen", status: "In Progress" },
+  { id: "#4709708", category: "RETURN_TO_SENDER", customer: "ABBOTT LYON LTD", carrier: "EVRI", agent: "Marcus Webb", status: "In Progress" },
+  { id: "#4709707", category: "WHERE_IS_MY_PARCEL", customer: "MILNER OFF ROAD", carrier: "EVRI", agent: "Sarah Chen", status: "In Progress" },
+  { id: "#4709706", category: "DELIVERY_DISPUTED", customer: "MAMAS & PAPAS", carrier: "DHL ECOMMERCE UK", agent: "Marcus Webb", status: "In Progress" },
+  { id: "#4709697", category: "RETURN_TO_SENDER", customer: "GALLEON SUPPLIES LIMITED", carrier: "DX FREIGHT", agent: "Sarah Chen", status: "In Progress" },
+  { id: "#4709696", category: "RETURN_TO_SENDER", customer: "HIGH STREET TV", carrier: "EVRI", agent: "Marcus Webb", status: "In Progress" },
+  { id: "#4709691", category: "WHERE_IS_MY_PARCEL", customer: "BAKER ROSS LTD", carrier: "DPD", agent: "Sarah Chen", status: "In Progress" },
+  { id: "#4709690", category: "WHERE_IS_MY_PARCEL", customer: "MAMAS & PAPAS", carrier: "DHL ECOMMERCE UK", agent: "Marcus Webb", status: "In Progress" },
   { id: "#4709688", category: "RETURN_TO_SENDER", customer: "PROCOOK UK LTD", carrier: "", agent: "Sarah Chen", status: "In Progress" },
-  { id: "#4709685", category: "RETURN_TO_SENDER", customer: "THE DUNE GROUP", carrier: "hermes", agent: "Marcus Webb", status: "In Progress" },
+  { id: "#4709685", category: "RETURN_TO_SENDER", customer: "THE DUNE GROUP", carrier: "EVRI", agent: "Marcus Webb", status: "In Progress" },
   { id: "#4709684", category: "RETURN_TO_SENDER", customer: "PROCOOK UK LTD", carrier: "", agent: "Sarah Chen", status: "In Progress" },
-  { id: "#4709683", category: "WHERE_IS_MY_PARCEL", customer: "WOODLAND GROUP LIMITED - WGAC", carrier: "hermes", agent: "Marcus Webb", status: "In Progress" },
-  { id: "#4709682", category: "WHERE_IS_MY_PARCEL", customer: "WOODLAND-DONCASTER2025", carrier: "hermes", agent: "Sarah Chen", status: "In Progress" },
+  { id: "#4709683", category: "WHERE_IS_MY_PARCEL", customer: "WOODLAND GROUP LIMITED - WGAC", carrier: "EVRI", agent: "Marcus Webb", status: "In Progress" },
+  { id: "#4709682", category: "WHERE_IS_MY_PARCEL", customer: "WOODLAND-DONCASTER2025", carrier: "EVRI", agent: "Sarah Chen", status: "In Progress" },
 ]
 
 const filters = [
@@ -125,9 +125,8 @@ export function TicketQueueView() {
             {ticketData.map((ticket, index) => (
               <tr
                 key={ticket.id}
-                className={`border-b border-border last:border-b-0 ${
-                  index % 2 === 0 ? "bg-background" : "bg-muted/20"
-                } hover:bg-muted/40 transition-colors`}
+                className={`border-b border-border last:border-b-0 ${index % 2 === 0 ? "bg-background" : "bg-muted/20"
+                  } hover:bg-muted/40 transition-colors`}
               >
                 <td className="px-4 py-3 text-sm font-medium text-[#1e3a5f]">
                   {ticket.id}
