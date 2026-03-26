@@ -4,6 +4,7 @@ import { useState } from "react"
 import { ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   Select,
   SelectContent,
@@ -11,6 +12,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+
+interface RoutingRule {
+  id: string
+  agentId: string
+  agentName: string
+  tags: string[]
+  priority: number
+  active: boolean
+}
 
 interface Agent {
   id: string
@@ -52,13 +62,28 @@ const initialAgents: Agent[] = [
   },
 ]
 
+const initialRoutingRules: RoutingRule[] = [
+  { id: "#82a5", agentId: "1", agentName: "Sarah Chen", tags: ["carrier:dpd", "region:domestic"], priority: 10, active: true },
+  { id: "#82a7", agentId: "2", agentName: "Marcus Webb", tags: ["carrier:royal-mail"], priority: 10, active: true },
+  { id: "#82a6", agentId: "1", agentName: "Sarah Chen", tags: ["region:international"], priority: 5, active: true },
+  { id: "#82a8", agentId: "2", agentName: "Marcus Webb", tags: ["type:collection"], priority: 8, active: true },
+]
+
+const availableTags = ["CONTACT", "first"]
+
 export function AgentsView() {
   const [agents, setAgents] = useState<Agent[]>(initialAgents)
+  const [routingRules, setRoutingRules] = useState<RoutingRule[]>(initialRoutingRules)
   const [newAgent, setNewAgent] = useState({
     name: "",
     email: "",
     role: "agent" as "agent" | "team-lead",
     password: "",
+  })
+  const [newRule, setNewRule] = useState({
+    agentId: "1",
+    tags: [] as string[],
+    priority: 10,
   })
 
   const toggleExpand = (id: string) => {
@@ -93,6 +118,38 @@ export function AgentsView() {
       setAgents([...agents, agent])
       setNewAgent({ name: "", email: "", role: "agent", password: "" })
     }
+  }
+
+  const handleAddRule = (agentId: string, agentName: string) => {
+    if (newRule.tags.length > 0) {
+      const rule: RoutingRule = {
+        id: `#${Math.random().toString(36).substr(2, 4)}`,
+        agentId,
+        agentName,
+        tags: newRule.tags,
+        priority: newRule.priority,
+        active: true,
+      }
+      setRoutingRules([...routingRules, rule])
+      setNewRule({ agentId: "1", tags: [], priority: 10 })
+    }
+  }
+
+  const handleDeleteRule = (ruleId: string) => {
+    setRoutingRules(routingRules.filter(rule => rule.id !== ruleId))
+  }
+
+  const toggleRuleTag = (tag: string) => {
+    setNewRule(prev => ({
+      ...prev,
+      tags: prev.tags.includes(tag) 
+        ? prev.tags.filter(t => t !== tag)
+        : [...prev.tags, tag]
+    }))
+  }
+
+  const getAgentRules = (agentId: string) => {
+    return routingRules.filter(rule => rule.agentId === agentId)
   }
 
   return (
@@ -159,8 +216,112 @@ export function AgentsView() {
               </div>
             </div>
             {agent.expanded && (
-              <div className="px-4 py-3 bg-muted/20 border-t border-border">
-                <p className="text-sm text-muted-foreground">Additional agent details would appear here.</p>
+              <div className="px-4 py-6 bg-muted/20 border-t border-border">
+                {/* Routing Rules Section */}
+                <h3 className="text-xl font-semibold text-[#1e3a5f] mb-4">Routing Rules</h3>
+                
+                {/* Routing Rules Table */}
+                <div className="border border-border rounded-lg bg-card mb-6">
+                  {/* Table Header */}
+                  <div className="grid grid-cols-[80px_140px_1fr_100px_80px_140px] gap-4 px-4 py-3 border-b border-border bg-muted/30">
+                    <div className="text-sm font-medium text-muted-foreground">Rule</div>
+                    <div className="text-sm font-medium text-muted-foreground">Agent</div>
+                    <div className="text-sm font-medium text-muted-foreground">Tags</div>
+                    <div className="text-sm font-medium text-muted-foreground">Priority</div>
+                    <div className="text-sm font-medium text-muted-foreground">Active</div>
+                    <div className="text-sm font-medium text-muted-foreground">Actions</div>
+                  </div>
+
+                  {/* Table Body */}
+                  {getAgentRules(agent.id).map((rule) => (
+                    <div key={rule.id} className="grid grid-cols-[80px_140px_1fr_100px_80px_140px] gap-4 px-4 py-3 items-center border-b border-border last:border-b-0">
+                      <div className="text-sm text-muted-foreground">{rule.id}</div>
+                      <div className="text-sm text-foreground">{rule.agentName}</div>
+                      <div className="flex flex-wrap gap-2">
+                        {rule.tags.map((tag) => (
+                          <span key={tag} className="inline-flex items-center px-2.5 py-0.5 rounded border border-border text-xs font-medium text-muted-foreground">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="text-sm text-foreground text-center">{rule.priority}</div>
+                      <div>
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-[#1a1a1a] text-white">
+                          Active
+                        </span>
+                      </div>
+                      <div className="flex gap-2">
+                        <Button variant="outline" size="sm" className="text-xs">
+                          Edit
+                        </Button>
+                        <Button 
+                          variant="destructive" 
+                          size="sm" 
+                          className="text-xs bg-red-600 hover:bg-red-700"
+                          onClick={() => handleDeleteRule(rule.id)}
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+
+                  {getAgentRules(agent.id).length === 0 && (
+                    <div className="px-4 py-6 text-center text-sm text-muted-foreground">
+                      No routing rules for this agent.
+                    </div>
+                  )}
+                </div>
+
+                {/* Add Routing Rule Form */}
+                <div className="border border-border rounded-lg bg-card p-6">
+                  <h4 className="text-lg font-semibold text-[#1e3a5f] mb-4">Add Routing Rule</h4>
+                  <div className="flex items-end gap-4 flex-wrap">
+                    <div className="w-[160px]">
+                      <label className="block text-sm font-medium text-muted-foreground mb-1.5">Agent</label>
+                      <Select value={agent.id} disabled>
+                        <SelectTrigger className="bg-background">
+                          <SelectValue>{agent.name}</SelectValue>
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value={agent.id}>{agent.name}</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-muted-foreground mb-1.5">Tags</label>
+                      <div className="flex flex-col gap-1">
+                        {availableTags.map((tag) => (
+                          <div key={tag} className="flex items-center gap-2">
+                            <Checkbox
+                              id={`tag-${agent.id}-${tag}`}
+                              checked={newRule.tags.includes(tag)}
+                              onCheckedChange={() => toggleRuleTag(tag)}
+                            />
+                            <label htmlFor={`tag-${agent.id}-${tag}`} className="text-sm text-muted-foreground">
+                              {tag}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="w-[100px]">
+                      <label className="block text-sm font-medium text-muted-foreground mb-1.5">Priority</label>
+                      <Input
+                        type="number"
+                        value={newRule.priority}
+                        onChange={(e) => setNewRule({ ...newRule, priority: parseInt(e.target.value) || 0 })}
+                        className="bg-background"
+                      />
+                    </div>
+                    <Button 
+                      onClick={() => handleAddRule(agent.id, agent.name)}
+                      className="bg-[#1a1a1a] hover:bg-[#2a2a2a] text-white"
+                    >
+                      Save Rule
+                    </Button>
+                  </div>
+                </div>
               </div>
             )}
           </div>
