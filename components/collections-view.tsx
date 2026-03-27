@@ -90,8 +90,8 @@ const sampleCollections: Shipment[] = [
 
 export function CollectionsView() {
   const [filters, setFilters] = useState<ShipmentFiltersType>({
-    customer: "mamaspapas",
-    carrier: "",
+    customer: "",
+    carrier: "dpd",
     service: "",
     consignmentNo: "",
     parcelNo: "",
