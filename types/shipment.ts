@@ -156,13 +156,12 @@ export const DESPATCH_DATE_PERIODS = [
 ] as const
 
 export const CUSTOMERS = [
-  { value: "mamaspapas", label: "MAMAS & PAPAS" },
   { value: "abbottlyon", label: "ABBOTT LYON LTD" },
-  { value: "customer1", label: "ABC Company Ltd" },
-  { value: "customer2", label: "XYZ Industries" },
-  { value: "customer3", label: "Global Trading Co" },
-  { value: "customer4", label: "Tech Solutions Inc" },
-  { value: "customer5", label: "European Exports" },
+  { value: "crewclothing", label: "CREW CLOTHING CO LIMITED" },
+  { value: "mamaspapas", label: "MAMAS & PAPAS" },
+  { value: "okadirect", label: "OKA DIRECT LIMITED" },
+  { value: "robertwelch", label: "ROBERT WELCH DESIGNS LIMITED" },
+  { value: "servicelogistics", label: "SERVICE LOGISTICS" },
 ] as const
 
 export const CARRIERS = [
