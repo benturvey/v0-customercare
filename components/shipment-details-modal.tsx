@@ -28,7 +28,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-import { ChevronDown } from "lucide-react"
+import { ChevronDown, User } from "lucide-react"
 import { useState } from "react"
 import type { ShipmentDetails } from "@/types/shipment"
 
@@ -45,6 +45,15 @@ export function ShipmentDetailsModal({
 }: ShipmentDetailsModalProps) {
   const [collectionAddressOpen, setCollectionAddressOpen] = useState(false)
   const [queryHistoryOpen, setQueryHistoryOpen] = useState(false)
+  const [customerContactModalOpen, setCustomerContactModalOpen] = useState(false)
+
+  // Customer contact details
+  const customerContactDetails = {
+    contactName: "Charlie Eaves",
+    contactPhone: "+44 7525 594149",
+    contactEmails: ["helen.collett@crewclothing.co.uk", "josh.harwood@crewclothing.co.uk"],
+    address: "TORQUE LOGISTICS, WORTLEY MOOR RD, LEEDS, LS12 4JH",
+  }
 
   if (!details) return null
 
@@ -147,20 +156,35 @@ export function ShipmentDetailsModal({
               </CardHeader>
               <CardContent>
                 <div className="flex flex-col gap-4">
-                  {detailRows.map((row, rowIndex) => (
-                    <div key={rowIndex} className="grid grid-cols-3 gap-4">
-                      {row.map((item) => (
-                        <div key={item.label} className="flex flex-col gap-1">
-                          <span className="text-sm font-medium text-muted-foreground">
-                            {item.label}
-                          </span>
-                          <span className="text-sm whitespace-nowrap">
-                            {item.value}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  ))}
+{detailRows.map((row, rowIndex) => (
+                                    <div key={rowIndex} className="grid grid-cols-3 gap-4">
+                                      {row.map((item) => (
+                                        <div key={item.label} className="flex flex-col gap-1">
+                                          <span className="text-sm font-medium text-muted-foreground">
+                                            {item.label}
+                                          </span>
+                                          {item.label === "Customer" ? (
+                                            <div className="flex items-center gap-2">
+                                              <span className="text-sm whitespace-nowrap">
+                                                {item.value}
+                                              </span>
+                                              <button
+                                                onClick={() => setCustomerContactModalOpen(true)}
+                                                className="p-1 rounded hover:bg-muted transition-colors"
+                                                title="View Customer Contact Details"
+                                              >
+                                                <User className="h-4 w-4 text-[#009eff]" />
+                                              </button>
+                                            </div>
+                                          ) : (
+                                            <span className="text-sm whitespace-nowrap">
+                                              {item.value}
+                                            </span>
+                                          )}
+                                        </div>
+                                      ))}
+                                    </div>
+                                  ))}
 
                   <div className="mt-4 pt-4 border-t">
                     <h4 className="text-sm font-semibold mb-2">Related documents</h4>
@@ -502,6 +526,47 @@ export function ShipmentDetailsModal({
           </div>
         </SheetContent>
       </Sheet>
+
+      {/* Customer Contact Details Modal */}
+      <Dialog open={customerContactModalOpen} onOpenChange={setCustomerContactModalOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-semibold">Customer Contact Details</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 pt-4">
+            <div>
+              <p className="text-sm text-muted-foreground">Contact Name</p>
+              <p className="font-medium">{customerContactDetails.contactName}</p>
+            </div>
+            <div>
+              <p className="text-sm text-muted-foreground">Contact Phone</p>
+              <p className="font-medium">{customerContactDetails.contactPhone}</p>
+            </div>
+            <div>
+              <p className="text-sm text-muted-foreground">Contact Email</p>
+              <div className="flex flex-wrap gap-2 mt-1">
+                {customerContactDetails.contactEmails.map((email, index) => (
+                  <span
+                    key={index}
+                    className="inline-flex items-center px-2.5 py-1 rounded-md bg-muted text-sm font-medium"
+                  >
+                    {email}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <p className="text-sm text-muted-foreground">Address</p>
+              <p className="font-medium">{customerContactDetails.address}</p>
+            </div>
+          </div>
+          <div className="flex justify-end pt-4">
+            <Button variant="outline" onClick={() => setCustomerContactModalOpen(false)}>
+              Close
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </Dialog>
   )
 }
