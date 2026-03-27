@@ -95,8 +95,15 @@ export function CollectionDetailsModal({ collection, open, onClose }: Collection
 
   const pieceHistory = [
     { date: "16/03/2026 10:38", location: "LEEDS", status: "DELIVERED, RECEIVED BY SARAH", description: "DELIVERED", receivedBy: "Received by GFS: 16/03/2026 10:59" },
-    { date: "18/03/2026 19:44", location: "HUB 3 - BHAM", status: "CONFIRMED AT HUB", description: "ARRIVED AT HUB", receivedBy: "Received by GFS: 18/03/2026 20:18" },
-    { date: "18/03/2026 11:37", location: "WARRINGTON", status: "RECONSIGN DATA RECEIVED", description: "RETURN TO SENDER - IN PROCESS", receivedBy: "" },
+    { date: "16/03/2026 07:45", location: "LEEDS", status: "OUT FOR DELIVERY", description: "OUT FOR DELIVERY", receivedBy: "Received by GFS: 16/03/2026 07:56" },
+    { date: "16/03/2026 02:23", location: "LEEDS", status: "CONFIRMED AT DEPOT", description: "YOUR PARCEL HAS ARRIVED AT THE DELIVERY DEPOT", receivedBy: "Received by GFS: 16/03/2026 06:02" },
+    { date: "16/03/2026 02:17", location: "LEEDS", status: "PARCEL LABEL APPLIED", description: "PARCEL LABEL APPLIED", receivedBy: "Received by GFS: 16/03/2026 06:02" },
+    { date: "14/03/2026 03:55", location: "LEEDS", status: "PARCEL LEFT DEPOT", description: "DEPARTED DEPOT", receivedBy: "Received by GFS: 14/03/2026 07:34" },
+    { date: "13/03/2026 20:35", location: "HUB 5 - HINCKLEY", status: "CONFIRMED AT HUB", description: "ARRIVED AT HUB", receivedBy: "Received by GFS: 13/03/2026 20:54" },
+    { date: "13/03/2026 16:31", location: "BOURNEMOUTH", status: "PARCEL LEFT DEPOT", description: "DEPARTED DEPOT", receivedBy: "Received by GFS: 13/03/2026 16:52" },
+    { date: "13/03/2026 16:27", location: "BOURNEMOUTH", status: "PARCEL LABEL APPLIED", description: "PARCEL LABEL APPLIED", receivedBy: "Received by GFS: 13/03/2026 17:36" },
+    { date: "13/03/2026 15:05", location: "BOURNEMOUTH", status: "COLLECTED FROM SENDER", description: "COLLECTED", receivedBy: "Received by GFS: 13/03/2026 15:11" },
+    { date: "13/03/2026 15:05", location: "BOURNEMOUTH", status: "PARCEL DATA ENTERED", description: "PARCEL DATA RECEIVED - AWAITING CARRIER SCAN", receivedBy: "Received by GFS: 13/03/2026 15:31" },
   ]
 
   const queries = [
