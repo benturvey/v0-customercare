@@ -86,12 +86,15 @@ export function CollectionDetailsModal({ collection, open, onClose }: Collection
   }
 
   const pieces = [
-    { itemNo: 1, parcelNo: "15508036013418", carrierScanDate: "19/03/2026 04:37", carrierText: "PARCEL LABEL APPLIED", swap: "-" },
-    { itemNo: 2, parcelNo: "15508036013411", carrierScanDate: "19/03/2026 04:37", carrierText: "PARCEL LABEL APPLIED", swap: "-" },
+    { itemNo: 1, parcelNo: "15502088322873", carrierScanDate: "16/03/2026 10:38", carrierText: "DELIVERED, RECEIVED BY SARAH", swap: "-" },
+    { itemNo: 2, parcelNo: "15502088322874", carrierScanDate: "16/03/2026 10:38", carrierText: "DELIVERED, RECEIVED BY SARAH", swap: "-" },
+    { itemNo: 3, parcelNo: "15502088322875", carrierScanDate: "16/03/2026 10:38", carrierText: "DELIVERED, RECEIVED BY SARAH", swap: "-" },
+    { itemNo: 4, parcelNo: "15502088322876", carrierScanDate: "16/03/2026 10:38", carrierText: "DELIVERED, RECEIVED BY SARAH", swap: "-" },
+    { itemNo: 5, parcelNo: "15502088322877", carrierScanDate: "16/03/2026 10:38", carrierText: "DELIVERED, RECEIVED BY SARAH", swap: "-" },
   ]
 
   const pieceHistory = [
-    { date: "19/03/2026 00:48", location: "WARRINGTON", status: "CONFIRMED AT DEPOT", description: "YOUR PARCEL HAS ARRIVED AT THE DELIVERY DEPOT", receivedBy: "Received by GFS: 19/03/2026 05:03" },
+    { date: "16/03/2026 10:38", location: "WARRINGTON", status: "CONFIRMED AT DEPOT", description: "YOUR PARCEL HAS ARRIVED AT THE DELIVERY DEPOT", receivedBy: "Received by GFS: 19/03/2026 05:03" },
     { date: "18/03/2026 19:44", location: "HUB 3 - BHAM", status: "CONFIRMED AT HUB", description: "ARRIVED AT HUB", receivedBy: "Received by GFS: 18/03/2026 20:18" },
     { date: "18/03/2026 11:37", location: "WARRINGTON", status: "RECONSIGN DATA RECEIVED", description: "RETURN TO SENDER - IN PROCESS", receivedBy: "" },
   ]
