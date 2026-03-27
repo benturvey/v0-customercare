@@ -44,22 +44,22 @@ export function CollectionDetailsModal({ collection, open, onClose }: Collection
 
   // Sample data for the modal
   const shipmentDetails = {
-    consignmentNo: collection.consignmentNo || "15500306013410",
-    insertDate: "16/03/2026 15:56:00",
-    despatchDate: "14/03/2026",
+    consignmentNo: collection.consignmentNo || "15508022322873",
+    insertDate: "13/03/2026 15:07:04",
+    despatchDate: "13/03/2026",
     customer: collection.customer,
     carrier: collection.carrier,
     service: collection.serviceDescr,
-    status: "PARCEL LABEL APPLIED",
-    weight: "3.56",
-    content: "Baby Goods",
-    accountNo: "423596",
+    status: "DELIVERED",
+    weight: "500",
+    content: "N/A",
+    accountNo: "119258",
     contractNo: collection.contractNo,
-    contractComment: "DPD Snuzkot",
+    contractComment: "DPD B2B Crew Clothing Retail",
     sender: collection.customer,
-    instructions: "-",
-    shipmentRef: "67020805",
-    consignmentRef: "67020805",
+    instructions: "from store",
+    shipmentRef: "consolidation",
+    consignmentRef: "",
     trackingNo: "-",
     collectionId: collection.collectionId,
     originDepot: "-",
@@ -67,24 +67,22 @@ export function CollectionDetailsModal({ collection, open, onClose }: Collection
   }
 
   const relatedDocuments = {
-    claimId: "9051562",
-    status: "Claim Incomplete",
     invoiceNo: "1374819",
   }
 
   const deliveryAddress = {
-    contact: "LAURA STEELE",
-    contactMobile: "+447935387279",
-    contactPhone: "+447935387279",
-    company: "LAURA STEELE",
-    addressLine1: "17 SHADEWOOD CRESCENT",
+    contact: "store manager",
+    contactMobile: "01943662900",
+    contactPhone: "",
+    company: "crew clothing",
+    addressLine1: "22 the grove",
     addressLine2: "-",
     district: "-",
-    county: "",
-    town: "GRAPPENHALL",
+    county: "west yorkshire",
+    town: "ilkley",
     country: "GB",
-    postcode: "WA4 2SN",
-    email: "LAURASTEELE@LIVE.CO.UK",
+    postcode: "ls29 9eg",
+    email: "ilkley@crewclothing.co.uk",
   }
 
   const pieces = [
