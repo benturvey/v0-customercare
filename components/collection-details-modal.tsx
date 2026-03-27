@@ -107,7 +107,7 @@ export function CollectionDetailsModal({ collection, open, onClose }: Collection
   ]
 
   const queries = [
-    { no: 1, queryId: "4696387", state: "Open", raisedBy: "Arfeen Mulla", createdDate: "18/03/2026", preferredContactType: "none", telNo: "-", email: "arfeen.mulla@mamasandpapas.com" },
+    { no: , queryId: "", state: "", raisedBy: "", createdDate: "", preferredContactType: "", telNo: "-", email: "" },
   ]
 
   const customsItems = [
