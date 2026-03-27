@@ -4,7 +4,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
 import {
   Select,
   SelectContent,
@@ -160,62 +159,16 @@ export function CollectionFilters({
           </div>
         </div>
 
-        {/* Checkboxes and Buttons Row */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-6 pt-4 border-t">
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-            <div className="flex items-center space-x-2">
-              <Checkbox
-                id="includeExceptions"
-                checked={filters.includeExceptions}
-                onCheckedChange={(checked) =>
-                  updateFilter("includeExceptions", checked === true)
-                }
-                className="data-[state=checked]:bg-[#009eff] data-[state=checked]:border-[#009eff]"
-              />
-              <Label htmlFor="includeExceptions" className="cursor-pointer">
-                Include Exceptions
-              </Label>
-            </div>
-
-            <div className="flex items-center space-x-2">
-              <Checkbox
-                id="exceptionsOnly"
-                checked={filters.exceptionsOnly}
-                onCheckedChange={(checked) =>
-                  updateFilter("exceptionsOnly", checked === true)
-                }
-                className="data-[state=checked]:bg-[#009eff] data-[state=checked]:border-[#009eff]"
-              />
-              <Label htmlFor="exceptionsOnly" className="cursor-pointer">
-                Exceptions Only
-              </Label>
-            </div>
-
-            <div className="flex items-center space-x-2">
-              <Checkbox
-                id="includeDeleted"
-                checked={filters.includeDeleted}
-                onCheckedChange={(checked) =>
-                  updateFilter("includeDeleted", checked === true)
-                }
-                className="data-[state=checked]:bg-[#009eff] data-[state=checked]:border-[#009eff]"
-              />
-              <Label htmlFor="includeDeleted" className="cursor-pointer">
-                Include Deleted Collections
-              </Label>
-            </div>
-          </div>
-
-          <div className="flex gap-2">
-            <Button variant="outline" onClick={onReset}>
-              <RotateCcw className="h-4 w-4 mr-2" />
-              Reset
-            </Button>
-            <Button onClick={onSearch} className="bg-[#009eff] hover:bg-[#007ecc] text-white">
-              <Search className="h-4 w-4 mr-2" />
-              Search
-            </Button>
-          </div>
+        {/* Buttons Row */}
+        <div className="flex justify-end gap-2 mt-6 pt-4 border-t">
+          <Button variant="outline" onClick={onReset}>
+            <RotateCcw className="h-4 w-4 mr-2" />
+            Reset
+          </Button>
+          <Button onClick={onSearch} className="bg-[#009eff] hover:bg-[#007ecc] text-white">
+            <Search className="h-4 w-4 mr-2" />
+            Search
+          </Button>
         </div>
       </CardContent>
     </Card>
