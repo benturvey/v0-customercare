@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { X, ChevronDown, ChevronUp } from "lucide-react"
+import { X, ChevronDown, ChevronUp, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -39,6 +39,15 @@ interface CollectionDetailsModalProps {
 
 export function CollectionDetailsModal({ collection, open, onClose }: CollectionDetailsModalProps) {
   const [collectionAddressOpen, setCollectionAddressOpen] = useState(false)
+  const [customerContactModalOpen, setCustomerContactModalOpen] = useState(false)
+
+  // Sample customer contact data
+  const customerContactDetails = {
+    contactName: "John Smith",
+    contactPhone: "+44 1onal 123456",
+    contactEmail: "contact@crewclothing.co.uk",
+    address: "Crew Clothing Co Limited, 3 Kingsland Court, Three Bridges Road, Crawley, West Sussex, RH10 1HL, United Kingdom",
+  }
 
   if (!collection) return null
 
@@ -142,7 +151,16 @@ export function CollectionDetailsModal({ collection, open, onClose }: Collection
                 </div>
                 <div>
                   <p className="text-muted-foreground">Customer</p>
-                  <p className="font-medium">{shipmentDetails.customer}</p>
+                  <div className="flex items-center gap-2">
+                    <p className="font-medium">{shipmentDetails.customer}</p>
+                    <button
+                      onClick={() => setCustomerContactModalOpen(true)}
+                      className="p-1 rounded hover:bg-muted transition-colors"
+                      title="View Customer Contact Details"
+                    >
+                      <User className="h-4 w-4 text-[#009eff]" />
+                    </button>
+                  </div>
                 </div>
                 <div>
                   <p className="text-muted-foreground">Carrier</p>
@@ -476,6 +494,38 @@ export function CollectionDetailsModal({ collection, open, onClose }: Collection
           </div>
         </div>
       </DialogContent>
+
+      {/* Customer Contact Details Modal */}
+      <Dialog open={customerContactModalOpen} onOpenChange={setCustomerContactModalOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-semibold">Customer Contact Details</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 pt-4">
+            <div>
+              <p className="text-sm text-muted-foreground">Contact Name</p>
+              <p className="font-medium">{customerContactDetails.contactName}</p>
+            </div>
+            <div>
+              <p className="text-sm text-muted-foreground">Contact Phone</p>
+              <p className="font-medium">{customerContactDetails.contactPhone}</p>
+            </div>
+            <div>
+              <p className="text-sm text-muted-foreground">Contact Email</p>
+              <p className="font-medium">{customerContactDetails.contactEmail}</p>
+            </div>
+            <div>
+              <p className="text-sm text-muted-foreground">Address</p>
+              <p className="font-medium">{customerContactDetails.address}</p>
+            </div>
+          </div>
+          <div className="flex justify-end pt-4">
+            <Button variant="outline" onClick={() => setCustomerContactModalOpen(false)}>
+              Close
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </Dialog>
   )
 }
