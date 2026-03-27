@@ -188,6 +188,11 @@ export function ShipmentTable({ shipments }: ShipmentTableProps) {
   const [selectedDetails, setSelectedDetails] = useState<ShipmentDetails | null>(null)
 
   const formatDate = (dateString: string) => {
+    // Date is already in DD/MM/YYYY format, just return it
+    if (dateString.includes("/")) {
+      return dateString
+    }
+    // Fallback for other formats
     const date = new Date(dateString)
     return date.toLocaleDateString("en-GB", {
       day: "2-digit",
