@@ -42,7 +42,7 @@ const sampleCollections: Collection[] = [
     contractNo: "5638",
   },
   {
-    collectionId: "1071002",
+    collectionId: "1072651",
     carrier: "DPD",
     customer: "BROMPTON BICYCLE LIMITED",
     serviceCode: "11",
