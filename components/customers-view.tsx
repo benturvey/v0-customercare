@@ -10,21 +10,21 @@ interface Customer {
   company: string
   contact: string
   telephone: string
-  email: string
+  emails: string[]
   receiveEmails: boolean
   tickets: number
   customTags: string[]
 }
 
 const initialCustomers: Customer[] = [
-  { id: "1", company: "ABBOTT LYON LTD", contact: "", telephone: "", email: "vicky.lomax@gfsdeliver.com", receiveEmails: false, tickets: 32, customTags: ["routing: focus"] },
-  { id: "2", company: "CREW CLOTHING CO LIMITED", contact: "Charlie Eaves", telephone: "+44 7525 594149", email: "helen.collett@crewclothing.co.uk", receiveEmails: true, tickets: 2, customTags: [] },
-  { id: "3", company: "MAMAS & PAPAS", contact: "", telephone: "01484 438394", email: "deliveries@mamasandpapas.com", receiveEmails: false, tickets: 30, customTags: [] },
-  { id: "4", company: "OKA DIRECT LIMITED", contact: "Christopher Ferguson", telephone: "01235433933", email: " customerservice@oka.com", receiveEmails: true, tickets: 8, customTags: [] },
-  { id: "5", company: "ROBERT WELCH DESIGNS LIMITED", contact: "John Wright", telephone: "01386 840880", email: "help@robertwelch.com", receiveEmails: true, tickets: 5, customTags: [] },
-  { id: "6", company: "SERVICE LOGISTICS", contact: "", telephone: "03456200000", email: "customer.service@servicelogistics.co.uk", receiveEmails: true, tickets: 1, customTags: [] },
-  { id: "7", company: "SMEG (UK) LIMITED", contact: "Debra Spinks", telephone: "", email: "operations@smeguk.com", receiveEmails: true, tickets: 2, customTags: [] },
-  { id: "8", company: "THE CAMBIUM GROUP UK HOLDINGS LIMITED", contact: "Lauren Pound", telephone: "01225615141", email: "lauren@thecambiumgroup.co.uk", receiveEmails: false, tickets: 10, customTags: [] },
+  { id: "1", company: "ABBOTT LYON LTD", contact: "", telephone: "", emails: ["vicky.lomax@gfsdeliver.com"], receiveEmails: false, tickets: 32, customTags: ["routing: focus"] },
+  { id: "2", company: "CREW CLOTHING CO LIMITED", contact: "Charlie Eaves", telephone: "+44 7525 594149", emails: ["helen.collett@crewclothing.co.uk", "josh.harwood@crewclothing.co.uk"], receiveEmails: true, tickets: 2, customTags: [] },
+  { id: "3", company: "MAMAS & PAPAS", contact: "", telephone: "01484 438394", emails: ["deliveries@mamasandpapas.com"], receiveEmails: false, tickets: 30, customTags: [] },
+  { id: "4", company: "OKA DIRECT LIMITED", contact: "Christopher Ferguson", telephone: "01235433933", emails: ["customerservice@oka.com"], receiveEmails: true, tickets: 8, customTags: [] },
+  { id: "5", company: "ROBERT WELCH DESIGNS LIMITED", contact: "John Wright", telephone: "01386 840880", emails: ["help@robertwelch.com", "sales@robertwelch.com"], receiveEmails: true, tickets: 5, customTags: [] },
+  { id: "6", company: "SERVICE LOGISTICS", contact: "", telephone: "03456200000", emails: ["customer.service@servicelogistics.co.uk"], receiveEmails: true, tickets: 1, customTags: [] },
+  { id: "7", company: "SMEG (UK) LIMITED", contact: "Debra Spinks", telephone: "", emails: ["operations@smeguk.com", "support@smeguk.com"], receiveEmails: true, tickets: 2, customTags: [] },
+  { id: "8", company: "THE CAMBIUM GROUP UK HOLDINGS LIMITED", contact: "Lauren Pound", telephone: "01225615141", emails: ["lauren@thecambiumgroup.co.uk"], receiveEmails: false, tickets: 10, customTags: [] },
 ]
 
 export function CustomersView() {
@@ -61,6 +61,14 @@ export function CustomersView() {
     setTagInput("")
   }
 
+  const handleRemoveEmail = (customerId: string, emailIndex: number) => {
+    setCustomers(customers.map(c =>
+      c.id === customerId
+        ? { ...c, emails: c.emails.filter((_, i) => i !== emailIndex) }
+        : c
+    ))
+  }
+
   return (
     <div className="container mx-auto px-4 py-6">
       <header className="mb-6">
@@ -87,7 +95,26 @@ export function CustomersView() {
                 <td className="py-4 px-4 text-sm font-medium text-foreground">{customer.company}</td>
                 <td className="py-4 px-4 text-sm text-foreground">{customer.contact}</td>
                 <td className="py-4 px-4 text-sm text-foreground">{customer.telephone}</td>
-                <td className="py-4 px-4 text-sm text-foreground">{customer.email}</td>
+                <td className="py-4 px-4 text-sm text-foreground">
+                  <div className="flex flex-wrap gap-1">
+                    {customer.emails.map((email, index) => (
+                      <span
+                        key={index}
+                        className="inline-flex items-center gap-1 px-2 py-0.5 bg-muted rounded text-xs"
+                      >
+                        {email}
+                        <button
+                          onClick={() => handleRemoveEmail(customer.id, index)}
+                          className="hover:text-destructive"
+                          title="Remove email"
+                        >
+                          <X className="h-3 w-3" />
+                        </button>
+                      </span>
+                    ))}
+                    {customer.emails.length === 0 && <span className="text-muted-foreground">—</span>}
+                  </div>
+                </td>
                 <td className="py-4 px-4 text-sm text-center text-foreground">
                   <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${customer.receiveEmails
                     ? "bg-green-100 text-green-800"
