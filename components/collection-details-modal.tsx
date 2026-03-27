@@ -279,7 +279,7 @@ export function CollectionDetailsModal({ collection, open, onClose }: Collection
                   <div className="grid grid-cols-4 gap-4 text-sm">
                     <div>
                       <p className="text-muted-foreground">Contact</p>
-                      <p className="font-medium">-</p>
+                      <p className="font-medium">yael sagar</p>
                     </div>
                     <div>
                       <p className="text-muted-foreground">Contact Mobile</p>
@@ -291,11 +291,11 @@ export function CollectionDetailsModal({ collection, open, onClose }: Collection
                     </div>
                     <div>
                       <p className="text-muted-foreground">Company</p>
-                      <p className="font-medium">-</p>
+                      <p className="font-medium">Crew Clothing</p>
                     </div>
                     <div>
                       <p className="text-muted-foreground">Address Line 1</p>
-                      <p className="font-medium">-</p>
+                      <p className="font-medium">41 High Street</p>
                     </div>
                     <div>
                       <p className="text-muted-foreground">Address Line 2</p>
@@ -307,11 +307,11 @@ export function CollectionDetailsModal({ collection, open, onClose }: Collection
                     </div>
                     <div>
                       <p className="text-muted-foreground">County</p>
-                      <p className="font-medium">-</p>
+                      <p className="font-medium">Dorset</p>
                     </div>
                     <div>
                       <p className="text-muted-foreground">Town</p>
-                      <p className="font-medium">-</p>
+                      <p className="font-medium">Wimborne</p>
                     </div>
                     <div>
                       <p className="text-muted-foreground">Country</p>
@@ -319,7 +319,7 @@ export function CollectionDetailsModal({ collection, open, onClose }: Collection
                     </div>
                     <div>
                       <p className="text-muted-foreground">Postcode</p>
-                      <p className="font-medium">-</p>
+                      <p className="font-medium">BH21 1HR</p>
                     </div>
                     <div>
                       <p className="text-muted-foreground">Email</p>
