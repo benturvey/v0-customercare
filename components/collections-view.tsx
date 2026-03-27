@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ShipmentFilters } from "@/components/shipment-filters"
+import { CollectionFilters } from "@/components/collection-filters"
 import { ShipmentTable } from "@/components/shipment-table"
 import type { ShipmentFilters as ShipmentFiltersType, Shipment } from "@/types/shipment"
 
@@ -162,7 +162,7 @@ export function CollectionsView() {
         </p>
       </header>
 
-      <ShipmentFilters
+      <CollectionFilters
         filters={filters}
         onFilterChange={handleFilterChange}
         onSearch={handleSearch}
