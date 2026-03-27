@@ -73,7 +73,7 @@ export function CollectionFilters({
               <SelectTrigger id="carrier">
                 <SelectValue placeholder="Select carrier" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="max-h-[180px] overflow-y-auto">
                 {CARRIERS.map((carrier) => (
                   <SelectItem key={carrier.value} value={carrier.value}>
                     {carrier.label}
