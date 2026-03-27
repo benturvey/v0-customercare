@@ -108,7 +108,7 @@ export function CollectionDetailsModal({ collection, open, onClose }: Collection
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-[95vw] w-[1400px] max-h-[90vh] overflow-y-auto p-0">
+      <DialogContent className="max-w-[98vw] w-full max-h-[90vh] overflow-y-auto p-0">
         <DialogHeader className="p-6 pb-0">
           <DialogTitle className="text-xl font-semibold">View Collection Details</DialogTitle>
         </DialogHeader>
