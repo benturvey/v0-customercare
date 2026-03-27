@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { CollectionFilters } from "@/components/collection-filters"
-import { ShipmentTable } from "@/components/shipment-table"
+import { CollectionTable } from "@/components/collection-table"
 import type { ShipmentFilters as ShipmentFiltersType, Shipment } from "@/types/shipment"
 
 // Sample data for collections
@@ -170,7 +170,7 @@ export function CollectionsView() {
       />
 
       <div className="mt-6">
-        <ShipmentTable shipments={filteredCollections} />
+        <CollectionTable collections={filteredCollections} />
       </div>
     </div>
   )
