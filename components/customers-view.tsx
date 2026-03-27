@@ -17,14 +17,14 @@ interface Customer {
 }
 
 const initialCustomers: Customer[] = [
-  { id: "1", company: "ABBOTT LYON LTD", contact: "John Smith", telephone: "020 1234 5678", email: "john@abbottlyon.com", receiveEmails: true, tickets: 32, customTags: ["routing: focus"] },
-  { id: "2", company: "ACAI OUTDOORWEAR LTD", contact: "Sarah Jones", telephone: "020 2345 6789", email: "sarah@acai.com", receiveEmails: true, tickets: 2, customTags: [] },
-  { id: "3", company: "AGTC LIMITED", contact: "Mike Brown", telephone: "020 3456 7890", email: "mike@agtc.com", receiveEmails: false, tickets: 30, customTags: [] },
-  { id: "4", company: "ANDERTONS MUSIC COMPANY", contact: "Emma Wilson", telephone: "020 4567 8901", email: "emma@andertons.com", receiveEmails: true, tickets: 8, customTags: [] },
-  { id: "5", company: "APD", contact: "David Lee", telephone: "020 5678 9012", email: "david@apd.com", receiveEmails: false, tickets: 5, customTags: [] },
-  { id: "6", company: "ARK MAT", contact: "Lisa Taylor", telephone: "020 6789 0123", email: "lisa@arkmat.com", receiveEmails: true, tickets: 1, customTags: [] },
-  { id: "7", company: "ARMSTRONG DIRECT LIMITED", contact: "James White", telephone: "020 7890 1234", email: "james@armstrong.com", receiveEmails: true, tickets: 2, customTags: [] },
-  { id: "8", company: "AXMINSTER TOOL CENTRE LTD", contact: "Rachel Green", telephone: "020 8901 2345", email: "rachel@axminster.com", receiveEmails: false, tickets: 10, customTags: [] },
+  { id: "1", company: "ABBOTT LYON LTD", contact: "", telephone: "", email: "", receiveEmails: false, tickets: 32, customTags: ["routing: focus"] },
+  { id: "2", company: "CREW CLOTHING CO LIMITED", contact: "Charlie Eaves", telephone: "+44 7525 594149", email: "helen.collett@crewclothing.co.uk", receiveEmails: true, tickets: 2, customTags: [] },
+  { id: "3", company: "MAMAS & PAPAS", contact: "", telephone: "01484 438394", email: "deliveries@mamasandpapas.com", receiveEmails: false, tickets: 30, customTags: [] },
+  { id: "4", company: "OKA DIRECT LIMITED", contact: "Christopher Ferguson", telephone: "01235433933", email: " customerservice@oka.com", receiveEmails: true, tickets: 8, customTags: [] },
+  { id: "5", company: "ROBERT WELCH DESIGNS LIMITED", contact: "John Wright", telephone: "01386 840880", email: "help@robertwelch.com", receiveEmails: true, tickets: 5, customTags: [] },
+  { id: "6", company: "SERVICE LOGISTICS", contact: "", telephone: "03456200000", email: "customer.service@servicelogistics.co.uk", receiveEmails: true, tickets: 1, customTags: [] },
+  { id: "7", company: "SMEG (UK) LIMITED", contact: "Debra Spinks", telephone: "", email: "operations@smeguk.com", receiveEmails: true, tickets: 2, customTags: [] },
+  { id: "8", company: "THE CAMBIUM GROUP UK HOLDINGS LIMITED", contact: "Lauren Pound", telephone: "01225615141", email: "lauren@thecambiumgroup.co.uk", receiveEmails: false, tickets: 10, customTags: [] },
 ]
 
 export function CustomersView() {
@@ -89,11 +89,10 @@ export function CustomersView() {
                 <td className="py-4 px-4 text-sm text-foreground">{customer.telephone}</td>
                 <td className="py-4 px-4 text-sm text-foreground">{customer.email}</td>
                 <td className="py-4 px-4 text-sm text-center text-foreground">
-                  <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
-                    customer.receiveEmails 
-                      ? "bg-green-100 text-green-800" 
+                  <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${customer.receiveEmails
+                      ? "bg-green-100 text-green-800"
                       : "bg-gray-100 text-gray-600"
-                  }`}>
+                    }`}>
                     {customer.receiveEmails ? "Yes" : "No"}
                   </span>
                 </td>
