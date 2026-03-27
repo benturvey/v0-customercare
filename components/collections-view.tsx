@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { CollectionFilters } from "@/components/collection-filters"
+import { CollectionDetailsModal } from "@/components/collection-details-modal"
 import type { ShipmentFilters as ShipmentFiltersType } from "@/types/shipment"
 import {
   Table,
@@ -104,6 +105,14 @@ const sampleCollections: Collection[] = [
 ]
 
 export function CollectionsView() {
+  const [selectedCollection, setSelectedCollection] = useState<Collection | null>(null)
+  const [detailsModalOpen, setDetailsModalOpen] = useState(false)
+
+  const handleViewDetails = (collection: Collection) => {
+    setSelectedCollection(collection)
+    setDetailsModalOpen(true)
+  }
+
   const [filters, setFilters] = useState<ShipmentFiltersType>({
     customer: "",
     carrier: "dpd",
@@ -216,6 +225,7 @@ export function CollectionsView() {
                           variant="ghost"
                           size="sm"
                           className="flex items-center gap-1"
+                          onClick={() => handleViewDetails(collection)}
                         >
                           <Eye className="h-4 w-4" />
                           Details
@@ -229,6 +239,13 @@ export function CollectionsView() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Collection Details Modal */}
+      <CollectionDetailsModal
+        collection={selectedCollection}
+        open={detailsModalOpen}
+        onClose={() => setDetailsModalOpen(false)}
+      />
     </div>
   )
 }
