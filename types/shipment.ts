@@ -165,12 +165,22 @@ export const CUSTOMERS = [
 ] as const
 
 export const CARRIERS = [
-  { value: "dhl", label: "DHL" },
-  { value: "fedex", label: "FedEx" },
-  { value: "ups", label: "UPS" },
-  { value: "royalmail", label: "Royal Mail" },
+  { value: "amazonlogistics", label: "AMAZON LOGISTICS UK" },
+  { value: "bjs", label: "BJS" },
+  { value: "dhlecommerce", label: "DHL ECOMMERCE UK" },
+  { value: "dhlexpress", label: "DHL EXPRESS" },
   { value: "dpd", label: "DPD" },
-  { value: "hermes", label: "Hermes" },
+  { value: "dpdde", label: "DPD DE" },
+  { value: "dpdlocal", label: "DPD LOCAL" },
+  { value: "dpdnl", label: "DPD NL" },
+  { value: "dxfreight", label: "DX FREIGHT" },
+  { value: "evri", label: "EVRI" },
+  { value: "evrips", label: "EVRI PS" },
+  { value: "exelot", label: "EXELOT" },
+  { value: "fedex", label: "FEDEX" },
+  { value: "gfsinternational", label: "GFS INTERNATIONAL" },
+  { value: "ocs", label: "OCS" },
+  { value: "ups", label: "UPS" },
 ] as const
 
 export const SERVICES = [
