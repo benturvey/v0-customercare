@@ -56,51 +56,39 @@ export function CollectionTable({ collections }: CollectionTableProps) {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="whitespace-nowrap">Sender</TableHead>
-                <TableHead className="whitespace-nowrap">Collection Date</TableHead>
-                <TableHead className="whitespace-nowrap">Carrier</TableHead>
                 <TableHead className="whitespace-nowrap">Collection ID</TableHead>
-                <TableHead className="whitespace-nowrap">Customer Reference</TableHead>
-                <TableHead className="whitespace-nowrap">Postcode</TableHead>
-                <TableHead className="whitespace-nowrap">Scan Text</TableHead>
+                <TableHead className="whitespace-nowrap">Carrier</TableHead>
+                <TableHead className="whitespace-nowrap">Customer</TableHead>
+                <TableHead className="whitespace-nowrap">Service Code</TableHead>
+                <TableHead className="whitespace-nowrap">Service Desc</TableHead>
+                <TableHead className="whitespace-nowrap">Collection Date</TableHead>
+                <TableHead className="whitespace-nowrap">Consignment No</TableHead>
+                <TableHead className="whitespace-nowrap">Customer Ref</TableHead>
                 <TableHead className="whitespace-nowrap text-right">Packs</TableHead>
-                <TableHead className="whitespace-nowrap">Country</TableHead>
+                <TableHead className="whitespace-nowrap">Contract No</TableHead>
                 <TableHead className="whitespace-nowrap">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {collections.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={10} className="text-center py-8 text-muted-foreground">
+                  <TableCell colSpan={11} className="text-center py-8 text-muted-foreground">
                     No collections found. Try adjusting your search filters.
                   </TableCell>
                 </TableRow>
               ) : (
                 collections.map((collection) => (
                   <TableRow key={collection.id}>
-                    <TableCell className="font-medium">{collection.sender}</TableCell>
-                    <TableCell>{formatDate(collection.despatchDate)}</TableCell>
-                    <TableCell>{collection.carrier}</TableCell>
                     <TableCell className="font-mono text-sm">{collection.consignmentNo}</TableCell>
+                    <TableCell>{collection.carrier}</TableCell>
+                    <TableCell className="font-medium">{collection.sender}</TableCell>
+                    <TableCell>{collection.service?.split(" ")[0] || "STD"}</TableCell>
+                    <TableCell>{collection.service || "Standard Collection"}</TableCell>
+                    <TableCell>{formatDate(collection.despatchDate)}</TableCell>
+                    <TableCell className="font-mono text-sm">{collection.trackingNo || "CON" + collection.id}</TableCell>
                     <TableCell className="font-mono text-sm">{collection.shipRef}</TableCell>
-                    <TableCell>{collection.postcode || "WA4 2SN"}</TableCell>
-                    <TableCell>
-                      <div className="flex flex-wrap items-center gap-2">
-                        <Badge
-                          variant={getScanTextVariant(collection.scanText)}
-                          className={collection.scanText.toLowerCase().includes("collect") && !collection.scanText.toLowerCase().includes("failed") ? "bg-[#3bc693] text-white hover:bg-[#3bc693]" : ""}
-                        >
-                          {collection.scanText}
-                        </Badge>
-                        {collection.isException && (
-                          <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-[#ff7353] text-white">
-                            EXCEPTION
-                          </span>
-                        )}
-                      </div>
-                    </TableCell>
                     <TableCell className="text-right">{collection.packs}</TableCell>
-                    <TableCell>{collection.country}</TableCell>
+                    <TableCell className="font-mono text-sm">{collection.contractNo || "CTR-001"}</TableCell>
                     <TableCell>
                       <Button
                         variant="ghost"
