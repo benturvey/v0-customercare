@@ -8,19 +8,23 @@ import { X } from "lucide-react"
 interface Customer {
   id: string
   company: string
+  contact: string
+  telephone: string
+  email: string
+  receiveEmails: boolean
   tickets: number
   customTags: string[]
 }
 
 const initialCustomers: Customer[] = [
-  { id: "1", company: "ABBOTT LYON LTD", tickets: 32, customTags: ["routing: focus"] },
-  { id: "2", company: "ACAI OUTDOORWEAR LTD", tickets: 2, customTags: [] },
-  { id: "3", company: "AGTC LIMITED", tickets: 30, customTags: [] },
-  { id: "4", company: "ANDERTONS MUSIC COMPANY", tickets: 8, customTags: [] },
-  { id: "5", company: "APD", tickets: 5, customTags: [] },
-  { id: "6", company: "ARK MAT", tickets: 1, customTags: [] },
-  { id: "7", company: "ARMSTRONG DIRECT LIMITED", tickets: 2, customTags: [] },
-  { id: "8", company: "AXMINSTER TOOL CENTRE LTD", tickets: 10, customTags: [] },
+  { id: "1", company: "ABBOTT LYON LTD", contact: "John Smith", telephone: "020 1234 5678", email: "john@abbottlyon.com", receiveEmails: true, tickets: 32, customTags: ["routing: focus"] },
+  { id: "2", company: "ACAI OUTDOORWEAR LTD", contact: "Sarah Jones", telephone: "020 2345 6789", email: "sarah@acai.com", receiveEmails: true, tickets: 2, customTags: [] },
+  { id: "3", company: "AGTC LIMITED", contact: "Mike Brown", telephone: "020 3456 7890", email: "mike@agtc.com", receiveEmails: false, tickets: 30, customTags: [] },
+  { id: "4", company: "ANDERTONS MUSIC COMPANY", contact: "Emma Wilson", telephone: "020 4567 8901", email: "emma@andertons.com", receiveEmails: true, tickets: 8, customTags: [] },
+  { id: "5", company: "APD", contact: "David Lee", telephone: "020 5678 9012", email: "david@apd.com", receiveEmails: false, tickets: 5, customTags: [] },
+  { id: "6", company: "ARK MAT", contact: "Lisa Taylor", telephone: "020 6789 0123", email: "lisa@arkmat.com", receiveEmails: true, tickets: 1, customTags: [] },
+  { id: "7", company: "ARMSTRONG DIRECT LIMITED", contact: "James White", telephone: "020 7890 1234", email: "james@armstrong.com", receiveEmails: true, tickets: 2, customTags: [] },
+  { id: "8", company: "AXMINSTER TOOL CENTRE LTD", contact: "Rachel Green", telephone: "020 8901 2345", email: "rachel@axminster.com", receiveEmails: false, tickets: 10, customTags: [] },
 ]
 
 export function CustomersView() {
@@ -68,6 +72,10 @@ export function CustomersView() {
           <thead>
             <tr className="border-b border-border">
               <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Company</th>
+              <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Contact</th>
+              <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Telephone</th>
+              <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Email</th>
+              <th className="text-center py-3 px-4 font-medium text-muted-foreground text-sm">Receive Emails</th>
               <th className="text-center py-3 px-4 font-medium text-muted-foreground text-sm">Tickets</th>
               <th className="text-center py-3 px-4 font-medium text-muted-foreground text-sm">Custom Tags</th>
               <th className="text-center py-3 px-4 font-medium text-muted-foreground text-sm">Actions</th>
@@ -77,6 +85,18 @@ export function CustomersView() {
             {customers.map((customer) => (
               <tr key={customer.id} className="border-b border-border last:border-b-0">
                 <td className="py-4 px-4 text-sm font-medium text-foreground">{customer.company}</td>
+                <td className="py-4 px-4 text-sm text-foreground">{customer.contact}</td>
+                <td className="py-4 px-4 text-sm text-foreground">{customer.telephone}</td>
+                <td className="py-4 px-4 text-sm text-foreground">{customer.email}</td>
+                <td className="py-4 px-4 text-sm text-center text-foreground">
+                  <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
+                    customer.receiveEmails 
+                      ? "bg-green-100 text-green-800" 
+                      : "bg-gray-100 text-gray-600"
+                  }`}>
+                    {customer.receiveEmails ? "Yes" : "No"}
+                  </span>
+                </td>
                 <td className="py-4 px-4 text-sm text-center text-foreground">{customer.tickets}</td>
                 <td className="py-4 px-4 text-sm text-center">
                   {editingId === customer.id ? (
