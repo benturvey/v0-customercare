@@ -17,7 +17,7 @@ interface Customer {
 }
 
 const initialCustomers: Customer[] = [
-  { id: "1", company: "ABBOTT LYON LTD", contact: "", telephone: "", email: "", receiveEmails: false, tickets: 32, customTags: ["routing: focus"] },
+  { id: "1", company: "ABBOTT LYON LTD", contact: "", telephone: "", email: "vicky.lomax@gfsdeliver.com", receiveEmails: false, tickets: 32, customTags: ["routing: focus"] },
   { id: "2", company: "CREW CLOTHING CO LIMITED", contact: "Charlie Eaves", telephone: "+44 7525 594149", email: "helen.collett@crewclothing.co.uk", receiveEmails: true, tickets: 2, customTags: [] },
   { id: "3", company: "MAMAS & PAPAS", contact: "", telephone: "01484 438394", email: "deliveries@mamasandpapas.com", receiveEmails: false, tickets: 30, customTags: [] },
   { id: "4", company: "OKA DIRECT LIMITED", contact: "Christopher Ferguson", telephone: "01235433933", email: " customerservice@oka.com", receiveEmails: true, tickets: 8, customTags: [] },
@@ -90,8 +90,8 @@ export function CustomersView() {
                 <td className="py-4 px-4 text-sm text-foreground">{customer.email}</td>
                 <td className="py-4 px-4 text-sm text-center text-foreground">
                   <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${customer.receiveEmails
-                      ? "bg-green-100 text-green-800"
-                      : "bg-gray-100 text-gray-600"
+                    ? "bg-green-100 text-green-800"
+                    : "bg-gray-100 text-gray-600"
                     }`}>
                     {customer.receiveEmails ? "Yes" : "No"}
                   </span>
