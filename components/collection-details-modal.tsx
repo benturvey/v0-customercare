@@ -43,10 +43,10 @@ export function CollectionDetailsModal({ collection, open, onClose }: Collection
 
   // Sample customer contact data
   const customerContactDetails = {
-    contactName: "John Smith",
-    contactPhone: "+44 1onal 123456",
-    contactEmails: ["contact@crewclothing.co.uk", "support@crewclothing.co.uk", "orders@crewclothing.co.uk"],
-    address: "Crew Clothing Co Limited, 3 Kingsland Court, Three Bridges Road, Crawley, West Sussex, RH10 1HL, United Kingdom",
+    contactName: "Charlie Eaves",
+    contactPhone: "+44 7525 594149",
+    contactEmails: ["helen.collett@crewclothing.co.uk", "josh.harwood@crewclothing.co.uk"],
+    address: "TORQUE LOGISTICS, WORTLEY MOOR RD, LEEDS, LS12 4JH",
   }
 
   if (!collection) return null
