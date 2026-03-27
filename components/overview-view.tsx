@@ -13,7 +13,7 @@ import {
 const stats = [
   { value: "15", label: "UNASSIGNED" },
   { value: "13", label: "IN PROGRESS" },
-  { value: "0", label: "DEFERRED" },
+  { value: "24", label: "DEFERRED" },
   { value: "13/30", label: "ACTIVE AGENTS" },
 ]
 
