@@ -107,7 +107,7 @@ export function CollectionDetailsModal({ collection, open, onClose }: Collection
   ]
 
   const queries = [
-    { no: , queryId: "", state: "", raisedBy: "", createdDate: "", preferredContactType: "", telNo: "-", email: "" },
+    { no: "", queryId: "", state: "", raisedBy: "", createdDate: "", preferredContactType: "", telNo: "-", email: "" },
   ]
 
   const customsItems = [
