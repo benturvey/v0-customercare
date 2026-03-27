@@ -45,7 +45,7 @@ export function CollectionDetailsModal({ collection, open, onClose }: Collection
   const customerContactDetails = {
     contactName: "John Smith",
     contactPhone: "+44 1onal 123456",
-    contactEmail: "contact@crewclothing.co.uk",
+    contactEmails: ["contact@crewclothing.co.uk", "support@crewclothing.co.uk", "orders@crewclothing.co.uk"],
     address: "Crew Clothing Co Limited, 3 Kingsland Court, Three Bridges Road, Crawley, West Sussex, RH10 1HL, United Kingdom",
   }
 
@@ -512,7 +512,16 @@ export function CollectionDetailsModal({ collection, open, onClose }: Collection
             </div>
             <div>
               <p className="text-sm text-muted-foreground">Contact Email</p>
-              <p className="font-medium">{customerContactDetails.contactEmail}</p>
+              <div className="flex flex-wrap gap-2 mt-1">
+                {customerContactDetails.contactEmails.map((email, index) => (
+                  <span
+                    key={index}
+                    className="inline-flex items-center px-2.5 py-1 rounded-md bg-muted text-sm font-medium"
+                  >
+                    {email}
+                  </span>
+                ))}
+              </div>
             </div>
             <div>
               <p className="text-sm text-muted-foreground">Address</p>
