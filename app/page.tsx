@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { TopNavigation } from "@/components/top-navigation"
 import { ShipmentsView } from "@/components/shipments-view"
+import { CollectionsView } from "@/components/collections-view"
 import { OverviewView } from "@/components/overview-view"
 import { TicketQueueView } from "@/components/ticket-queue-view"
 import { RoutingRulesView } from "@/components/routing-rules-view"
@@ -48,6 +49,9 @@ export default function MainPage() {
     }
     if (activeView === "shipment-search") {
       return <ShipmentsView />
+    }
+    if (activeView === "collection-search") {
+      return <CollectionsView />
     }
     if (activeView === "routing-rules") {
       return <RoutingRulesView />
