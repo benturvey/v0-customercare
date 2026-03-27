@@ -49,10 +49,10 @@ export function ShipmentDetailsModal({
 
   // Customer contact details
   const customerContactDetails = {
-    contactName: "Charlie Eaves",
-    contactPhone: "+44 7525 594149",
-    contactEmails: ["helen.collett@crewclothing.co.uk", "josh.harwood@crewclothing.co.uk"],
-    address: "TORQUE LOGISTICS, WORTLEY MOOR RD, LEEDS, LS12 4JH",
+    contactName: "",
+    contactPhone: "01484 438394",
+    contactEmails: ["deliveries@mamasandpapas.com"],
+    address: "COLNE BRIDGE ROAD, HUDDERSFIELD, WEST YORKSHIRE, HD5 0RH",
   }
 
   if (!details) return null
