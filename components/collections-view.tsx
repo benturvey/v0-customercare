@@ -36,7 +36,7 @@ const sampleCollections: Collection[] = [
     serviceCode: "12",
     serviceDescr: "NEXT DAY DELIVERY",
     collectionDate: "13/03/2026",
-    consignmentNo: "",
+    consignmentNo: "15508001025023",
     customerRef: "RMA121066",
     packs: 1,
     contractNo: "5638",
