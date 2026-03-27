@@ -52,7 +52,8 @@ const sampleCollections: Collection[] = [
     customerRef: "DO00428580",
     packs: 1,
     contractNo: "5962",
-  }, {
+  },
+  {
     collectionId: "1072652",
     carrier: "DPD",
     customer: "CREW CLOTHING CO LIMITED",
@@ -63,7 +64,8 @@ const sampleCollections: Collection[] = [
     customerRef: "consolidation",
     packs: 5,
     contractNo: "0637",
-  }, {
+  },
+  {
     collectionId: "1072677",
     carrier: "DPD",
     customer: "SERVICE LOGISTICS",
@@ -74,7 +76,8 @@ const sampleCollections: Collection[] = [
     customerRef: "Can Do Payments 1850266003 ADHOC",
     packs: 1,
     contractNo: "0138",
-  }, {
+  },
+  {
     collectionId: "1072996",
     carrier: "DPD",
     customer: "OKA DIRECT LIMITED",
@@ -85,6 +88,18 @@ const sampleCollections: Collection[] = [
     customerRef: "RAUK66350",
     packs: 1,
     contractNo: "5638",
+  },
+  {
+    collectionId: "1073014",
+    carrier: "DPD",
+    customer: "ROBERT WELCH DESINGS LIMITED",
+    serviceCode: "19",
+    serviceDescr: "DPD CLASSIC PARCEL",
+    collectionDate: "13/03/2026",
+    consignmentNo: "",
+    customerRef: "C1065103 Adamson",
+    packs: 1,
+    contractNo: "5789",
   },
 ]
 
