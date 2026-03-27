@@ -3,6 +3,45 @@
 import { useState } from "react"
 import { CollectionFilters } from "@/components/collection-filters"
 import type { ShipmentFilters as ShipmentFiltersType } from "@/types/shipment"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Card, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Eye } from "lucide-react"
+
+interface Collection {
+  collectionId: string
+  carrier: string
+  customer: string
+  serviceCode: string
+  serviceDescr: string
+  collectionDate: string
+  consignmentNo: string
+  customerRef: string
+  packs: number
+  contractNo: string
+}
+
+const sampleCollections: Collection[] = [
+  {
+    collectionId: "1071002",
+    carrier: "DPD",
+    customer: "COSATTO",
+    serviceCode: "12",
+    serviceDescr: "NEXT DAY DELIVERY",
+    collectionDate: "13/03/2026",
+    consignmentNo: "",
+    customerRef: "RMA121066",
+    packs: 1,
+    contractNo: "5638",
+  },
+]
 
 export function CollectionsView() {
   const [filters, setFilters] = useState<ShipmentFiltersType>({
@@ -71,6 +110,65 @@ export function CollectionsView() {
         onSearch={handleSearch}
         onReset={handleReset}
       />
+
+      {/* Results Section */}
+      <Card className="mt-6">
+        <CardContent className="p-0">
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="whitespace-nowrap">Collection ID</TableHead>
+                  <TableHead className="whitespace-nowrap">Carrier</TableHead>
+                  <TableHead className="whitespace-nowrap">Customer</TableHead>
+                  <TableHead className="whitespace-nowrap">Service Code</TableHead>
+                  <TableHead className="whitespace-nowrap">Service Desc</TableHead>
+                  <TableHead className="whitespace-nowrap">Collection Date</TableHead>
+                  <TableHead className="whitespace-nowrap">Consignment No</TableHead>
+                  <TableHead className="whitespace-nowrap">Customer Ref</TableHead>
+                  <TableHead className="whitespace-nowrap text-right">Packs</TableHead>
+                  <TableHead className="whitespace-nowrap">Contract No</TableHead>
+                  <TableHead className="whitespace-nowrap">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {sampleCollections.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={11} className="text-center py-8 text-muted-foreground">
+                      No collections found. Try adjusting your search filters.
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  sampleCollections.map((collection) => (
+                    <TableRow key={collection.collectionId}>
+                      <TableCell className="font-mono text-sm">{collection.collectionId}</TableCell>
+                      <TableCell>{collection.carrier}</TableCell>
+                      <TableCell className="font-medium">{collection.customer}</TableCell>
+                      <TableCell>{collection.serviceCode}</TableCell>
+                      <TableCell>{collection.serviceDescr}</TableCell>
+                      <TableCell>{collection.collectionDate}</TableCell>
+                      <TableCell className="font-mono text-sm">{collection.consignmentNo || "—"}</TableCell>
+                      <TableCell className="font-mono text-sm">{collection.customerRef}</TableCell>
+                      <TableCell className="text-right">{collection.packs}</TableCell>
+                      <TableCell className="font-mono text-sm">{collection.contractNo}</TableCell>
+                      <TableCell>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="flex items-center gap-1"
+                        >
+                          <Eye className="h-4 w-4" />
+                          Details
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   )
 }
