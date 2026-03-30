@@ -32,7 +32,7 @@ const initialCustomers: Customer[] = [
   { id: "5", company: "ROBERT WELCH DESIGNS LIMITED", contact: "John Wright", telephone: "01386 840880", emails: ["help@robertwelch.com", "sales@robertwelch.com"], receiveEmails: true, tickets: 5, customTags: [] },
   { id: "6", company: "SERVICE LOGISTICS", contact: "", telephone: "03456200000", emails: ["customer.service@servicelogistics.co.uk"], receiveEmails: true, tickets: 1, customTags: [] },
   { id: "7", company: "SMEG (UK) LIMITED", contact: "Debra Spinks", telephone: "", emails: ["operations@smeguk.com", "support@smeguk.com"], receiveEmails: true, tickets: 2, customTags: [] },
-  { id: "8", company: "THE CAMBIUM GROUP UK HOLDINGS LIMITED", contact: "Lauren Pound", telephone: "01225615141", emails: ["lauren@thecambiumgroup.co.uk"], receiveEmails: false, tickets: 10, customTags: [] },
+  { id: "8", company: "THE CAMBIUM GROUP UK HOLDINGS LIMITED", contact: "Lauren Pound", telephone: "01225615141", emails: ["lauren@thecambiumgroup.co.uk"], receiveEmails: false, tickets: 10, customTags: ["routing: focus"] },
 ]
 
 export function CustomersView() {
@@ -103,12 +103,12 @@ export function CustomersView() {
       setCustomers(customers.map(c =>
         c.id === editingCustomer.id
           ? {
-              ...c,
-              contact: editForm.contact,
-              telephone: editForm.telephone,
-              emails: editForm.emails,
-              receiveEmails: editForm.receiveEmails,
-            }
+            ...c,
+            contact: editForm.contact,
+            telephone: editForm.telephone,
+            emails: editForm.emails,
+            receiveEmails: editForm.receiveEmails,
+          }
           : c
       ))
       setEditSheetOpen(false)
@@ -292,7 +292,7 @@ export function CustomersView() {
           <SheetHeader>
             <SheetTitle className="text-xl font-semibold text-[#1e3a5f]">Edit Customer Details</SheetTitle>
           </SheetHeader>
-          
+
           {editingCustomer && (
             <div className="space-y-6 mt-6">
               {/* Company (Read-only) */}
@@ -374,7 +374,7 @@ export function CustomersView() {
                 <Checkbox
                   id="receiveEmails"
                   checked={editForm.receiveEmails}
-                  onCheckedChange={(checked) => 
+                  onCheckedChange={(checked) =>
                     setEditForm(prev => ({ ...prev, receiveEmails: checked === true }))
                   }
                 />
