@@ -3,6 +3,14 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Checkbox } from "@/components/ui/checkbox"
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet"
 import { X, Pencil } from "lucide-react"
 
 interface Customer {
@@ -31,6 +39,15 @@ export function CustomersView() {
   const [customers, setCustomers] = useState<Customer[]>(initialCustomers)
   const [editingId, setEditingId] = useState<string | null>(null)
   const [tagInput, setTagInput] = useState("")
+  const [editSheetOpen, setEditSheetOpen] = useState(false)
+  const [editingCustomer, setEditingCustomer] = useState<Customer | null>(null)
+  const [editForm, setEditForm] = useState({
+    contact: "",
+    telephone: "",
+    emails: [] as string[],
+    receiveEmails: false,
+  })
+  const [newEmailInput, setNewEmailInput] = useState("")
 
   const handleEditTags = (customerId: string) => {
     setEditingId(customerId)
@@ -67,6 +84,53 @@ export function CustomersView() {
         ? { ...c, emails: c.emails.filter((_, i) => i !== emailIndex) }
         : c
     ))
+  }
+
+  const handleEditCustomer = (customer: Customer) => {
+    setEditingCustomer(customer)
+    setEditForm({
+      contact: customer.contact,
+      telephone: customer.telephone,
+      emails: [...customer.emails],
+      receiveEmails: customer.receiveEmails,
+    })
+    setNewEmailInput("")
+    setEditSheetOpen(true)
+  }
+
+  const handleSaveCustomer = () => {
+    if (editingCustomer) {
+      setCustomers(customers.map(c =>
+        c.id === editingCustomer.id
+          ? {
+              ...c,
+              contact: editForm.contact,
+              telephone: editForm.telephone,
+              emails: editForm.emails,
+              receiveEmails: editForm.receiveEmails,
+            }
+          : c
+      ))
+      setEditSheetOpen(false)
+      setEditingCustomer(null)
+    }
+  }
+
+  const handleAddEmailToForm = () => {
+    if (newEmailInput.trim()) {
+      setEditForm(prev => ({
+        ...prev,
+        emails: [...prev.emails, newEmailInput.trim()]
+      }))
+      setNewEmailInput("")
+    }
+  }
+
+  const handleRemoveEmailFromForm = (index: number) => {
+    setEditForm(prev => ({
+      ...prev,
+      emails: prev.emails.filter((_, i) => i !== index)
+    }))
   }
 
   return (
@@ -209,6 +273,7 @@ export function CustomersView() {
                       variant="outline"
                       size="sm"
                       className="text-xs"
+                      onClick={() => handleEditCustomer(customer)}
                     >
                       <Pencil className="h-3 w-3 mr-1" />
                       Edit
@@ -220,6 +285,123 @@ export function CustomersView() {
           </tbody>
         </table>
       </div>
+
+      {/* Edit Customer Sheet */}
+      <Sheet open={editSheetOpen} onOpenChange={setEditSheetOpen}>
+        <SheetContent className="w-[400px] sm:w-[500px]">
+          <SheetHeader>
+            <SheetTitle className="text-xl font-semibold text-[#1e3a5f]">Edit Customer Details</SheetTitle>
+          </SheetHeader>
+          
+          {editingCustomer && (
+            <div className="space-y-6 mt-6">
+              {/* Company (Read-only) */}
+              <div className="space-y-2">
+                <Label htmlFor="company">Company</Label>
+                <Input
+                  id="company"
+                  value={editingCustomer.company}
+                  disabled
+                  className="bg-muted"
+                />
+              </div>
+
+              {/* Contact */}
+              <div className="space-y-2">
+                <Label htmlFor="contact">Contact</Label>
+                <Input
+                  id="contact"
+                  value={editForm.contact}
+                  onChange={(e) => setEditForm(prev => ({ ...prev, contact: e.target.value }))}
+                  placeholder="Enter contact name"
+                />
+              </div>
+
+              {/* Telephone */}
+              <div className="space-y-2">
+                <Label htmlFor="telephone">Telephone</Label>
+                <Input
+                  id="telephone"
+                  value={editForm.telephone}
+                  onChange={(e) => setEditForm(prev => ({ ...prev, telephone: e.target.value }))}
+                  placeholder="Enter telephone number"
+                />
+              </div>
+
+              {/* Email */}
+              <div className="space-y-2">
+                <Label>Email</Label>
+                <div className="flex flex-wrap gap-2 mb-2">
+                  {editForm.emails.map((email, index) => (
+                    <span
+                      key={index}
+                      className="inline-flex items-center gap-1 px-2.5 py-1 bg-muted rounded-md text-sm"
+                    >
+                      {email}
+                      <button
+                        onClick={() => handleRemoveEmailFromForm(index)}
+                        className="hover:text-destructive"
+                        title="Remove email"
+                      >
+                        <X className="h-3 w-3" />
+                      </button>
+                    </span>
+                  ))}
+                </div>
+                <div className="flex gap-2">
+                  <Input
+                    value={newEmailInput}
+                    onChange={(e) => setNewEmailInput(e.target.value)}
+                    placeholder="Enter email address"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault()
+                        handleAddEmailToForm()
+                      }
+                    }}
+                  />
+                  <Button
+                    variant="outline"
+                    onClick={handleAddEmailToForm}
+                  >
+                    Add
+                  </Button>
+                </div>
+              </div>
+
+              {/* Receive Emails */}
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="receiveEmails"
+                  checked={editForm.receiveEmails}
+                  onCheckedChange={(checked) => 
+                    setEditForm(prev => ({ ...prev, receiveEmails: checked === true }))
+                  }
+                />
+                <Label htmlFor="receiveEmails" className="cursor-pointer">
+                  Receive Emails
+                </Label>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex gap-2 pt-4">
+                <Button
+                  onClick={handleSaveCustomer}
+                  className="bg-[#1a1a1a] hover:bg-[#2a2a2a] text-white"
+                >
+                  Save Changes
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => setEditSheetOpen(false)}
+                >
+                  Cancel
+                </Button>
+              </div>
+            </div>
+          )}
+        </SheetContent>
+      </Sheet>
     </div>
   )
 }
