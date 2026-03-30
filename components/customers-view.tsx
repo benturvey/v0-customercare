@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { X } from "lucide-react"
+import { X, Pencil } from "lucide-react"
 
 interface Customer {
   id: string
@@ -196,14 +196,24 @@ export function CustomersView() {
                   )}
                 </td>
                 <td className="py-4 px-4 text-center">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="text-xs"
-                    onClick={() => handleEditTags(customer.id)}
-                  >
-                    Edit Tags
-                  </Button>
+                  <div className="flex items-center justify-center gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="text-xs"
+                      onClick={() => handleEditTags(customer.id)}
+                    >
+                      Edit Tags
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="text-xs"
+                    >
+                      <Pencil className="h-3 w-3 mr-1" />
+                      Edit
+                    </Button>
+                  </div>
                 </td>
               </tr>
             ))}
