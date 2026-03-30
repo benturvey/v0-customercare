@@ -157,6 +157,7 @@ export const DESPATCH_DATE_PERIODS = [
 
 export const CUSTOMERS = [
   { value: "abbottlyon", label: "ABBOTT LYON LTD" },
+  { value: "castlestech", label: "CASTLES TECHNOLOGY UK & IRELAND LTD" },
   { value: "crewclothing", label: "CREW CLOTHING CO LIMITED" },
   { value: "mamaspapas", label: "MAMAS & PAPAS" },
   { value: "okadirect", label: "OKA DIRECT LIMITED" },
