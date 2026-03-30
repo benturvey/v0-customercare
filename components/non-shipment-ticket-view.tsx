@@ -98,7 +98,7 @@ export function NonShipmentTicketView() {
       <Card>
         <CardContent className="p-6">
           <div className="space-y-6 max-w-4xl">
-            {/* Contact Name and Assign Ticket To - Side by Side */}
+            {/* Contact Name and Contact No - Side by Side */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Contact Name */}
               <div className="space-y-2">
@@ -111,73 +111,73 @@ export function NonShipmentTicketView() {
                 />
               </div>
 
-              {/* Assign Ticket To */}
-              <div className="space-y-3">
-                <Label>Assign Ticket To</Label>
-                <RadioGroup
-                  value={formData.assignType}
-                  onValueChange={(value: "person" | "group") => 
-                    setFormData(prev => ({ ...prev, assignType: value, assignTo: "" }))
-                  }
-                  className="flex gap-4"
-                >
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="person" id="person" />
-                    <Label htmlFor="person" className="cursor-pointer font-normal">Person</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="group" id="group" />
-                    <Label htmlFor="group" className="cursor-pointer font-normal">Group</Label>
-                  </div>
-                </RadioGroup>
-
-                {formData.assignType === "person" && (
-                  <Select
-                    value={formData.assignTo}
-                    onValueChange={(value) => setFormData(prev => ({ ...prev, assignTo: value }))}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select employee" />
-                    </SelectTrigger>
-                    <SelectContent className="max-h-[200px] overflow-y-auto">
-                      {EMPLOYEES.map((employee) => (
-                        <SelectItem key={employee.value} value={employee.value}>
-                          {employee.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                )}
-
-                {formData.assignType === "group" && (
-                  <Select
-                    value={formData.assignTo}
-                    onValueChange={(value) => setFormData(prev => ({ ...prev, assignTo: value }))}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select group" />
-                    </SelectTrigger>
-                    <SelectContent className="max-h-[200px] overflow-y-auto">
-                      {GROUPS.map((group) => (
-                        <SelectItem key={group.value} value={group.value}>
-                          {group.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                )}
+              {/* Contact No */}
+              <div className="space-y-2">
+                <Label htmlFor="contactNo">Contact No</Label>
+                <Input
+                  id="contactNo"
+                  value={formData.contactNo}
+                  onChange={(e) => setFormData(prev => ({ ...prev, contactNo: e.target.value }))}
+                  placeholder="Enter contact number"
+                />
               </div>
             </div>
 
-            {/* Contact No */}
-            <div className="space-y-2 max-w-md">
-              <Label htmlFor="contactNo">Contact No</Label>
-              <Input
-                id="contactNo"
-                value={formData.contactNo}
-                onChange={(e) => setFormData(prev => ({ ...prev, contactNo: e.target.value }))}
-                placeholder="Enter contact number"
-              />
+            {/* Assign Ticket To - Below Contact Name */}
+            <div className="space-y-3 max-w-md">
+              <Label>Assign Ticket To</Label>
+              <RadioGroup
+                value={formData.assignType}
+                onValueChange={(value: "person" | "group") => 
+                  setFormData(prev => ({ ...prev, assignType: value, assignTo: "" }))
+                }
+                className="flex gap-4"
+              >
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="person" id="person" />
+                  <Label htmlFor="person" className="cursor-pointer font-normal">Person</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="group" id="group" />
+                  <Label htmlFor="group" className="cursor-pointer font-normal">Group</Label>
+                </div>
+              </RadioGroup>
+
+              {formData.assignType === "person" && (
+                <Select
+                  value={formData.assignTo}
+                  onValueChange={(value) => setFormData(prev => ({ ...prev, assignTo: value }))}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select employee" />
+                  </SelectTrigger>
+                  <SelectContent className="max-h-[200px] overflow-y-auto">
+                    {EMPLOYEES.map((employee) => (
+                      <SelectItem key={employee.value} value={employee.value}>
+                        {employee.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+
+              {formData.assignType === "group" && (
+                <Select
+                  value={formData.assignTo}
+                  onValueChange={(value) => setFormData(prev => ({ ...prev, assignTo: value }))}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select group" />
+                  </SelectTrigger>
+                  <SelectContent className="max-h-[200px] overflow-y-auto">
+                    {GROUPS.map((group) => (
+                      <SelectItem key={group.value} value={group.value}>
+                        {group.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
             </div>
 
             {/* Comments */}
