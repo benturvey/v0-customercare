@@ -7,6 +7,46 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Card, CardContent } from "@/components/ui/card"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+const EMPLOYEES = [
+  { value: "aaron-doherty", label: "Aaron Doherty" },
+  { value: "alex-lucy", label: "Alex Lucy" },
+  { value: "andrei-costea", label: "Andrei Costea" },
+  { value: "charlie-eaves", label: "Charlie Eaves" },
+  { value: "john-smith", label: "John Smith" },
+  { value: "sarah-jones", label: "Sarah Jones" },
+]
+
+const GROUPS = [
+  { value: "call-handlers", label: "Call Handlers" },
+  { value: "claims", label: "Claims" },
+  { value: "collections", label: "Collections" },
+  { value: "collections-exceptions", label: "Collections Exceptions" },
+  { value: "dhl-ecommerce-tracking", label: "DHL ECommerce Tracking" },
+  { value: "dhl-express-tracking", label: "DHL Express Tracking" },
+  { value: "dpd-tracking", label: "DPD Tracking" },
+  { value: "escalations", label: "Escalations" },
+  { value: "escalations-exceptions", label: "Escalations Exceptions" },
+  { value: "international", label: "International" },
+  { value: "international-exceptions", label: "International Exceptions" },
+  { value: "oz", label: "Oz" },
+  { value: "simple-tickets", label: "Simple Tickets" },
+  { value: "evri", label: "Evri" },
+  { value: "evri-tracking", label: "Evri Tracking" },
+  { value: "focus-customers", label: "Focus Customers" },
+  { value: "focus-exceptions", label: "Focus Exceptions" },
+  { value: "new-customer", label: "New Customer" },
+  { value: "new-customer-exceptions", label: "New Customer Exceptions" },
+  { value: "saturday-deliveries", label: "Saturday Deliveries" },
+]
 
 export function NonShipmentTicketView() {
   const [formData, setFormData] = useState({
@@ -15,6 +55,8 @@ export function NonShipmentTicketView() {
     comments: "",
     emailCommentsTo: false,
     emailAddress: "",
+    assignType: "" as "" | "person" | "group",
+    assignTo: "",
   })
 
   const handleSubmit = () => {
@@ -27,6 +69,8 @@ export function NonShipmentTicketView() {
       comments: "",
       emailCommentsTo: false,
       emailAddress: "",
+      assignType: "",
+      assignTo: "",
     })
   }
 
@@ -37,6 +81,8 @@ export function NonShipmentTicketView() {
       comments: "",
       emailCommentsTo: false,
       emailAddress: "",
+      assignType: "",
+      assignTo: "",
     })
   }
 
@@ -51,20 +97,80 @@ export function NonShipmentTicketView() {
 
       <Card>
         <CardContent className="p-6">
-          <div className="space-y-6 max-w-2xl">
-            {/* Contact Name */}
-            <div className="space-y-2">
-              <Label htmlFor="contactName">Contact Name</Label>
-              <Input
-                id="contactName"
-                value={formData.contactName}
-                onChange={(e) => setFormData(prev => ({ ...prev, contactName: e.target.value }))}
-                placeholder="Enter contact name"
-              />
+          <div className="space-y-6 max-w-4xl">
+            {/* Contact Name and Assign Ticket To - Side by Side */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Contact Name */}
+              <div className="space-y-2">
+                <Label htmlFor="contactName">Contact Name</Label>
+                <Input
+                  id="contactName"
+                  value={formData.contactName}
+                  onChange={(e) => setFormData(prev => ({ ...prev, contactName: e.target.value }))}
+                  placeholder="Enter contact name"
+                />
+              </div>
+
+              {/* Assign Ticket To */}
+              <div className="space-y-3">
+                <Label>Assign Ticket To</Label>
+                <RadioGroup
+                  value={formData.assignType}
+                  onValueChange={(value: "person" | "group") => 
+                    setFormData(prev => ({ ...prev, assignType: value, assignTo: "" }))
+                  }
+                  className="flex gap-4"
+                >
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="person" id="person" />
+                    <Label htmlFor="person" className="cursor-pointer font-normal">Person</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="group" id="group" />
+                    <Label htmlFor="group" className="cursor-pointer font-normal">Group</Label>
+                  </div>
+                </RadioGroup>
+
+                {formData.assignType === "person" && (
+                  <Select
+                    value={formData.assignTo}
+                    onValueChange={(value) => setFormData(prev => ({ ...prev, assignTo: value }))}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select employee" />
+                    </SelectTrigger>
+                    <SelectContent className="max-h-[200px] overflow-y-auto">
+                      {EMPLOYEES.map((employee) => (
+                        <SelectItem key={employee.value} value={employee.value}>
+                          {employee.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
+
+                {formData.assignType === "group" && (
+                  <Select
+                    value={formData.assignTo}
+                    onValueChange={(value) => setFormData(prev => ({ ...prev, assignTo: value }))}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select group" />
+                    </SelectTrigger>
+                    <SelectContent className="max-h-[200px] overflow-y-auto">
+                      {GROUPS.map((group) => (
+                        <SelectItem key={group.value} value={group.value}>
+                          {group.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
+              </div>
             </div>
 
             {/* Contact No */}
-            <div className="space-y-2">
+            <div className="space-y-2 max-w-md">
               <Label htmlFor="contactNo">Contact No</Label>
               <Input
                 id="contactNo"
