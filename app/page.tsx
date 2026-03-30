@@ -10,6 +10,7 @@ import { RoutingRulesView } from "@/components/routing-rules-view"
 import { AgentsView } from "@/components/agents-view"
 import { TaggingRulesView } from "@/components/tagging-rules-view"
 import { CustomersView } from "@/components/customers-view"
+import { NonShipmentTicketView } from "@/components/non-shipment-ticket-view"
 
 function PlaceholderView({ title }: { title: string }) {
   return (
@@ -52,6 +53,9 @@ export default function MainPage() {
     }
     if (activeView === "collection-search") {
       return <CollectionsView />
+    }
+    if (activeView === "raise-non-shipment-ticket") {
+      return <NonShipmentTicketView />
     }
     if (activeView === "routing-rules") {
       return <RoutingRulesView />
