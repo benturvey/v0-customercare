@@ -45,15 +45,15 @@ export function ShipmentFilters({
   return (
     <Card>
       <CardContent className="pt-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7 gap-4">
           {/* Customer Dropdown */}
-          <div className="space-y-2">
-            <Label htmlFor="customer">Customer</Label>
+          <div className="space-y-2 min-w-[200px]">
+            <Label htmlFor="customer" className="whitespace-nowrap">Customer</Label>
             <Select
               value={filters.customer}
               onValueChange={(value) => updateFilter("customer", value)}
             >
-              <SelectTrigger id="customer">
+              <SelectTrigger id="customer" className="min-w-[200px]">
                 <SelectValue placeholder="Select customer" />
               </SelectTrigger>
               <SelectContent>
@@ -67,8 +67,8 @@ export function ShipmentFilters({
           </div>
 
           {/* Carrier Dropdown */}
-          <div className="space-y-2">
-            <Label htmlFor="carrier">Carrier</Label>
+          <div className="space-y-2 min-w-[180px]">
+            <Label htmlFor="carrier" className="whitespace-nowrap">Carrier</Label>
             <Select
               value={filters.carrier}
               onValueChange={(value) => updateFilter("carrier", value)}
@@ -87,8 +87,8 @@ export function ShipmentFilters({
           </div>
 
           {/* Service Dropdown */}
-          <div className="space-y-2">
-            <Label htmlFor="service">Service</Label>
+          <div className="space-y-2 min-w-[180px]">
+            <Label htmlFor="service" className="whitespace-nowrap">Service</Label>
             <Select
               value={filters.service}
               onValueChange={(value) => updateFilter("service", value)}
@@ -107,8 +107,8 @@ export function ShipmentFilters({
           </div>
 
           {/* Consignment No */}
-          <div className="space-y-2">
-            <Label htmlFor="consignmentNo">Consignment No</Label>
+          <div className="space-y-2 min-w-[160px]">
+            <Label htmlFor="consignmentNo" className="whitespace-nowrap">Consignment No</Label>
             <Input
               id="consignmentNo"
               placeholder="Enter consignment no"
@@ -118,8 +118,8 @@ export function ShipmentFilters({
           </div>
 
           {/* Parcel No */}
-          <div className="space-y-2">
-            <Label htmlFor="parcelNo">Parcel No</Label>
+          <div className="space-y-2 min-w-[140px]">
+            <Label htmlFor="parcelNo" className="whitespace-nowrap">Parcel No</Label>
             <Input
               id="parcelNo"
               placeholder="Enter parcel no"
@@ -129,8 +129,8 @@ export function ShipmentFilters({
           </div>
 
           {/* Tracking No */}
-          <div className="space-y-2">
-            <Label htmlFor="trackingNo">Tracking No</Label>
+          <div className="space-y-2 min-w-[140px]">
+            <Label htmlFor="trackingNo" className="whitespace-nowrap">Tracking No</Label>
             <Input
               id="trackingNo"
               placeholder="Enter tracking no"
@@ -140,8 +140,8 @@ export function ShipmentFilters({
           </div>
 
           {/* Shipment Reference No */}
-          <div className="space-y-2">
-            <Label htmlFor="shipmentReferenceNo">Shipment Reference No</Label>
+          <div className="space-y-2 min-w-[180px]">
+            <Label htmlFor="shipmentReferenceNo" className="whitespace-nowrap">Shipment Reference No</Label>
             <Input
               id="shipmentReferenceNo"
               placeholder="Enter reference no"
@@ -151,8 +151,8 @@ export function ShipmentFilters({
           </div>
 
           {/* Company */}
-          <div className="space-y-2">
-            <Label htmlFor="company">Company</Label>
+          <div className="space-y-2 min-w-[140px]">
+            <Label htmlFor="company" className="whitespace-nowrap">Company</Label>
             <Input
               id="company"
               placeholder="Enter company"
@@ -162,8 +162,8 @@ export function ShipmentFilters({
           </div>
 
           {/* County */}
-          <div className="space-y-2">
-            <Label htmlFor="county">County</Label>
+          <div className="space-y-2 min-w-[140px]">
+            <Label htmlFor="county" className="whitespace-nowrap">County</Label>
             <Input
               id="county"
               placeholder="Enter county"
@@ -173,8 +173,8 @@ export function ShipmentFilters({
           </div>
 
           {/* Postcode */}
-          <div className="space-y-2">
-            <Label htmlFor="postcode">Postcode</Label>
+          <div className="space-y-2 min-w-[120px]">
+            <Label htmlFor="postcode" className="whitespace-nowrap">Postcode</Label>
             <Input
               id="postcode"
               placeholder="Enter postcode"
@@ -184,8 +184,8 @@ export function ShipmentFilters({
           </div>
 
           {/* Country Dropdown */}
-          <div className="space-y-2">
-            <Label htmlFor="country">Country</Label>
+          <div className="space-y-2 min-w-[140px]">
+            <Label htmlFor="country" className="whitespace-nowrap">Country</Label>
             <Select
               value={filters.country}
               onValueChange={(value) => updateFilter("country", value)}
@@ -204,8 +204,8 @@ export function ShipmentFilters({
           </div>
 
           {/* Set Despatch Date Period Dropdown */}
-          <div className="space-y-2">
-            <Label htmlFor="despatchDatePeriod">Set Despatch Date Period</Label>
+          <div className="space-y-2 min-w-[200px]">
+            <Label htmlFor="despatchDatePeriod" className="whitespace-nowrap">Set Despatch Date Period</Label>
             <Select
               value={filters.despatchDatePeriod}
               onValueChange={(value) => updateFilter("despatchDatePeriod", value)}
@@ -224,8 +224,8 @@ export function ShipmentFilters({
           </div>
 
           {/* Despatch Date From */}
-          <div className="space-y-2">
-            <Label htmlFor="despatchDateFrom">Despatch Date From</Label>
+          <div className="space-y-2 min-w-[160px]">
+            <Label htmlFor="despatchDateFrom" className="whitespace-nowrap">Despatch Date From</Label>
             <Input
               id="despatchDateFrom"
               type="date"
@@ -235,8 +235,8 @@ export function ShipmentFilters({
           </div>
 
           {/* Despatch Date To */}
-          <div className="space-y-2">
-            <Label htmlFor="despatchDateTo">Despatch Date To</Label>
+          <div className="space-y-2 min-w-[160px]">
+            <Label htmlFor="despatchDateTo" className="whitespace-nowrap">Despatch Date To</Label>
             <Input
               id="despatchDateTo"
               type="date"
