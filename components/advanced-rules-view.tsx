@@ -14,7 +14,7 @@ interface AdvancedRule {
 }
 
 const initialRules: AdvancedRule[] = [
-  { id: "1", keyword: "Complaint", itemValue: "", parcelCount: "", state: "", condition: "", skillLevel: "L4" },
+  { id: "1", keyword: "Complaint, Complain", itemValue: "", parcelCount: "", state: "", condition: "", skillLevel: "L4" },
 ]
 
 export function AdvancedRulesView() {
