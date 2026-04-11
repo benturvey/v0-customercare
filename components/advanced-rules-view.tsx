@@ -36,7 +36,7 @@ const initialRules: AdvancedRule[] = [
 ]
 
 const initialQueryStateRules: QueryStateRule[] = [
-  { id: "1", ruleDescription: "Repeat Defer Premium Carrier", queryLifecycle: "Defer, Review", lifecycleCountThreshold: "6", carrier: "DPD", skillLevel: "L4" },
+  { id: "1", ruleDescription: "Repeat Defer Premium Carrier", queryLifecycle: "Defer, Review", lifecycleCountThreshold: "6", carrier: "DHL ECommerce UK, DPD, DPD Local", skillLevel: "L4" },
 ]
 
 export function AdvancedRulesView() {
@@ -203,11 +203,11 @@ export function AdvancedRulesView() {
                     <td className="py-4 px-4 text-sm text-foreground">{rule.carrier}</td>
                     <td className="py-4 px-4 text-sm text-foreground">
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${rule.skillLevel === "L4" ? "bg-purple-100 text-purple-800" :
-                          rule.skillLevel === "L3" ? "bg-blue-100 text-blue-800" :
-                            rule.skillLevel === "L2" ? "bg-green-100 text-green-800" :
-                              rule.skillLevel === "MGM" ? "bg-orange-100 text-orange-800" :
-                                rule.skillLevel === "ADM" ? "bg-red-100 text-red-800" :
-                                  "bg-gray-100 text-gray-800"
+                        rule.skillLevel === "L3" ? "bg-blue-100 text-blue-800" :
+                          rule.skillLevel === "L2" ? "bg-green-100 text-green-800" :
+                            rule.skillLevel === "MGM" ? "bg-orange-100 text-orange-800" :
+                              rule.skillLevel === "ADM" ? "bg-red-100 text-red-800" :
+                                "bg-gray-100 text-gray-800"
                         }`}>
                         {rule.skillLevel}
                       </span>
