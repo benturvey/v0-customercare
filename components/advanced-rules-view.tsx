@@ -26,6 +26,9 @@ export function AdvancedRulesView() {
 
       <Card>
         <CardContent className="p-0">
+          <div className="px-4 py-3 border-b border-border">
+            <h2 className="text-lg font-medium text-foreground">General Advanced Rules</h2>
+          </div>
           <table className="w-full">
             <thead>
               <tr className="border-b border-border bg-muted/30">
