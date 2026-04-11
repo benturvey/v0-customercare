@@ -27,6 +27,7 @@ interface Agent {
   name: string
   email: string
   role: "agent" | "senior" | "team-lead" | "management"
+  skillLevel: "junior" | "intermediate" | "senior" | "expert"
   status: "active" | "inactive"
   currentTickets: number
   expanded: boolean
@@ -38,6 +39,7 @@ const initialAgents: Agent[] = [
     name: "Aaron Doherty",
     email: "aaron.doherty@gfsdeliver.com",
     role: "agent",
+    skillLevel: "intermediate",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -47,6 +49,7 @@ const initialAgents: Agent[] = [
     name: "Alex Lucy",
     email: "alex.lucy@gfsdeliver.com",
     role: "agent",
+    skillLevel: "junior",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -56,6 +59,7 @@ const initialAgents: Agent[] = [
     name: "Andrei Costea",
     email: "andrei.costea@gfsdeliver.com",
     role: "agent",
+    skillLevel: "intermediate",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -65,6 +69,7 @@ const initialAgents: Agent[] = [
     name: "Annette Davidson",
     email: "annette.davidson@gfsdeliver.com",
     role: "agent",
+    skillLevel: "senior",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -74,6 +79,7 @@ const initialAgents: Agent[] = [
     name: "Apryl Watson",
     email: "apryl.watson@gfsdeliver.com",
     role: "agent",
+    skillLevel: "intermediate",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -83,6 +89,7 @@ const initialAgents: Agent[] = [
     name: "Arlene Griffin",
     email: "arlene.griffin@gfsdeliver.com",
     role: "agent",
+    skillLevel: "junior",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -92,6 +99,7 @@ const initialAgents: Agent[] = [
     name: "Audrey Johnson",
     email: "audrey.johnson@gfsdeliver.com",
     role: "agent",
+    skillLevel: "senior",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -101,6 +109,7 @@ const initialAgents: Agent[] = [
     name: "Ben Lund",
     email: "ben.lund@gfsdeliver.com",
     role: "management",
+    skillLevel: "expert",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -110,6 +119,7 @@ const initialAgents: Agent[] = [
     name: "Danielle Marcroft",
     email: "danielle.marcroft@gfsdeliver.com",
     role: "agent",
+    skillLevel: "intermediate",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -119,6 +129,7 @@ const initialAgents: Agent[] = [
     name: "Francine Payne",
     email: "francine.payne@gfsdeliver.com",
     role: "team-lead",
+    skillLevel: "expert",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -128,6 +139,7 @@ const initialAgents: Agent[] = [
     name: "George Lilliston",
     email: "george.lilliston@gfsdeliver.com",
     role: "agent",
+    skillLevel: "junior",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -137,6 +149,7 @@ const initialAgents: Agent[] = [
     name: "Georgia Collins",
     email: "georgia.collins@gfsdeliver.com",
     role: "agent",
+    skillLevel: "intermediate",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -146,6 +159,7 @@ const initialAgents: Agent[] = [
     name: "Ibrahim Anidi",
     email: "ibrahim.anidi@gfsdeliver.com",
     role: "agent",
+    skillLevel: "senior",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -155,6 +169,7 @@ const initialAgents: Agent[] = [
     name: "Kimberley McCormick",
     email: "kimberley.mcCormick@gfsdeliver.com",
     role: "team-lead",
+    skillLevel: "expert",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -164,6 +179,7 @@ const initialAgents: Agent[] = [
     name: "Kirsty Doyle",
     email: "kirsty.doyle@gfsdeliver.com",
     role: "agent",
+    skillLevel: "intermediate",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -173,6 +189,7 @@ const initialAgents: Agent[] = [
     name: "Lee Higgins",
     email: "lee.higgins@gfsdeliver.com",
     role: "agent",
+    skillLevel: "junior",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -182,6 +199,7 @@ const initialAgents: Agent[] = [
     name: "Lisa Yates",
     email: "lisa.yates@gfsdeliver.com",
     role: "senior",
+    skillLevel: "expert",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -191,6 +209,7 @@ const initialAgents: Agent[] = [
     name: "Lucy King",
     email: "lucy.king@gfsdeliver.com",
     role: "agent",
+    skillLevel: "intermediate",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -200,6 +219,7 @@ const initialAgents: Agent[] = [
     name: "Lynn Forrest",
     email: "lynn.forrest@gfsdeliver.com",
     role: "agent",
+    skillLevel: "senior",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -209,6 +229,7 @@ const initialAgents: Agent[] = [
     name: "Olivia Liburd",
     email: "olivia.liburd@gfsdeliver.com",
     role: "agent",
+    skillLevel: "junior",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -218,6 +239,7 @@ const initialAgents: Agent[] = [
     name: "Patricia McGuire",
     email: "patricia.mcGuire@gfsdeliver.com",
     role: "agent",
+    skillLevel: "intermediate",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -227,6 +249,7 @@ const initialAgents: Agent[] = [
     name: "Rachel Martin",
     email: "rachel.martin@gfsdeliver.com",
     role: "agent",
+    skillLevel: "senior",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -236,6 +259,7 @@ const initialAgents: Agent[] = [
     name: "Rebecca Gibson",
     email: "rebecca.gibson@gfsdeliver.com",
     role: "agent",
+    skillLevel: "intermediate",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -245,6 +269,7 @@ const initialAgents: Agent[] = [
     name: "Sarah Adams",
     email: "sarah.adams@gfsdeliver.com",
     role: "senior",
+    skillLevel: "expert",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -254,6 +279,7 @@ const initialAgents: Agent[] = [
     name: "Sarah Tshikuna",
     email: "sarah.tshikuna@gfsdeliver.com",
     role: "agent",
+    skillLevel: "junior",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -263,6 +289,7 @@ const initialAgents: Agent[] = [
     name: "Sharon Pearce",
     email: "sharon.pearce@gfsdeliver.com",
     role: "agent",
+    skillLevel: "intermediate",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -272,6 +299,7 @@ const initialAgents: Agent[] = [
     name: "Sue Foster",
     email: "sue.foster@gfsdeliver.com",
     role: "agent",
+    skillLevel: "senior",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -281,6 +309,7 @@ const initialAgents: Agent[] = [
     name: "Tracey Crooke",
     email: "tracey.crooke@gfsdeliver.com",
     role: "team-lead",
+    skillLevel: "expert",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -290,6 +319,7 @@ const initialAgents: Agent[] = [
     name: "Tracey Johnson",
     email: "tracey.johnson@gfsdeliver.com",
     role: "senior",
+    skillLevel: "expert",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -299,6 +329,7 @@ const initialAgents: Agent[] = [
     name: "Vicky Lomax",
     email: "vicky.lomax@gfsdeliver.com",
     role: "management",
+    skillLevel: "expert",
     status: "active",
     currentTickets: 0,
     expanded: false,
@@ -404,11 +435,12 @@ export function AgentsView() {
       {/* Agents Table */}
       <div className="border border-border rounded-lg bg-card mb-6">
         {/* Table Header */}
-        <div className="grid grid-cols-[40px_1fr_1fr_150px_100px_120px_120px] gap-4 px-4 py-3 border-b border-border bg-muted/30">
+        <div className="grid grid-cols-[40px_1fr_1fr_150px_120px_100px_120px_120px] gap-4 px-4 py-3 border-b border-border bg-muted/30">
           <div></div>
           <div className="text-sm font-medium text-muted-foreground">Name</div>
           <div className="text-sm font-medium text-muted-foreground">Email</div>
           <div className="text-sm font-medium text-muted-foreground">Role</div>
+          <div className="text-sm font-medium text-muted-foreground">Skill Level</div>
           <div className="text-sm font-medium text-muted-foreground">Status</div>
           <div className="text-sm font-medium text-muted-foreground">Current Tickets</div>
           <div className="text-sm font-medium text-muted-foreground">Actions</div>
@@ -417,7 +449,7 @@ export function AgentsView() {
         {/* Table Body */}
         {agents.map((agent) => (
           <div key={agent.id} className="border-b border-border last:border-b-0">
-            <div className="grid grid-cols-[40px_1fr_1fr_150px_100px_120px_120px] gap-4 px-4 py-3 items-center">
+            <div className="grid grid-cols-[40px_1fr_1fr_150px_120px_100px_120px_120px] gap-4 px-4 py-3 items-center">
               <button
                 onClick={() => toggleExpand(agent.id)}
                 className="flex items-center justify-center text-muted-foreground hover:text-foreground"
@@ -438,6 +470,16 @@ export function AgentsView() {
                     <SelectItem value="management">Management</SelectItem>
                   </SelectContent>
                 </Select>
+              </div>
+              <div>
+                <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium capitalize ${
+                  agent.skillLevel === "expert" ? "bg-purple-100 text-purple-800" :
+                  agent.skillLevel === "senior" ? "bg-blue-100 text-blue-800" :
+                  agent.skillLevel === "intermediate" ? "bg-green-100 text-green-800" :
+                  "bg-gray-100 text-gray-800"
+                }`}>
+                  {agent.skillLevel}
+                </span>
               </div>
               <div>
                 <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${agent.status === "active"
