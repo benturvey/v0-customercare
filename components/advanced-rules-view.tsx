@@ -108,11 +108,11 @@ const initialElapsedDaysRules: ElapsedDaysRule[] = [
 
 export function AdvancedRulesView() {
   const [rules, setRules] = useState<AdvancedRule[]>(initialRules)
-  const [queryStateRules] = useState<QueryStateRule[]>(initialQueryStateRules)
-  const [parcelCountRules] = useState<ParcelCountRule[]>(initialParcelCountRules)
-  const [consignmentStateRules] = useState<ConsignmentStateRule[]>(initialConsignmentStateRules)
-  const [customerBasedRules] = useState<CustomerBasedRule[]>(initialCustomerBasedRules)
-  const [elapsedDaysRules] = useState<ElapsedDaysRule[]>(initialElapsedDaysRules)
+  const [queryStateRules, setQueryStateRules] = useState<QueryStateRule[]>(initialQueryStateRules)
+  const [parcelCountRules, setParcelCountRules] = useState<ParcelCountRule[]>(initialParcelCountRules)
+  const [consignmentStateRules, setConsignmentStateRules] = useState<ConsignmentStateRule[]>(initialConsignmentStateRules)
+  const [customerBasedRules, setCustomerBasedRules] = useState<CustomerBasedRule[]>(initialCustomerBasedRules)
+  const [elapsedDaysRules, setElapsedDaysRules] = useState<ElapsedDaysRule[]>(initialElapsedDaysRules)
 
   // Modal state for General Advanced Rules
   const [isGeneralRuleModalOpen, setIsGeneralRuleModalOpen] = useState(false)
@@ -131,6 +131,10 @@ export function AdvancedRulesView() {
     itemValue: "",
     skillLevel: "",
   })
+
+  // Delete confirmation state
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false)
+  const [deleteTarget, setDeleteTarget] = useState<{ section: string; id: string; description: string } | null>(null)
 
   const handleAddGeneralRule = () => {
     if (newGeneralRule.ruleDescription || newGeneralRule.keyword || newGeneralRule.itemValue) {
@@ -173,6 +177,39 @@ export function AdvancedRulesView() {
 
   const handleCancelGeneralRuleEdit = () => {
     setEditingGeneralRuleId(null)
+  }
+
+  const handleOpenDeleteModal = (section: string, id: string, description: string) => {
+    setDeleteTarget({ section, id, description })
+    setDeleteModalOpen(true)
+  }
+
+  const handleConfirmDelete = () => {
+    if (!deleteTarget) return
+
+    switch (deleteTarget.section) {
+      case "general":
+        setRules(rules.filter(r => r.id !== deleteTarget.id))
+        break
+      case "queryState":
+        setQueryStateRules(queryStateRules.filter(r => r.id !== deleteTarget.id))
+        break
+      case "parcelCount":
+        setParcelCountRules(parcelCountRules.filter(r => r.id !== deleteTarget.id))
+        break
+      case "consignmentState":
+        setConsignmentStateRules(consignmentStateRules.filter(r => r.id !== deleteTarget.id))
+        break
+      case "customerBased":
+        setCustomerBasedRules(customerBasedRules.filter(r => r.id !== deleteTarget.id))
+        break
+      case "elapsedDays":
+        setElapsedDaysRules(elapsedDaysRules.filter(r => r.id !== deleteTarget.id))
+        break
+    }
+
+    setDeleteModalOpen(false)
+    setDeleteTarget(null)
   }
 
   const getSkillLevelBadgeClass = (skillLevel: string) => {
@@ -321,7 +358,7 @@ export function AdvancedRulesView() {
                           <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit" onClick={() => handleEditGeneralRule(rule)}>
                             <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
                           </button>
-                          <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete">
+                          <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete" onClick={() => handleOpenDeleteModal("general", rule.id, rule.ruleDescription)}>
                             <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
                           </button>
                         </div>
@@ -380,7 +417,7 @@ export function AdvancedRulesView() {
                         <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit">
                           <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
                         </button>
-                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete">
+                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete" onClick={() => handleOpenDeleteModal("queryState", rule.id, rule.ruleDescription)}>
                           <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
                         </button>
                       </div>
@@ -436,7 +473,7 @@ export function AdvancedRulesView() {
                         <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit">
                           <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
                         </button>
-                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete">
+                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete" onClick={() => handleOpenDeleteModal("parcelCount", rule.id, rule.ruleDescription)}>
                           <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
                         </button>
                       </div>
@@ -492,7 +529,7 @@ export function AdvancedRulesView() {
                         <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit">
                           <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
                         </button>
-                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete">
+                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete" onClick={() => handleOpenDeleteModal("consignmentState", rule.id, rule.ruleDescription)}>
                           <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
                         </button>
                       </div>
@@ -548,7 +585,7 @@ export function AdvancedRulesView() {
                         <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit">
                           <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
                         </button>
-                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete">
+                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete" onClick={() => handleOpenDeleteModal("customerBased", rule.id, rule.ruleDescription)}>
                           <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
                         </button>
                       </div>
@@ -602,7 +639,7 @@ export function AdvancedRulesView() {
                         <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit">
                           <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
                         </button>
-                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete">
+                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete" onClick={() => handleOpenDeleteModal("elapsedDays", rule.id, rule.ruleDescription)}>
                           <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
                         </button>
                       </div>
@@ -674,6 +711,32 @@ export function AdvancedRulesView() {
             </Button>
             <Button onClick={handleAddGeneralRule}>
               Save
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Confirmation Modal */}
+      <Dialog open={deleteModalOpen} onOpenChange={setDeleteModalOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Confirm Deletion</DialogTitle>
+          </DialogHeader>
+          <div className="py-4">
+            <p className="text-sm text-muted-foreground">
+              Are you sure you want to delete the rule{" "}
+              <span className="font-medium text-foreground">{deleteTarget?.description || "this rule"}</span>?
+            </p>
+            <p className="text-sm text-muted-foreground mt-2">
+              This action cannot be undone.
+            </p>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setDeleteModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button variant="destructive" onClick={handleConfirmDelete}>
+              Delete
             </Button>
           </DialogFooter>
         </DialogContent>
