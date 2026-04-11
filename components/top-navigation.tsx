@@ -16,7 +16,7 @@ const navItems: NavItem[] = [
   { id: "agents", label: "Agents" },
   { id: "customers", label: "Customers" },
   { id: "tagging-rules", label: "Tagging Rules" },
-  { id: "query-type", label: "Query Type" },
+  { id: "query-type", label: "Basic Rules" },
 ]
 
 interface TopNavigationProps {
