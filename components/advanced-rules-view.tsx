@@ -10,6 +10,7 @@ interface AdvancedRule {
   parcelCount: string
   state: string
   condition: string
+  skillLevel: string
 }
 
 const initialRules: AdvancedRule[] = []
@@ -36,12 +37,13 @@ export function AdvancedRulesView() {
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Parcel Count</th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">State</th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Condition</th>
+                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Skill Level</th>
               </tr>
             </thead>
             <tbody>
               {rules.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="py-8 text-center text-muted-foreground text-sm">
+                  <td colSpan={6} className="py-8 text-center text-muted-foreground text-sm">
                     No advanced rules defined
                   </td>
                 </tr>
@@ -53,6 +55,18 @@ export function AdvancedRulesView() {
                     <td className="py-4 px-4 text-sm text-foreground">{rule.parcelCount}</td>
                     <td className="py-4 px-4 text-sm text-foreground">{rule.state}</td>
                     <td className="py-4 px-4 text-sm text-foreground">{rule.condition}</td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${
+                        rule.skillLevel === "L4" ? "bg-purple-100 text-purple-800" :
+                        rule.skillLevel === "L3" ? "bg-blue-100 text-blue-800" :
+                        rule.skillLevel === "L2" ? "bg-green-100 text-green-800" :
+                        rule.skillLevel === "MGM" ? "bg-orange-100 text-orange-800" :
+                        rule.skillLevel === "ADM" ? "bg-red-100 text-red-800" :
+                        "bg-gray-100 text-gray-800"
+                      }`}>
+                        {rule.skillLevel}
+                      </span>
+                    </td>
                   </tr>
                 ))
               )}
