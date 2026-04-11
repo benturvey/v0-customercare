@@ -225,7 +225,7 @@ export function QueryTypeView() {
   return (
     <div className="w-full px-4 py-6">
       <header className="mb-6">
-        <h1 className="text-2xl font-semibold text-[#1e3a5f]">Query Type / Carrier Skill Levels</h1>
+        <h1 className="text-2xl font-semibold text-[#1e3a5f]">Basic Skill Level Rules</h1>
       </header>
 
       {/* Add New Entry Section */}
