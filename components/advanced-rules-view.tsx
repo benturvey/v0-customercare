@@ -13,7 +13,9 @@ interface AdvancedRule {
   skillLevel: string
 }
 
-const initialRules: AdvancedRule[] = []
+const initialRules: AdvancedRule[] = [
+  { id: "1", keyword: "Complaint", itemValue: "", parcelCount: "", state: "", condition: "", skillLevel: "L4" },
+]
 
 export function AdvancedRulesView() {
   const [rules] = useState<AdvancedRule[]>(initialRules)
