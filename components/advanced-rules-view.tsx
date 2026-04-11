@@ -5,7 +5,6 @@ import { Card, CardContent } from "@/components/ui/card"
 
 interface AdvancedRule {
   id: string
-  customer: string
   keyword: string
   itemValue: string
   parcelCount: string
@@ -32,7 +31,6 @@ export function AdvancedRulesView() {
           <table className="w-full">
             <thead>
               <tr className="border-b border-border bg-muted/30">
-                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Customer</th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Keyword</th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Item Value</th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Parcel Count</th>
@@ -43,14 +41,13 @@ export function AdvancedRulesView() {
             <tbody>
               {rules.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="py-8 text-center text-muted-foreground text-sm">
+                  <td colSpan={5} className="py-8 text-center text-muted-foreground text-sm">
                     No advanced rules defined
                   </td>
                 </tr>
               ) : (
                 rules.map((rule) => (
                   <tr key={rule.id} className="border-b border-border last:border-b-0">
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.customer}</td>
                     <td className="py-4 px-4 text-sm text-foreground">{rule.keyword}</td>
                     <td className="py-4 px-4 text-sm text-foreground">{rule.itemValue}</td>
                     <td className="py-4 px-4 text-sm text-foreground">{rule.parcelCount}</td>
