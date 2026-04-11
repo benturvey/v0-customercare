@@ -62,7 +62,9 @@ const initialParcelCountRules: ParcelCountRule[] = [
   { id: "2", ruleDescription: "Searches For Multi Parcel", queryCondition: "descriptions provided", parcelCount: "1", skillLevel: "L4" },
 ]
 
-const initialConsignmentStateRules: ConsignmentStateRule[] = []
+const initialConsignmentStateRules: ConsignmentStateRule[] = [
+  { id: "1", ruleDescription: "Part Delivered", consignmentState: "", queryLifecycle: "", skillLevel: "L3" },
+]
 
 export function AdvancedRulesView() {
   const [rules] = useState<AdvancedRule[]>(initialRules)
