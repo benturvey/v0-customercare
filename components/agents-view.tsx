@@ -259,7 +259,7 @@ const initialAgents: Agent[] = [
     name: "Rebecca Gibson",
     email: "rebecca.gibson@gfsdeliver.com",
     role: "agent",
-    skillLevel: "L2",
+    skillLevel: "L4",
     status: "active",
     currentTickets: 0,
     expanded: false,
