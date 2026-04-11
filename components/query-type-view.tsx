@@ -55,28 +55,7 @@ interface QueryTypeItem {
   skillLevel: string
 }
 
-const initialQueryTypes: QueryTypeItem[] = [
-  { id: "1", queryType: "Delivery Query", carrier: "DPD", skillLevel: "L1" },
-  { id: "2", queryType: "Delivery Query", carrier: "DHL Express", skillLevel: "L2" },
-  { id: "3", queryType: "Delivery Query", carrier: "DHL ECommerce", skillLevel: "L2" },
-  { id: "4", queryType: "Delivery Query", carrier: "Evri", skillLevel: "L1" },
-  { id: "5", queryType: "Collection Query", carrier: "DPD", skillLevel: "L2" },
-  { id: "6", queryType: "Collection Query", carrier: "DHL Express", skillLevel: "L3" },
-  { id: "7", queryType: "Damage Claim", carrier: "DPD", skillLevel: "L3" },
-  { id: "8", queryType: "Damage Claim", carrier: "DHL Express", skillLevel: "L3" },
-  { id: "9", queryType: "Damage Claim", carrier: "DHL ECommerce", skillLevel: "L3" },
-  { id: "10", queryType: "Damage Claim", carrier: "Evri", skillLevel: "L3" },
-  { id: "11", queryType: "Lost Shipment", carrier: "DPD", skillLevel: "L4" },
-  { id: "12", queryType: "Lost Shipment", carrier: "DHL Express", skillLevel: "L4" },
-  { id: "13", queryType: "Lost Shipment", carrier: "DHL ECommerce", skillLevel: "L4" },
-  { id: "14", queryType: "Lost Shipment", carrier: "Evri", skillLevel: "L4" },
-  { id: "15", queryType: "Tracking Update", carrier: "DPD", skillLevel: "L1" },
-  { id: "16", queryType: "Tracking Update", carrier: "DHL Express", skillLevel: "L1" },
-  { id: "17", queryType: "Tracking Update", carrier: "DHL ECommerce", skillLevel: "L1" },
-  { id: "18", queryType: "Tracking Update", carrier: "Evri", skillLevel: "L1" },
-  { id: "19", queryType: "Address Amendment", carrier: "DPD", skillLevel: "L2" },
-  { id: "20", queryType: "Address Amendment", carrier: "DHL Express", skillLevel: "L2" },
-]
+const initialQueryTypes: QueryTypeItem[] = []
 
 export function QueryTypeView() {
   const [queryTypes, setQueryTypes] = useState<QueryTypeItem[]>(initialQueryTypes)
