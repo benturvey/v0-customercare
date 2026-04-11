@@ -18,6 +18,7 @@ const navItems: NavItem[] = [
   { id: "tagging-rules", label: "Tagging Rules" },
   { id: "query-type", label: "Basic Rules" },
   { id: "advanced-rules", label: "Advanced Rules" },
+  { id: "rule-priority", label: "Rule Priority" },
 ]
 
 interface TopNavigationProps {

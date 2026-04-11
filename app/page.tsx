@@ -13,6 +13,7 @@ import { CustomersView } from "@/components/customers-view"
 import { NonShipmentTicketView } from "@/components/non-shipment-ticket-view"
 import { QueryTypeView } from "@/components/query-type-view"
 import { AdvancedRulesView } from "@/components/advanced-rules-view"
+import { RulePriorityView } from "@/components/rule-priority-view"
 
 function PlaceholderView({ title }: { title: string }) {
   return (
@@ -76,6 +77,9 @@ export default function MainPage() {
     }
     if (activeView === "advanced-rules") {
       return <AdvancedRulesView />
+    }
+    if (activeView === "rule-priority") {
+      return <RulePriorityView />
     }
     return <PlaceholderView title={viewTitles[activeView] || "Unknown"} />
   }
