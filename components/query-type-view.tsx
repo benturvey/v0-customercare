@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
+import { ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react"
 import {
   Select,
   SelectContent,
@@ -88,6 +89,9 @@ const initialQueryTypes: QueryTypeItem[] = [
 
 const STORAGE_KEY = "queryTypeCarrierSkillLevels"
 
+type SortField = "queryType" | "carrier" | null
+type SortDirection = "asc" | "desc"
+
 export function QueryTypeView() {
   const [queryTypes, setQueryTypes] = useState<QueryTypeItem[]>(initialQueryTypes)
   const [newEntry, setNewEntry] = useState({
@@ -95,6 +99,8 @@ export function QueryTypeView() {
     carrier: "",
     skillLevel: "",
   })
+  const [sortField, setSortField] = useState<SortField>(null)
+  const [sortDirection, setSortDirection] = useState<SortDirection>("asc")
 
   // Load persisted data on mount
   useEffect(() => {
@@ -129,6 +135,34 @@ export function QueryTypeView() {
       setNewEntry({ queryType: "", carrier: "", skillLevel: "" })
     }
   }
+
+  const handleSort = (field: SortField) => {
+    if (sortField === field) {
+      setSortDirection(sortDirection === "asc" ? "desc" : "asc")
+    } else {
+      setSortField(field)
+      setSortDirection("asc")
+    }
+  }
+
+  const getSortIcon = (field: SortField) => {
+    if (sortField !== field) {
+      return <ArrowUpDown className="h-4 w-4 ml-1" />
+    }
+    return sortDirection === "asc" 
+      ? <ArrowUp className="h-4 w-4 ml-1" /> 
+      : <ArrowDown className="h-4 w-4 ml-1" />
+  }
+
+  const sortedQueryTypes = [...queryTypes].sort((a, b) => {
+    if (!sortField) return 0
+    const aValue = a[sortField].toLowerCase()
+    const bValue = b[sortField].toLowerCase()
+    if (sortDirection === "asc") {
+      return aValue.localeCompare(bValue)
+    }
+    return bValue.localeCompare(aValue)
+  })
 
   return (
     <div className="w-full px-4 py-6">
@@ -213,13 +247,29 @@ export function QueryTypeView() {
           <table className="w-full">
             <thead>
               <tr className="border-b border-border bg-muted/30">
-                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Query Type</th>
-                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Carrier</th>
+                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">
+                  <button 
+                    onClick={() => handleSort("queryType")}
+                    className="flex items-center hover:text-foreground transition-colors"
+                  >
+                    Query Type
+                    {getSortIcon("queryType")}
+                  </button>
+                </th>
+                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">
+                  <button 
+                    onClick={() => handleSort("carrier")}
+                    className="flex items-center hover:text-foreground transition-colors"
+                  >
+                    Carrier
+                    {getSortIcon("carrier")}
+                  </button>
+                </th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Skill Level</th>
               </tr>
             </thead>
             <tbody>
-              {queryTypes.map((item) => (
+              {sortedQueryTypes.map((item) => (
                 <tr key={item.id} className="border-b border-border last:border-b-0">
                   <td className="py-4 px-4 text-sm font-medium text-foreground">{item.queryType}</td>
                   <td className="py-4 px-4 text-sm text-foreground">{item.carrier}</td>
