@@ -154,6 +154,16 @@ export function AdvancedRulesView() {
     skillLevel: "",
   })
 
+  // Edit state for Query State Specific Rules
+  const [editingQueryStateRuleId, setEditingQueryStateRuleId] = useState<string | null>(null)
+  const [editingQueryStateRule, setEditingQueryStateRule] = useState({
+    ruleDescription: "",
+    queryLifecycle: [] as string[],
+    lifecycleCountThreshold: "",
+    carrier: [] as string[],
+    skillLevel: "",
+  })
+
   const handleAddGeneralRule = () => {
     if (newGeneralRule.ruleDescription || newGeneralRule.keyword || newGeneralRule.itemValue) {
       const newRule: AdvancedRule = {
@@ -218,6 +228,55 @@ export function AdvancedRulesView() {
 
   const toggleCarrier = (carrier: string) => {
     setNewQueryStateRule(prev => ({
+      ...prev,
+      carrier: prev.carrier.includes(carrier)
+        ? prev.carrier.filter(c => c !== carrier)
+        : [...prev.carrier, carrier]
+    }))
+  }
+
+  const handleEditQueryStateRule = (rule: QueryStateRule) => {
+    setEditingQueryStateRuleId(rule.id)
+    setEditingQueryStateRule({
+      ruleDescription: rule.ruleDescription,
+      queryLifecycle: rule.queryLifecycle ? rule.queryLifecycle.split(", ").map(s => s.trim()).filter(Boolean) : [],
+      lifecycleCountThreshold: rule.lifecycleCountThreshold,
+      carrier: rule.carrier ? rule.carrier.split(", ").map(s => s.trim()).filter(Boolean) : [],
+      skillLevel: rule.skillLevel,
+    })
+  }
+
+  const handleSaveQueryStateRuleEdit = (ruleId: string) => {
+    setQueryStateRules(queryStateRules.map(rule =>
+      rule.id === ruleId
+        ? {
+            ...rule,
+            ruleDescription: editingQueryStateRule.ruleDescription,
+            queryLifecycle: editingQueryStateRule.queryLifecycle.join(", "),
+            lifecycleCountThreshold: editingQueryStateRule.lifecycleCountThreshold,
+            carrier: editingQueryStateRule.carrier.join(", "),
+            skillLevel: editingQueryStateRule.skillLevel,
+          }
+        : rule
+    ))
+    setEditingQueryStateRuleId(null)
+  }
+
+  const handleCancelQueryStateRuleEdit = () => {
+    setEditingQueryStateRuleId(null)
+  }
+
+  const toggleEditQueryLifecycle = (lifecycle: string) => {
+    setEditingQueryStateRule(prev => ({
+      ...prev,
+      queryLifecycle: prev.queryLifecycle.includes(lifecycle)
+        ? prev.queryLifecycle.filter(l => l !== lifecycle)
+        : [...prev.queryLifecycle, lifecycle]
+    }))
+  }
+
+  const toggleEditCarrier = (carrier: string) => {
+    setEditingQueryStateRule(prev => ({
       ...prev,
       carrier: prev.carrier.includes(carrier)
         ? prev.carrier.filter(c => c !== carrier)
@@ -472,24 +531,139 @@ export function AdvancedRulesView() {
               ) : (
                 queryStateRules.map((rule) => (
                   <tr key={rule.id} className="border-b border-border last:border-b-0">
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.ruleDescription}</td>
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.queryLifecycle}</td>
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.lifecycleCountThreshold}</td>
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.carrier}</td>
                     <td className="py-4 px-4 text-sm text-foreground">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${getSkillLevelBadgeClass(rule.skillLevel)}`}>
-                        {rule.skillLevel}
-                      </span>
+                      {editingQueryStateRuleId === rule.id ? (
+                        <Input
+                          value={editingQueryStateRule.ruleDescription}
+                          onChange={(e) => setEditingQueryStateRule({ ...editingQueryStateRule, ruleDescription: e.target.value })}
+                          className="h-8 text-sm"
+                        />
+                      ) : (
+                        rule.ruleDescription
+                      )}
                     </td>
                     <td className="py-4 px-4 text-sm text-foreground">
-                      <div className="flex items-center gap-2">
-                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit">
-                          <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
-                        </button>
-                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete" onClick={() => handleOpenDeleteModal("queryState", rule.id, rule.ruleDescription)}>
-                          <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
-                        </button>
-                      </div>
+                      {editingQueryStateRuleId === rule.id ? (
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <Button variant="outline" size="sm" className="h-8 w-full justify-between font-normal text-left">
+                              <span className="truncate text-xs">
+                                {editingQueryStateRule.queryLifecycle.length > 0
+                                  ? editingQueryStateRule.queryLifecycle.join(", ")
+                                  : "Select"}
+                              </span>
+                              <ChevronDown className="h-3 w-3 opacity-50 shrink-0" />
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-48 p-2" align="start">
+                            <div className="grid gap-2">
+                              {QUERY_LIFECYCLES.map((lifecycle) => (
+                                <div key={lifecycle} className="flex items-center gap-2">
+                                  <Checkbox
+                                    id={`edit-lifecycle-${rule.id}-${lifecycle}`}
+                                    checked={editingQueryStateRule.queryLifecycle.includes(lifecycle)}
+                                    onCheckedChange={() => toggleEditQueryLifecycle(lifecycle)}
+                                  />
+                                  <label htmlFor={`edit-lifecycle-${rule.id}-${lifecycle}`} className="text-sm cursor-pointer">
+                                    {lifecycle}
+                                  </label>
+                                </div>
+                              ))}
+                            </div>
+                          </PopoverContent>
+                        </Popover>
+                      ) : (
+                        rule.queryLifecycle
+                      )}
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      {editingQueryStateRuleId === rule.id ? (
+                        <Input
+                          value={editingQueryStateRule.lifecycleCountThreshold}
+                          onChange={(e) => setEditingQueryStateRule({ ...editingQueryStateRule, lifecycleCountThreshold: e.target.value })}
+                          className="h-8 text-sm w-20"
+                        />
+                      ) : (
+                        rule.lifecycleCountThreshold
+                      )}
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      {editingQueryStateRuleId === rule.id ? (
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <Button variant="outline" size="sm" className="h-8 w-full justify-between font-normal text-left">
+                              <span className="truncate text-xs">
+                                {editingQueryStateRule.carrier.length > 0
+                                  ? editingQueryStateRule.carrier.join(", ")
+                                  : "Select"}
+                              </span>
+                              <ChevronDown className="h-3 w-3 opacity-50 shrink-0" />
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-56 p-2 max-h-60 overflow-y-auto" align="start">
+                            <div className="grid gap-2">
+                              {CARRIERS.map((carrier) => (
+                                <div key={carrier} className="flex items-center gap-2">
+                                  <Checkbox
+                                    id={`edit-carrier-${rule.id}-${carrier}`}
+                                    checked={editingQueryStateRule.carrier.includes(carrier)}
+                                    onCheckedChange={() => toggleEditCarrier(carrier)}
+                                  />
+                                  <label htmlFor={`edit-carrier-${rule.id}-${carrier}`} className="text-sm cursor-pointer">
+                                    {carrier}
+                                  </label>
+                                </div>
+                              ))}
+                            </div>
+                          </PopoverContent>
+                        </Popover>
+                      ) : (
+                        rule.carrier
+                      )}
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      {editingQueryStateRuleId === rule.id ? (
+                        <Select
+                          value={editingQueryStateRule.skillLevel}
+                          onValueChange={(value) => setEditingQueryStateRule({ ...editingQueryStateRule, skillLevel: value })}
+                        >
+                          <SelectTrigger className="h-8 w-20">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {SKILL_LEVELS.map((level) => (
+                              <SelectItem key={level} value={level}>
+                                {level}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      ) : (
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${getSkillLevelBadgeClass(rule.skillLevel)}`}>
+                          {rule.skillLevel}
+                        </span>
+                      )}
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      {editingQueryStateRuleId === rule.id ? (
+                        <div className="flex items-center gap-2">
+                          <Button size="sm" className="h-7 text-xs" onClick={() => handleSaveQueryStateRuleEdit(rule.id)}>
+                            Save
+                          </Button>
+                          <Button size="sm" variant="outline" className="h-7 text-xs" onClick={handleCancelQueryStateRuleEdit}>
+                            Cancel
+                          </Button>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-2">
+                          <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit" onClick={() => handleEditQueryStateRule(rule)}>
+                            <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+                          </button>
+                          <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete" onClick={() => handleOpenDeleteModal("queryState", rule.id, rule.ruleDescription)}>
+                            <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
+                          </button>
+                        </div>
+                      )}
                     </td>
                   </tr>
                 ))
