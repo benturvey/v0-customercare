@@ -58,6 +58,18 @@ interface QueryTypeItem {
 const initialQueryTypes: QueryTypeItem[] = [
   { id: "1", queryType: "WHERE_IS_MY_PARCEL", carrier: "Evri", skillLevel: "L1" },
   { id: "2", queryType: "WHERE_IS_MY_PARCEL", carrier: "DPD", skillLevel: "L2" },
+  { id: "1", queryType: "WHERE_IS_MY_PARCEL", carrier: "DPD Local", skillLevel: "L2" },
+  { id: "2", queryType: "WHERE_IS_MY_PARCEL", carrier: "DHL ECommerce UK", skillLevel: "L2" },
+  { id: "1", queryType: "WHERE_IS_MY_PARCEL", carrier: "Amazon Logistics UK", skillLevel: "L2" },
+  { id: "2", queryType: "WHERE_IS_MY_PARCEL", carrier: "DX Freight", skillLevel: "L3" },
+  { id: "1", queryType: "WHERE_IS_MY_PARCEL", carrier: "BJS", skillLevel: "L4" },
+  { id: "2", queryType: "WHERE_IS_MY_PARCEL", carrier: "UPS", skillLevel: "L3" },
+  { id: "1", queryType: "WHERE_IS_MY_PARCEL", carrier: "GFS International", skillLevel: "L3" },
+  { id: "2", queryType: "WHERE_IS_MY_PARCEL", carrier: "DPD NL", skillLevel: "L3" },
+  { id: "1", queryType: "WHERE_IS_MY_PARCEL", carrier: "DPD DE", skillLevel: "L3" },
+  { id: "2", queryType: "WHERE_IS_MY_PARCEL", carrier: "Evri PS", skillLevel: "L3" },
+  { id: "1", queryType: "WHERE_IS_MY_PARCEL", carrier: "DHL Express", skillLevel: "L3" },
+  { id: "2", queryType: "WHERE_IS_MY_PARCEL", carrier: "OCS", skillLevel: "L3" },
 ]
 
 const STORAGE_KEY = "queryTypeCarrierSkillLevels"
