@@ -35,7 +35,9 @@ const initialRules: AdvancedRule[] = [
   { id: "2", ruleDescription: "High Value", keyword: "", itemValue: "300", parcelCount: "", state: "", condition: "", skillLevel: "L4" },
 ]
 
-const initialQueryStateRules: QueryStateRule[] = []
+const initialQueryStateRules: QueryStateRule[] = [
+  { id: "1", ruleDescription: "Repeat Defer Premium Carrier", queryLifecycle: "Defer, Review", lifecycleCountThreshold: "6", carrier: "DPD", skillLevel: "L4" },
+]
 
 export function AdvancedRulesView() {
   const [rules] = useState<AdvancedRule[]>(initialRules)
