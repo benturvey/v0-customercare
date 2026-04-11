@@ -37,6 +37,8 @@ const initialRules: AdvancedRule[] = [
 
 const initialQueryStateRules: QueryStateRule[] = [
   { id: "1", ruleDescription: "Repeat Defer Premium Carrier", queryLifecycle: "Defer, Review", lifecycleCountThreshold: "6", carrier: "DHL ECommerce UK, DPD, DPD Local", skillLevel: "L4" },
+  { id: "2", ruleDescription: "Repeat contact", queryLifecycle: "Reopened", lifecycleCountThreshold: "3", carrier: "", skillLevel: "L4" },
+  { id: "3", ruleDescription: "Repeat Defer ", queryLifecycle: "Defer, Review", lifecycleCountThreshold: "11", carrier: "Amazon Logisitcs UK, DHL Express, DPD DE, DPD NL, Evri, Evri PS,GFS International, OCS, UPS   ", skillLevel: "L4" },
 ]
 
 export function AdvancedRulesView() {
