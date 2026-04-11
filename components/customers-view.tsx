@@ -26,6 +26,7 @@ interface Customer {
 
 const initialCustomers: Customer[] = [
   { id: "1", company: "ABBOTT LYON LTD", contact: "", telephone: "", emails: ["vicky.lomax@gfsdeliver.com"], receiveEmails: false, tickets: 32, customTags: [""] },
+  { id: "2", company: "ANDERTONS MUSIC COMPANY", contact: "Customer Service Team", telephone: "01483477162", emails: ["help@andertons.co.uk"], receiveEmails: true, tickets: 5, customTags: ["L4"] },
   { id: "2", company: "CASTLES TECHNOLOGY UK & IRELAND LTD", contact: "", telephone: "0871 3020213", emails: ["support-centre@castlestech.com"], receiveEmails: true, tickets: 5, customTags: ["L4"] },
   { id: "2", company: "CREW CLOTHING CO LIMITED", contact: "Charlie Eaves", telephone: "+44 7525 594149", emails: ["helen.collett@crewclothing.co.uk", "josh.harwood@crewclothing.co.uk"], receiveEmails: true, tickets: 2, customTags: [] },
   { id: "3", company: "FENWICK", contact: "Jenny Brooks", telephone: "0208 546 1001", emails: ["Customerserviceinternal@fenwick.co.uk", "Eloisemcgurk@fenwick.co.uk"], receiveEmails: true, tickets: 30, customTags: [""] },
