@@ -55,7 +55,9 @@ interface QueryTypeItem {
   skillLevel: string
 }
 
-const initialQueryTypes: QueryTypeItem[] = []
+const initialQueryTypes: QueryTypeItem[] = [
+  { id: "1", queryType: "WHERE_IS_MY_PARCEL", carrier: "Evri", skillLevel: "L1" },
+]
 
 const STORAGE_KEY = "queryTypeCarrierSkillLevels"
 
