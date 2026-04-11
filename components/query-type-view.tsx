@@ -13,12 +13,20 @@ import {
 } from "@/components/ui/select"
 
 const QUERY_TYPES = [
-  "Delivery Query",
-  "Collection Query",
-  "Damage Claim",
-  "Lost Shipment",
-  "Tracking Update",
-  "Address Amendment",
+  "CHANGE_ADDRESS",
+  "COLLECTION_ENQUIRY",
+  "CUSTOMS_INFO",
+  "DELIVERED_DAMAGED",
+  "DELIVERED_INCOMPLETE",
+  "DELIVERY_DISPUTED",
+  "GENERAL ENQUIRY",
+  "PARCEL_DESCRIPTION_FOR_INVESTIGATION",
+  "POST_DELIVERY_FEEDBACK",
+  "REDELIVER_PARCEL",
+  "REQUEST_PROOF_OF_DELIVERY",
+  "RETURN_TO_SENDER",
+  "WHERE_IS_MY_PARCEL",
+  "WHY_WAS_THIS_DONE",
 ]
 
 const CARRIERS = [
@@ -180,12 +188,11 @@ export function QueryTypeView() {
                   <td className="py-4 px-4 text-sm font-medium text-foreground">{item.queryType}</td>
                   <td className="py-4 px-4 text-sm text-foreground">{item.carrier}</td>
                   <td className="py-4 px-4 text-sm text-foreground">
-                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${
-                      item.skillLevel === "L4" ? "bg-purple-100 text-purple-800" :
-                      item.skillLevel === "L3" ? "bg-blue-100 text-blue-800" :
-                      item.skillLevel === "L2" ? "bg-green-100 text-green-800" :
-                      "bg-gray-100 text-gray-800"
-                    }`}>
+                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${item.skillLevel === "L4" ? "bg-purple-100 text-purple-800" :
+                        item.skillLevel === "L3" ? "bg-blue-100 text-blue-800" :
+                          item.skillLevel === "L2" ? "bg-green-100 text-green-800" :
+                            "bg-gray-100 text-gray-800"
+                      }`}>
                       {item.skillLevel}
                     </span>
                   </td>
