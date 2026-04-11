@@ -2,6 +2,13 @@
 
 import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
+import { HelpCircle } from "lucide-react"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 interface AdvancedRule {
   id: string
@@ -35,11 +42,81 @@ export function AdvancedRulesView() {
           <table className="w-full">
             <thead>
               <tr className="border-b border-border bg-muted/30">
-                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Keyword</th>
-                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Item Value £</th>
-                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Parcel Count</th>
-                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">State</th>
-                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Condition</th>
+                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">
+                  <div className="flex items-center gap-1">
+                    Keyword
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <HelpCircle className="h-4 w-4 text-muted-foreground" />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Keywords to match in ticket content</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
+                </th>
+                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">
+                  <div className="flex items-center gap-1">
+                    Item Value £
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <HelpCircle className="h-4 w-4 text-muted-foreground" />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Minimum item value threshold in GBP</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
+                </th>
+                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">
+                  <div className="flex items-center gap-1">
+                    Parcel Count
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <HelpCircle className="h-4 w-4 text-muted-foreground" />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Number of parcels in the shipment</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
+                </th>
+                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">
+                  <div className="flex items-center gap-1">
+                    State
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <HelpCircle className="h-4 w-4 text-muted-foreground" />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Current state of the shipment</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
+                </th>
+                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">
+                  <div className="flex items-center gap-1">
+                    Condition
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <HelpCircle className="h-4 w-4 text-muted-foreground" />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Additional conditions for this rule</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
+                </th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Skill Level</th>
               </tr>
             </thead>
