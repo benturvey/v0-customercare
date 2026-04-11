@@ -12,6 +12,7 @@ import { TaggingRulesView } from "@/components/tagging-rules-view"
 import { CustomersView } from "@/components/customers-view"
 import { NonShipmentTicketView } from "@/components/non-shipment-ticket-view"
 import { QueryTypeView } from "@/components/query-type-view"
+import { AdvancedRulesView } from "@/components/advanced-rules-view"
 
 function PlaceholderView({ title }: { title: string }) {
   return (
@@ -72,6 +73,9 @@ export default function MainPage() {
     }
     if (activeView === "query-type") {
       return <QueryTypeView />
+    }
+    if (activeView === "advanced-rules") {
+      return <AdvancedRulesView />
     }
     return <PlaceholderView title={viewTitles[activeView] || "Unknown"} />
   }
