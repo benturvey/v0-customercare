@@ -123,6 +123,15 @@ export function AdvancedRulesView() {
     skillLevel: "",
   })
 
+  // Edit state for General Advanced Rules
+  const [editingGeneralRuleId, setEditingGeneralRuleId] = useState<string | null>(null)
+  const [editingGeneralRule, setEditingGeneralRule] = useState({
+    ruleDescription: "",
+    keyword: "",
+    itemValue: "",
+    skillLevel: "",
+  })
+
   const handleAddGeneralRule = () => {
     if (newGeneralRule.ruleDescription || newGeneralRule.keyword || newGeneralRule.itemValue) {
       const newRule: AdvancedRule = {
@@ -141,6 +150,29 @@ export function AdvancedRulesView() {
   const handleOpenGeneralRuleModal = () => {
     setNewGeneralRule({ ruleDescription: "", keyword: "", itemValue: "", skillLevel: "" })
     setIsGeneralRuleModalOpen(true)
+  }
+
+  const handleEditGeneralRule = (rule: AdvancedRule) => {
+    setEditingGeneralRuleId(rule.id)
+    setEditingGeneralRule({
+      ruleDescription: rule.ruleDescription,
+      keyword: rule.keyword,
+      itemValue: rule.itemValue,
+      skillLevel: rule.skillLevel,
+    })
+  }
+
+  const handleSaveGeneralRuleEdit = (ruleId: string) => {
+    setRules(rules.map(rule =>
+      rule.id === ruleId
+        ? { ...rule, ...editingGeneralRule }
+        : rule
+    ))
+    setEditingGeneralRuleId(null)
+  }
+
+  const handleCancelGeneralRuleEdit = () => {
+    setEditingGeneralRuleId(null)
   }
 
   const getSkillLevelBadgeClass = (skillLevel: string) => {
@@ -218,23 +250,82 @@ export function AdvancedRulesView() {
               ) : (
                 rules.map((rule) => (
                   <tr key={rule.id} className="border-b border-border last:border-b-0">
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.ruleDescription}</td>
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.keyword}</td>
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.itemValue}</td>
                     <td className="py-4 px-4 text-sm text-foreground">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${getSkillLevelBadgeClass(rule.skillLevel)}`}>
-                        {rule.skillLevel}
-                      </span>
+                      {editingGeneralRuleId === rule.id ? (
+                        <Input
+                          value={editingGeneralRule.ruleDescription}
+                          onChange={(e) => setEditingGeneralRule({ ...editingGeneralRule, ruleDescription: e.target.value })}
+                          className="h-8 text-sm"
+                        />
+                      ) : (
+                        rule.ruleDescription
+                      )}
                     </td>
                     <td className="py-4 px-4 text-sm text-foreground">
-                      <div className="flex items-center gap-2">
-                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit">
-                          <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
-                        </button>
-                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete">
-                          <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
-                        </button>
-                      </div>
+                      {editingGeneralRuleId === rule.id ? (
+                        <Input
+                          value={editingGeneralRule.keyword}
+                          onChange={(e) => setEditingGeneralRule({ ...editingGeneralRule, keyword: e.target.value })}
+                          className="h-8 text-sm"
+                        />
+                      ) : (
+                        rule.keyword
+                      )}
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      {editingGeneralRuleId === rule.id ? (
+                        <Input
+                          value={editingGeneralRule.itemValue}
+                          onChange={(e) => setEditingGeneralRule({ ...editingGeneralRule, itemValue: e.target.value })}
+                          className="h-8 text-sm w-24"
+                        />
+                      ) : (
+                        rule.itemValue
+                      )}
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      {editingGeneralRuleId === rule.id ? (
+                        <Select
+                          value={editingGeneralRule.skillLevel}
+                          onValueChange={(value) => setEditingGeneralRule({ ...editingGeneralRule, skillLevel: value })}
+                        >
+                          <SelectTrigger className="h-8 w-24">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {SKILL_LEVELS.map((level) => (
+                              <SelectItem key={level} value={level}>
+                                {level}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      ) : (
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${getSkillLevelBadgeClass(rule.skillLevel)}`}>
+                          {rule.skillLevel}
+                        </span>
+                      )}
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      {editingGeneralRuleId === rule.id ? (
+                        <div className="flex items-center gap-2">
+                          <Button size="sm" className="h-7 text-xs" onClick={() => handleSaveGeneralRuleEdit(rule.id)}>
+                            Save
+                          </Button>
+                          <Button size="sm" variant="outline" className="h-7 text-xs" onClick={handleCancelGeneralRuleEdit}>
+                            Cancel
+                          </Button>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-2">
+                          <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit" onClick={() => handleEditGeneralRule(rule)}>
+                            <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+                          </button>
+                          <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete">
+                            <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
+                          </button>
+                        </div>
+                      )}
                     </td>
                   </tr>
                 ))
