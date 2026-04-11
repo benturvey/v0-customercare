@@ -36,7 +36,7 @@ export function AdvancedRulesView() {
             <thead>
               <tr className="border-b border-border bg-muted/30">
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Keyword</th>
-                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Item Value</th>
+                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Item Value £</th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Parcel Count</th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">State</th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Condition</th>
