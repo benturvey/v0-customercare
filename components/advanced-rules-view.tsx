@@ -164,6 +164,15 @@ export function AdvancedRulesView() {
     skillLevel: "",
   })
 
+  // Modal state for Parcel Count Rules
+  const [isParcelCountRuleModalOpen, setIsParcelCountRuleModalOpen] = useState(false)
+  const [newParcelCountRule, setNewParcelCountRule] = useState({
+    ruleDescription: "",
+    queryCondition: "",
+    parcelCount: "",
+    skillLevel: "",
+  })
+
   const handleAddGeneralRule = () => {
     if (newGeneralRule.ruleDescription || newGeneralRule.keyword || newGeneralRule.itemValue) {
       const newRule: AdvancedRule = {
@@ -282,6 +291,36 @@ export function AdvancedRulesView() {
         ? prev.carrier.filter(c => c !== carrier)
         : [...prev.carrier, carrier]
     }))
+  }
+
+  const handleOpenParcelCountRuleModal = () => {
+    setNewParcelCountRule({
+      ruleDescription: "",
+      queryCondition: "",
+      parcelCount: "",
+      skillLevel: "",
+    })
+    setIsParcelCountRuleModalOpen(true)
+  }
+
+  const handleAddParcelCountRule = () => {
+    if (newParcelCountRule.ruleDescription || newParcelCountRule.parcelCount) {
+      const newRule: ParcelCountRule = {
+        id: String(parcelCountRules.length + 1),
+        ruleDescription: newParcelCountRule.ruleDescription,
+        queryCondition: newParcelCountRule.queryCondition,
+        parcelCount: newParcelCountRule.parcelCount,
+        skillLevel: newParcelCountRule.skillLevel || "L1",
+      }
+      setParcelCountRules([...parcelCountRules, newRule])
+      setNewParcelCountRule({
+        ruleDescription: "",
+        queryCondition: "",
+        parcelCount: "",
+        skillLevel: "",
+      })
+      setIsParcelCountRuleModalOpen(false)
+    }
   }
 
   const handleEditGeneralRule = (rule: AdvancedRule) => {
@@ -677,8 +716,8 @@ export function AdvancedRulesView() {
       <Card className="mt-6">
         <CardContent className="p-0">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between">
-            <h2 className="text-lg font-medium text-foreground">Parcel Count Rules</h2>
-            <Button variant="outline" size="sm" className="gap-1">
+<h2 className="text-lg font-medium text-foreground">Parcel Count Rules</h2>
+            <Button variant="outline" size="sm" className="gap-1" onClick={handleOpenParcelCountRuleModal}>
               <Plus className="h-4 w-4" />
               Add Rule
             </Button>
@@ -1068,6 +1107,70 @@ export function AdvancedRulesView() {
               Cancel
             </Button>
             <Button onClick={handleAddQueryStateRule}>
+              Save
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Add Parcel Count Rule Modal */}
+      <Dialog open={isParcelCountRuleModalOpen} onOpenChange={setIsParcelCountRuleModalOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Add Parcel Count Rule</DialogTitle>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid gap-2">
+              <Label htmlFor="pcRuleDescription">Rule Description</Label>
+              <Input
+                id="pcRuleDescription"
+                value={newParcelCountRule.ruleDescription}
+                onChange={(e) => setNewParcelCountRule({ ...newParcelCountRule, ruleDescription: e.target.value })}
+                placeholder="Enter rule description"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="pcQueryCondition">Query Condition</Label>
+              <Input
+                id="pcQueryCondition"
+                value={newParcelCountRule.queryCondition}
+                onChange={(e) => setNewParcelCountRule({ ...newParcelCountRule, queryCondition: e.target.value })}
+                placeholder="Enter query condition"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="pcParcelCount">Parcel Count</Label>
+              <Input
+                id="pcParcelCount"
+                value={newParcelCountRule.parcelCount}
+                onChange={(e) => setNewParcelCountRule({ ...newParcelCountRule, parcelCount: e.target.value })}
+                placeholder="Enter parcel count"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="pcSkillLevel">Skill Level</Label>
+              <Select
+                value={newParcelCountRule.skillLevel}
+                onValueChange={(value) => setNewParcelCountRule({ ...newParcelCountRule, skillLevel: value })}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select skill level" />
+                </SelectTrigger>
+                <SelectContent>
+                  {SKILL_LEVELS.map((level) => (
+                    <SelectItem key={level} value={level}>
+                      {level}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsParcelCountRuleModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={handleAddParcelCountRule}>
               Save
             </Button>
           </DialogFooter>
