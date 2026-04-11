@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
@@ -57,6 +57,8 @@ interface QueryTypeItem {
 
 const initialQueryTypes: QueryTypeItem[] = []
 
+const STORAGE_KEY = "queryTypeCarrierSkillLevels"
+
 export function QueryTypeView() {
   const [queryTypes, setQueryTypes] = useState<QueryTypeItem[]>(initialQueryTypes)
   const [newEntry, setNewEntry] = useState({
@@ -65,9 +67,27 @@ export function QueryTypeView() {
     skillLevel: "",
   })
 
+  // Load persisted data on mount
+  useEffect(() => {
+    const stored = localStorage.getItem(STORAGE_KEY)
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored)
+        setQueryTypes(parsed)
+      } catch {
+        // Ignore parse errors
+      }
+    }
+  }, [])
+
+  // Persist data whenever queryTypes changes
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(queryTypes))
+  }, [queryTypes])
+
   const handleAddEntry = () => {
     if (newEntry.queryType && newEntry.carrier && newEntry.skillLevel) {
-      const newId = (queryTypes.length + 1).toString()
+      const newId = Date.now().toString()
       setQueryTypes([
         ...queryTypes,
         {
