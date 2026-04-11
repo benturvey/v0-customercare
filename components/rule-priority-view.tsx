@@ -11,6 +11,18 @@ interface RulePriority {
 
 const initialRulePriorities: RulePriority[] = [
   { id: "1", priority: 1, ruleDescription: "Repeat Defer Premium Carrier" },
+  { id: "2", priority: 2, ruleDescription: "Repeat Contact" },
+  { id: "3", priority: 3, ruleDescription: "Complaint" },
+  { id: "4", priority: 4, ruleDescription: "Parcel Count " },
+  { id: "5", priority: 5, ruleDescription: "Part Delivered" },
+  { id: "6", priority: 6, ruleDescription: "High Value" },
+  { id: "7", priority: 7, ruleDescription: "Searches for Multi Parcel" },
+  { id: "8", priority: 8, ruleDescription: "Customer Specific - Fenwick" },
+  { id: "9", priority: 9, ruleDescription: "Repeat Defer" },
+  { id: "10", priority: 10, ruleDescription: "Reopened Data" },
+  { id: "11", priority: 11, ruleDescription: "Elapsed Days No Scan" },
+  { id: "12", priority: 12, ruleDescription: "Customer Specific Rules" },
+  { id: "13", priority: 13, ruleDescription: "Basic Rules" },
 ]
 
 export function RulePriorityView() {
