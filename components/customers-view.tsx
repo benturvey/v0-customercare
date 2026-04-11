@@ -28,6 +28,7 @@ const initialCustomers: Customer[] = [
   { id: "1", company: "ABBOTT LYON LTD", contact: "", telephone: "", emails: ["vicky.lomax@gfsdeliver.com"], receiveEmails: false, tickets: 32, customTags: [""] },
   { id: "2", company: "CASTLES TECHNOLOGY UK & IRELAND LTD", contact: "", telephone: "0871 3020213", emails: ["support-centre@castlestech.com"], receiveEmails: true, tickets: 5, customTags: ["L4"] },
   { id: "2", company: "CREW CLOTHING CO LIMITED", contact: "Charlie Eaves", telephone: "+44 7525 594149", emails: ["helen.collett@crewclothing.co.uk", "josh.harwood@crewclothing.co.uk"], receiveEmails: true, tickets: 2, customTags: [] },
+  { id: "3", company: "FENWICK", contact: "Jenny Brooks", telephone: "0208 546 1001", emails: ["Customerserviceinternal@fenwick.co.uk", "Eloisemcgurk@fenwick.co.uk"], receiveEmails: true, tickets: 30, customTags: [""] },
   { id: "3", company: "FINNING UK LTD", contact: "Amy Maguire", telephone: "07716097906", emails: ["GFSPartsQueries@finning.com "], receiveEmails: true, tickets: 30, customTags: ["L4"] },
   { id: "3", company: "MAMAS & PAPAS", contact: "", telephone: "01484 438394", emails: ["deliveries@mamasandpapas.com"], receiveEmails: false, tickets: 30, customTags: [] },
   { id: "4", company: "OKA DIRECT LIMITED", contact: "Christopher Ferguson", telephone: "01235433933", emails: ["customerservice@oka.com"], receiveEmails: true, tickets: 8, customTags: [] },
