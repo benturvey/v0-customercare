@@ -153,7 +153,7 @@ export function CustomersView() {
               <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Email</th>
               <th className="text-center py-3 px-4 font-medium text-muted-foreground text-sm">Receive Emails</th>
               <th className="text-center py-3 px-4 font-medium text-muted-foreground text-sm">Tickets</th>
-              <th className="text-center py-3 px-4 font-medium text-muted-foreground text-sm">Custom Tags</th>
+              <th className="text-center py-3 px-4 font-medium text-muted-foreground text-sm">Skill Level</th>
               <th className="text-center py-3 px-4 font-medium text-muted-foreground text-sm">Actions</th>
             </tr>
           </thead>
