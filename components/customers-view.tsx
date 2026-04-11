@@ -36,7 +36,7 @@ const initialCustomers: Customer[] = [
   { id: "5", company: "ROBERT WELCH DESIGNS LIMITED", contact: "John Wright", telephone: "01386 840880", emails: ["help@robertwelch.com", "sales@robertwelch.com"], receiveEmails: true, tickets: 5, customTags: [] },
   { id: "6", company: "SERVICE LOGISTICS", contact: "", telephone: "03456200000", emails: ["customer.service@servicelogistics.co.uk"], receiveEmails: true, tickets: 1, customTags: [] },
   { id: "7", company: "SMEG (UK) LIMITED", contact: "Debra Spinks", telephone: "", emails: ["operations@smeguk.com", "support@smeguk.com"], receiveEmails: true, tickets: 2, customTags: [] },
-  { id: "8", company: "THE CAMBIUM GROUP UK HOLDINGS LIMITED", contact: "Lauren Pound", telephone: "01225615141", emails: ["lauren@thecambiumgroup.co.uk"], receiveEmails: false, tickets: 10, customTags: ["routing: focus"] },
+  { id: "8", company: "THE CAMBIUM GROUP UK HOLDINGS LIMITED", contact: "Lauren Pound", telephone: "01225615141", emails: ["lauren@thecambiumgroup.co.uk"], receiveEmails: false, tickets: 10, customTags: [""] },
 ]
 
 export function CustomersView() {
