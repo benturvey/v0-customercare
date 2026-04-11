@@ -173,6 +173,15 @@ export function AdvancedRulesView() {
     skillLevel: "",
   })
 
+  // Edit state for Parcel Count Rules
+  const [editingParcelCountRuleId, setEditingParcelCountRuleId] = useState<string | null>(null)
+  const [editingParcelCountRule, setEditingParcelCountRule] = useState({
+    ruleDescription: "",
+    queryCondition: "",
+    parcelCount: "",
+    skillLevel: "",
+  })
+
   const handleAddGeneralRule = () => {
     if (newGeneralRule.ruleDescription || newGeneralRule.keyword || newGeneralRule.itemValue) {
       const newRule: AdvancedRule = {
@@ -321,6 +330,29 @@ export function AdvancedRulesView() {
       })
       setIsParcelCountRuleModalOpen(false)
     }
+  }
+
+  const handleEditParcelCountRule = (rule: ParcelCountRule) => {
+    setEditingParcelCountRuleId(rule.id)
+    setEditingParcelCountRule({
+      ruleDescription: rule.ruleDescription,
+      queryCondition: rule.queryCondition,
+      parcelCount: rule.parcelCount,
+      skillLevel: rule.skillLevel,
+    })
+  }
+
+  const handleSaveParcelCountRuleEdit = (ruleId: string) => {
+    setParcelCountRules(parcelCountRules.map(rule =>
+      rule.id === ruleId
+        ? { ...rule, ...editingParcelCountRule }
+        : rule
+    ))
+    setEditingParcelCountRuleId(null)
+  }
+
+  const handleCancelParcelCountRuleEdit = () => {
+    setEditingParcelCountRuleId(null)
   }
 
   const handleEditGeneralRule = (rule: AdvancedRule) => {
@@ -742,23 +774,82 @@ export function AdvancedRulesView() {
               ) : (
                 parcelCountRules.map((rule) => (
                   <tr key={rule.id} className="border-b border-border last:border-b-0">
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.ruleDescription}</td>
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.queryCondition}</td>
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.parcelCount}</td>
                     <td className="py-4 px-4 text-sm text-foreground">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${getSkillLevelBadgeClass(rule.skillLevel)}`}>
-                        {rule.skillLevel}
-                      </span>
+                      {editingParcelCountRuleId === rule.id ? (
+                        <Input
+                          value={editingParcelCountRule.ruleDescription}
+                          onChange={(e) => setEditingParcelCountRule({ ...editingParcelCountRule, ruleDescription: e.target.value })}
+                          className="h-8 text-sm"
+                        />
+                      ) : (
+                        rule.ruleDescription
+                      )}
                     </td>
                     <td className="py-4 px-4 text-sm text-foreground">
-                      <div className="flex items-center gap-2">
-                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit">
-                          <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
-                        </button>
-                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete" onClick={() => handleOpenDeleteModal("parcelCount", rule.id, rule.ruleDescription)}>
-                          <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
-                        </button>
-                      </div>
+                      {editingParcelCountRuleId === rule.id ? (
+                        <Input
+                          value={editingParcelCountRule.queryCondition}
+                          onChange={(e) => setEditingParcelCountRule({ ...editingParcelCountRule, queryCondition: e.target.value })}
+                          className="h-8 text-sm"
+                        />
+                      ) : (
+                        rule.queryCondition
+                      )}
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      {editingParcelCountRuleId === rule.id ? (
+                        <Input
+                          value={editingParcelCountRule.parcelCount}
+                          onChange={(e) => setEditingParcelCountRule({ ...editingParcelCountRule, parcelCount: e.target.value })}
+                          className="h-8 text-sm w-20"
+                        />
+                      ) : (
+                        rule.parcelCount
+                      )}
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      {editingParcelCountRuleId === rule.id ? (
+                        <Select
+                          value={editingParcelCountRule.skillLevel}
+                          onValueChange={(value) => setEditingParcelCountRule({ ...editingParcelCountRule, skillLevel: value })}
+                        >
+                          <SelectTrigger className="h-8 w-20">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {SKILL_LEVELS.map((level) => (
+                              <SelectItem key={level} value={level}>
+                                {level}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      ) : (
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${getSkillLevelBadgeClass(rule.skillLevel)}`}>
+                          {rule.skillLevel}
+                        </span>
+                      )}
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      {editingParcelCountRuleId === rule.id ? (
+                        <div className="flex items-center gap-2">
+                          <Button size="sm" className="h-7 text-xs" onClick={() => handleSaveParcelCountRuleEdit(rule.id)}>
+                            Save
+                          </Button>
+                          <Button size="sm" variant="outline" className="h-7 text-xs" onClick={handleCancelParcelCountRuleEdit}>
+                            Cancel
+                          </Button>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-2">
+                          <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit" onClick={() => handleEditParcelCountRule(rule)}>
+                            <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+                          </button>
+                          <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete" onClick={() => handleOpenDeleteModal("parcelCount", rule.id, rule.ruleDescription)}>
+                            <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
+                          </button>
+                        </div>
+                      )}
                     </td>
                   </tr>
                 ))
