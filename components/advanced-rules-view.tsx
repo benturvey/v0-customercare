@@ -48,7 +48,9 @@ const initialQueryStateRules: QueryStateRule[] = [
   { id: "3", ruleDescription: "Repeat Defer", queryLifecycle: "Defer, Review", lifecycleCountThreshold: "11", carrier: "Amazon Logisitcs UK, DHL Express, DPD DE, DPD NL, Evri, Evri PS, GFS International, OCS, UPS", skillLevel: "L4" },
 ]
 
-const initialParcelCountRules: ParcelCountRule[] = []
+const initialParcelCountRules: ParcelCountRule[] = [
+  { id: "1", ruleDescription: "Multi Parcel", parcelCount: "1", skillLevel: "L3" },
+]
 
 export function AdvancedRulesView() {
   const [rules] = useState<AdvancedRule[]>(initialRules)
