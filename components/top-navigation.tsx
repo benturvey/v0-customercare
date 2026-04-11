@@ -13,7 +13,6 @@ const navItems: NavItem[] = [
   { id: "shipment-search", label: "Shipment Search" },
   { id: "collection-search", label: "Collection Search" },
   { id: "raise-non-shipment-ticket", label: "Raise Non-Shipment Ticket" },
-  { id: "routing-rules", label: "Routing Rules" },
   { id: "agents", label: "Agents" },
   { id: "customers", label: "Customers" },
   { id: "tagging-rules", label: "Tagging Rules" },
