@@ -113,7 +113,7 @@ const initialParcelCountRules: ParcelCountRule[] = [
 ]
 
 const initialConsignmentStateRules: ConsignmentStateRule[] = [
-  { id: "1", ruleDescription: "Part Delivered", consignmentState: "PARTIALLY DELIVERED", queryLifecycle: "", skillLevel: "L3" },
+  { id: "1", ruleDescription: "Part Delivered", consignmentState: "DELIVERED - SPLIT", queryLifecycle: "", skillLevel: "L3" },
   { id: "2", ruleDescription: "Reopened Data", consignmentState: "PARCEL DATA RECEIVED - AWAITING CARRIER SCAN", queryLifecycle: "Reopening", skillLevel: "L4" },
 ]
 
@@ -196,6 +196,15 @@ export function AdvancedRulesView() {
   // Modal state for Consignment State Based Rules
   const [isConsignmentStateRuleModalOpen, setIsConsignmentStateRuleModalOpen] = useState(false)
   const [newConsignmentStateRule, setNewConsignmentStateRule] = useState({
+    ruleDescription: "",
+    consignmentState: "",
+    queryLifecycle: [] as string[],
+    skillLevel: "",
+  })
+
+  // Edit state for Consignment State Based Rules
+  const [editingConsignmentStateRuleId, setEditingConsignmentStateRuleId] = useState<string | null>(null)
+  const [editingConsignmentStateRule, setEditingConsignmentStateRule] = useState({
     ruleDescription: "",
     consignmentState: "",
     queryLifecycle: [] as string[],
@@ -407,6 +416,44 @@ export function AdvancedRulesView() {
 
   const toggleConsignmentQueryLifecycle = (lifecycle: string) => {
     setNewConsignmentStateRule(prev => ({
+      ...prev,
+      queryLifecycle: prev.queryLifecycle.includes(lifecycle)
+        ? prev.queryLifecycle.filter(l => l !== lifecycle)
+        : [...prev.queryLifecycle, lifecycle]
+    }))
+  }
+
+  const handleEditConsignmentStateRule = (rule: ConsignmentStateRule) => {
+    setEditingConsignmentStateRuleId(rule.id)
+    setEditingConsignmentStateRule({
+      ruleDescription: rule.ruleDescription,
+      consignmentState: rule.consignmentState,
+      queryLifecycle: rule.queryLifecycle ? rule.queryLifecycle.split(", ").map(s => s.trim()).filter(Boolean) : [],
+      skillLevel: rule.skillLevel,
+    })
+  }
+
+  const handleSaveConsignmentStateRuleEdit = (ruleId: string) => {
+    setConsignmentStateRules(consignmentStateRules.map(rule =>
+      rule.id === ruleId
+        ? {
+            ...rule,
+            ruleDescription: editingConsignmentStateRule.ruleDescription,
+            consignmentState: editingConsignmentStateRule.consignmentState,
+            queryLifecycle: editingConsignmentStateRule.queryLifecycle.join(", "),
+            skillLevel: editingConsignmentStateRule.skillLevel,
+          }
+        : rule
+    ))
+    setEditingConsignmentStateRuleId(null)
+  }
+
+  const handleCancelConsignmentStateRuleEdit = () => {
+    setEditingConsignmentStateRuleId(null)
+  }
+
+  const toggleEditConsignmentQueryLifecycle = (lifecycle: string) => {
+    setEditingConsignmentStateRule(prev => ({
       ...prev,
       queryLifecycle: prev.queryLifecycle.includes(lifecycle)
         ? prev.queryLifecycle.filter(l => l !== lifecycle)
@@ -807,7 +854,7 @@ export function AdvancedRulesView() {
       <Card className="mt-6">
         <CardContent className="p-0">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between">
-<h2 className="text-lg font-medium text-foreground">Parcel Count Rules</h2>
+            <h2 className="text-lg font-medium text-foreground">Parcel Count Rules</h2>
             <Button variant="outline" size="sm" className="gap-1" onClick={handleOpenParcelCountRuleModal}>
               <Plus className="h-4 w-4" />
               Add Rule
@@ -922,7 +969,7 @@ export function AdvancedRulesView() {
       <Card className="mt-6">
         <CardContent className="p-0">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between">
-<h2 className="text-lg font-medium text-foreground">Consignment State Based Rules</h2>
+            <h2 className="text-lg font-medium text-foreground">Consignment State Based Rules</h2>
             <Button variant="outline" size="sm" className="gap-1" onClick={handleOpenConsignmentStateRuleModal}>
               <Plus className="h-4 w-4" />
               Add Rule
@@ -948,23 +995,115 @@ export function AdvancedRulesView() {
               ) : (
                 consignmentStateRules.map((rule) => (
                   <tr key={rule.id} className="border-b border-border last:border-b-0">
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.ruleDescription}</td>
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.consignmentState}</td>
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.queryLifecycle}</td>
                     <td className="py-4 px-4 text-sm text-foreground">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${getSkillLevelBadgeClass(rule.skillLevel)}`}>
-                        {rule.skillLevel}
-                      </span>
+                      {editingConsignmentStateRuleId === rule.id ? (
+                        <Input
+                          value={editingConsignmentStateRule.ruleDescription}
+                          onChange={(e) => setEditingConsignmentStateRule({ ...editingConsignmentStateRule, ruleDescription: e.target.value })}
+                          className="h-8 text-sm"
+                        />
+                      ) : (
+                        rule.ruleDescription
+                      )}
                     </td>
                     <td className="py-4 px-4 text-sm text-foreground">
-                      <div className="flex items-center gap-2">
-                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit">
-                          <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
-                        </button>
-                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete" onClick={() => handleOpenDeleteModal("consignmentState", rule.id, rule.ruleDescription)}>
-                          <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
-                        </button>
-                      </div>
+                      {editingConsignmentStateRuleId === rule.id ? (
+                        <Select
+                          value={editingConsignmentStateRule.consignmentState}
+                          onValueChange={(value) => setEditingConsignmentStateRule({ ...editingConsignmentStateRule, consignmentState: value })}
+                        >
+                          <SelectTrigger className="h-8 w-full">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {CONSIGNMENT_STATES.map((state) => (
+                              <SelectItem key={state} value={state}>
+                                {state}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      ) : (
+                        rule.consignmentState
+                      )}
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      {editingConsignmentStateRuleId === rule.id ? (
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <Button variant="outline" size="sm" className="h-8 w-full justify-between font-normal text-left">
+                              <span className="truncate text-xs">
+                                {editingConsignmentStateRule.queryLifecycle.length > 0
+                                  ? editingConsignmentStateRule.queryLifecycle.join(", ")
+                                  : "Select"}
+                              </span>
+                              <ChevronDown className="h-3 w-3 opacity-50 shrink-0" />
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-48 p-2" align="start">
+                            <div className="grid gap-2">
+                              {QUERY_LIFECYCLES.map((lifecycle) => (
+                                <div key={lifecycle} className="flex items-center gap-2">
+                                  <Checkbox
+                                    id={`edit-cs-lifecycle-${rule.id}-${lifecycle}`}
+                                    checked={editingConsignmentStateRule.queryLifecycle.includes(lifecycle)}
+                                    onCheckedChange={() => toggleEditConsignmentQueryLifecycle(lifecycle)}
+                                  />
+                                  <label htmlFor={`edit-cs-lifecycle-${rule.id}-${lifecycle}`} className="text-sm cursor-pointer">
+                                    {lifecycle}
+                                  </label>
+                                </div>
+                              ))}
+                            </div>
+                          </PopoverContent>
+                        </Popover>
+                      ) : (
+                        rule.queryLifecycle
+                      )}
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      {editingConsignmentStateRuleId === rule.id ? (
+                        <Select
+                          value={editingConsignmentStateRule.skillLevel}
+                          onValueChange={(value) => setEditingConsignmentStateRule({ ...editingConsignmentStateRule, skillLevel: value })}
+                        >
+                          <SelectTrigger className="h-8 w-20">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {SKILL_LEVELS.map((level) => (
+                              <SelectItem key={level} value={level}>
+                                {level}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      ) : (
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${getSkillLevelBadgeClass(rule.skillLevel)}`}>
+                          {rule.skillLevel}
+                        </span>
+                      )}
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      {editingConsignmentStateRuleId === rule.id ? (
+                        <div className="flex items-center gap-2">
+                          <Button size="sm" className="h-7 text-xs" onClick={() => handleSaveConsignmentStateRuleEdit(rule.id)}>
+                            Save
+                          </Button>
+                          <Button size="sm" variant="outline" className="h-7 text-xs" onClick={handleCancelConsignmentStateRuleEdit}>
+                            Cancel
+                          </Button>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-2">
+                          <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit" onClick={() => handleEditConsignmentStateRule(rule)}>
+                            <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+                          </button>
+                          <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete" onClick={() => handleOpenDeleteModal("consignmentState", rule.id, rule.ruleDescription)}>
+                            <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
+                          </button>
+                        </div>
+                      )}
                     </td>
                   </tr>
                 ))
