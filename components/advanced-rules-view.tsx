@@ -33,6 +33,7 @@ interface QueryStateRule {
 interface ParcelCountRule {
   id: string
   ruleDescription: string
+  queryCondition: string
   parcelCount: string
   skillLevel: string
 }
@@ -49,7 +50,7 @@ const initialQueryStateRules: QueryStateRule[] = [
 ]
 
 const initialParcelCountRules: ParcelCountRule[] = [
-  { id: "1", ruleDescription: "Multi Parcel", parcelCount: "1", skillLevel: "L3" },
+  { id: "1", ruleDescription: "Multi Parcel", queryCondition: "", parcelCount: "1", skillLevel: "L3" },
 ]
 
 export function AdvancedRulesView() {
@@ -244,6 +245,7 @@ export function AdvancedRulesView() {
             <thead>
               <tr className="border-b border-border bg-muted/30">
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Rule Description</th>
+                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Query Condition</th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Parcel Count</th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Skill Level</th>
               </tr>
@@ -251,7 +253,7 @@ export function AdvancedRulesView() {
             <tbody>
               {parcelCountRules.length === 0 ? (
                 <tr>
-                  <td colSpan={3} className="py-8 text-center text-muted-foreground text-sm">
+                  <td colSpan={4} className="py-8 text-center text-muted-foreground text-sm">
                     No parcel count rules defined
                   </td>
                 </tr>
@@ -259,6 +261,7 @@ export function AdvancedRulesView() {
                 parcelCountRules.map((rule) => (
                   <tr key={rule.id} className="border-b border-border last:border-b-0">
                     <td className="py-4 px-4 text-sm text-foreground">{rule.ruleDescription}</td>
+                    <td className="py-4 px-4 text-sm text-foreground">{rule.queryCondition}</td>
                     <td className="py-4 px-4 text-sm text-foreground">{rule.parcelCount}</td>
                     <td className="py-4 px-4 text-sm text-foreground">
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${
