@@ -243,6 +243,14 @@ export function AdvancedRulesView() {
     skillLevel: "",
   })
 
+  // Modal state for Elapsed Days Since Last Scan Rules
+  const [isElapsedDaysRuleModalOpen, setIsElapsedDaysRuleModalOpen] = useState(false)
+  const [newElapsedDaysRule, setNewElapsedDaysRule] = useState({
+    ruleDescription: "",
+    elapsedDays: "",
+    skillLevel: "",
+  })
+
   const handleAddGeneralRule = () => {
     if (newGeneralRule.ruleDescription || newGeneralRule.keyword || newGeneralRule.itemValue) {
       const newRule: AdvancedRule = {
@@ -568,6 +576,33 @@ export function AdvancedRulesView() {
         ? prev.carrier.filter(c => c !== carrier)
         : [...prev.carrier, carrier]
     }))
+  }
+
+  const handleOpenElapsedDaysRuleModal = () => {
+    setNewElapsedDaysRule({
+      ruleDescription: "",
+      elapsedDays: "",
+      skillLevel: "",
+    })
+    setIsElapsedDaysRuleModalOpen(true)
+  }
+
+  const handleAddElapsedDaysRule = () => {
+    if (newElapsedDaysRule.ruleDescription || newElapsedDaysRule.elapsedDays) {
+      const newRule: ElapsedDaysRule = {
+        id: String(elapsedDaysRules.length + 1),
+        ruleDescription: newElapsedDaysRule.ruleDescription,
+        elapsedDays: newElapsedDaysRule.elapsedDays,
+        skillLevel: newElapsedDaysRule.skillLevel || "L1",
+      }
+      setElapsedDaysRules([...elapsedDaysRules, newRule])
+      setNewElapsedDaysRule({
+        ruleDescription: "",
+        elapsedDays: "",
+        skillLevel: "",
+      })
+      setIsElapsedDaysRuleModalOpen(false)
+    }
   }
 
   const handleEditGeneralRule = (rule: AdvancedRule) => {
@@ -1374,8 +1409,8 @@ export function AdvancedRulesView() {
       <Card className="mt-6">
         <CardContent className="p-0">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between">
-            <h2 className="text-lg font-medium text-foreground">Elapsed Days Since Last Scan Rules</h2>
-            <Button variant="outline" size="sm" className="gap-1">
+<h2 className="text-lg font-medium text-foreground">Elapsed Days Since Last Scan Rules</h2>
+            <Button variant="outline" size="sm" className="gap-1" onClick={handleOpenElapsedDaysRuleModal}>
               <Plus className="h-4 w-4" />
               Add Rule
             </Button>
@@ -1597,6 +1632,61 @@ export function AdvancedRulesView() {
               Cancel
             </Button>
             <Button onClick={handleAddQueryStateRule}>
+              Save
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Add Elapsed Days Since Last Scan Rule Modal */}
+      <Dialog open={isElapsedDaysRuleModalOpen} onOpenChange={setIsElapsedDaysRuleModalOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Add Elapsed Days Since Last Scan Rule</DialogTitle>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid gap-2">
+              <Label htmlFor="edRuleDescription">Rule Description</Label>
+              <Input
+                id="edRuleDescription"
+                value={newElapsedDaysRule.ruleDescription}
+                onChange={(e) => setNewElapsedDaysRule({ ...newElapsedDaysRule, ruleDescription: e.target.value })}
+                placeholder="Enter rule description"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="edElapsedDays">Elapsed Days</Label>
+              <Input
+                id="edElapsedDays"
+                value={newElapsedDaysRule.elapsedDays}
+                onChange={(e) => setNewElapsedDaysRule({ ...newElapsedDaysRule, elapsedDays: e.target.value })}
+                placeholder="Enter elapsed days"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="edSkillLevel">Skill Level</Label>
+              <Select
+                value={newElapsedDaysRule.skillLevel}
+                onValueChange={(value) => setNewElapsedDaysRule({ ...newElapsedDaysRule, skillLevel: value })}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select skill level" />
+                </SelectTrigger>
+                <SelectContent>
+                  {SKILL_LEVELS.map((level) => (
+                    <SelectItem key={level} value={level}>
+                      {level}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsElapsedDaysRuleModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={handleAddElapsedDaysRule}>
               Save
             </Button>
           </DialogFooter>
