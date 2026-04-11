@@ -2,6 +2,8 @@
 
 import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { ArrowUp, ArrowDown } from "lucide-react"
 
 interface RulePriority {
   id: string
@@ -26,7 +28,35 @@ const initialRulePriorities: RulePriority[] = [
 ]
 
 export function RulePriorityView() {
-  const [rulePriorities] = useState<RulePriority[]>(initialRulePriorities)
+  const [rulePriorities, setRulePriorities] = useState<RulePriority[]>(initialRulePriorities)
+
+  const moveUp = (index: number) => {
+    if (index === 0) return
+    const newRules = [...rulePriorities]
+    const temp = newRules[index]
+    newRules[index] = newRules[index - 1]
+    newRules[index - 1] = temp
+    // Update priorities
+    const updatedRules = newRules.map((rule, idx) => ({
+      ...rule,
+      priority: idx + 1
+    }))
+    setRulePriorities(updatedRules)
+  }
+
+  const moveDown = (index: number) => {
+    if (index === rulePriorities.length - 1) return
+    const newRules = [...rulePriorities]
+    const temp = newRules[index]
+    newRules[index] = newRules[index + 1]
+    newRules[index + 1] = temp
+    // Update priorities
+    const updatedRules = newRules.map((rule, idx) => ({
+      ...rule,
+      priority: idx + 1
+    }))
+    setRulePriorities(updatedRules)
+  }
 
   return (
     <div className="container mx-auto px-4 py-6">
@@ -41,20 +71,43 @@ export function RulePriorityView() {
               <tr className="border-b border-border bg-muted/30">
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Priority</th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Rule Description</th>
+                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Reorder</th>
               </tr>
             </thead>
             <tbody>
               {rulePriorities.length === 0 ? (
                 <tr>
-                  <td colSpan={2} className="py-8 text-center text-muted-foreground text-sm">
+                  <td colSpan={3} className="py-8 text-center text-muted-foreground text-sm">
                     No rule priorities defined
                   </td>
                 </tr>
               ) : (
-                rulePriorities.map((rule) => (
+                rulePriorities.map((rule, index) => (
                   <tr key={rule.id} className="border-b border-border last:border-b-0">
                     <td className="py-4 px-4 text-sm text-foreground">{rule.priority}</td>
                     <td className="py-4 px-4 text-sm text-foreground">{rule.ruleDescription}</td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      <div className="flex items-center gap-1">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => moveUp(index)}
+                          disabled={index === 0}
+                          className="h-8 w-8 p-0"
+                        >
+                          <ArrowUp className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => moveDown(index)}
+                          disabled={index === rulePriorities.length - 1}
+                          className="h-8 w-8 p-0"
+                        >
+                          <ArrowDown className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </td>
                   </tr>
                 ))
               )}
