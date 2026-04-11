@@ -26,7 +26,7 @@ interface Agent {
   id: string
   name: string
   email: string
-  role: "agent" | "senior-agent" | "admin" | "management" | "team-leader" | "trainer" | "senior-management"
+  role: "agent" | "senior-agent" | "admin" | "management" | "team-leader" | "trainer" | "senior-management" | "director"
   skillLevel: "junior" | "intermediate" | "senior" | "expert"
   status: "active" | "inactive"
   currentTickets: number
@@ -471,6 +471,7 @@ export function AgentsView() {
                     <SelectItem value="team-leader">Team Leader</SelectItem>
                     <SelectItem value="trainer">Trainer</SelectItem>
                     <SelectItem value="senior-management">Senior Management</SelectItem>
+                    <SelectItem value="director">Director</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
