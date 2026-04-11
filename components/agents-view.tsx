@@ -333,6 +333,16 @@ const initialAgents: Agent[] = [
     status: "active",
     currentTickets: 0,
     expanded: false,
+  },
+  {
+    id: "31",
+    name: "Deborah Hoolihan",
+    email: "deborah.hoolihan@gfsdeliver.com",
+    role: "trainer",
+    skillLevel: "expert",
+    status: "active",
+    currentTickets: 0,
+    expanded: false,
   }
 ]
 
