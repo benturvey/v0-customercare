@@ -251,6 +251,14 @@ export function AdvancedRulesView() {
     skillLevel: "",
   })
 
+  // Edit state for Elapsed Days Since Last Scan Rules
+  const [editingElapsedDaysRuleId, setEditingElapsedDaysRuleId] = useState<string | null>(null)
+  const [editingElapsedDaysRule, setEditingElapsedDaysRule] = useState({
+    ruleDescription: "",
+    elapsedDays: "",
+    skillLevel: "",
+  })
+
   const handleAddGeneralRule = () => {
     if (newGeneralRule.ruleDescription || newGeneralRule.keyword || newGeneralRule.itemValue) {
       const newRule: AdvancedRule = {
@@ -603,6 +611,28 @@ export function AdvancedRulesView() {
       })
       setIsElapsedDaysRuleModalOpen(false)
     }
+  }
+
+  const handleEditElapsedDaysRule = (rule: ElapsedDaysRule) => {
+    setEditingElapsedDaysRuleId(rule.id)
+    setEditingElapsedDaysRule({
+      ruleDescription: rule.ruleDescription,
+      elapsedDays: rule.elapsedDays,
+      skillLevel: rule.skillLevel,
+    })
+  }
+
+  const handleSaveElapsedDaysRuleEdit = (ruleId: string) => {
+    setElapsedDaysRules(elapsedDaysRules.map(rule =>
+      rule.id === ruleId
+        ? { ...rule, ...editingElapsedDaysRule }
+        : rule
+    ))
+    setEditingElapsedDaysRuleId(null)
+  }
+
+  const handleCancelElapsedDaysRuleEdit = () => {
+    setEditingElapsedDaysRuleId(null)
   }
 
   const handleEditGeneralRule = (rule: AdvancedRule) => {
@@ -1434,22 +1464,71 @@ export function AdvancedRulesView() {
               ) : (
                 elapsedDaysRules.map((rule) => (
                   <tr key={rule.id} className="border-b border-border last:border-b-0">
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.ruleDescription}</td>
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.elapsedDays}</td>
                     <td className="py-4 px-4 text-sm text-foreground">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${getSkillLevelBadgeClass(rule.skillLevel)}`}>
-                        {rule.skillLevel}
-                      </span>
+                      {editingElapsedDaysRuleId === rule.id ? (
+                        <Input
+                          value={editingElapsedDaysRule.ruleDescription}
+                          onChange={(e) => setEditingElapsedDaysRule({ ...editingElapsedDaysRule, ruleDescription: e.target.value })}
+                          className="h-8 text-sm"
+                        />
+                      ) : (
+                        rule.ruleDescription
+                      )}
                     </td>
                     <td className="py-4 px-4 text-sm text-foreground">
-                      <div className="flex items-center gap-2">
-                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit">
-                          <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
-                        </button>
-                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete" onClick={() => handleOpenDeleteModal("elapsedDays", rule.id, rule.ruleDescription)}>
-                          <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
-                        </button>
-                      </div>
+                      {editingElapsedDaysRuleId === rule.id ? (
+                        <Input
+                          value={editingElapsedDaysRule.elapsedDays}
+                          onChange={(e) => setEditingElapsedDaysRule({ ...editingElapsedDaysRule, elapsedDays: e.target.value })}
+                          className="h-8 text-sm w-20"
+                        />
+                      ) : (
+                        rule.elapsedDays
+                      )}
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      {editingElapsedDaysRuleId === rule.id ? (
+                        <Select
+                          value={editingElapsedDaysRule.skillLevel}
+                          onValueChange={(value) => setEditingElapsedDaysRule({ ...editingElapsedDaysRule, skillLevel: value })}
+                        >
+                          <SelectTrigger className="h-8 w-20">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {SKILL_LEVELS.map((level) => (
+                              <SelectItem key={level} value={level}>
+                                {level}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      ) : (
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${getSkillLevelBadgeClass(rule.skillLevel)}`}>
+                          {rule.skillLevel}
+                        </span>
+                      )}
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      {editingElapsedDaysRuleId === rule.id ? (
+                        <div className="flex items-center gap-2">
+                          <Button size="sm" className="h-7 text-xs" onClick={() => handleSaveElapsedDaysRuleEdit(rule.id)}>
+                            Save
+                          </Button>
+                          <Button size="sm" variant="outline" className="h-7 text-xs" onClick={handleCancelElapsedDaysRuleEdit}>
+                            Cancel
+                          </Button>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-2">
+                          <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit" onClick={() => handleEditElapsedDaysRule(rule)}>
+                            <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+                          </button>
+                          <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete" onClick={() => handleOpenDeleteModal("elapsedDays", rule.id, rule.ruleDescription)}>
+                            <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
+                          </button>
+                        </div>
+                      )}
                     </td>
                   </tr>
                 ))
