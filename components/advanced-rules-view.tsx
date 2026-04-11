@@ -30,6 +30,13 @@ interface QueryStateRule {
   skillLevel: string
 }
 
+interface ParcelCountRule {
+  id: string
+  ruleDescription: string
+  parcelCount: string
+  skillLevel: string
+}
+
 const initialRules: AdvancedRule[] = [
   { id: "1", ruleDescription: "Complaint", keyword: "Complaint, Complain", itemValue: "", parcelCount: "", state: "", condition: "", skillLevel: "L4" },
   { id: "2", ruleDescription: "High Value", keyword: "", itemValue: "300", parcelCount: "", state: "", condition: "", skillLevel: "L4" },
@@ -41,9 +48,12 @@ const initialQueryStateRules: QueryStateRule[] = [
   { id: "3", ruleDescription: "Repeat Defer", queryLifecycle: "Defer, Review", lifecycleCountThreshold: "11", carrier: "Amazon Logisitcs UK, DHL Express, DPD DE, DPD NL, Evri, Evri PS, GFS International, OCS, UPS", skillLevel: "L4" },
 ]
 
+const initialParcelCountRules: ParcelCountRule[] = []
+
 export function AdvancedRulesView() {
   const [rules] = useState<AdvancedRule[]>(initialRules)
   const [queryStateRules] = useState<QueryStateRule[]>(initialQueryStateRules)
+  const [parcelCountRules] = useState<ParcelCountRule[]>(initialParcelCountRules)
 
   return (
     <div className="container mx-auto px-4 py-6">
@@ -211,6 +221,52 @@ export function AdvancedRulesView() {
                               rule.skillLevel === "ADM" ? "bg-red-100 text-red-800" :
                                 "bg-gray-100 text-gray-800"
                         }`}>
+                        {rule.skillLevel}
+                      </span>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </CardContent>
+      </Card>
+
+      {/* Parcel Count Rules Section */}
+      <Card className="mt-6">
+        <CardContent className="p-0">
+          <div className="px-4 py-3 border-b border-border">
+            <h2 className="text-lg font-medium text-foreground">Parcel Count Rules</h2>
+          </div>
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-border bg-muted/30">
+                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Rule Description</th>
+                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Parcel Count</th>
+                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Skill Level</th>
+              </tr>
+            </thead>
+            <tbody>
+              {parcelCountRules.length === 0 ? (
+                <tr>
+                  <td colSpan={3} className="py-8 text-center text-muted-foreground text-sm">
+                    No parcel count rules defined
+                  </td>
+                </tr>
+              ) : (
+                parcelCountRules.map((rule) => (
+                  <tr key={rule.id} className="border-b border-border last:border-b-0">
+                    <td className="py-4 px-4 text-sm text-foreground">{rule.ruleDescription}</td>
+                    <td className="py-4 px-4 text-sm text-foreground">{rule.parcelCount}</td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${
+                        rule.skillLevel === "L4" ? "bg-purple-100 text-purple-800" :
+                        rule.skillLevel === "L3" ? "bg-blue-100 text-blue-800" :
+                        rule.skillLevel === "L2" ? "bg-green-100 text-green-800" :
+                        rule.skillLevel === "MGM" ? "bg-orange-100 text-orange-800" :
+                        rule.skillLevel === "ADM" ? "bg-red-100 text-red-800" :
+                        "bg-gray-100 text-gray-800"
+                      }`}>
                         {rule.skillLevel}
                       </span>
                     </td>
