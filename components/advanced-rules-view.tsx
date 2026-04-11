@@ -36,6 +36,17 @@ import {
 const SKILL_LEVELS = ["L1", "L2", "L3", "L4", "MGM", "ADM"]
 const QUERY_LIFECYCLES = ["Opening", "Delegating", "Deferring", "Closing", "Updating", "Reviewing", "Reopening"]
 const CARRIERS = ["Amazon Logistics UK", "BJS", "DHL ECommerce UK", "DHL Express", "DPD", "DPD DE", "DPD Local", "DPD NL", "DX Freight", "Evri", "Evri PS", "GFS International", "OCS", "UPS"]
+const CONSIGNMENT_STATES = [
+  "PARCEL DATA RECEIVED - AWAITING CARRIER SCAN",
+  "YOUR PARCEL HAS ARRIVED AT THE DELIVERY DEPOT",
+  "IN TRANSIT",
+  "ARRIVED AT HUB",
+  "DEPARTED DEPOT",
+  "DEPARTED HUB",
+  "OUT FOR DELIVERY",
+  "DELIVERED - SPLIT",
+  "DELIVERED"
+]
 
 interface AdvancedRule {
   id: string
@@ -179,6 +190,15 @@ export function AdvancedRulesView() {
     ruleDescription: "",
     queryCondition: "",
     parcelCount: "",
+    skillLevel: "",
+  })
+
+  // Modal state for Consignment State Based Rules
+  const [isConsignmentStateRuleModalOpen, setIsConsignmentStateRuleModalOpen] = useState(false)
+  const [newConsignmentStateRule, setNewConsignmentStateRule] = useState({
+    ruleDescription: "",
+    consignmentState: "",
+    queryLifecycle: [] as string[],
     skillLevel: "",
   })
 
@@ -353,6 +373,45 @@ export function AdvancedRulesView() {
 
   const handleCancelParcelCountRuleEdit = () => {
     setEditingParcelCountRuleId(null)
+  }
+
+  const handleOpenConsignmentStateRuleModal = () => {
+    setNewConsignmentStateRule({
+      ruleDescription: "",
+      consignmentState: "",
+      queryLifecycle: [],
+      skillLevel: "",
+    })
+    setIsConsignmentStateRuleModalOpen(true)
+  }
+
+  const handleAddConsignmentStateRule = () => {
+    if (newConsignmentStateRule.ruleDescription || newConsignmentStateRule.consignmentState) {
+      const newRule: ConsignmentStateRule = {
+        id: String(consignmentStateRules.length + 1),
+        ruleDescription: newConsignmentStateRule.ruleDescription,
+        consignmentState: newConsignmentStateRule.consignmentState,
+        queryLifecycle: newConsignmentStateRule.queryLifecycle.join(", "),
+        skillLevel: newConsignmentStateRule.skillLevel || "L1",
+      }
+      setConsignmentStateRules([...consignmentStateRules, newRule])
+      setNewConsignmentStateRule({
+        ruleDescription: "",
+        consignmentState: "",
+        queryLifecycle: [],
+        skillLevel: "",
+      })
+      setIsConsignmentStateRuleModalOpen(false)
+    }
+  }
+
+  const toggleConsignmentQueryLifecycle = (lifecycle: string) => {
+    setNewConsignmentStateRule(prev => ({
+      ...prev,
+      queryLifecycle: prev.queryLifecycle.includes(lifecycle)
+        ? prev.queryLifecycle.filter(l => l !== lifecycle)
+        : [...prev.queryLifecycle, lifecycle]
+    }))
   }
 
   const handleEditGeneralRule = (rule: AdvancedRule) => {
@@ -863,8 +922,8 @@ export function AdvancedRulesView() {
       <Card className="mt-6">
         <CardContent className="p-0">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between">
-            <h2 className="text-lg font-medium text-foreground">Consignment State Based Rules</h2>
-            <Button variant="outline" size="sm" className="gap-1">
+<h2 className="text-lg font-medium text-foreground">Consignment State Based Rules</h2>
+            <Button variant="outline" size="sm" className="gap-1" onClick={handleOpenConsignmentStateRuleModal}>
               <Plus className="h-4 w-4" />
               Add Rule
             </Button>
@@ -1198,6 +1257,99 @@ export function AdvancedRulesView() {
               Cancel
             </Button>
             <Button onClick={handleAddQueryStateRule}>
+              Save
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Add Consignment State Based Rule Modal */}
+      <Dialog open={isConsignmentStateRuleModalOpen} onOpenChange={setIsConsignmentStateRuleModalOpen}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle>Add Consignment State Based Rule</DialogTitle>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid gap-2">
+              <Label htmlFor="csRuleDescription">Rule Description</Label>
+              <Input
+                id="csRuleDescription"
+                value={newConsignmentStateRule.ruleDescription}
+                onChange={(e) => setNewConsignmentStateRule({ ...newConsignmentStateRule, ruleDescription: e.target.value })}
+                placeholder="Enter rule description"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="csConsignmentState">Consignment State</Label>
+              <Select
+                value={newConsignmentStateRule.consignmentState}
+                onValueChange={(value) => setNewConsignmentStateRule({ ...newConsignmentStateRule, consignmentState: value })}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select consignment state" />
+                </SelectTrigger>
+                <SelectContent>
+                  {CONSIGNMENT_STATES.map((state) => (
+                    <SelectItem key={state} value={state}>
+                      {state}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="grid gap-2">
+              <Label>Query Lifecycle</Label>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="outline" className="w-full justify-between font-normal">
+                    {newConsignmentStateRule.queryLifecycle.length > 0
+                      ? newConsignmentStateRule.queryLifecycle.join(", ")
+                      : "Select lifecycle stages"}
+                    <ChevronDown className="h-4 w-4 opacity-50" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-full p-2" align="start">
+                  <div className="grid gap-2">
+                    {QUERY_LIFECYCLES.map((lifecycle) => (
+                      <div key={lifecycle} className="flex items-center gap-2">
+                        <Checkbox
+                          id={`cs-lifecycle-${lifecycle}`}
+                          checked={newConsignmentStateRule.queryLifecycle.includes(lifecycle)}
+                          onCheckedChange={() => toggleConsignmentQueryLifecycle(lifecycle)}
+                        />
+                        <label htmlFor={`cs-lifecycle-${lifecycle}`} className="text-sm cursor-pointer">
+                          {lifecycle}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </PopoverContent>
+              </Popover>
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="csSkillLevel">Skill Level</Label>
+              <Select
+                value={newConsignmentStateRule.skillLevel}
+                onValueChange={(value) => setNewConsignmentStateRule({ ...newConsignmentStateRule, skillLevel: value })}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select skill level" />
+                </SelectTrigger>
+                <SelectContent>
+                  {SKILL_LEVELS.map((level) => (
+                    <SelectItem key={level} value={level}>
+                      {level}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsConsignmentStateRuleModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={handleAddConsignmentStateRule}>
               Save
             </Button>
           </DialogFooter>
