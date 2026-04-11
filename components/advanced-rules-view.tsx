@@ -47,6 +47,20 @@ const CONSIGNMENT_STATES = [
   "DELIVERED - SPLIT",
   "DELIVERED"
 ]
+const CUSTOMERS = [
+  "ABBOTT LYON LTD",
+  "ANDERTONS MUSIC COMPANY",
+  "CASTLES TECHNOLOGY UK & IRELAND LTD",
+  "CREW CLOTHING CO LIMITED",
+  "FENWICK",
+  "FINNING UK LTD",
+  "MAMAS & PAPAS",
+  "OKA DIRECT LIMITED",
+  "ROBERT WELCH DESIGNS LIMITED",
+  "SERVICE LOGISTICS",
+  "SMEG (UK) LIMITED",
+  "THE CAMBIUM GROUP UK HOLDINGS LIMITED"
+]
 
 interface AdvancedRule {
   id: string
@@ -208,6 +222,15 @@ export function AdvancedRulesView() {
     ruleDescription: "",
     consignmentState: "",
     queryLifecycle: [] as string[],
+    skillLevel: "",
+  })
+
+  // Modal state for Customer Based Rules
+  const [isCustomerBasedRuleModalOpen, setIsCustomerBasedRuleModalOpen] = useState(false)
+  const [newCustomerBasedRule, setNewCustomerBasedRule] = useState({
+    ruleDescription: "",
+    customer: "",
+    carrier: [] as string[],
     skillLevel: "",
   })
 
@@ -458,6 +481,45 @@ export function AdvancedRulesView() {
       queryLifecycle: prev.queryLifecycle.includes(lifecycle)
         ? prev.queryLifecycle.filter(l => l !== lifecycle)
         : [...prev.queryLifecycle, lifecycle]
+    }))
+  }
+
+  const handleOpenCustomerBasedRuleModal = () => {
+    setNewCustomerBasedRule({
+      ruleDescription: "",
+      customer: "",
+      carrier: [],
+      skillLevel: "",
+    })
+    setIsCustomerBasedRuleModalOpen(true)
+  }
+
+  const handleAddCustomerBasedRule = () => {
+    if (newCustomerBasedRule.ruleDescription || newCustomerBasedRule.customer) {
+      const newRule: CustomerBasedRule = {
+        id: String(customerBasedRules.length + 1),
+        ruleDescription: newCustomerBasedRule.ruleDescription,
+        customer: newCustomerBasedRule.customer,
+        carrier: newCustomerBasedRule.carrier.join(", "),
+        skillLevel: newCustomerBasedRule.skillLevel || "L1",
+      }
+      setCustomerBasedRules([...customerBasedRules, newRule])
+      setNewCustomerBasedRule({
+        ruleDescription: "",
+        customer: "",
+        carrier: [],
+        skillLevel: "",
+      })
+      setIsCustomerBasedRuleModalOpen(false)
+    }
+  }
+
+  const toggleCustomerBasedCarrier = (carrier: string) => {
+    setNewCustomerBasedRule(prev => ({
+      ...prev,
+      carrier: prev.carrier.includes(carrier)
+        ? prev.carrier.filter(c => c !== carrier)
+        : [...prev.carrier, carrier]
     }))
   }
 
@@ -1117,8 +1179,8 @@ export function AdvancedRulesView() {
       <Card className="mt-6">
         <CardContent className="p-0">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between">
-            <h2 className="text-lg font-medium text-foreground">Customer Based Rules</h2>
-            <Button variant="outline" size="sm" className="gap-1">
+<h2 className="text-lg font-medium text-foreground">Customer Based Rules</h2>
+            <Button variant="outline" size="sm" className="gap-1" onClick={handleOpenCustomerBasedRuleModal}>
               <Plus className="h-4 w-4" />
               Add Rule
             </Button>
@@ -1396,6 +1458,101 @@ export function AdvancedRulesView() {
               Cancel
             </Button>
             <Button onClick={handleAddQueryStateRule}>
+              Save
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Add Customer Based Rule Modal */}
+      <Dialog open={isCustomerBasedRuleModalOpen} onOpenChange={setIsCustomerBasedRuleModalOpen}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle>Add Customer Based Rule</DialogTitle>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid gap-2">
+              <Label htmlFor="cbRuleDescription">Rule Description</Label>
+              <Input
+                id="cbRuleDescription"
+                value={newCustomerBasedRule.ruleDescription}
+                onChange={(e) => setNewCustomerBasedRule({ ...newCustomerBasedRule, ruleDescription: e.target.value })}
+                placeholder="Enter rule description"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="cbCustomer">Customer</Label>
+              <Select
+                value={newCustomerBasedRule.customer}
+                onValueChange={(value) => setNewCustomerBasedRule({ ...newCustomerBasedRule, customer: value })}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select customer" />
+                </SelectTrigger>
+                <SelectContent>
+                  {CUSTOMERS.map((customer) => (
+                    <SelectItem key={customer} value={customer}>
+                      {customer}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="grid gap-2">
+              <Label>Carrier</Label>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="outline" className="w-full justify-between font-normal text-left">
+                    <span className="truncate">
+                      {newCustomerBasedRule.carrier.length > 0
+                        ? newCustomerBasedRule.carrier.join(", ")
+                        : "Select carriers"}
+                    </span>
+                    <ChevronDown className="h-4 w-4 opacity-50 shrink-0" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-full p-2 max-h-60 overflow-y-auto" align="start">
+                  <div className="grid gap-2">
+                    {CARRIERS.map((carrier) => (
+                      <div key={carrier} className="flex items-center gap-2">
+                        <Checkbox
+                          id={`cb-carrier-${carrier}`}
+                          checked={newCustomerBasedRule.carrier.includes(carrier)}
+                          onCheckedChange={() => toggleCustomerBasedCarrier(carrier)}
+                        />
+                        <label htmlFor={`cb-carrier-${carrier}`} className="text-sm cursor-pointer">
+                          {carrier}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </PopoverContent>
+              </Popover>
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="cbSkillLevel">Skill Level</Label>
+              <Select
+                value={newCustomerBasedRule.skillLevel}
+                onValueChange={(value) => setNewCustomerBasedRule({ ...newCustomerBasedRule, skillLevel: value })}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select skill level" />
+                </SelectTrigger>
+                <SelectContent>
+                  {SKILL_LEVELS.map((level) => (
+                    <SelectItem key={level} value={level}>
+                      {level}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsCustomerBasedRuleModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={handleAddCustomerBasedRule}>
               Save
             </Button>
           </DialogFooter>
