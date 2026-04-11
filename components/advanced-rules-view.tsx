@@ -51,7 +51,7 @@ export function AdvancedRulesView() {
                           <HelpCircle className="h-4 w-4 text-muted-foreground" />
                         </TooltipTrigger>
                         <TooltipContent>
-                          <p>Keywords to match in ticket content</p>
+                          <p>Customer must specifically state the keyword(s) in the query text</p>
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
