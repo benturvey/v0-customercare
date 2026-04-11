@@ -81,7 +81,7 @@ export function AdvancedRulesView() {
                           <HelpCircle className="h-4 w-4 text-muted-foreground" />
                         </TooltipTrigger>
                         <TooltipContent>
-                          <p>Number of parcels in the shipment</p>
+                          <p>The parcel count on the consignment must be greater than the assigned value</p>
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
