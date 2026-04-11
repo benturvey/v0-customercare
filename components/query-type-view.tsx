@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
-import { ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react"
+import { ArrowUpDown, ArrowUp, ArrowDown, Pencil, Trash2 } from "lucide-react"
 import {
   Select,
   SelectContent,
@@ -101,6 +101,12 @@ export function QueryTypeView() {
   })
   const [sortField, setSortField] = useState<SortField>(null)
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc")
+  const [editingId, setEditingId] = useState<string | null>(null)
+  const [editEntry, setEditEntry] = useState({
+    queryType: "",
+    carrier: "",
+    skillLevel: "",
+  })
 
   // Load persisted data on mount
   useEffect(() => {
@@ -134,6 +140,34 @@ export function QueryTypeView() {
       ])
       setNewEntry({ queryType: "", carrier: "", skillLevel: "" })
     }
+  }
+
+  const handleDeleteEntry = (id: string) => {
+    setQueryTypes(queryTypes.filter(item => item.id !== id))
+  }
+
+  const handleEditStart = (item: QueryTypeItem) => {
+    setEditingId(item.id)
+    setEditEntry({
+      queryType: item.queryType,
+      carrier: item.carrier,
+      skillLevel: item.skillLevel,
+    })
+  }
+
+  const handleEditSave = (id: string) => {
+    setQueryTypes(queryTypes.map(item =>
+      item.id === id
+        ? { ...item, ...editEntry }
+        : item
+    ))
+    setEditingId(null)
+    setEditEntry({ queryType: "", carrier: "", skillLevel: "" })
+  }
+
+  const handleEditCancel = () => {
+    setEditingId(null)
+    setEditEntry({ queryType: "", carrier: "", skillLevel: "" })
   }
 
   const handleSort = (field: SortField) => {
@@ -266,21 +300,109 @@ export function QueryTypeView() {
                   </button>
                 </th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Skill Level</th>
+                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Actions</th>
               </tr>
             </thead>
             <tbody>
               {sortedQueryTypes.map((item) => (
                 <tr key={item.id} className="border-b border-border last:border-b-0">
-                  <td className="py-4 px-4 text-sm font-medium text-foreground">{item.queryType}</td>
-                  <td className="py-4 px-4 text-sm text-foreground">{item.carrier}</td>
+                  <td className="py-4 px-4 text-sm font-medium text-foreground">
+                    {editingId === item.id ? (
+                      <Select
+                        value={editEntry.queryType}
+                        onValueChange={(value) => setEditEntry(prev => ({ ...prev, queryType: value }))}
+                      >
+                        <SelectTrigger className="h-8">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {QUERY_TYPES.map((type) => (
+                            <SelectItem key={type} value={type}>{type}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    ) : item.queryType}
+                  </td>
                   <td className="py-4 px-4 text-sm text-foreground">
-                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${item.skillLevel === "L4" ? "bg-purple-100 text-purple-800" :
-                      item.skillLevel === "L3" ? "bg-blue-100 text-blue-800" :
-                        item.skillLevel === "L2" ? "bg-green-100 text-green-800" :
-                          "bg-gray-100 text-gray-800"
-                      }`}>
-                      {item.skillLevel}
-                    </span>
+                    {editingId === item.id ? (
+                      <Select
+                        value={editEntry.carrier}
+                        onValueChange={(value) => setEditEntry(prev => ({ ...prev, carrier: value }))}
+                      >
+                        <SelectTrigger className="h-8">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {CARRIERS.map((carrier) => (
+                            <SelectItem key={carrier} value={carrier}>{carrier}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    ) : item.carrier}
+                  </td>
+                  <td className="py-4 px-4 text-sm text-foreground">
+                    {editingId === item.id ? (
+                      <Select
+                        value={editEntry.skillLevel}
+                        onValueChange={(value) => setEditEntry(prev => ({ ...prev, skillLevel: value }))}
+                      >
+                        <SelectTrigger className="h-8">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {SKILL_LEVELS.map((level) => (
+                            <SelectItem key={level} value={level}>{level}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    ) : (
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${item.skillLevel === "L4" ? "bg-purple-100 text-purple-800" :
+                        item.skillLevel === "L3" ? "bg-blue-100 text-blue-800" :
+                          item.skillLevel === "L2" ? "bg-green-100 text-green-800" :
+                            "bg-gray-100 text-gray-800"
+                        }`}>
+                        {item.skillLevel}
+                      </span>
+                    )}
+                  </td>
+                  <td className="py-4 px-4 text-sm text-foreground">
+                    {editingId === item.id ? (
+                      <div className="flex items-center gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handleEditSave(item.id)}
+                          className="text-xs"
+                        >
+                          Save
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={handleEditCancel}
+                          className="text-xs"
+                        >
+                          Cancel
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => handleEditStart(item)}
+                          className="p-1 hover:bg-muted rounded transition-colors"
+                          title="Edit"
+                        >
+                          <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteEntry(item.id)}
+                          className="p-1 hover:bg-muted rounded transition-colors"
+                          title="Delete"
+                        >
+                          <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
+                        </button>
+                      </div>
+                    )}
                   </td>
                 </tr>
               ))}
