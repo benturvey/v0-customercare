@@ -15,9 +15,6 @@ interface AdvancedRule {
   ruleDescription: string
   keyword: string
   itemValue: string
-  parcelCount: string
-  state: string
-  condition: string
   skillLevel: string
 }
 
@@ -62,8 +59,8 @@ interface ElapsedDaysRule {
 }
 
 const initialRules: AdvancedRule[] = [
-  { id: "1", ruleDescription: "Complaint", keyword: "Complaint, Complain", itemValue: "", parcelCount: "", state: "", condition: "", skillLevel: "L4" },
-  { id: "2", ruleDescription: "High Value", keyword: "", itemValue: "300", parcelCount: "", state: "", condition: "", skillLevel: "L4" },
+  { id: "1", ruleDescription: "Complaint", keyword: "Complaint, Complain", itemValue: "", skillLevel: "L4" },
+  { id: "2", ruleDescription: "High Value", keyword: "", itemValue: "300", skillLevel: "L4" },
 ]
 
 const initialQueryStateRules: QueryStateRule[] = [
@@ -143,58 +140,13 @@ export function AdvancedRulesView() {
                     </TooltipProvider>
                   </div>
                 </th>
-                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">
-                  <div className="flex items-center gap-1">
-                    Parcel Count
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <HelpCircle className="h-4 w-4 text-muted-foreground" />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>The parcel count on the consignment must be greater than the assigned value</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </div>
-                </th>
-                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">
-                  <div className="flex items-center gap-1">
-                    State
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <HelpCircle className="h-4 w-4 text-muted-foreground" />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>Current state of the shipment</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </div>
-                </th>
-                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">
-                  <div className="flex items-center gap-1">
-                    Condition
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <HelpCircle className="h-4 w-4 text-muted-foreground" />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>Additional conditions for this rule</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </div>
-                </th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Skill Level</th>
               </tr>
             </thead>
             <tbody>
               {rules.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="py-8 text-center text-muted-foreground text-sm">
+                  <td colSpan={4} className="py-8 text-center text-muted-foreground text-sm">
                     No advanced rules defined
                   </td>
                 </tr>
@@ -204,9 +156,6 @@ export function AdvancedRulesView() {
                     <td className="py-4 px-4 text-sm text-foreground">{rule.ruleDescription}</td>
                     <td className="py-4 px-4 text-sm text-foreground">{rule.keyword}</td>
                     <td className="py-4 px-4 text-sm text-foreground">{rule.itemValue}</td>
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.parcelCount}</td>
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.state}</td>
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.condition}</td>
                     <td className="py-4 px-4 text-sm text-foreground">
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${rule.skillLevel === "L4" ? "bg-purple-100 text-purple-800" :
                         rule.skillLevel === "L3" ? "bg-blue-100 text-blue-800" :
