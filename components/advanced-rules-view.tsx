@@ -5,7 +5,13 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { HelpCircle, Plus, Pencil, Trash2 } from "lucide-react"
+import { HelpCircle, Plus, Pencil, Trash2, ChevronDown } from "lucide-react"
+import { Checkbox } from "@/components/ui/checkbox"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 import {
   Tooltip,
   TooltipContent,
@@ -28,6 +34,8 @@ import {
 } from "@/components/ui/select"
 
 const SKILL_LEVELS = ["L1", "L2", "L3", "L4", "MGM", "ADM"]
+const QUERY_LIFECYCLES = ["Opening", "Delegating", "Deferring", "Closing", "Updating", "Reviewing", "Reopening"]
+const CARRIERS = ["Amazon Logistics UK", "BJS", "DHL ECommerce UK", "DHL Express", "DPD", "DPD DE", "DPD Local", "DPD NL", "DX Freight", "Evri", "Evri PS", "GFS International", "OCS", "UPS"]
 
 interface AdvancedRule {
   id: string
@@ -136,6 +144,16 @@ export function AdvancedRulesView() {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
   const [deleteTarget, setDeleteTarget] = useState<{ section: string; id: string; description: string } | null>(null)
 
+  // Modal state for Query State Specific Rules
+  const [isQueryStateRuleModalOpen, setIsQueryStateRuleModalOpen] = useState(false)
+  const [newQueryStateRule, setNewQueryStateRule] = useState({
+    ruleDescription: "",
+    queryLifecycle: [] as string[],
+    lifecycleCountThreshold: "",
+    carrier: [] as string[],
+    skillLevel: "",
+  })
+
   const handleAddGeneralRule = () => {
     if (newGeneralRule.ruleDescription || newGeneralRule.keyword || newGeneralRule.itemValue) {
       const newRule: AdvancedRule = {
@@ -154,6 +172,57 @@ export function AdvancedRulesView() {
   const handleOpenGeneralRuleModal = () => {
     setNewGeneralRule({ ruleDescription: "", keyword: "", itemValue: "", skillLevel: "" })
     setIsGeneralRuleModalOpen(true)
+  }
+
+  const handleOpenQueryStateRuleModal = () => {
+    setNewQueryStateRule({
+      ruleDescription: "",
+      queryLifecycle: [],
+      lifecycleCountThreshold: "",
+      carrier: [],
+      skillLevel: "",
+    })
+    setIsQueryStateRuleModalOpen(true)
+  }
+
+  const handleAddQueryStateRule = () => {
+    if (newQueryStateRule.ruleDescription || newQueryStateRule.queryLifecycle.length > 0) {
+      const newRule: QueryStateRule = {
+        id: String(queryStateRules.length + 1),
+        ruleDescription: newQueryStateRule.ruleDescription,
+        queryLifecycle: newQueryStateRule.queryLifecycle.join(", "),
+        lifecycleCountThreshold: newQueryStateRule.lifecycleCountThreshold,
+        carrier: newQueryStateRule.carrier.join(", "),
+        skillLevel: newQueryStateRule.skillLevel || "L1",
+      }
+      setQueryStateRules([...queryStateRules, newRule])
+      setNewQueryStateRule({
+        ruleDescription: "",
+        queryLifecycle: [],
+        lifecycleCountThreshold: "",
+        carrier: [],
+        skillLevel: "",
+      })
+      setIsQueryStateRuleModalOpen(false)
+    }
+  }
+
+  const toggleQueryLifecycle = (lifecycle: string) => {
+    setNewQueryStateRule(prev => ({
+      ...prev,
+      queryLifecycle: prev.queryLifecycle.includes(lifecycle)
+        ? prev.queryLifecycle.filter(l => l !== lifecycle)
+        : [...prev.queryLifecycle, lifecycle]
+    }))
+  }
+
+  const toggleCarrier = (carrier: string) => {
+    setNewQueryStateRule(prev => ({
+      ...prev,
+      carrier: prev.carrier.includes(carrier)
+        ? prev.carrier.filter(c => c !== carrier)
+        : [...prev.carrier, carrier]
+    }))
   }
 
   const handleEditGeneralRule = (rule: AdvancedRule) => {
@@ -377,7 +446,7 @@ export function AdvancedRulesView() {
         <CardContent className="p-0">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between">
             <h2 className="text-lg font-medium text-foreground">Query State Specific Rules</h2>
-            <Button variant="outline" size="sm" className="gap-1">
+            <Button variant="outline" size="sm" className="gap-1" onClick={handleOpenQueryStateRuleModal}>
               <Plus className="h-4 w-4" />
               Add Rule
             </Button>
@@ -710,6 +779,121 @@ export function AdvancedRulesView() {
               Cancel
             </Button>
             <Button onClick={handleAddGeneralRule}>
+              Save
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Add Query State Specific Rule Modal */}
+      <Dialog open={isQueryStateRuleModalOpen} onOpenChange={setIsQueryStateRuleModalOpen}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle>Add Query State Specific Rule</DialogTitle>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid gap-2">
+              <Label htmlFor="qsRuleDescription">Rule Description</Label>
+              <Input
+                id="qsRuleDescription"
+                value={newQueryStateRule.ruleDescription}
+                onChange={(e) => setNewQueryStateRule({ ...newQueryStateRule, ruleDescription: e.target.value })}
+                placeholder="Enter rule description"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label>Query Lifecycle</Label>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="outline" className="w-full justify-between font-normal">
+                    {newQueryStateRule.queryLifecycle.length > 0
+                      ? newQueryStateRule.queryLifecycle.join(", ")
+                      : "Select lifecycle stages"}
+                    <ChevronDown className="h-4 w-4 opacity-50" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-full p-2" align="start">
+                  <div className="grid gap-2">
+                    {QUERY_LIFECYCLES.map((lifecycle) => (
+                      <div key={lifecycle} className="flex items-center gap-2">
+                        <Checkbox
+                          id={`lifecycle-${lifecycle}`}
+                          checked={newQueryStateRule.queryLifecycle.includes(lifecycle)}
+                          onCheckedChange={() => toggleQueryLifecycle(lifecycle)}
+                        />
+                        <label htmlFor={`lifecycle-${lifecycle}`} className="text-sm cursor-pointer">
+                          {lifecycle}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </PopoverContent>
+              </Popover>
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="qsLifecycleThreshold">Lifecycle Count Threshold</Label>
+              <Input
+                id="qsLifecycleThreshold"
+                value={newQueryStateRule.lifecycleCountThreshold}
+                onChange={(e) => setNewQueryStateRule({ ...newQueryStateRule, lifecycleCountThreshold: e.target.value })}
+                placeholder="Enter threshold"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label>Carrier</Label>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="outline" className="w-full justify-between font-normal text-left">
+                    <span className="truncate">
+                      {newQueryStateRule.carrier.length > 0
+                        ? newQueryStateRule.carrier.join(", ")
+                        : "Select carriers"}
+                    </span>
+                    <ChevronDown className="h-4 w-4 opacity-50 shrink-0" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-full p-2 max-h-60 overflow-y-auto" align="start">
+                  <div className="grid gap-2">
+                    {CARRIERS.map((carrier) => (
+                      <div key={carrier} className="flex items-center gap-2">
+                        <Checkbox
+                          id={`carrier-${carrier}`}
+                          checked={newQueryStateRule.carrier.includes(carrier)}
+                          onCheckedChange={() => toggleCarrier(carrier)}
+                        />
+                        <label htmlFor={`carrier-${carrier}`} className="text-sm cursor-pointer">
+                          {carrier}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </PopoverContent>
+              </Popover>
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="qsSkillLevel">Skill Level</Label>
+              <Select
+                value={newQueryStateRule.skillLevel}
+                onValueChange={(value) => setNewQueryStateRule({ ...newQueryStateRule, skillLevel: value })}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select skill level" />
+                </SelectTrigger>
+                <SelectContent>
+                  {SKILL_LEVELS.map((level) => (
+                    <SelectItem key={level} value={level}>
+                      {level}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsQueryStateRuleModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={handleAddQueryStateRule}>
               Save
             </Button>
           </DialogFooter>
