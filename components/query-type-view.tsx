@@ -231,7 +231,7 @@ export function QueryTypeView() {
       {/* Add New Entry Section */}
       <Card className="mb-6">
         <CardContent className="p-6">
-          <h2 className="text-lg font-medium text-foreground mb-4">Add New Query Type / Carrier Skill Level</h2>
+          <h2 className="text-lg font-medium text-foreground mb-4">Add Basic Rule</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
             <div className="space-y-2">
               <Label htmlFor="queryType">Query Type</Label>
