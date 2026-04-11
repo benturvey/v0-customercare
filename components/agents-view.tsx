@@ -328,7 +328,7 @@ const initialAgents: Agent[] = [
     id: "30",
     name: "Vicky Lomax",
     email: "vicky.lomax@gfsdeliver.com",
-    role: "management",
+    role: "director",
     skillLevel: "expert",
     status: "active",
     currentTickets: 0,
