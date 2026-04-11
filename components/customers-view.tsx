@@ -12,6 +12,15 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet"
 import { X, Pencil } from "lucide-react"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+const SKILL_LEVELS = ["L1", "L2", "L3", "L4", "MGM", "ADM"]
 
 interface Customer {
   id: string
@@ -53,33 +62,21 @@ export function CustomersView() {
   })
   const [newEmailInput, setNewEmailInput] = useState("")
 
-  const handleEditTags = (customerId: string) => {
+  const handleEditSkillLevel = (customerId: string) => {
     setEditingId(customerId)
-    setTagInput("")
   }
 
-  const handleSaveTags = (customerId: string) => {
-    if (tagInput.trim()) {
-      setCustomers(customers.map(c =>
-        c.id === customerId
-          ? { ...c, customTags: [...c.customTags, tagInput.trim()] }
-          : c
-      ))
-    }
-    setTagInput("")
-  }
-
-  const handleRemoveTag = (customerId: string, tagIndex: number) => {
+  const handleSkillLevelChange = (customerId: string, skillLevel: string) => {
     setCustomers(customers.map(c =>
       c.id === customerId
-        ? { ...c, customTags: c.customTags.filter((_, i) => i !== tagIndex) }
+        ? { ...c, customTags: skillLevel ? [skillLevel] : [] }
         : c
     ))
+    setEditingId(null)
   }
 
   const handleCloseEdit = () => {
     setEditingId(null)
-    setTagInput("")
   }
 
   const handleRemoveEmail = (customerId: string, emailIndex: number) => {
@@ -194,71 +191,43 @@ export function CustomersView() {
                 <td className="py-4 px-4 text-sm text-center text-foreground">{customer.tickets}</td>
                 <td className="py-4 px-4 text-sm text-center">
                   {editingId === customer.id ? (
-                    <div className="flex flex-col items-start gap-3">
-                      {/* Display existing tags */}
-                      {customer.customTags.length > 0 && (
-                        <div className="flex flex-wrap gap-1">
-                          {customer.customTags.map((tag, index) => (
-                            <span
-                              key={index}
-                              className="inline-flex items-center gap-1 px-2 py-0.5 bg-muted rounded text-xs"
-                            >
-                              {tag}
-                              <button
-                                onClick={() => handleRemoveTag(customer.id, index)}
-                                className="hover:text-destructive"
-                              >
-                                <X className="h-3 w-3" />
-                              </button>
-                            </span>
+                    <div className="flex items-center justify-center gap-2">
+                      <Select
+                        value={customer.customTags[0] || ""}
+                        onValueChange={(value) => handleSkillLevelChange(customer.id, value)}
+                      >
+                        <SelectTrigger className="w-24 h-8">
+                          <SelectValue placeholder="Select" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {SKILL_LEVELS.map((level) => (
+                            <SelectItem key={level} value={level}>
+                              {level}
+                            </SelectItem>
                           ))}
-                        </div>
-                      )}
-                      {/* Input row with Add button */}
-                      <div className="flex items-center gap-2">
-                        <Input
-                          value={tagInput}
-                          onChange={(e) => setTagInput(e.target.value)}
-                          placeholder="e.g. custom:vip"
-                          className="h-9 w-48 text-sm rounded-full border-border"
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter") {
-                              handleSaveTags(customer.id)
-                            }
-                          }}
-                        />
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="h-9 text-sm px-4"
-                          onClick={() => handleSaveTags(customer.id)}
-                        >
-                          Add
-                        </Button>
-                      </div>
-                      {/* Save and Cancel buttons */}
-                      <div className="flex items-center gap-2">
-                        <Button
-                          size="sm"
-                          className="h-9 text-sm px-4 bg-[#1a1a1a] hover:bg-[#2a2a2a] text-white"
-                          onClick={handleCloseEdit}
-                        >
-                          Save
-                        </Button>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="h-9 text-sm px-4"
-                          onClick={handleCloseEdit}
-                        >
-                          Cancel
-                        </Button>
-                      </div>
+                        </SelectContent>
+                      </Select>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="h-8 text-xs"
+                        onClick={handleCloseEdit}
+                      >
+                        Cancel
+                      </Button>
                     </div>
                   ) : (
-                    <span className="text-muted-foreground">
-                      {customer.customTags.length > 0
-                        ? customer.customTags.join(", ")
+                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${
+                      customer.customTags[0] === "L4" ? "bg-purple-100 text-purple-800" :
+                      customer.customTags[0] === "L3" ? "bg-blue-100 text-blue-800" :
+                      customer.customTags[0] === "L2" ? "bg-green-100 text-green-800" :
+                      customer.customTags[0] === "L1" ? "bg-gray-100 text-gray-800" :
+                      customer.customTags[0] === "MGM" ? "bg-orange-100 text-orange-800" :
+                      customer.customTags[0] === "ADM" ? "bg-red-100 text-red-800" :
+                      "text-muted-foreground"
+                    }`}>
+                      {customer.customTags.length > 0 && customer.customTags[0]
+                        ? customer.customTags[0]
                         : "—"}
                     </span>
                   )}
@@ -269,7 +238,7 @@ export function CustomersView() {
                       variant="outline"
                       size="sm"
                       className="text-xs"
-                      onClick={() => handleEditTags(customer.id)}
+                      onClick={() => handleEditSkillLevel(customer.id)}
                     >
                       Change Skill Level
                     </Button>
