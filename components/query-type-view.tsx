@@ -307,38 +307,10 @@ export function QueryTypeView() {
               {sortedQueryTypes.map((item) => (
                 <tr key={item.id} className="border-b border-border last:border-b-0">
                   <td className="py-4 px-4 text-sm font-medium text-foreground">
-                    {editingId === item.id ? (
-                      <Select
-                        value={editEntry.queryType}
-                        onValueChange={(value) => setEditEntry(prev => ({ ...prev, queryType: value }))}
-                      >
-                        <SelectTrigger className="h-8">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {QUERY_TYPES.map((type) => (
-                            <SelectItem key={type} value={type}>{type}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    ) : item.queryType}
+                    {item.queryType}
                   </td>
                   <td className="py-4 px-4 text-sm text-foreground">
-                    {editingId === item.id ? (
-                      <Select
-                        value={editEntry.carrier}
-                        onValueChange={(value) => setEditEntry(prev => ({ ...prev, carrier: value }))}
-                      >
-                        <SelectTrigger className="h-8">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {CARRIERS.map((carrier) => (
-                            <SelectItem key={carrier} value={carrier}>{carrier}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    ) : item.carrier}
+                    {item.carrier}
                   </td>
                   <td className="py-4 px-4 text-sm text-foreground">
                     {editingId === item.id ? (
