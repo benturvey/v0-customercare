@@ -3,6 +3,8 @@
 import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { HelpCircle, Plus } from "lucide-react"
 import {
   Tooltip,
@@ -10,6 +12,22 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+const SKILL_LEVELS = ["L1", "L2", "L3", "L4", "MGM", "ADM"]
 
 interface AdvancedRule {
   id: string
@@ -89,12 +107,41 @@ const initialElapsedDaysRules: ElapsedDaysRule[] = [
 ]
 
 export function AdvancedRulesView() {
-  const [rules] = useState<AdvancedRule[]>(initialRules)
+  const [rules, setRules] = useState<AdvancedRule[]>(initialRules)
   const [queryStateRules] = useState<QueryStateRule[]>(initialQueryStateRules)
   const [parcelCountRules] = useState<ParcelCountRule[]>(initialParcelCountRules)
   const [consignmentStateRules] = useState<ConsignmentStateRule[]>(initialConsignmentStateRules)
   const [customerBasedRules] = useState<CustomerBasedRule[]>(initialCustomerBasedRules)
   const [elapsedDaysRules] = useState<ElapsedDaysRule[]>(initialElapsedDaysRules)
+
+  // Modal state for General Advanced Rules
+  const [isGeneralRuleModalOpen, setIsGeneralRuleModalOpen] = useState(false)
+  const [newGeneralRule, setNewGeneralRule] = useState({
+    ruleDescription: "",
+    keyword: "",
+    itemValue: "",
+    skillLevel: "",
+  })
+
+  const handleAddGeneralRule = () => {
+    if (newGeneralRule.ruleDescription || newGeneralRule.keyword || newGeneralRule.itemValue) {
+      const newRule: AdvancedRule = {
+        id: String(rules.length + 1),
+        ruleDescription: newGeneralRule.ruleDescription,
+        keyword: newGeneralRule.keyword,
+        itemValue: newGeneralRule.itemValue,
+        skillLevel: newGeneralRule.skillLevel || "L1",
+      }
+      setRules([...rules, newRule])
+      setNewGeneralRule({ ruleDescription: "", keyword: "", itemValue: "", skillLevel: "" })
+      setIsGeneralRuleModalOpen(false)
+    }
+  }
+
+  const handleOpenGeneralRuleModal = () => {
+    setNewGeneralRule({ ruleDescription: "", keyword: "", itemValue: "", skillLevel: "" })
+    setIsGeneralRuleModalOpen(true)
+  }
 
   return (
     <div className="container mx-auto px-4 py-6">
@@ -106,7 +153,7 @@ export function AdvancedRulesView() {
         <CardContent className="p-0">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between">
             <h2 className="text-lg font-medium text-foreground">General Advanced Rules</h2>
-            <Button variant="outline" size="sm" className="gap-1">
+            <Button variant="outline" size="sm" className="gap-1" onClick={handleOpenGeneralRuleModal}>
               <Plus className="h-4 w-4" />
               Add Rule
             </Button>
@@ -435,6 +482,70 @@ export function AdvancedRulesView() {
           </table>
         </CardContent>
       </Card>
+
+      {/* Add General Advanced Rule Modal */}
+      <Dialog open={isGeneralRuleModalOpen} onOpenChange={setIsGeneralRuleModalOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Add General Advanced Rule</DialogTitle>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid gap-2">
+              <Label htmlFor="ruleDescription">Rule Description</Label>
+              <Input
+                id="ruleDescription"
+                value={newGeneralRule.ruleDescription}
+                onChange={(e) => setNewGeneralRule({ ...newGeneralRule, ruleDescription: e.target.value })}
+                placeholder="Enter rule description"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="keyword">Keyword</Label>
+              <Input
+                id="keyword"
+                value={newGeneralRule.keyword}
+                onChange={(e) => setNewGeneralRule({ ...newGeneralRule, keyword: e.target.value })}
+                placeholder="Enter keyword(s)"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="itemValue">Item Value</Label>
+              <Input
+                id="itemValue"
+                value={newGeneralRule.itemValue}
+                onChange={(e) => setNewGeneralRule({ ...newGeneralRule, itemValue: e.target.value })}
+                placeholder="Enter item value"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="skillLevel">Skill Level</Label>
+              <Select
+                value={newGeneralRule.skillLevel}
+                onValueChange={(value) => setNewGeneralRule({ ...newGeneralRule, skillLevel: value })}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select skill level" />
+                </SelectTrigger>
+                <SelectContent>
+                  {SKILL_LEVELS.map((level) => (
+                    <SelectItem key={level} value={level}>
+                      {level}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsGeneralRuleModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={handleAddGeneralRule}>
+              Save
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
