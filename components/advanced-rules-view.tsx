@@ -2,7 +2,8 @@
 
 import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
-import { HelpCircle } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { HelpCircle, Plus } from "lucide-react"
 import {
   Tooltip,
   TooltipContent,
@@ -103,8 +104,12 @@ export function AdvancedRulesView() {
 
       <Card>
         <CardContent className="p-0">
-          <div className="px-4 py-3 border-b border-border">
+          <div className="px-4 py-3 border-b border-border flex items-center justify-between">
             <h2 className="text-lg font-medium text-foreground">General Advanced Rules</h2>
+            <Button variant="outline" size="sm" className="gap-1">
+              <Plus className="h-4 w-4" />
+              Add Rule
+            </Button>
           </div>
           <table className="w-full">
             <thead>
@@ -178,8 +183,12 @@ export function AdvancedRulesView() {
       {/* Query State Specific Rules Section */}
       <Card className="mt-6">
         <CardContent className="p-0">
-          <div className="px-4 py-3 border-b border-border">
+          <div className="px-4 py-3 border-b border-border flex items-center justify-between">
             <h2 className="text-lg font-medium text-foreground">Query State Specific Rules</h2>
+            <Button variant="outline" size="sm" className="gap-1">
+              <Plus className="h-4 w-4" />
+              Add Rule
+            </Button>
           </div>
           <table className="w-full">
             <thead>
@@ -227,8 +236,12 @@ export function AdvancedRulesView() {
       {/* Parcel Count Rules Section */}
       <Card className="mt-6">
         <CardContent className="p-0">
-          <div className="px-4 py-3 border-b border-border">
+          <div className="px-4 py-3 border-b border-border flex items-center justify-between">
             <h2 className="text-lg font-medium text-foreground">Parcel Count Rules</h2>
+            <Button variant="outline" size="sm" className="gap-1">
+              <Plus className="h-4 w-4" />
+              Add Rule
+            </Button>
           </div>
           <table className="w-full">
             <thead>
@@ -274,8 +287,12 @@ export function AdvancedRulesView() {
       {/* Consignment State Based Rules Section */}
       <Card className="mt-6">
         <CardContent className="p-0">
-          <div className="px-4 py-3 border-b border-border">
+          <div className="px-4 py-3 border-b border-border flex items-center justify-between">
             <h2 className="text-lg font-medium text-foreground">Consignment State Based Rules</h2>
+            <Button variant="outline" size="sm" className="gap-1">
+              <Plus className="h-4 w-4" />
+              Add Rule
+            </Button>
           </div>
           <table className="w-full">
             <thead>
@@ -321,8 +338,12 @@ export function AdvancedRulesView() {
       {/* Customer Based Rules Section */}
       <Card className="mt-6">
         <CardContent className="p-0">
-          <div className="px-4 py-3 border-b border-border">
+          <div className="px-4 py-3 border-b border-border flex items-center justify-between">
             <h2 className="text-lg font-medium text-foreground">Customer Based Rules</h2>
+            <Button variant="outline" size="sm" className="gap-1">
+              <Plus className="h-4 w-4" />
+              Add Rule
+            </Button>
           </div>
           <table className="w-full">
             <thead>
@@ -368,8 +389,12 @@ export function AdvancedRulesView() {
       {/* Elapsed Days Since Last Scan Rules Section */}
       <Card className="mt-6">
         <CardContent className="p-0">
-          <div className="px-4 py-3 border-b border-border">
+          <div className="px-4 py-3 border-b border-border flex items-center justify-between">
             <h2 className="text-lg font-medium text-foreground">Elapsed Days Since Last Scan Rules</h2>
+            <Button variant="outline" size="sm" className="gap-1">
+              <Plus className="h-4 w-4" />
+              Add Rule
+            </Button>
           </div>
           <table className="w-full">
             <thead>
