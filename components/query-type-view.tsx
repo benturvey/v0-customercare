@@ -12,6 +12,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 
 const QUERY_TYPES = [
   "CHANGE_ADDRESS",
@@ -107,6 +115,8 @@ export function QueryTypeView() {
     carrier: "",
     skillLevel: "",
   })
+  const [deleteId, setDeleteId] = useState<string | null>(null)
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
 
   // Load persisted data on mount
   useEffect(() => {
@@ -142,8 +152,22 @@ export function QueryTypeView() {
     }
   }
 
-  const handleDeleteEntry = (id: string) => {
-    setQueryTypes(queryTypes.filter(item => item.id !== id))
+  const handleDeleteClick = (id: string) => {
+    setDeleteId(id)
+    setIsDeleteDialogOpen(true)
+  }
+
+  const handleDeleteConfirm = () => {
+    if (deleteId) {
+      setQueryTypes(queryTypes.filter(item => item.id !== deleteId))
+    }
+    setIsDeleteDialogOpen(false)
+    setDeleteId(null)
+  }
+
+  const handleDeleteCancel = () => {
+    setIsDeleteDialogOpen(false)
+    setDeleteId(null)
   }
 
   const handleEditStart = (item: QueryTypeItem) => {
@@ -367,7 +391,7 @@ export function QueryTypeView() {
                           <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
                         </button>
                         <button
-                          onClick={() => handleDeleteEntry(item.id)}
+                          onClick={() => handleDeleteClick(item.id)}
                           className="p-1 hover:bg-muted rounded transition-colors"
                           title="Delete"
                         >
@@ -382,6 +406,26 @@ export function QueryTypeView() {
           </table>
         </CardContent>
       </Card>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Confirm Deletion</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete this entry? This action cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={handleDeleteCancel}>
+              Cancel
+            </Button>
+            <Button variant="destructive" onClick={handleDeleteConfirm}>
+              Delete
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
