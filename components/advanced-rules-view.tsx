@@ -54,7 +54,7 @@ export function AdvancedRulesView() {
                 rules.map((rule) => (
                   <tr key={rule.id} className="border-b border-border last:border-b-0">
                     <td className="py-4 px-4 text-sm text-foreground">{rule.keyword}</td>
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.itemValue}{rule.itemValue && " £"}</td>
+                    <td className="py-4 px-4 text-sm text-foreground">{rule.itemValue}</td>
                     <td className="py-4 px-4 text-sm text-foreground">{rule.parcelCount}</td>
                     <td className="py-4 px-4 text-sm text-foreground">{rule.state}</td>
                     <td className="py-4 px-4 text-sm text-foreground">{rule.condition}</td>
