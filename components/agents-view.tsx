@@ -356,7 +356,7 @@ const initialRoutingRules: RoutingRule[] = [
 const availableTags = ["CONTACT", "first"]
 
 export function AgentsView() {
-  const [agents, setAgents] = useState<Agent[]>(initialAgents)
+  const [agents, setAgents] = useState<Agent[]>([...initialAgents].sort((a, b) => a.name.localeCompare(b.name)))
   const [routingRules, setRoutingRules] = useState<RoutingRule[]>(initialRoutingRules)
   const [newAgent, setNewAgent] = useState({
     name: "",
