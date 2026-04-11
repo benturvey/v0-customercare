@@ -271,7 +271,7 @@ export function CustomersView() {
                       className="text-xs"
                       onClick={() => handleEditTags(customer.id)}
                     >
-                      Edit Tags
+                      Change Skill Level
                     </Button>
                     <Button
                       variant="outline"
