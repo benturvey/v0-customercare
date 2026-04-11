@@ -30,12 +30,20 @@ const QUERY_TYPES = [
 ]
 
 const CARRIERS = [
-  "DPD",
+  "Amazon Logistics UK",
+  "BJS",
+  "DHL ECommerce UK",
   "DHL Express",
-  "DHL ECommerce",
+  "DPD",
+  "DPD DE",
+  "DPD Local",
+  "DPD NL",
+  "DX Freight",
   "Evri",
+  "Evri PS",
+  "GFS International",
+  "OCS",
   "UPS",
-  "FedEx",
 ]
 
 const SKILL_LEVELS = ["L1", "L2", "L3", "L4", "MGM", "ADM"]
@@ -189,9 +197,9 @@ export function QueryTypeView() {
                   <td className="py-4 px-4 text-sm text-foreground">{item.carrier}</td>
                   <td className="py-4 px-4 text-sm text-foreground">
                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${item.skillLevel === "L4" ? "bg-purple-100 text-purple-800" :
-                        item.skillLevel === "L3" ? "bg-blue-100 text-blue-800" :
-                          item.skillLevel === "L2" ? "bg-green-100 text-green-800" :
-                            "bg-gray-100 text-gray-800"
+                      item.skillLevel === "L3" ? "bg-blue-100 text-blue-800" :
+                        item.skillLevel === "L2" ? "bg-green-100 text-green-800" :
+                          "bg-gray-100 text-gray-800"
                       }`}>
                       {item.skillLevel}
                     </span>
