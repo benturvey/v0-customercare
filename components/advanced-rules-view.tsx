@@ -12,6 +12,7 @@ import {
 
 interface AdvancedRule {
   id: string
+  priority: number
   keyword: string
   itemValue: string
   parcelCount: string
@@ -21,8 +22,8 @@ interface AdvancedRule {
 }
 
 const initialRules: AdvancedRule[] = [
-  { id: "1", keyword: "\"Complaint\", \"Complain\"", itemValue: "", parcelCount: "", state: "", condition: "", skillLevel: "L4" },
-  { id: "2", keyword: "", itemValue: "300", parcelCount: "", state: "", condition: "", skillLevel: "L4" },
+  { id: "1", priority: 1, keyword: "\"Complaint\", \"Complain\"", itemValue: "", parcelCount: "", state: "", condition: "", skillLevel: "L4" },
+  { id: "2", priority: 2, keyword: "", itemValue: "300", parcelCount: "", state: "", condition: "", skillLevel: "L4" },
 ]
 
 export function AdvancedRulesView() {
@@ -42,6 +43,7 @@ export function AdvancedRulesView() {
           <table className="w-full">
             <thead>
               <tr className="border-b border-border bg-muted/30">
+                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Priority</th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">
                   <div className="flex items-center gap-1">
                     Keyword
@@ -123,13 +125,14 @@ export function AdvancedRulesView() {
             <tbody>
               {rules.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="py-8 text-center text-muted-foreground text-sm">
+                  <td colSpan={7} className="py-8 text-center text-muted-foreground text-sm">
                     No advanced rules defined
                   </td>
                 </tr>
               ) : (
                 rules.map((rule) => (
                   <tr key={rule.id} className="border-b border-border last:border-b-0">
+                    <td className="py-4 px-4 text-sm text-foreground">{rule.priority}</td>
                     <td className="py-4 px-4 text-sm text-foreground">{rule.keyword}</td>
                     <td className="py-4 px-4 text-sm text-foreground">{rule.itemValue}</td>
                     <td className="py-4 px-4 text-sm text-foreground">{rule.parcelCount}</td>
