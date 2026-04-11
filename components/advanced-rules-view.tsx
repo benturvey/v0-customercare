@@ -234,6 +234,15 @@ export function AdvancedRulesView() {
     skillLevel: "",
   })
 
+  // Edit state for Customer Based Rules
+  const [editingCustomerBasedRuleId, setEditingCustomerBasedRuleId] = useState<string | null>(null)
+  const [editingCustomerBasedRule, setEditingCustomerBasedRule] = useState({
+    ruleDescription: "",
+    customer: "",
+    carrier: [] as string[],
+    skillLevel: "",
+  })
+
   const handleAddGeneralRule = () => {
     if (newGeneralRule.ruleDescription || newGeneralRule.keyword || newGeneralRule.itemValue) {
       const newRule: AdvancedRule = {
@@ -516,6 +525,44 @@ export function AdvancedRulesView() {
 
   const toggleCustomerBasedCarrier = (carrier: string) => {
     setNewCustomerBasedRule(prev => ({
+      ...prev,
+      carrier: prev.carrier.includes(carrier)
+        ? prev.carrier.filter(c => c !== carrier)
+        : [...prev.carrier, carrier]
+    }))
+  }
+
+  const handleEditCustomerBasedRule = (rule: CustomerBasedRule) => {
+    setEditingCustomerBasedRuleId(rule.id)
+    setEditingCustomerBasedRule({
+      ruleDescription: rule.ruleDescription,
+      customer: rule.customer,
+      carrier: rule.carrier ? rule.carrier.split(", ").map(s => s.trim()).filter(Boolean) : [],
+      skillLevel: rule.skillLevel,
+    })
+  }
+
+  const handleSaveCustomerBasedRuleEdit = (ruleId: string) => {
+    setCustomerBasedRules(customerBasedRules.map(rule =>
+      rule.id === ruleId
+        ? {
+            ...rule,
+            ruleDescription: editingCustomerBasedRule.ruleDescription,
+            customer: editingCustomerBasedRule.customer,
+            carrier: editingCustomerBasedRule.carrier.join(", "),
+            skillLevel: editingCustomerBasedRule.skillLevel,
+          }
+        : rule
+    ))
+    setEditingCustomerBasedRuleId(null)
+  }
+
+  const handleCancelCustomerBasedRuleEdit = () => {
+    setEditingCustomerBasedRuleId(null)
+  }
+
+  const toggleEditCustomerBasedCarrier = (carrier: string) => {
+    setEditingCustomerBasedRule(prev => ({
       ...prev,
       carrier: prev.carrier.includes(carrier)
         ? prev.carrier.filter(c => c !== carrier)
@@ -1205,23 +1252,115 @@ export function AdvancedRulesView() {
               ) : (
                 customerBasedRules.map((rule) => (
                   <tr key={rule.id} className="border-b border-border last:border-b-0">
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.ruleDescription}</td>
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.customer}</td>
-                    <td className="py-4 px-4 text-sm text-foreground">{rule.carrier}</td>
                     <td className="py-4 px-4 text-sm text-foreground">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${getSkillLevelBadgeClass(rule.skillLevel)}`}>
-                        {rule.skillLevel}
-                      </span>
+                      {editingCustomerBasedRuleId === rule.id ? (
+                        <Input
+                          value={editingCustomerBasedRule.ruleDescription}
+                          onChange={(e) => setEditingCustomerBasedRule({ ...editingCustomerBasedRule, ruleDescription: e.target.value })}
+                          className="h-8 text-sm"
+                        />
+                      ) : (
+                        rule.ruleDescription
+                      )}
                     </td>
                     <td className="py-4 px-4 text-sm text-foreground">
-                      <div className="flex items-center gap-2">
-                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit">
-                          <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
-                        </button>
-                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete" onClick={() => handleOpenDeleteModal("customerBased", rule.id, rule.ruleDescription)}>
-                          <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
-                        </button>
-                      </div>
+                      {editingCustomerBasedRuleId === rule.id ? (
+                        <Select
+                          value={editingCustomerBasedRule.customer}
+                          onValueChange={(value) => setEditingCustomerBasedRule({ ...editingCustomerBasedRule, customer: value })}
+                        >
+                          <SelectTrigger className="h-8 w-full">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {CUSTOMERS.map((customer) => (
+                              <SelectItem key={customer} value={customer}>
+                                {customer}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      ) : (
+                        rule.customer
+                      )}
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      {editingCustomerBasedRuleId === rule.id ? (
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <Button variant="outline" size="sm" className="h-8 w-full justify-between font-normal text-left">
+                              <span className="truncate text-xs">
+                                {editingCustomerBasedRule.carrier.length > 0
+                                  ? editingCustomerBasedRule.carrier.join(", ")
+                                  : "Select"}
+                              </span>
+                              <ChevronDown className="h-3 w-3 opacity-50 shrink-0" />
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-56 p-2 max-h-60 overflow-y-auto" align="start">
+                            <div className="grid gap-2">
+                              {CARRIERS.map((carrier) => (
+                                <div key={carrier} className="flex items-center gap-2">
+                                  <Checkbox
+                                    id={`edit-cb-carrier-${rule.id}-${carrier}`}
+                                    checked={editingCustomerBasedRule.carrier.includes(carrier)}
+                                    onCheckedChange={() => toggleEditCustomerBasedCarrier(carrier)}
+                                  />
+                                  <label htmlFor={`edit-cb-carrier-${rule.id}-${carrier}`} className="text-sm cursor-pointer">
+                                    {carrier}
+                                  </label>
+                                </div>
+                              ))}
+                            </div>
+                          </PopoverContent>
+                        </Popover>
+                      ) : (
+                        rule.carrier
+                      )}
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      {editingCustomerBasedRuleId === rule.id ? (
+                        <Select
+                          value={editingCustomerBasedRule.skillLevel}
+                          onValueChange={(value) => setEditingCustomerBasedRule({ ...editingCustomerBasedRule, skillLevel: value })}
+                        >
+                          <SelectTrigger className="h-8 w-20">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {SKILL_LEVELS.map((level) => (
+                              <SelectItem key={level} value={level}>
+                                {level}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      ) : (
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${getSkillLevelBadgeClass(rule.skillLevel)}`}>
+                          {rule.skillLevel}
+                        </span>
+                      )}
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      {editingCustomerBasedRuleId === rule.id ? (
+                        <div className="flex items-center gap-2">
+                          <Button size="sm" className="h-7 text-xs" onClick={() => handleSaveCustomerBasedRuleEdit(rule.id)}>
+                            Save
+                          </Button>
+                          <Button size="sm" variant="outline" className="h-7 text-xs" onClick={handleCancelCustomerBasedRuleEdit}>
+                            Cancel
+                          </Button>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-2">
+                          <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit" onClick={() => handleEditCustomerBasedRule(rule)}>
+                            <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+                          </button>
+                          <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete" onClick={() => handleOpenDeleteModal("customerBased", rule.id, rule.ruleDescription)}>
+                            <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
+                          </button>
+                        </div>
+                      )}
                     </td>
                   </tr>
                 ))
