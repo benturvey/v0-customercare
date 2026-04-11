@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { HelpCircle, Plus } from "lucide-react"
+import { HelpCircle, Plus, Pencil, Trash2 } from "lucide-react"
 import {
   Tooltip,
   TooltipContent,
@@ -143,12 +143,24 @@ export function AdvancedRulesView() {
     setIsGeneralRuleModalOpen(true)
   }
 
+  const getSkillLevelBadgeClass = (skillLevel: string) => {
+    switch (skillLevel) {
+      case "L4": return "bg-purple-100 text-purple-800"
+      case "L3": return "bg-blue-100 text-blue-800"
+      case "L2": return "bg-green-100 text-green-800"
+      case "MGM": return "bg-orange-100 text-orange-800"
+      case "ADM": return "bg-red-100 text-red-800"
+      default: return "bg-gray-100 text-gray-800"
+    }
+  }
+
   return (
     <div className="container mx-auto px-4 py-6">
       <header className="mb-6">
         <h1 className="text-2xl font-semibold text-[#1e3a5f]">Advanced Skill Level Rules</h1>
       </header>
 
+      {/* General Advanced Rules */}
       <Card>
         <CardContent className="p-0">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between">
@@ -193,12 +205,13 @@ export function AdvancedRulesView() {
                   </div>
                 </th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Skill Level</th>
+                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Actions</th>
               </tr>
             </thead>
             <tbody>
               {rules.length === 0 ? (
                 <tr>
-                  <td colSpan={4} className="py-8 text-center text-muted-foreground text-sm">
+                  <td colSpan={5} className="py-8 text-center text-muted-foreground text-sm">
                     No advanced rules defined
                   </td>
                 </tr>
@@ -209,15 +222,19 @@ export function AdvancedRulesView() {
                     <td className="py-4 px-4 text-sm text-foreground">{rule.keyword}</td>
                     <td className="py-4 px-4 text-sm text-foreground">{rule.itemValue}</td>
                     <td className="py-4 px-4 text-sm text-foreground">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${rule.skillLevel === "L4" ? "bg-purple-100 text-purple-800" :
-                        rule.skillLevel === "L3" ? "bg-blue-100 text-blue-800" :
-                          rule.skillLevel === "L2" ? "bg-green-100 text-green-800" :
-                            rule.skillLevel === "MGM" ? "bg-orange-100 text-orange-800" :
-                              rule.skillLevel === "ADM" ? "bg-red-100 text-red-800" :
-                                "bg-gray-100 text-gray-800"
-                        }`}>
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${getSkillLevelBadgeClass(rule.skillLevel)}`}>
                         {rule.skillLevel}
                       </span>
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      <div className="flex items-center gap-2">
+                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit">
+                          <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+                        </button>
+                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete">
+                          <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))
@@ -227,7 +244,7 @@ export function AdvancedRulesView() {
         </CardContent>
       </Card>
 
-      {/* Query State Specific Rules Section */}
+      {/* Query State Specific Rules */}
       <Card className="mt-6">
         <CardContent className="p-0">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between">
@@ -245,12 +262,13 @@ export function AdvancedRulesView() {
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Lifecycle Count Threshold</th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Carrier</th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Skill Level</th>
+                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Actions</th>
               </tr>
             </thead>
             <tbody>
               {queryStateRules.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="py-8 text-center text-muted-foreground text-sm">
+                  <td colSpan={6} className="py-8 text-center text-muted-foreground text-sm">
                     No query state specific rules defined
                   </td>
                 </tr>
@@ -262,15 +280,19 @@ export function AdvancedRulesView() {
                     <td className="py-4 px-4 text-sm text-foreground">{rule.lifecycleCountThreshold}</td>
                     <td className="py-4 px-4 text-sm text-foreground">{rule.carrier}</td>
                     <td className="py-4 px-4 text-sm text-foreground">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${rule.skillLevel === "L4" ? "bg-purple-100 text-purple-800" :
-                        rule.skillLevel === "L3" ? "bg-blue-100 text-blue-800" :
-                          rule.skillLevel === "L2" ? "bg-green-100 text-green-800" :
-                            rule.skillLevel === "MGM" ? "bg-orange-100 text-orange-800" :
-                              rule.skillLevel === "ADM" ? "bg-red-100 text-red-800" :
-                                "bg-gray-100 text-gray-800"
-                        }`}>
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${getSkillLevelBadgeClass(rule.skillLevel)}`}>
                         {rule.skillLevel}
                       </span>
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      <div className="flex items-center gap-2">
+                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit">
+                          <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+                        </button>
+                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete">
+                          <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))
@@ -280,7 +302,7 @@ export function AdvancedRulesView() {
         </CardContent>
       </Card>
 
-      {/* Parcel Count Rules Section */}
+      {/* Parcel Count Rules */}
       <Card className="mt-6">
         <CardContent className="p-0">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between">
@@ -297,12 +319,13 @@ export function AdvancedRulesView() {
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Query Condition</th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Parcel Count</th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Skill Level</th>
+                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Actions</th>
               </tr>
             </thead>
             <tbody>
               {parcelCountRules.length === 0 ? (
                 <tr>
-                  <td colSpan={4} className="py-8 text-center text-muted-foreground text-sm">
+                  <td colSpan={5} className="py-8 text-center text-muted-foreground text-sm">
                     No parcel count rules defined
                   </td>
                 </tr>
@@ -313,15 +336,19 @@ export function AdvancedRulesView() {
                     <td className="py-4 px-4 text-sm text-foreground">{rule.queryCondition}</td>
                     <td className="py-4 px-4 text-sm text-foreground">{rule.parcelCount}</td>
                     <td className="py-4 px-4 text-sm text-foreground">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${rule.skillLevel === "L4" ? "bg-purple-100 text-purple-800" :
-                        rule.skillLevel === "L3" ? "bg-blue-100 text-blue-800" :
-                          rule.skillLevel === "L2" ? "bg-green-100 text-green-800" :
-                            rule.skillLevel === "MGM" ? "bg-orange-100 text-orange-800" :
-                              rule.skillLevel === "ADM" ? "bg-red-100 text-red-800" :
-                                "bg-gray-100 text-gray-800"
-                        }`}>
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${getSkillLevelBadgeClass(rule.skillLevel)}`}>
                         {rule.skillLevel}
                       </span>
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      <div className="flex items-center gap-2">
+                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit">
+                          <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+                        </button>
+                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete">
+                          <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))
@@ -331,7 +358,7 @@ export function AdvancedRulesView() {
         </CardContent>
       </Card>
 
-      {/* Consignment State Based Rules Section */}
+      {/* Consignment State Based Rules */}
       <Card className="mt-6">
         <CardContent className="p-0">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between">
@@ -348,12 +375,13 @@ export function AdvancedRulesView() {
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Consignment State</th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Query Lifecycle</th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Skill Level</th>
+                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Actions</th>
               </tr>
             </thead>
             <tbody>
               {consignmentStateRules.length === 0 ? (
                 <tr>
-                  <td colSpan={4} className="py-8 text-center text-muted-foreground text-sm">
+                  <td colSpan={5} className="py-8 text-center text-muted-foreground text-sm">
                     No consignment state based rules defined
                   </td>
                 </tr>
@@ -364,15 +392,19 @@ export function AdvancedRulesView() {
                     <td className="py-4 px-4 text-sm text-foreground">{rule.consignmentState}</td>
                     <td className="py-4 px-4 text-sm text-foreground">{rule.queryLifecycle}</td>
                     <td className="py-4 px-4 text-sm text-foreground">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${rule.skillLevel === "L4" ? "bg-purple-100 text-purple-800" :
-                        rule.skillLevel === "L3" ? "bg-blue-100 text-blue-800" :
-                          rule.skillLevel === "L2" ? "bg-green-100 text-green-800" :
-                            rule.skillLevel === "MGM" ? "bg-orange-100 text-orange-800" :
-                              rule.skillLevel === "ADM" ? "bg-red-100 text-red-800" :
-                                "bg-gray-100 text-gray-800"
-                        }`}>
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${getSkillLevelBadgeClass(rule.skillLevel)}`}>
                         {rule.skillLevel}
                       </span>
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      <div className="flex items-center gap-2">
+                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit">
+                          <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+                        </button>
+                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete">
+                          <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))
@@ -382,7 +414,7 @@ export function AdvancedRulesView() {
         </CardContent>
       </Card>
 
-      {/* Customer Based Rules Section */}
+      {/* Customer Based Rules */}
       <Card className="mt-6">
         <CardContent className="p-0">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between">
@@ -399,12 +431,13 @@ export function AdvancedRulesView() {
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Customer</th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Carrier</th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Skill Level</th>
+                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Actions</th>
               </tr>
             </thead>
             <tbody>
               {customerBasedRules.length === 0 ? (
                 <tr>
-                  <td colSpan={4} className="py-8 text-center text-muted-foreground text-sm">
+                  <td colSpan={5} className="py-8 text-center text-muted-foreground text-sm">
                     No customer based rules defined
                   </td>
                 </tr>
@@ -415,15 +448,19 @@ export function AdvancedRulesView() {
                     <td className="py-4 px-4 text-sm text-foreground">{rule.customer}</td>
                     <td className="py-4 px-4 text-sm text-foreground">{rule.carrier}</td>
                     <td className="py-4 px-4 text-sm text-foreground">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${rule.skillLevel === "L4" ? "bg-purple-100 text-purple-800" :
-                          rule.skillLevel === "L3" ? "bg-blue-100 text-blue-800" :
-                            rule.skillLevel === "L2" ? "bg-green-100 text-green-800" :
-                              rule.skillLevel === "MGM" ? "bg-orange-100 text-orange-800" :
-                                rule.skillLevel === "ADM" ? "bg-red-100 text-red-800" :
-                                  "bg-gray-100 text-gray-800"
-                        }`}>
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${getSkillLevelBadgeClass(rule.skillLevel)}`}>
                         {rule.skillLevel}
                       </span>
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      <div className="flex items-center gap-2">
+                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit">
+                          <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+                        </button>
+                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete">
+                          <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))
@@ -433,7 +470,7 @@ export function AdvancedRulesView() {
         </CardContent>
       </Card>
 
-      {/* Elapsed Days Since Last Scan Rules Section */}
+      {/* Elapsed Days Since Last Scan Rules */}
       <Card className="mt-6">
         <CardContent className="p-0">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between">
@@ -449,12 +486,13 @@ export function AdvancedRulesView() {
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Rule Description</th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Elapsed Days</th>
                 <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Skill Level</th>
+                <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Actions</th>
               </tr>
             </thead>
             <tbody>
               {elapsedDaysRules.length === 0 ? (
                 <tr>
-                  <td colSpan={3} className="py-8 text-center text-muted-foreground text-sm">
+                  <td colSpan={4} className="py-8 text-center text-muted-foreground text-sm">
                     No elapsed days rules defined
                   </td>
                 </tr>
@@ -464,16 +502,19 @@ export function AdvancedRulesView() {
                     <td className="py-4 px-4 text-sm text-foreground">{rule.ruleDescription}</td>
                     <td className="py-4 px-4 text-sm text-foreground">{rule.elapsedDays}</td>
                     <td className="py-4 px-4 text-sm text-foreground">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${
-                        rule.skillLevel === "L4" ? "bg-purple-100 text-purple-800" :
-                        rule.skillLevel === "L3" ? "bg-blue-100 text-blue-800" :
-                        rule.skillLevel === "L2" ? "bg-green-100 text-green-800" :
-                        rule.skillLevel === "MGM" ? "bg-orange-100 text-orange-800" :
-                        rule.skillLevel === "ADM" ? "bg-red-100 text-red-800" :
-                        "bg-gray-100 text-gray-800"
-                      }`}>
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${getSkillLevelBadgeClass(rule.skillLevel)}`}>
                         {rule.skillLevel}
                       </span>
+                    </td>
+                    <td className="py-4 px-4 text-sm text-foreground">
+                      <div className="flex items-center gap-2">
+                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Edit">
+                          <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+                        </button>
+                        <button className="p-1 hover:bg-muted rounded transition-colors" title="Delete">
+                          <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))
