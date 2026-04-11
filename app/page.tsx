@@ -11,6 +11,7 @@ import { AgentsView } from "@/components/agents-view"
 import { TaggingRulesView } from "@/components/tagging-rules-view"
 import { CustomersView } from "@/components/customers-view"
 import { NonShipmentTicketView } from "@/components/non-shipment-ticket-view"
+import { QueryTypeView } from "@/components/query-type-view"
 
 function PlaceholderView({ title }: { title: string }) {
   return (
@@ -68,6 +69,9 @@ export default function MainPage() {
     }
     if (activeView === "customers") {
       return <CustomersView />
+    }
+    if (activeView === "query-type") {
+      return <QueryTypeView />
     }
     return <PlaceholderView title={viewTitles[activeView] || "Unknown"} />
   }
