@@ -26,7 +26,7 @@ interface Agent {
   id: string
   name: string
   email: string
-  role: "agent" | "senior" | "team-lead" | "management"
+  role: "agent" | "senior-agent" | "admin" | "management" | "team-leader" | "trainer" | "senior-management"
   skillLevel: "junior" | "intermediate" | "senior" | "expert"
   status: "active" | "inactive"
   currentTickets: number
@@ -128,7 +128,7 @@ const initialAgents: Agent[] = [
     id: "10",
     name: "Francine Payne",
     email: "francine.payne@gfsdeliver.com",
-    role: "team-lead",
+    role: "team-leader",
     skillLevel: "expert",
     status: "active",
     currentTickets: 0,
@@ -168,7 +168,7 @@ const initialAgents: Agent[] = [
     id: "14",
     name: "Kimberley McCormick",
     email: "kimberley.mcCormick@gfsdeliver.com",
-    role: "team-lead",
+    role: "team-leader",
     skillLevel: "expert",
     status: "active",
     currentTickets: 0,
@@ -198,7 +198,7 @@ const initialAgents: Agent[] = [
     id: "17",
     name: "Lisa Yates",
     email: "lisa.yates@gfsdeliver.com",
-    role: "senior",
+    role: "senior-agent",
     skillLevel: "expert",
     status: "active",
     currentTickets: 0,
@@ -268,7 +268,7 @@ const initialAgents: Agent[] = [
     id: "24",
     name: "Sarah Adams",
     email: "sarah.adams@gfsdeliver.com",
-    role: "senior",
+    role: "senior-agent",
     skillLevel: "expert",
     status: "active",
     currentTickets: 0,
@@ -308,7 +308,7 @@ const initialAgents: Agent[] = [
     id: "28",
     name: "Tracey Crooke",
     email: "tracey.crooke@gfsdeliver.com",
-    role: "team-lead",
+    role: "team-leader",
     skillLevel: "expert",
     status: "active",
     currentTickets: 0,
@@ -318,7 +318,7 @@ const initialAgents: Agent[] = [
     id: "29",
     name: "Tracey Johnson",
     email: "tracey.johnson@gfsdeliver.com",
-    role: "senior",
+    role: "senior-agent",
     skillLevel: "expert",
     status: "active",
     currentTickets: 0,
@@ -366,7 +366,7 @@ export function AgentsView() {
     ))
   }
 
-  const updateRole = (id: string, role: "agent" | "senior" | "team-lead" | "management") => {
+  const updateRole = (id: string, role: Agent["role"]) => {
     setAgents(agents.map(agent =>
       agent.id === id ? { ...agent, role } : agent
     ))
@@ -459,15 +459,18 @@ export function AgentsView() {
               <div className="text-sm font-medium text-foreground">{agent.name}</div>
               <div className="text-sm text-muted-foreground">{agent.email}</div>
               <div>
-                <Select value={agent.role} onValueChange={(value: "agent" | "team-lead") => updateRole(agent.id, value)}>
+                <Select value={agent.role} onValueChange={(value: Agent["role"]) => updateRole(agent.id, value)}>
                   <SelectTrigger className="h-8 text-sm">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="agent">Agent</SelectItem>
-                    <SelectItem value="senior">Senior</SelectItem>
-                    <SelectItem value="team-lead">Team Lead</SelectItem>
+                    <SelectItem value="senior-agent">Senior Agent</SelectItem>
+                    <SelectItem value="admin">Admin</SelectItem>
                     <SelectItem value="management">Management</SelectItem>
+                    <SelectItem value="team-leader">Team Leader</SelectItem>
+                    <SelectItem value="trainer">Trainer</SelectItem>
+                    <SelectItem value="senior-management">Senior Management</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
