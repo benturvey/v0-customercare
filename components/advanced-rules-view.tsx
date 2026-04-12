@@ -225,7 +225,7 @@ export function AdvancedRulesView() {
     skillLevel: "",
   })
 
-  // Modal state for Customer Based Rules
+  // Modal state for Customer Carrier Based Rules
   const [isCustomerBasedRuleModalOpen, setIsCustomerBasedRuleModalOpen] = useState(false)
   const [newCustomerBasedRule, setNewCustomerBasedRule] = useState({
     ruleDescription: "",
@@ -234,7 +234,7 @@ export function AdvancedRulesView() {
     skillLevel: "",
   })
 
-  // Edit state for Customer Based Rules
+  // Edit state for Customer Carrier Based Rules
   const [editingCustomerBasedRuleId, setEditingCustomerBasedRuleId] = useState<string | null>(null)
   const [editingCustomerBasedRule, setEditingCustomerBasedRule] = useState({
     ruleDescription: "",
@@ -1287,11 +1287,11 @@ export function AdvancedRulesView() {
         </CardContent>
       </Card>
 
-      {/* Customer Based Rules */}
+      {/* Customer Carrier Based Rules */}
       <Card className="mt-6">
         <CardContent className="p-0">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between">
-            <h2 className="text-lg font-medium text-foreground">Customer Based Rules</h2>
+            <h2 className="text-lg font-medium text-foreground">Customer Carrier Based Rules</h2>
             <Button variant="outline" size="sm" className="gap-1" onClick={handleOpenCustomerBasedRuleModal}>
               <Plus className="h-4 w-4" />
               Add Rule
