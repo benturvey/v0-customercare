@@ -25,8 +25,7 @@ const initialRulePriorities: RulePriority[] = [
   { id: "11", priority: 11, ruleDescription: "Repeat Defer" },
   { id: "12", priority: 12, ruleDescription: "Reopened Data" },
   { id: "13", priority: 13, ruleDescription: "Elapsed Days No Scan" },
-  { id: "14", priority: 14, ruleDescription: "Customer Specific Rules" },
-  { id: "15", priority: 15, ruleDescription: "Basic Rules" },
+  { id: "14", priority: 14, ruleDescription: "Basic Rules" },
 ]
 
 export function RulePriorityView() {
