@@ -14,6 +14,7 @@ import { NonShipmentTicketView } from "@/components/non-shipment-ticket-view"
 import { QueryTypeView } from "@/components/query-type-view"
 import { AdvancedRulesView } from "@/components/advanced-rules-view"
 import { RulePriorityView } from "@/components/rule-priority-view"
+import { WorkingHoursView } from "@/components/working-hours-view"
 
 function PlaceholderView({ title }: { title: string }) {
   return (
@@ -80,6 +81,9 @@ export default function MainPage() {
     }
     if (activeView === "rule-priority") {
       return <RulePriorityView />
+    }
+    if (activeView === "working-hours") {
+      return <WorkingHoursView />
     }
     return <PlaceholderView title={viewTitles[activeView] || "Unknown"} />
   }

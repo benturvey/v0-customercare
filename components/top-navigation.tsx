@@ -19,6 +19,7 @@ const navItems: NavItem[] = [
   { id: "query-type", label: "Basic Rules" },
   { id: "advanced-rules", label: "Advanced Rules" },
   { id: "rule-priority", label: "Rule Priority" },
+  { id: "working-hours", label: "Working Hours" },
 ]
 
 interface TopNavigationProps {
