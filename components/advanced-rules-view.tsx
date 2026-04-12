@@ -132,7 +132,7 @@ const initialConsignmentStateRules: ConsignmentStateRule[] = [
 ]
 
 const initialCustomerBasedRules: CustomerBasedRule[] = [
-  { id: "1", ruleDescription: "Customer Specific - Fenwick", customer: "FENWICK", carrier: "DX Freight", skillLevel: "L4" },
+  { id: "1", ruleDescription: "Customer Carrier Specific - Fenwick", customer: "FENWICK", carrier: "DX Freight", skillLevel: "L4" },
 ]
 
 const initialElapsedDaysRules: ElapsedDaysRule[] = [
@@ -485,12 +485,12 @@ export function AdvancedRulesView() {
     setConsignmentStateRules(consignmentStateRules.map(rule =>
       rule.id === ruleId
         ? {
-            ...rule,
-            ruleDescription: editingConsignmentStateRule.ruleDescription,
-            consignmentState: editingConsignmentStateRule.consignmentState,
-            queryLifecycle: editingConsignmentStateRule.queryLifecycle.join(", "),
-            skillLevel: editingConsignmentStateRule.skillLevel,
-          }
+          ...rule,
+          ruleDescription: editingConsignmentStateRule.ruleDescription,
+          consignmentState: editingConsignmentStateRule.consignmentState,
+          queryLifecycle: editingConsignmentStateRule.queryLifecycle.join(", "),
+          skillLevel: editingConsignmentStateRule.skillLevel,
+        }
         : rule
     ))
     setEditingConsignmentStateRuleId(null)
@@ -562,12 +562,12 @@ export function AdvancedRulesView() {
     setCustomerBasedRules(customerBasedRules.map(rule =>
       rule.id === ruleId
         ? {
-            ...rule,
-            ruleDescription: editingCustomerBasedRule.ruleDescription,
-            customer: editingCustomerBasedRule.customer,
-            carrier: editingCustomerBasedRule.carrier.join(", "),
-            skillLevel: editingCustomerBasedRule.skillLevel,
-          }
+          ...rule,
+          ruleDescription: editingCustomerBasedRule.ruleDescription,
+          customer: editingCustomerBasedRule.customer,
+          carrier: editingCustomerBasedRule.carrier.join(", "),
+          skillLevel: editingCustomerBasedRule.skillLevel,
+        }
         : rule
     ))
     setEditingCustomerBasedRuleId(null)
@@ -1291,7 +1291,7 @@ export function AdvancedRulesView() {
       <Card className="mt-6">
         <CardContent className="p-0">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between">
-<h2 className="text-lg font-medium text-foreground">Customer Based Rules</h2>
+            <h2 className="text-lg font-medium text-foreground">Customer Based Rules</h2>
             <Button variant="outline" size="sm" className="gap-1" onClick={handleOpenCustomerBasedRuleModal}>
               <Plus className="h-4 w-4" />
               Add Rule
@@ -1439,7 +1439,7 @@ export function AdvancedRulesView() {
       <Card className="mt-6">
         <CardContent className="p-0">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between">
-<h2 className="text-lg font-medium text-foreground">Elapsed Days Since Last Scan Rules</h2>
+            <h2 className="text-lg font-medium text-foreground">Elapsed Days Since Last Scan Rules</h2>
             <Button variant="outline" size="sm" className="gap-1" onClick={handleOpenElapsedDaysRuleModal}>
               <Plus className="h-4 w-4" />
               Add Rule
