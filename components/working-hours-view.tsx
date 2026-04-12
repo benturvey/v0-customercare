@@ -4,14 +4,14 @@ import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { ChevronDown } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 // Generate time options in 15-minute increments (24-hour format)
 const generateTimeOptions = () => {
@@ -34,7 +34,7 @@ interface TimeInputProps {
 }
 
 function TimeInput({ value, onChange, label }: TimeInputProps) {
-  const [isTyping, setIsTyping] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
   const [inputValue, setInputValue] = useState(value)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,48 +50,61 @@ function TimeInput({ value, onChange, label }: TimeInputProps) {
   }
 
   const handleInputBlur = () => {
-    setIsTyping(false)
     // Reset to last valid value if invalid
     if (!/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/.test(inputValue)) {
       setInputValue(value)
     }
   }
 
-  const handleSelectChange = (newValue: string) => {
-    onChange(newValue)
-    setInputValue(newValue)
+  const handleTimeSelect = (time: string) => {
+    onChange(time)
+    setInputValue(time)
+    setIsOpen(false)
   }
 
   return (
     <div className="grid gap-2">
       <Label className="text-sm font-medium">{label}</Label>
-      <div className="flex gap-2">
-        <Input
-          type="text"
-          value={isTyping ? inputValue : value}
-          onChange={handleInputChange}
-          onFocus={() => {
-            setIsTyping(true)
-            setInputValue(value)
-          }}
-          onBlur={handleInputBlur}
-          placeholder="HH:MM"
-          className="w-24 font-mono"
-          maxLength={5}
-        />
-        <Select value={value} onValueChange={handleSelectChange}>
-          <SelectTrigger className="w-28">
-            <SelectValue placeholder="Select" />
-          </SelectTrigger>
-          <SelectContent className="max-h-60">
+      <Popover open={isOpen} onOpenChange={setIsOpen}>
+        <PopoverTrigger asChild>
+          <div className="relative">
+            <Input
+              type="text"
+              value={inputValue}
+              onChange={handleInputChange}
+              onBlur={handleInputBlur}
+              placeholder="HH:MM"
+              className="w-32 font-mono pr-8"
+              maxLength={5}
+            />
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="absolute right-0 top-0 h-full px-2 hover:bg-transparent"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              <ChevronDown className="h-4 w-4 text-muted-foreground" />
+            </Button>
+          </div>
+        </PopoverTrigger>
+        <PopoverContent className="w-32 p-0 max-h-60 overflow-y-auto" align="start">
+          <div className="grid">
             {TIME_OPTIONS.map((time) => (
-              <SelectItem key={time} value={time}>
+              <button
+                key={time}
+                type="button"
+                className={`px-3 py-1.5 text-sm text-left hover:bg-muted transition-colors ${
+                  time === value ? "bg-muted font-medium" : ""
+                }`}
+                onClick={() => handleTimeSelect(time)}
+              >
                 {time}
-              </SelectItem>
+              </button>
             ))}
-          </SelectContent>
-        </Select>
-      </div>
+          </div>
+        </PopoverContent>
+      </Popover>
     </div>
   )
 }
