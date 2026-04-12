@@ -94,9 +94,8 @@ function TimeInput({ value, onChange, label }: TimeInputProps) {
               <button
                 key={time}
                 type="button"
-                className={`px-3 py-1.5 text-sm text-left hover:bg-muted transition-colors ${
-                  time === value ? "bg-muted font-medium" : ""
-                }`}
+                className={`px-3 py-1.5 text-sm text-left hover:bg-muted transition-colors ${time === value ? "bg-muted font-medium" : ""
+                  }`}
                 onClick={() => handleTimeSelect(time)}
               >
                 {time}
@@ -111,10 +110,10 @@ function TimeInput({ value, onChange, label }: TimeInputProps) {
 
 export function WorkingHoursView() {
   const [activeHoursType, setActiveHoursType] = useState<"standard" | "extended">("standard")
-  const [standardStartTime, setStandardStartTime] = useState("09:00")
-  const [standardEndTime, setStandardEndTime] = useState("17:00")
+  const [standardStartTime, setStandardStartTime] = useState("08:00")
+  const [standardEndTime, setStandardEndTime] = useState("18:45")
   const [extendedStartTime, setExtendedStartTime] = useState("07:00")
-  const [extendedEndTime, setExtendedEndTime] = useState("21:00")
+  const [extendedEndTime, setExtendedEndTime] = useState("20:00")
 
   const handleToggle = (type: "standard" | "extended") => {
     setActiveHoursType(type)

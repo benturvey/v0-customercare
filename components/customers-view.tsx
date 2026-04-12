@@ -11,7 +11,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet"
-import { X, Pencil } from "lucide-react"
+import { X, Pencil, Search } from "lucide-react"
 import {
   Select,
   SelectContent,
@@ -50,6 +50,7 @@ const initialCustomers: Customer[] = [
 
 export function CustomersView() {
   const [customers, setCustomers] = useState<Customer[]>(initialCustomers)
+  const [searchQuery, setSearchQuery] = useState("")
   const [editingId, setEditingId] = useState<string | null>(null)
   const [tagInput, setTagInput] = useState("")
   const [editSheetOpen, setEditSheetOpen] = useState(false)
@@ -127,6 +128,17 @@ export function CustomersView() {
     }
   }
 
+  // Filter customers based on search query
+  const filteredCustomers = customers.filter((customer) => {
+    const query = searchQuery.toLowerCase()
+    return (
+      customer.company.toLowerCase().includes(query) ||
+      customer.contact.toLowerCase().includes(query) ||
+      customer.telephone.toLowerCase().includes(query) ||
+      customer.emails.some(email => email.toLowerCase().includes(query))
+    )
+  })
+
   const handleRemoveEmailFromForm = (index: number) => {
     setEditForm(prev => ({
       ...prev,
@@ -139,6 +151,20 @@ export function CustomersView() {
       <header className="mb-6">
         <h1 className="text-2xl font-semibold text-[#1e3a5f]">Customers</h1>
       </header>
+
+      {/* Search Bar */}
+      <div className="mb-4">
+        <div className="relative max-w-md">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input
+            type="text"
+            placeholder="Search customers by company, contact, telephone or email..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-10"
+          />
+        </div>
+      </div>
 
       <div className="bg-card rounded-lg border border-border">
         <table className="w-full">
@@ -155,7 +181,7 @@ export function CustomersView() {
             </tr>
           </thead>
           <tbody>
-            {customers.map((customer) => (
+            {filteredCustomers.map((customer) => (
               <tr key={customer.id} className="border-b border-border last:border-b-0">
                 <td className="py-4 px-4 text-sm font-medium text-foreground">{customer.company}</td>
                 <td className="py-4 px-4 text-sm text-foreground">{customer.contact}</td>
