@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronDown } from "lucide-react"
+import { ChevronDown, Pencil } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -369,6 +369,7 @@ export function AgentsView() {
     tags: [] as string[],
     priority: 10,
   })
+  const [editingAgentId, setEditingAgentId] = useState<string | null>(null)
 
   const toggleExpand = (id: string) => {
     setAgents(agents.map(agent =>
@@ -475,36 +476,44 @@ export function AgentsView() {
               <div className="text-sm font-medium text-foreground">{agent.name}</div>
               <div className="text-sm text-muted-foreground">{agent.email}</div>
               <div>
-                <Select value={agent.role} onValueChange={(value: Agent["role"]) => updateRole(agent.id, value)}>
-                  <SelectTrigger className="h-8 text-sm">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="agent">Agent</SelectItem>
-                    <SelectItem value="senior-agent">Senior Agent</SelectItem>
-                    <SelectItem value="admin">Admin</SelectItem>
-                    <SelectItem value="management">Management</SelectItem>
-                    <SelectItem value="team-leader">Team Leader</SelectItem>
-                    <SelectItem value="trainer">Trainer</SelectItem>
-                    <SelectItem value="senior-management">Senior Management</SelectItem>
-                    <SelectItem value="director">Director</SelectItem>
-                  </SelectContent>
-                </Select>
+                {editingAgentId === agent.id ? (
+                  <Select value={agent.role} onValueChange={(value: Agent["role"]) => updateRole(agent.id, value)}>
+                    <SelectTrigger className="h-8 text-sm">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="agent">Agent</SelectItem>
+                      <SelectItem value="senior-agent">Senior Agent</SelectItem>
+                      <SelectItem value="admin">Admin</SelectItem>
+                      <SelectItem value="management">Management</SelectItem>
+                      <SelectItem value="team-leader">Team Leader</SelectItem>
+                      <SelectItem value="trainer">Trainer</SelectItem>
+                      <SelectItem value="senior-management">Senior Management</SelectItem>
+                      <SelectItem value="director">Director</SelectItem>
+                    </SelectContent>
+                  </Select>
+                ) : (
+                  <span className="text-sm text-foreground capitalize">{agent.role.replace("-", " ")}</span>
+                )}
               </div>
               <div>
-                <Select value={agent.skillLevel} onValueChange={(value: Agent["skillLevel"]) => updateSkillLevel(agent.id, value)}>
-                  <SelectTrigger className="h-8 text-sm">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="L1">L1</SelectItem>
-                    <SelectItem value="L2">L2</SelectItem>
-                    <SelectItem value="L3">L3</SelectItem>
-                    <SelectItem value="L4">L4</SelectItem>
-                    <SelectItem value="MGM">MGM</SelectItem>
-                    <SelectItem value="ADM">ADM</SelectItem>
-                  </SelectContent>
-                </Select>
+                {editingAgentId === agent.id ? (
+                  <Select value={agent.skillLevel} onValueChange={(value: Agent["skillLevel"]) => updateSkillLevel(agent.id, value)}>
+                    <SelectTrigger className="h-8 text-sm">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="L1">L1</SelectItem>
+                      <SelectItem value="L2">L2</SelectItem>
+                      <SelectItem value="L3">L3</SelectItem>
+                      <SelectItem value="L4">L4</SelectItem>
+                      <SelectItem value="MGM">MGM</SelectItem>
+                      <SelectItem value="ADM">ADM</SelectItem>
+                    </SelectContent>
+                  </Select>
+                ) : (
+                  <span className="text-sm text-foreground">{agent.skillLevel}</span>
+                )}
               </div>
               <div>
                 <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${agent.status === "active"
@@ -515,7 +524,25 @@ export function AgentsView() {
                 </span>
               </div>
               <div className="text-sm text-foreground text-center">{agent.currentTickets}</div>
-              <div>
+              <div className="flex items-center gap-2">
+                {editingAgentId === agent.id ? (
+                  <Button
+                    variant="default"
+                    size="sm"
+                    onClick={() => setEditingAgentId(null)}
+                    className="text-xs"
+                  >
+                    Save
+                  </Button>
+                ) : (
+                  <button
+                    className="p-1 hover:bg-muted rounded transition-colors"
+                    title="Edit"
+                    onClick={() => setEditingAgentId(agent.id)}
+                  >
+                    <Pencil className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+                  </button>
+                )}
                 <Button
                   variant="outline"
                   size="sm"
