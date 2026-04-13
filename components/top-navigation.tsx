@@ -15,7 +15,6 @@ const navItems: NavItem[] = [
   { id: "raise-non-shipment-ticket", label: "Raise Non-Shipment Ticket" },
   { id: "agents", label: "Agents" },
   { id: "customers", label: "Customers" },
-  { id: "tagging-rules", label: "Tagging Rules" },
   { id: "query-type", label: "Basic Rules" },
   { id: "advanced-rules", label: "Advanced Rules" },
   { id: "rule-priority", label: "Rule Priority" },
