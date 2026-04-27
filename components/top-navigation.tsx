@@ -1,6 +1,7 @@
 "use client"
 
 import { cn } from "@/lib/utils"
+import Image from "next/image"
 
 type NavItem = {
   id: string
@@ -29,6 +30,15 @@ interface TopNavigationProps {
 export function TopNavigation({ activeItem, onItemSelect }: TopNavigationProps) {
   return (
     <nav className="w-56 shrink-0 min-h-screen border-r border-border bg-card flex flex-col">
+      <div className="flex items-center justify-center p-4 border-b border-border">
+        <Image
+          src="/gfs-logo.png"
+          alt="GFS Logo"
+          width={180}
+          height={80}
+          className="object-contain"
+        />
+      </div>
       <div className="flex flex-col gap-1 p-3 pt-6">
         {navItems.map((item) => (
           <button
