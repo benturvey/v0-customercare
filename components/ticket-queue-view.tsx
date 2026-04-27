@@ -12,21 +12,21 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 const ticketData = [
-  { id: "#4709718", category: "WHERE_IS_MY_PARCEL", customer: "BRINDISA LIMITED", carrier: "DHL ECOMMERCE UK", agent: "", status: "Unassigned" },
-  { id: "#4709717", category: "DELIVERY_DISPUTED", customer: "ABBOTT LYON LTD", carrier: "GFS INTERNATIONAL", agent: "", status: "Unassigned" },
-  { id: "#4709709", category: "DELIVERY_DISPUTED", customer: "ABBOTT LYON LTD", carrier: "GFS INTERNATIONAL", agent: "Tracey Johnson", status: "In Progress" },
-  { id: "#4709708", category: "RETURN_TO_SENDER", customer: "ABBOTT LYON LTD", carrier: "EVRI", agent: "Aaron Doherty", status: "In Progress" },
-  { id: "#4709707", category: "WHERE_IS_MY_PARCEL", customer: "MILNER OFF ROAD", carrier: "EVRI", agent: "Andrei Costea", status: "In Progress" },
-  { id: "#4709706", category: "DELIVERY_DISPUTED", customer: "MAMAS & PAPAS", carrier: "DHL ECOMMERCE UK", agent: "George Lilliston", status: "In Progress" },
-  { id: "#4709697", category: "RETURN_TO_SENDER", customer: "GALLEON SUPPLIES LIMITED", carrier: "DX FREIGHT", agent: "Kirsty Doyle", status: "In Progress" },
-  { id: "#4709696", category: "RETURN_TO_SENDER", customer: "HIGH STREET TV", carrier: "EVRI", agent: "Arlene Griffin", status: "In Progress" },
-  { id: "#4709691", category: "WHERE_IS_MY_PARCEL", customer: "BAKER ROSS LTD", carrier: "DPD", agent: "Rachel Martin", status: "In Progress" },
-  { id: "#4709690", category: "WHERE_IS_MY_PARCEL", customer: "MAMAS & PAPAS", carrier: "DHL ECOMMERCE UK", agent: "Ibrahim Anidi", status: "In Progress" },
-  { id: "#4709688", category: "RETURN_TO_SENDER", customer: "PROCOOK UK LTD", carrier: "UPS", agent: "Sarah Tshikuna", status: "In Progress" },
-  { id: "#4709685", category: "RETURN_TO_SENDER", customer: "THE DUNE GROUP", carrier: "EVRI", agent: "Apryl Watson", status: "In Progress" },
-  { id: "#4709684", category: "RETURN_TO_SENDER", customer: "PROCOOK UK LTD", carrier: "DPD LOCAL", agent: "Rebecca Gibson", status: "In Progress" },
-  { id: "#4709683", category: "WHERE_IS_MY_PARCEL", customer: "WOODLAND GROUP LIMITED - WGAC", carrier: "EVRI", agent: "Audrey Johnson", status: "In Progress" },
-  { id: "#4709682", category: "WHERE_IS_MY_PARCEL", customer: "WOODLAND-DONCASTER2025", carrier: "EVRI", agent: "Danielle Marcroft", status: "In Progress" },
+  { id: "#4709718", category: "WHERE_IS_MY_PARCEL", consignmentNo: "GFS00123456", packs: 2, customer: "BRINDISA LIMITED", carrier: "DHL ECOMMERCE UK", agent: "", status: "Unassigned" },
+  { id: "#4709717", category: "DELIVERY_DISPUTED", consignmentNo: "GFS00123457", packs: 1, customer: "ABBOTT LYON LTD", carrier: "GFS INTERNATIONAL", agent: "", status: "Unassigned" },
+  { id: "#4709709", category: "DELIVERY_DISPUTED", consignmentNo: "GFS00123458", packs: 3, customer: "ABBOTT LYON LTD", carrier: "GFS INTERNATIONAL", agent: "Tracey Johnson", status: "In Progress" },
+  { id: "#4709708", category: "RETURN_TO_SENDER", consignmentNo: "GFS00123459", packs: 1, customer: "ABBOTT LYON LTD", carrier: "EVRI", agent: "Aaron Doherty", status: "In Progress" },
+  { id: "#4709707", category: "WHERE_IS_MY_PARCEL", consignmentNo: "GFS00123460", packs: 4, customer: "MILNER OFF ROAD", carrier: "EVRI", agent: "Andrei Costea", status: "In Progress" },
+  { id: "#4709706", category: "DELIVERY_DISPUTED", consignmentNo: "GFS00123461", packs: 2, customer: "MAMAS & PAPAS", carrier: "DHL ECOMMERCE UK", agent: "George Lilliston", status: "In Progress" },
+  { id: "#4709697", category: "RETURN_TO_SENDER", consignmentNo: "GFS00123462", packs: 1, customer: "GALLEON SUPPLIES LIMITED", carrier: "DX FREIGHT", agent: "Kirsty Doyle", status: "In Progress" },
+  { id: "#4709696", category: "RETURN_TO_SENDER", consignmentNo: "GFS00123463", packs: 2, customer: "HIGH STREET TV", carrier: "EVRI", agent: "Arlene Griffin", status: "In Progress" },
+  { id: "#4709691", category: "WHERE_IS_MY_PARCEL", consignmentNo: "GFS00123464", packs: 1, customer: "BAKER ROSS LTD", carrier: "DPD", agent: "Rachel Martin", status: "In Progress" },
+  { id: "#4709690", category: "WHERE_IS_MY_PARCEL", consignmentNo: "GFS00123465", packs: 3, customer: "MAMAS & PAPAS", carrier: "DHL ECOMMERCE UK", agent: "Ibrahim Anidi", status: "In Progress" },
+  { id: "#4709688", category: "RETURN_TO_SENDER", consignmentNo: "GFS00123466", packs: 1, customer: "PROCOOK UK LTD", carrier: "UPS", agent: "Sarah Tshikuna", status: "In Progress" },
+  { id: "#4709685", category: "RETURN_TO_SENDER", consignmentNo: "GFS00123467", packs: 2, customer: "THE DUNE GROUP", carrier: "EVRI", agent: "Apryl Watson", status: "In Progress" },
+  { id: "#4709684", category: "RETURN_TO_SENDER", consignmentNo: "GFS00123468", packs: 1, customer: "PROCOOK UK LTD", carrier: "DPD LOCAL", agent: "Rebecca Gibson", status: "In Progress" },
+  { id: "#4709683", category: "WHERE_IS_MY_PARCEL", consignmentNo: "GFS00123469", packs: 5, customer: "WOODLAND GROUP LIMITED - WGAC", carrier: "EVRI", agent: "Audrey Johnson", status: "In Progress" },
+  { id: "#4709682", category: "WHERE_IS_MY_PARCEL", consignmentNo: "GFS00123470", packs: 2, customer: "WOODLAND-DONCASTER2025", carrier: "EVRI", agent: "Danielle Marcroft", status: "In Progress" },
 ]
 
 const filters = [
@@ -103,6 +103,15 @@ export function TicketQueueView() {
               </th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider">
                 <div className="flex items-center gap-1">
+                  Consignment No
+                  <ArrowUpDown className="h-3 w-3" />
+                </div>
+              </th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider">
+                Packs
+              </th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider">
+                <div className="flex items-center gap-1">
                   Customer
                   <ArrowUpDown className="h-3 w-3" />
                 </div>
@@ -133,6 +142,12 @@ export function TicketQueueView() {
                 </td>
                 <td className="px-4 py-3 text-sm text-[#1e3a5f]">
                   {ticket.category}
+                </td>
+                <td className="px-4 py-3 text-sm text-[#1e3a5f]">
+                  {ticket.consignmentNo}
+                </td>
+                <td className="px-4 py-3 text-sm text-[#1e3a5f]">
+                  {ticket.packs}
                 </td>
                 <td className="px-4 py-3 text-sm text-[#1e3a5f]">
                   {ticket.customer}
