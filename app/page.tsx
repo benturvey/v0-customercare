@@ -89,9 +89,11 @@ export default function MainPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex">
       <TopNavigation activeItem={activeView} onItemSelect={setActiveView} />
-      {renderView()}
+      <main className="flex-1 overflow-auto">
+        {renderView()}
+      </main>
     </div>
   )
 }

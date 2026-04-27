@@ -28,26 +28,22 @@ interface TopNavigationProps {
 
 export function TopNavigation({ activeItem, onItemSelect }: TopNavigationProps) {
   return (
-    <nav className="border-b border-border bg-card">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center gap-1 overflow-x-auto">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => onItemSelect(item.id)}
-              className={cn(
-                "whitespace-nowrap px-4 py-3 text-sm font-medium transition-colors",
-                "hover:text-foreground",
-                "border-b-2 -mb-px",
-                activeItem === item.id
-                  ? "border-primary text-foreground"
-                  : "border-transparent text-muted-foreground"
-              )}
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
+    <nav className="w-56 shrink-0 min-h-screen border-r border-border bg-card flex flex-col">
+      <div className="flex flex-col gap-1 p-3 pt-6">
+        {navItems.map((item) => (
+          <button
+            key={item.id}
+            onClick={() => onItemSelect(item.id)}
+            className={cn(
+              "w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors",
+              activeItem === item.id
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground"
+            )}
+          >
+            {item.label}
+          </button>
+        ))}
       </div>
     </nav>
   )
