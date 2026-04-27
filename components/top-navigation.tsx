@@ -40,7 +40,7 @@ export function TopNavigation({ activeItem, onItemSelect }: TopNavigationProps) 
         />
       </div>
       <div className="flex flex-col gap-1 p-3 pt-6">
-        <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Dashboard</p>
+        <p className="px-3 pb-2 text-xs font-semibold text-muted-foreground">Dashboard</p>
         {navItems.map((item) => (
           <button
             key={item.id}
