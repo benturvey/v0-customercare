@@ -29,7 +29,7 @@ interface TopNavigationProps {
 
 export function TopNavigation({ activeItem, onItemSelect }: TopNavigationProps) {
   return (
-    <nav className="w-56 shrink-0 min-h-screen border-r border-border bg-card flex flex-col">
+    <nav className="w-56 shrink-0 min-h-screen border-r border-border bg-gray-100 flex flex-col">
       <div className="flex items-center justify-center p-4 border-b border-border">
         <Image
           src="/gfs-logo.png"
