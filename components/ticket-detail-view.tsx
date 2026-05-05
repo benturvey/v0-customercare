@@ -190,7 +190,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               <DetailRow icon={FileText}  label="Additional Info" value="Parcel unable to be delivered to parcel shop and now shows delayed. Please could we have further information regarding this delay as customer is very unhappy and unsure why delivery failed" />
             </div>
           </div>
-          <DetailRow icon={User}      label="Contact"   value="CS Team" />
+          <DetailRow icon={User}      label="Contact"   value="CS Team (support@lisaeldridge.com)" />
         </div>
       </div>
     </div>
