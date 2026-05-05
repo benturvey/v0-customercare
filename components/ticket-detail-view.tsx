@@ -10,6 +10,19 @@ import {
   AlarmClock,
   Flag,
   Star,
+  Truck,
+  MapPin,
+  Layers,
+  Package,
+  CalendarDays,
+  User,
+  Building2,
+  Mail,
+  Phone,
+  PlusCircle,
+  History,
+  Activity,
+  UserCircle,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -76,6 +89,73 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
             </div>
           )
         })}
+      </div>
+
+      {/* Shipment Details Summary */}
+      <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Shipment Details Summary</h2>
+      <div className="grid grid-cols-3 gap-4 mb-6">
+
+        {/* Card 1 — Shipment Summary */}
+        <div className="rounded-lg border border-border bg-card p-4">
+          <h3 className="text-sm font-semibold text-[#1e3a5f] mb-3">Shipment Summary</h3>
+          <div className="grid gap-2.5">
+            <DetailRow icon={Truck}       label="Carrier"        value="EVRI" />
+            <DetailRow icon={MapPin}      label="Destination"    value="G73 4LZ" />
+            <DetailRow icon={Layers}      label="Service"        value="2 DAY SERVICE" />
+            <DetailRow icon={Package}     label="Total Parcels"  value="1" />
+            <DetailRow icon={Globe}       label="Origin"         value={
+              <span className="flex items-center gap-1.5">
+                <span role="img" aria-label="UK flag" className="text-base leading-none">🇬🇧</span>
+                <span>UK</span>
+              </span>
+            } />
+            <DetailRow icon={CalendarDays} label="Despatched"   value="30/04/2026" />
+          </div>
+        </div>
+
+        {/* Card 2 — Customer Details */}
+        <div className="rounded-lg border border-border bg-card p-4">
+          <h3 className="text-sm font-semibold text-[#1e3a5f] mb-3">Customer Details</h3>
+          <div className="grid gap-2.5">
+            <DetailRow icon={User}        label="Name"     value="CS Team" />
+            <DetailRow icon={Building2}   label="Company"  value="LISA ELDRIDGE" />
+            <DetailRow icon={Mail}        label="Email"    value="support@lisaeldridge.com" />
+            <DetailRow icon={Phone}       label="Phone"    value="—" />
+          </div>
+        </div>
+
+        {/* Card 3 — Ticket Summary */}
+        <div className="rounded-lg border border-border bg-card p-4">
+          <h3 className="text-sm font-semibold text-[#1e3a5f] mb-3">Ticket Summary</h3>
+          <div className="grid gap-2.5">
+            <DetailRow icon={PlusCircle}  label="Created"        value="05/05/2026 15:49" />
+            <DetailRow icon={History}     label="Last Updated"   value="05/05/2026 15:49" />
+            <DetailRow icon={Activity}    label="Status"         value="Reviewing" />
+            <DetailRow icon={RefreshCw}   label="Defer/Review"   value="1" />
+            <DetailRow icon={UserCircle}  label="Assigned To"    value="Unassigned" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  )
+}
+
+function DetailRow({
+  icon: Icon,
+  label,
+  value,
+}: {
+  icon: React.ElementType
+  label: string
+  value: React.ReactNode
+}) {
+  return (
+    <div className="flex items-start gap-2">
+      <Icon className="h-4 w-4 shrink-0 text-muted-foreground mt-0.5" />
+      <div className="flex flex-col leading-tight min-w-0">
+        <span className="text-xs text-muted-foreground">{label}</span>
+        <span className="text-sm font-medium text-foreground break-words">{value}</span>
       </div>
     </div>
   )
