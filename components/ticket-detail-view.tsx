@@ -193,6 +193,35 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           <DetailRow icon={User}      label="Contact"   value="CS Team (support@lisaeldridge.com)" />
         </div>
       </div>
+
+      {/* Customer Conversation and Team Conversation & Exceptions */}
+      <div className="grid grid-cols-2 gap-4 mb-6">
+        {/* Customer Conversation */}
+        <div>
+          <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Customer Conversation</h2>
+          <div className="rounded-lg border border-border bg-card p-4">
+            <div className="rounded-lg border border-border bg-muted/20 p-3">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-semibold text-[#1e3a5f]">CS Team</span>
+                <span className="text-xs text-muted-foreground">05/05/2026 15:49</span>
+              </div>
+              <p className="text-sm text-foreground">
+                <span className="font-medium">Where is my parcel?</span>
+                <br />
+                <span className="text-muted-foreground">Additional Information:</span> Parcel unable to be delivered to parcel shop and now shows delayed. Please could we have further information regarding this delay as customer is very unhappy and unsure why delivery failed
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Team Conversation & Exceptions */}
+        <div>
+          <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Team Conversation & Exceptions</h2>
+          <div className="rounded-lg border border-border bg-card p-4 min-h-[120px]">
+            <p className="text-sm text-muted-foreground italic">No team conversations or exceptions yet.</p>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
