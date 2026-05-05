@@ -23,6 +23,7 @@ import {
   History,
   Activity,
   UserCircle,
+  Home,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -93,7 +94,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
 
       {/* Shipment Details Summary */}
       <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Shipment Details Summary</h2>
-      <div className="grid grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-4 gap-4 mb-6">
 
         {/* Card 1 — Shipment Summary */}
         <div className="rounded-lg border border-border bg-card p-4">
@@ -133,6 +134,23 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
             <DetailRow icon={Activity}    label="Status"         value="Reviewing" />
             <DetailRow icon={RefreshCw}   label="Defer/Review"   value="1" />
             <DetailRow icon={UserCircle}  label="Assigned To"    value="Unassigned" />
+          </div>
+        </div>
+
+        {/* Card 4 — Delivery Address */}
+        <div className="rounded-lg border border-border bg-card p-4">
+          <h3 className="text-sm font-semibold text-[#1e3a5f] mb-3">Delivery Address</h3>
+          <div className="grid gap-2.5">
+            <DetailRow icon={Building2}   label="Company"         value="CAROLINE BRILLANT" />
+            <DetailRow icon={User}        label="Contact"         value="CAROLINE BRILLANT" />
+            <DetailRow icon={Phone}       label="Contact Phone"   value="07927140269" />
+            <DetailRow icon={Mail}        label="Contact Email"   value="SISTERBRILLANT@YAHOO.CO.UK" />
+            <DetailRow icon={Home}        label="Address Line 1"  value="0/1 (GROUND LEFT)" />
+            <DetailRow icon={Home}        label="Address Line 2"  value="9 ROWANTREE AVENUE" />
+            <DetailRow icon={MapPin}      label="Town/City"       value="RUTHERGLEN" />
+            <DetailRow icon={MapPin}      label="County"          value="SCT" />
+            <DetailRow icon={MapPin}      label="Postcode"        value="G73 4LZ" />
+            <DetailRow icon={Globe}       label="Country"         value="UNITED KINGDOM" />
           </div>
         </div>
 
