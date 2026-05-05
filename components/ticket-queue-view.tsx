@@ -10,6 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { TicketDetailView } from "@/components/ticket-detail-view"
 
 const ticketData = [
   { id: "#4709718", category: "WHERE_IS_MY_PARCEL", consignmentNo: "31536710005479", packs: 2, customer: "BRINDISA LIMITED", carrier: "DHL ECOMMERCE UK", agent: "", status: "Unassigned" },
@@ -37,8 +38,11 @@ const filters = [
   { label: "All Regions", options: ["All Regions", "UK", "EU", "US"] },
 ]
 
+type Ticket = typeof ticketData[number]
+
 export function TicketQueueView() {
   const [searchQuery, setSearchQuery] = useState("")
+  const [selectedTicket, setSelectedTicket] = useState<Ticket | null>(null)
   const [selectedFilters, setSelectedFilters] = useState<Record<string, string>>({
     "All Statuses": "All Statuses",
     "All Carriers": "All Carriers",
@@ -46,6 +50,10 @@ export function TicketQueueView() {
     "All Agents": "All Agents",
     "All Regions": "All Regions",
   })
+
+  if (selectedTicket) {
+    return <TicketDetailView ticket={selectedTicket} onBack={() => setSelectedTicket(null)} />
+  }
 
   return (
     <div className="container mx-auto px-4 py-6">
@@ -134,7 +142,8 @@ export function TicketQueueView() {
             {ticketData.map((ticket, index) => (
               <tr
                 key={ticket.id}
-                className={`border-b border-border last:border-b-0 ${index % 2 === 0 ? "bg-background" : "bg-muted/20"
+                onClick={() => setSelectedTicket(ticket)}
+                className={`border-b border-border last:border-b-0 cursor-pointer ${index % 2 === 0 ? "bg-background" : "bg-muted/20"
                   } hover:bg-muted/40 transition-colors`}
               >
                 <td className="px-4 py-3 text-sm font-medium text-[#1e3a5f]">
