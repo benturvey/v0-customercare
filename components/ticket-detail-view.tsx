@@ -100,17 +100,23 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         <div className="rounded-lg border border-border bg-card p-4">
           <h3 className="text-sm font-semibold text-[#1e3a5f] mb-3">Shipment Summary</h3>
           <div className="grid gap-2.5">
-            <DetailRow icon={Truck}       label="Carrier"        value="EVRI" />
-            <DetailRow icon={MapPin}      label="Destination"    value="G73 4LZ" />
-            <DetailRow icon={Layers}      label="Service"        value="2 DAY SERVICE" />
-            <DetailRow icon={Package}     label="Total Parcels"  value="1" />
-            <DetailRow icon={Globe}       label="Origin"         value={
-              <span className="flex items-center gap-1.5">
-                <span role="img" aria-label="UK flag" className="text-base leading-none">🇬🇧</span>
-                <span>UK</span>
-              </span>
-            } />
-            <DetailRow icon={CalendarDays} label="Despatched"   value="30/04/2026" />
+            <div className="grid grid-cols-2 gap-2.5">
+              <DetailRow icon={Truck}    label="Carrier"      value="EVRI" />
+              <DetailRow icon={MapPin}   label="Destination"  value="G73 4LZ" />
+            </div>
+            <div className="grid grid-cols-2 gap-2.5">
+              <DetailRow icon={Layers}   label="Service"        value="2 DAY SERVICE" />
+              <DetailRow icon={Package}  label="Total Parcels"  value="1" />
+            </div>
+            <div className="grid grid-cols-2 gap-2.5">
+              <DetailRow icon={Globe}        label="Origin" value={
+                <span className="flex items-center gap-1.5">
+                  <span role="img" aria-label="UK flag" className="text-base leading-none">🇬🇧</span>
+                  <span>UK</span>
+                </span>
+              } />
+              <DetailRow icon={CalendarDays} label="Despatched" value="30/04/2026" />
+            </div>
           </div>
         </div>
 
