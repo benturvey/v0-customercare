@@ -33,7 +33,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
       </Button>
 
       <header className="mb-6">
-        <h1 className="text-2xl font-bold text-[#1e3a5f]">{ticket.id}</h1>
+        <h1 className="text-2xl font-bold text-[#1e3a5f]">Ticket {ticket.id}</h1>
       </header>
     </div>
   )
