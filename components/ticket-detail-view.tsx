@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import {
   ArrowLeft,
   Globe,
@@ -33,6 +34,9 @@ import {
   Link2,
   StickyNote,
   CheckCircle2,
+  List,
+  GitCommitHorizontal,
+  ScanLine,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -64,6 +68,8 @@ const metaItems = [
 ]
 
 export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
+  const [trackingView, setTrackingView] = useState<"list" | "timeline">("list")
+
   return (
     <div className="container mx-auto px-4 py-6">
       <Button
@@ -277,6 +283,86 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
             </div>
           </div>
         </div>
+      </div>
+      {/* Tracking Visibility */}
+      <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Tracking Visibility</h2>
+      <div className="rounded-lg border border-border bg-card p-4 mb-6">
+        {/* View toggle */}
+        <div className="flex items-center gap-2 mb-4">
+          <span className="text-sm text-muted-foreground font-medium">View as:</span>
+          <div className="flex rounded-md border border-border overflow-hidden">
+            <button
+              onClick={() => setTrackingView("list")}
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium transition-colors ${
+                trackingView === "list"
+                  ? "bg-[#1e3a5f] text-white"
+                  : "bg-background text-muted-foreground hover:bg-muted"
+              }`}
+            >
+              <List className="h-3.5 w-3.5" />
+              List
+            </button>
+            <button
+              onClick={() => setTrackingView("timeline")}
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium transition-colors border-l border-border ${
+                trackingView === "timeline"
+                  ? "bg-[#1e3a5f] text-white"
+                  : "bg-background text-muted-foreground hover:bg-muted"
+              }`}
+            >
+              <GitCommitHorizontal className="h-3.5 w-3.5" />
+              Timeline
+            </button>
+          </div>
+        </div>
+
+        {trackingView === "list" && (
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border bg-muted/40">
+                  <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider whitespace-nowrap">Parcel No</th>
+                  <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider whitespace-nowrap">Tracking No</th>
+                  <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider whitespace-nowrap">Carrier & Service</th>
+                  <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider whitespace-nowrap">Status</th>
+                  <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider whitespace-nowrap">Latest Scan</th>
+                  <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider whitespace-nowrap">Latest Update</th>
+                  <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider whitespace-nowrap">Delivered / EDD</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-border last:border-b-0 hover:bg-muted/20 transition-colors">
+                  <td className="px-3 py-3 text-foreground font-medium">1</td>
+                  <td className="px-3 py-3 text-foreground font-mono text-xs">T06XUA0000734531</td>
+                  <td className="px-3 py-3">
+                    <span className="font-medium text-foreground">EVRI</span>
+                    <br />
+                    <span className="text-xs text-muted-foreground">2 DAY SERVICE</span>
+                  </td>
+                  <td className="px-3 py-3">
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-red-50 text-red-700 border border-red-200">
+                      <ScanLine className="h-3 w-3" />
+                      DELIVERY ATTEMPTED
+                    </span>
+                  </td>
+                  <td className="px-3 py-3 text-xs text-foreground max-w-xs">
+                    WE HAVEN&apos;T BEEN ABLE TO DELIVER TO THE PARCELSHOP TODAY. WE&apos;LL RE-ATTEMPT ON THE NEXT WORKING DAY
+                  </td>
+                  <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">04/04/2026 14:03</td>
+                  <td className="px-3 py-3 whitespace-nowrap">
+                    <span className="text-xs font-medium text-orange-500">EDD</span>
+                    <br />
+                    <span className="text-sm font-semibold text-orange-500">05/04/2026</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {trackingView === "timeline" && (
+          <p className="text-sm text-muted-foreground italic">Timeline view coming soon.</p>
+        )}
       </div>
     </div>
   )
