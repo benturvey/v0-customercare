@@ -87,13 +87,13 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
       </header>
 
       {/* Metadata strip */}
-      <div className="flex flex-wrap items-center gap-0 rounded-lg border border-border bg-muted/30 overflow-hidden mb-6">
+      <div className="flex items-center gap-0 rounded-lg border border-border bg-muted/30 overflow-hidden mb-6">
         {metaItems.map((item, index) => {
           const Icon = item.icon
           return (
             <div
               key={item.label}
-              className={`flex items-center gap-2 px-4 py-3 ${
+              className={`flex flex-1 items-center gap-2 px-4 py-3 ${
                 index !== metaItems.length - 1 ? "border-r border-border" : ""
               }`}
             >
