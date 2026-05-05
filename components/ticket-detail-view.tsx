@@ -177,15 +177,19 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
       {/* Customer Query */}
       <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Customer Query</h2>
       <div className="rounded-lg border border-border bg-card p-4 mb-6">
-        <div className="grid gap-3">
-          <div className="grid grid-cols-3 gap-4">
-            <DetailRow icon={User}      label="Raised by" value="CS Team" />
+        <div className="grid grid-cols-3 gap-4">
+          <DetailRow icon={User}      label="Raised by" value="CS Team" />
+          <div>
             <DetailRow icon={Building2} label="Company"   value="LISA ELDRIDGE" />
-            <DetailRow icon={User}      label="Contact"   value="CS Team" />
+            <div className="mt-3">
+              <DetailRow icon={FileText}  label="Additional Info" value="Parcel unable to be delivered to parcel shop and now shows delayed. Please could we have further information regarding this delay as customer is very unhappy and unsure why delivery failed" />
+            </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            <DetailRow icon={Tag}       label="Category"        value="WHERE_IS_MY_PARCEL" />
-            <DetailRow icon={FileText}  label="Additional Info" value="Parcel unable to be delivered to parcel shop and now shows delayed. Please could we have further information regarding this delay as customer is very unhappy and unsure why delivery failed" />
+          <div>
+            <DetailRow icon={User}      label="Contact"   value="CS Team" />
+            <div className="mt-3">
+              <DetailRow icon={Tag}       label="Category"        value="WHERE_IS_MY_PARCEL" />
+            </div>
           </div>
         </div>
       </div>
