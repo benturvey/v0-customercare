@@ -26,6 +26,13 @@ import {
   Home,
   FileText,
   Tag,
+  Reply,
+  PauseCircle,
+  Eye,
+  ArrowUpCircle,
+  Link2,
+  StickyNote,
+  CheckCircle2,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -194,8 +201,8 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         </div>
       </div>
 
-      {/* Customer Conversation and Team Conversation & Exceptions */}
-      <div className="grid grid-cols-2 gap-4 mb-6">
+      {/* Customer Conversation, Team Conversation & Exceptions, and Actions */}
+      <div className="grid grid-cols-3 gap-4 mb-6">
         {/* Customer Conversation */}
         <div>
           <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Customer Conversation</h2>
@@ -226,6 +233,47 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               <p className="text-sm text-foreground leading-relaxed">
                 Hello, Thanks for contacting GFS. I am sorry to advise the parcel has missed connection to the courier which has caused a delay. Evri are aiming to get this parcel back on track to your customer as soon as possible. We will check for further scans and update you daily. Kind regards -GFS Customer Care
               </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Actions */}
+        <div>
+          <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Actions</h2>
+          <div className="rounded-lg border border-border bg-card p-4">
+            <div className="flex flex-col gap-2">
+              <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
+                <Reply className="h-4 w-4" />
+                Reply to Customer
+              </Button>
+              <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
+                <PauseCircle className="h-4 w-4" />
+                Defer / Awaiting Carrier
+              </Button>
+              <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
+                <Eye className="h-4 w-4" />
+                Review (Conditional)
+              </Button>
+              <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
+                <ArrowUpCircle className="h-4 w-4" />
+                Escalate to L2
+              </Button>
+              <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
+                <ArrowUpCircle className="h-4 w-4" />
+                Escalate to L3
+              </Button>
+              <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
+                <Link2 className="h-4 w-4" />
+                Merge / Link Tickets
+              </Button>
+              <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
+                <StickyNote className="h-4 w-4" />
+                Add Internal Notes
+              </Button>
+              <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
+                <CheckCircle2 className="h-4 w-4" />
+                Close as Resolved
+              </Button>
             </div>
           </div>
         </div>
