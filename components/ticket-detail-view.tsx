@@ -379,7 +379,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 <span className="text-sm font-semibold text-[#1e3a5f]">CS Team</span>
                 <span className="text-xs text-muted-foreground">06/05/2026 09:49</span>
               </div>
-              <p className="text-sm text-foreground">
+              <p className="text-sm text-foreground leading-relaxed">
                 <span className="font-medium">Where is my parcel?</span>
                 <br />
                 <span className="text-muted-foreground">Additional Information:</span> What is happening with the delivery?
@@ -392,7 +392,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 <span className="text-sm font-semibold text-[#1e3a5f]">CS Team</span>
                 <span className="text-xs text-muted-foreground">05/05/2026 15:49</span>
               </div>
-              <p className="text-sm text-foreground">
+              <p className="text-sm text-foreground leading-relaxed">
                 <span className="font-medium">Where is my parcel?</span>
                 <br />
                 <span className="text-muted-foreground">Additional Information:</span> Parcel unable to be delivered to parcel shop and now shows delayed. Please could we have further information regarding this delay as customer is very unhappy and unsure why delivery failed
