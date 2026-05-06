@@ -137,6 +137,13 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [internalNotesDialogOpen, setInternalNotesDialogOpen] = useState(false)
   const [internalNotesComment, setInternalNotesComment] = useState("")
 
+  const [closeResolvedDialogOpen, setCloseResolvedDialogOpen] = useState(false)
+  const [closeResolvedCategory, setCloseResolvedCategory] = useState("")
+  const [closeResolvedCommentToCustomer, setCloseResolvedCommentToCustomer] = useState("")
+  const [closeResolvedInternalComments, setCloseResolvedInternalComments] = useState("")
+  const [closeResolvedSendEmail, setCloseResolvedSendEmail] = useState(true)
+  const [closeResolvedEmailAddresses, setCloseResolvedEmailAddresses] = useState("")
+
   const [mergeDialogOpen, setMergeDialogOpen] = useState(false)
   const [mergeCriteria, setMergeCriteria] = useState<string[]>([])
   const [mergeReason, setMergeReason] = useState("")
@@ -427,7 +434,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 <StickyNote className="h-4 w-4" />
                 Add Internal Notes
               </Button>
-              <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
+              <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setCloseResolvedDialogOpen(true)}>
                 <CheckCircle2 className="h-4 w-4" />
                 Close as Resolved
               </Button>
@@ -1186,6 +1193,100 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           <DialogFooter>
             <Button variant="outline" onClick={() => setMergeDialogOpen(false)}>Cancel</Button>
             <Button onClick={() => setMergeDialogOpen(false)}>Confirm Merge</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Close as Resolved Dialog */}
+      <Dialog open={closeResolvedDialogOpen} onOpenChange={setCloseResolvedDialogOpen}>
+        <DialogContent className="sm:max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>Close as Resolved</DialogTitle>
+            <DialogDescription>
+              Mark this ticket as resolved and optionally notify the customer.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-4">
+            {/* Resolution Category */}
+            <div className="space-y-1.5">
+              <Label htmlFor="close-resolved-category">Resolution Category</Label>
+              <Select value={closeResolvedCategory} onValueChange={setCloseResolvedCategory}>
+                <SelectTrigger id="close-resolved-category">
+                  <SelectValue placeholder="Select a category..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="address-query">GFS Investigation: Address Query</SelectItem>
+                  <SelectItem value="awaiting-information">GFS Investigation: Awaiting information from</SelectItem>
+                  <SelectItem value="customs">GFS Investigation: Customs require further information</SelectItem>
+                  <SelectItem value="eta-requested">GFS Investigation: ETA requested from carrier. Awaiting feedback</SelectItem>
+                  <SelectItem value="no-scan">GFS Investigation: No scan data, please confirm if label used</SelectItem>
+                  <SelectItem value="parcel-damaged">GFS Investigation: Parcel damaged</SelectItem>
+                  <SelectItem value="parcel-stolen">GFS Investigation: Parcel stolen</SelectItem>
+                  <SelectItem value="claim">Sender to raise claim within carrier set timelimit</SelectItem>
+                  <SelectItem value="part-delivery">GFS Investigation: Part delivery. Outstanding items due for delivery</SelectItem>
+                  <SelectItem value="packaging-description">GFS Investigation: Please supply a description of the packaging, contents and value</SelectItem>
+                  <SelectItem value="contact-number">GFS Investigation: Please supply consignee contact number</SelectItem>
+                  <SelectItem value="redelivery">GFS Investigation: Redelivery requested</SelectItem>
+                  <SelectItem value="searches-actioned">GFS Investigation: Searches being actioned. Awaiting carrier feedback</SelectItem>
+                  <SelectItem value="awaiting-carrier">GFS Investigation: Awaiting carrier feedback</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Comment to Customer */}
+            <div className="space-y-1.5">
+              <Label htmlFor="close-resolved-customer-comment">Comment to Customer</Label>
+              <Textarea
+                id="close-resolved-customer-comment"
+                placeholder="Enter a comment to send to the customer..."
+                rows={3}
+                value={closeResolvedCommentToCustomer}
+                onChange={(e) => setCloseResolvedCommentToCustomer(e.target.value)}
+              />
+            </div>
+
+            {/* Internal Comments */}
+            <div className="space-y-1.5">
+              <Label htmlFor="close-resolved-internal-comments">Internal Comments</Label>
+              <Textarea
+                id="close-resolved-internal-comments"
+                placeholder="Enter internal comments (not visible to customer)..."
+                rows={3}
+                value={closeResolvedInternalComments}
+                onChange={(e) => setCloseResolvedInternalComments(e.target.value)}
+              />
+            </div>
+
+            {/* Send Email checkbox */}
+            <div className="flex items-center gap-2">
+              <Checkbox
+                id="close-resolved-send-email"
+                checked={closeResolvedSendEmail}
+                onCheckedChange={(checked) => setCloseResolvedSendEmail(checked === true)}
+              />
+              <Label htmlFor="close-resolved-send-email" className="cursor-pointer">
+                Must email be sent to customer?
+              </Label>
+            </div>
+
+            {/* Email addresses */}
+            <div className="space-y-1.5">
+              <Label htmlFor="close-resolved-email">Email Address</Label>
+              <Input
+                id="close-resolved-email"
+                type="text"
+                placeholder="Enter one or more email addresses, separated by commas..."
+                value={closeResolvedEmailAddresses}
+                onChange={(e) => setCloseResolvedEmailAddresses(e.target.value)}
+              />
+              <p className="text-xs text-muted-foreground">Separate multiple addresses with commas.</p>
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setCloseResolvedDialogOpen(false)}>Cancel</Button>
+            <Button onClick={() => setCloseResolvedDialogOpen(false)}>Resolve Ticket</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
