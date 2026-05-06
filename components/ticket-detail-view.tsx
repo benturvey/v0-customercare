@@ -473,6 +473,39 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                   <td className="px-3 py-3 text-sm text-muted-foreground">—</td>
                   <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">01/05/2026 06:03</td>
                 </tr>
+                <tr className="border-b border-border last:border-b-0 hover:bg-muted/20 transition-colors">
+                  <td className="px-3 py-3 text-foreground font-mono text-xs">T06XUA0000734531</td>
+                  <td className="px-3 py-3 text-foreground font-mono text-xs">T06XUA0000734531</td>
+                  <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">01/05/2026 01:37</td>
+                  <td className="px-3 py-3 text-xs text-foreground max-w-sm">
+                    <div>WE&apos;VE RECEIVED THIS PARCEL AT THE HUB AND WILL BE SORTED TO THE CUSTOMERS DELIVERY DEPOT</div>
+                    <div className="text-blue-600 font-medium mt-1">ARRIVED AT HUB.</div>
+                  </td>
+                  <td className="px-3 py-3 text-sm text-muted-foreground">—</td>
+                  <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">01/05/2026 06:03</td>
+                </tr>
+                <tr className="border-b border-border last:border-b-0 hover:bg-muted/20 transition-colors">
+                  <td className="px-3 py-3 text-foreground font-mono text-xs">T06XUA0000734531</td>
+                  <td className="px-3 py-3 text-foreground font-mono text-xs">T06XUA0000734531</td>
+                  <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">30/04/2026 22:24</td>
+                  <td className="px-3 py-3 text-xs text-foreground max-w-sm">
+                    <div>PARCELSHOP DIVERT REQUESTED</div>
+                    <div className="text-blue-600 font-medium mt-1">ALTERNATIVE INSTRUCTIONS TO A PARCEL SHOP.</div>
+                  </td>
+                  <td className="px-3 py-3 text-sm text-muted-foreground">—</td>
+                  <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">01/05/2026 06:03</td>
+                </tr>
+                <tr className="border-b border-border last:border-b-0 hover:bg-muted/20 transition-colors">
+                  <td className="px-3 py-3 text-foreground font-mono text-xs">T06XUA0000734531</td>
+                  <td className="px-3 py-3 text-foreground font-mono text-xs">T06XUA0000734531</td>
+                  <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">30/04/2026 20:15</td>
+                  <td className="px-3 py-3 text-xs text-foreground max-w-sm">
+                    <div>WE HAVE RECEIVED THE DETAILS FOR THIS PARCEL AND EXPECT IT TO REACH THE EVRI NETWORK SHORTLY</div>
+                    <div className="text-blue-600 font-medium mt-1">PARCEL DATA RECEIVED - AWAITING CARRIER SCAN.</div>
+                  </td>
+                  <td className="px-3 py-3 text-sm text-muted-foreground">—</td>
+                  <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">30/04/2026 22:05</td>
+                </tr>
               </tbody>
             </table>
           </div>
