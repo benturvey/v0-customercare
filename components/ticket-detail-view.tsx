@@ -37,6 +37,7 @@ import {
   List,
   GitCommitHorizontal,
   ScanLine,
+  Paperclip,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -248,6 +249,10 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Actions</h2>
           <div className="rounded-lg border border-border bg-card p-4">
             <div className="flex flex-col gap-2">
+              <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
+                <Paperclip className="h-4 w-4" />
+                Attach Items
+              </Button>
               <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
                 <Reply className="h-4 w-4" />
                 Reply to Customer
