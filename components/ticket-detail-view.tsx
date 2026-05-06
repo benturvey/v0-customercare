@@ -68,6 +68,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
 type Ticket = {
   id: string
@@ -120,6 +121,16 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [deferInternalComments, setDeferInternalComments] = useState("")
   const [deferSendEmail, setDeferSendEmail] = useState(true)
   const [deferEmailAddresses, setDeferEmailAddresses] = useState("")
+
+  const [reviewDialogOpen, setReviewDialogOpen] = useState(false)
+  const [reviewDate, setReviewDate] = useState(getTomorrowDate)
+  const [reviewTime, setReviewTime] = useState(getCurrentTime)
+  const [reviewExpectedStatus, setReviewExpectedStatus] = useState("out-for-delivery")
+  const [reviewReason, setReviewReason] = useState("")
+  const [reviewCommentToCustomer, setReviewCommentToCustomer] = useState("")
+  const [reviewInternalComments, setReviewInternalComments] = useState("")
+  const [reviewSendEmail, setReviewSendEmail] = useState(true)
+  const [reviewEmailAddresses, setReviewEmailAddresses] = useState("")
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
@@ -339,7 +350,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 <PauseCircle className="h-4 w-4" />
                 Defer / Awaiting Carrier
               </Button>
-              <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
+              <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setReviewDialogOpen(true)}>
                 <Eye className="h-4 w-4" />
                 Review (Conditional)
               </Button>
@@ -710,6 +721,141 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
             </Button>
             <Button onClick={() => setDeferDialogOpen(false)}>
               Submit Deferral
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Review (Conditional) Dialog */}
+      <Dialog open={reviewDialogOpen} onOpenChange={setReviewDialogOpen}>
+        <DialogContent className="sm:max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>Review (Conditional)</DialogTitle>
+            <DialogDescription>
+              Set a snooze date and review conditions for this ticket.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-4">
+            {/* Row 1: Date + Time */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-1.5">
+                <Label htmlFor="review-date">Snooze Query To Date</Label>
+                <Input
+                  id="review-date"
+                  type="date"
+                  value={reviewDate}
+                  onChange={(e) => setReviewDate(e.target.value)}
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="review-time">Time</Label>
+                <Input
+                  id="review-time"
+                  type="time"
+                  value={reviewTime}
+                  onChange={(e) => setReviewTime(e.target.value)}
+                />
+              </div>
+            </div>
+
+            {/* Expected Status */}
+            <div className="space-y-1.5">
+              <Label>Expected Status</Label>
+              <RadioGroup value={reviewExpectedStatus} onValueChange={setReviewExpectedStatus} className="flex gap-6">
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="out-for-delivery" id="status-ofd" />
+                  <Label htmlFor="status-ofd" className="cursor-pointer font-normal">Out For Delivery</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="delivered" id="status-delivered" />
+                  <Label htmlFor="status-delivered" className="cursor-pointer font-normal">Delivered</Label>
+                </div>
+              </RadioGroup>
+            </div>
+
+            {/* Reason for Review */}
+            <div className="space-y-1.5">
+              <Label htmlFor="review-reason">Reason for Review</Label>
+              <Select value={reviewReason} onValueChange={setReviewReason}>
+                <SelectTrigger id="review-reason">
+                  <SelectValue placeholder="Select a reason..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="address-query">GFS Investigation: Address Query</SelectItem>
+                  <SelectItem value="awaiting-information">GFS Investigation: Awaiting information from</SelectItem>
+                  <SelectItem value="customs">GFS Investigation: Customs require further information</SelectItem>
+                  <SelectItem value="eta-requested">GFS Investigation: ETA requested from carrier. Awaiting feedback</SelectItem>
+                  <SelectItem value="no-scan">GFS Investigation: No scan data, please confirm if label used</SelectItem>
+                  <SelectItem value="parcel-damaged">GFS Investigation: Parcel damaged</SelectItem>
+                  <SelectItem value="parcel-stolen">GFS Investigation: Parcel stolen</SelectItem>
+                  <SelectItem value="claim">Sender to raise claim within carrier set timelimit</SelectItem>
+                  <SelectItem value="part-delivery">GFS Investigation: Part delivery. Outstanding items due for delivery</SelectItem>
+                  <SelectItem value="packaging-description">GFS Investigation: Please supply a description of the packaging, contents and value</SelectItem>
+                  <SelectItem value="contact-number">GFS Investigation: Please supply consignee contact number</SelectItem>
+                  <SelectItem value="redelivery">GFS Investigation: Redelivery requested</SelectItem>
+                  <SelectItem value="searches-actioned">GFS Investigation: Searches being actioned. Awaiting carrier feedback</SelectItem>
+                  <SelectItem value="awaiting-carrier">GFS Investigation: Awaiting carrier feedback</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Comment to Customer */}
+            <div className="space-y-1.5">
+              <Label htmlFor="review-customer-comment">Comment to Customer</Label>
+              <Textarea
+                id="review-customer-comment"
+                placeholder="Enter a comment to send to the customer..."
+                rows={3}
+                value={reviewCommentToCustomer}
+                onChange={(e) => setReviewCommentToCustomer(e.target.value)}
+              />
+            </div>
+
+            {/* Internal Comments */}
+            <div className="space-y-1.5">
+              <Label htmlFor="review-internal-comments">Internal Comments</Label>
+              <Textarea
+                id="review-internal-comments"
+                placeholder="Enter internal comments (not visible to customer)..."
+                rows={3}
+                value={reviewInternalComments}
+                onChange={(e) => setReviewInternalComments(e.target.value)}
+              />
+            </div>
+
+            {/* Send Email checkbox */}
+            <div className="flex items-center gap-2">
+              <Checkbox
+                id="review-send-email"
+                checked={reviewSendEmail}
+                onCheckedChange={(checked) => setReviewSendEmail(checked === true)}
+              />
+              <Label htmlFor="review-send-email" className="cursor-pointer">
+                Must email be sent to customer?
+              </Label>
+            </div>
+
+            {/* Email addresses */}
+            <div className="space-y-1.5">
+              <Label htmlFor="review-email">Email Address</Label>
+              <Input
+                id="review-email"
+                type="text"
+                placeholder="Enter one or more email addresses, separated by commas..."
+                value={reviewEmailAddresses}
+                onChange={(e) => setReviewEmailAddresses(e.target.value)}
+              />
+              <p className="text-xs text-muted-foreground">Separate multiple addresses with commas.</p>
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setReviewDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={() => setReviewDialogOpen(false)}>
+              Submit Review
             </Button>
           </DialogFooter>
         </DialogContent>
