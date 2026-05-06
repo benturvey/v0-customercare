@@ -41,6 +41,7 @@ import {
   Upload,
   X,
   Image as ImageIcon,
+  FileCheck2,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -87,14 +88,15 @@ interface TicketDetailViewProps {
 }
 
 const metaItems = [
-  { icon: Globe,        label: "Origin",         value: "UK" },
-  { icon: RefreshCw,    label: "Defer/Review",   value: "1" },
-  { icon: MessageSquare,label: "Responded",       value: "1" },
-  { icon: BarChart2,    label: "Level",           value: "L1 - Basic" },
-  { icon: Clock,        label: "Ticket Age",      value: "42m" },
-  { icon: AlarmClock,   label: "SLA Due",         value: "11:32 in 2h 15m" },
-  { icon: Flag,         label: "Priority",        value: "Normal" },
-  { icon: Star,         label: "Customer Tier",   value: "Focus Customer" },
+  { icon: Globe,        label: "Origin",                  value: "UK",              iconColor: undefined },
+  { icon: RefreshCw,    label: "Defer/Review",            value: "1",               iconColor: undefined },
+  { icon: MessageSquare,label: "Responded",               value: "1",               iconColor: undefined },
+  { icon: BarChart2,    label: "Level",                   value: "L1 - Basic",      iconColor: undefined },
+  { icon: Clock,        label: "Ticket Age",              value: "42m",             iconColor: undefined },
+  { icon: AlarmClock,   label: "SLA Due",                 value: "11:32 in 2h 15m", iconColor: undefined },
+  { icon: Flag,         label: "Priority",                value: "Normal",          iconColor: undefined },
+  { icon: Star,         label: "Customer Tier",           value: "Focus Customer",  iconColor: undefined },
+  { icon: FileCheck2,   label: "Descriptions Received",   value: "Received",        iconColor: "text-green-500" },
 ]
 
 export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
@@ -174,7 +176,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 index !== metaItems.length - 1 ? "border-r border-border" : ""
               }`}
             >
-              <Icon className="h-4 w-4 shrink-0 text-[#1e3a5f]" />
+              <Icon className={`h-4 w-4 shrink-0 ${item.iconColor ?? "text-[#1e3a5f]"}`} />
               <div className="flex flex-col leading-tight">
                 <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">{item.label}</span>
                 <span className="text-sm font-semibold text-[#1e3a5f] whitespace-nowrap">{item.value}</span>
