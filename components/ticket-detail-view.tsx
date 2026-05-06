@@ -134,6 +134,29 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [reviewSendEmail, setReviewSendEmail] = useState(true)
   const [reviewEmailAddresses, setReviewEmailAddresses] = useState("")
 
+  const [mergeDialogOpen, setMergeDialogOpen] = useState(false)
+  const [mergeCriteria, setMergeCriteria] = useState<string[]>([])
+  const [mergeReason, setMergeReason] = useState("")
+
+  const mergeCriteriaOptions = [
+    { value: "store",     label: "Store" },
+    { value: "postcode",  label: "Postcode" },
+    { value: "day",       label: "Day" },
+    { value: "category",  label: "Category" },
+  ]
+
+  const toggleMergeCriteria = (value: string) => {
+    setMergeCriteria((prev) =>
+      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
+    )
+  }
+
+  const mockMatchedTickets = [
+    { ticketNo: "#4712301", raisedDate: "04/05/2026 09:15", raisedBy: "CS Team",  status: "Unassigned", category: "WHERE_IS_MY_PARCEL" },
+    { ticketNo: "#4718844", raisedDate: "04/05/2026 11:42", raisedBy: "CS Team",  status: "Reviewing",  category: "WHERE_IS_MY_PARCEL" },
+    { ticketNo: "#4721009", raisedDate: "05/05/2026 08:30", raisedBy: "Jane Doe", status: "Deferred",   category: "WHERE_IS_MY_PARCEL" },
+  ]
+
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
     if (files) {
@@ -364,7 +387,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 <ArrowUpCircle className="h-4 w-4" />
                 Escalate to L3
               </Button>
-              <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
+              <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setMergeDialogOpen(true)}>
                 <Link2 className="h-4 w-4" />
                 Merge / Link Tickets
               </Button>
@@ -859,6 +882,100 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
             <Button onClick={() => setReviewDialogOpen(false)}>
               Submit Review
             </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Merge / Link Tickets Dialog */}
+      <Dialog open={mergeDialogOpen} onOpenChange={setMergeDialogOpen}>
+        <DialogContent className="sm:max-w-3xl">
+          <DialogHeader>
+            <DialogTitle>Merge / Link Tickets</DialogTitle>
+            <DialogDescription>
+              Select matching criteria to find related tickets, then choose a reason for the merge.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-5">
+            {/* Criteria multi-select */}
+            <div className="space-y-2">
+              <Label>Criteria to Match</Label>
+              <div className="flex flex-wrap gap-2">
+                {mergeCriteriaOptions.map((opt) => (
+                  <button
+                    key={opt.value}
+                    type="button"
+                    onClick={() => toggleMergeCriteria(opt.value)}
+                    className={`px-3 py-1.5 rounded-md border text-sm font-medium transition-colors ${
+                      mergeCriteria.includes(opt.value)
+                        ? "bg-[#1e3a5f] text-white border-[#1e3a5f]"
+                        : "bg-background text-foreground border-border hover:bg-muted"
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Matched tickets table */}
+            <div className="space-y-2">
+              <Label>Matched Tickets</Label>
+              <div className="rounded-lg border border-border overflow-hidden">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="bg-muted/40 border-b border-border">
+                      <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider">Ticket No</th>
+                      <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider">Raised Date</th>
+                      <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider">Raised By</th>
+                      <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider">Status</th>
+                      <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider">Category</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {mockMatchedTickets.map((t) => (
+                      <tr key={t.ticketNo} className="border-b border-border last:border-b-0 hover:bg-muted/20 transition-colors">
+                        <td className="px-3 py-2.5 font-medium text-foreground">{t.ticketNo}</td>
+                        <td className="px-3 py-2.5 text-foreground whitespace-nowrap">{t.raisedDate}</td>
+                        <td className="px-3 py-2.5 text-foreground">{t.raisedBy}</td>
+                        <td className="px-3 py-2.5">
+                          <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${
+                            t.status === "Unassigned" ? "bg-gray-100 text-gray-700" :
+                            t.status === "Reviewing"  ? "bg-blue-50 text-blue-700" :
+                            "bg-yellow-50 text-yellow-700"
+                          }`}>
+                            {t.status}
+                          </span>
+                        </td>
+                        <td className="px-3 py-2.5 text-foreground">{t.category}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Reason for merge */}
+            <div className="space-y-1.5">
+              <Label htmlFor="merge-reason">Reason for Ticket Merge</Label>
+              <Select value={mergeReason} onValueChange={setMergeReason}>
+                <SelectTrigger id="merge-reason">
+                  <SelectValue placeholder="Select a reason..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="duplicate">Duplicate Query</SelectItem>
+                  <SelectItem value="same-consignment">Same Consignment</SelectItem>
+                  <SelectItem value="same-customer">Same Customer — Multiple Submissions</SelectItem>
+                  <SelectItem value="same-issue">Same Issue — Different Contacts</SelectItem>
+                  <SelectItem value="related">Related Tickets — Single Resolution</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setMergeDialogOpen(false)}>Cancel</Button>
+            <Button onClick={() => setMergeDialogOpen(false)}>Confirm Merge</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
