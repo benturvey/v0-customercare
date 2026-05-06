@@ -982,20 +982,18 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                           <SelectValue placeholder="Select a category..." />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="address-query">GFS Investigation: Address Query</SelectItem>
-                          <SelectItem value="awaiting-information">GFS Investigation: Awaiting information from</SelectItem>
-                          <SelectItem value="customs">GFS Investigation: Customs require further information</SelectItem>
-                          <SelectItem value="eta-requested">GFS Investigation: ETA requested from carrier. Awaiting feedback</SelectItem>
-                          <SelectItem value="no-scan">GFS Investigation: No scan data, please confirm if label used</SelectItem>
-                          <SelectItem value="parcel-damaged">GFS Investigation: Parcel damaged</SelectItem>
-                          <SelectItem value="parcel-stolen">GFS Investigation: Parcel stolen</SelectItem>
-                          <SelectItem value="claim">Sender to raise claim within carrier set timelimit</SelectItem>
-                          <SelectItem value="part-delivery">GFS Investigation: Part delivery. Outstanding items due for delivery</SelectItem>
-                          <SelectItem value="packaging-description">GFS Investigation: Please supply a description of the packaging, contents and value</SelectItem>
-                          <SelectItem value="contact-number">GFS Investigation: Please supply consignee contact number</SelectItem>
-                          <SelectItem value="redelivery">GFS Investigation: Redelivery requested</SelectItem>
-                          <SelectItem value="searches-actioned">GFS Investigation: Searches being actioned. Awaiting carrier feedback</SelectItem>
-                          <SelectItem value="awaiting-carrier">GFS Investigation: Awaiting carrier feedback</SelectItem>
+                          <SelectItem value="collection-enquiry">Collection enquiry</SelectItem>
+                          <SelectItem value="disputed-delivery">Disputed Delivery</SelectItem>
+                          <SelectItem value="incomplete-delivery">Order has been delivered incomplete</SelectItem>
+                          <SelectItem value="delivered-damaged">Parcel has been delivered damaged</SelectItem>
+                          <SelectItem value="post-delivery-feedback">Post Delivery feedback</SelectItem>
+                          <SelectItem value="additional-delivery-info">Provide additional delivery information</SelectItem>
+                          <SelectItem value="customs-info">Provide Customs Information</SelectItem>
+                          <SelectItem value="collect-parcel">Request for consignee to collect parcel</SelectItem>
+                          <SelectItem value="change-address">Request to change delivery address</SelectItem>
+                          <SelectItem value="redeliver">Request to redeliver</SelectItem>
+                          <SelectItem value="return-to-sender">Request to return parcel to sender</SelectItem>
+                          <SelectItem value="where-is-my-parcel">Where is my parcel?</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
