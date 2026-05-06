@@ -42,6 +42,8 @@ import {
   X,
   Image as ImageIcon,
   FileCheck2,
+  ToggleLeft,
+  Workflow,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -89,6 +91,8 @@ interface TicketDetailViewProps {
 
 const metaItems = [
   { icon: Globe,        label: "Origin",                  value: "UK",              iconColor: undefined },
+  { icon: ToggleLeft,   label: "State",                   value: "OPEN",            iconColor: undefined },
+  { icon: Workflow,     label: "Lifecycle",               value: "Reviewing",       iconColor: undefined },
   { icon: RefreshCw,    label: "Defer/Review",            value: "1",               iconColor: undefined },
   { icon: MessageSquare,label: "Responded",               value: "1",               iconColor: undefined },
   { icon: BarChart2,    label: "Level",                   value: "L1 - Basic",      iconColor: undefined },
