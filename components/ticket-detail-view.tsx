@@ -57,6 +57,17 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
+import { Label } from "@/components/ui/label"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Input } from "@/components/ui/input"
 
 type Ticket = {
   id: string
@@ -90,6 +101,25 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [attachDialogOpen, setAttachDialogOpen] = useState(false)
   const [attachments, setAttachments] = useState<{ name: string; url: string }[]>([])
   const [attachmentsSheetOpen, setAttachmentsSheetOpen] = useState(false)
+  const [deferDialogOpen, setDeferDialogOpen] = useState(false)
+
+  const getTomorrowDate = () => {
+    const d = new Date()
+    d.setDate(d.getDate() + 1)
+    return d.toISOString().split("T")[0]
+  }
+  const getCurrentTime = () => {
+    const now = new Date()
+    return now.toTimeString().slice(0, 5)
+  }
+
+  const [deferDate, setDeferDate] = useState(getTomorrowDate)
+  const [deferTime, setDeferTime] = useState(getCurrentTime)
+  const [deferReason, setDeferReason] = useState("")
+  const [deferCommentToCustomer, setDeferCommentToCustomer] = useState("")
+  const [deferInternalComments, setDeferInternalComments] = useState("")
+  const [deferSendEmail, setDeferSendEmail] = useState(true)
+  const [deferEmailAddresses, setDeferEmailAddresses] = useState("")
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
@@ -305,7 +335,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 <Reply className="h-4 w-4" />
                 Reply to Customer
               </Button>
-              <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
+              <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setDeferDialogOpen(true)}>
                 <PauseCircle className="h-4 w-4" />
                 Defer / Awaiting Carrier
               </Button>
@@ -564,6 +594,126 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           </div>
         )}
       </div>
+
+      {/* Defer / Awaiting Carrier Dialog */}
+      <Dialog open={deferDialogOpen} onOpenChange={setDeferDialogOpen}>
+        <DialogContent className="sm:max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>Defer / Awaiting Carrier</DialogTitle>
+            <DialogDescription>
+              Set a deferral date and reason for this ticket.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-4">
+            {/* Row 1: Date + Time */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-1.5">
+                <Label htmlFor="defer-date">Defer Query To Date</Label>
+                <Input
+                  id="defer-date"
+                  type="date"
+                  value={deferDate}
+                  onChange={(e) => setDeferDate(e.target.value)}
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="defer-time">Time</Label>
+                <Input
+                  id="defer-time"
+                  type="time"
+                  value={deferTime}
+                  onChange={(e) => setDeferTime(e.target.value)}
+                />
+              </div>
+            </div>
+
+            {/* Reason for Deferral */}
+            <div className="space-y-1.5">
+              <Label htmlFor="defer-reason">Reason for Deferral</Label>
+              <Select value={deferReason} onValueChange={setDeferReason}>
+                <SelectTrigger id="defer-reason">
+                  <SelectValue placeholder="Select a reason..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="address-query">GFS Investigation: Address Query</SelectItem>
+                  <SelectItem value="awaiting-information">GFS Investigation: Awaiting information from</SelectItem>
+                  <SelectItem value="customs">GFS Investigation: Customs require further information</SelectItem>
+                  <SelectItem value="eta-requested">GFS Investigation: ETA requested from carrier. Awaiting feedback</SelectItem>
+                  <SelectItem value="no-scan">GFS Investigation: No scan data, please confirm if label used</SelectItem>
+                  <SelectItem value="parcel-damaged">GFS Investigation: Parcel damaged</SelectItem>
+                  <SelectItem value="parcel-stolen">GFS Investigation: Parcel stolen</SelectItem>
+                  <SelectItem value="claim">Sender to raise claim within carrier set timelimit</SelectItem>
+                  <SelectItem value="part-delivery">GFS Investigation: Part delivery. Outstanding items due for delivery</SelectItem>
+                  <SelectItem value="packaging-description">GFS Investigation: Please supply a description of the packaging, contents and value</SelectItem>
+                  <SelectItem value="contact-number">GFS Investigation: Please supply consignee contact number</SelectItem>
+                  <SelectItem value="redelivery">GFS Investigation: Redelivery requested</SelectItem>
+                  <SelectItem value="searches-actioned">GFS Investigation: Searches being actioned. Awaiting carrier feedback</SelectItem>
+                  <SelectItem value="awaiting-carrier">GFS Investigation: Awaiting carrier feedback</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Comment to Customer */}
+            <div className="space-y-1.5">
+              <Label htmlFor="defer-customer-comment">Comment to Customer</Label>
+              <Textarea
+                id="defer-customer-comment"
+                placeholder="Enter a comment to send to the customer..."
+                rows={3}
+                value={deferCommentToCustomer}
+                onChange={(e) => setDeferCommentToCustomer(e.target.value)}
+              />
+            </div>
+
+            {/* Internal Comments */}
+            <div className="space-y-1.5">
+              <Label htmlFor="defer-internal-comments">Internal Comments</Label>
+              <Textarea
+                id="defer-internal-comments"
+                placeholder="Enter internal comments (not visible to customer)..."
+                rows={3}
+                value={deferInternalComments}
+                onChange={(e) => setDeferInternalComments(e.target.value)}
+              />
+            </div>
+
+            {/* Send Email checkbox */}
+            <div className="flex items-center gap-2">
+              <Checkbox
+                id="defer-send-email"
+                checked={deferSendEmail}
+                onCheckedChange={(checked) => setDeferSendEmail(checked === true)}
+              />
+              <Label htmlFor="defer-send-email" className="cursor-pointer">
+                Must email be sent to customer?
+              </Label>
+            </div>
+
+            {/* Email addresses */}
+            <div className="space-y-1.5">
+              <Label htmlFor="defer-email">Email Address</Label>
+              <Input
+                id="defer-email"
+                type="text"
+                placeholder="Enter one or more email addresses, separated by commas..."
+                value={deferEmailAddresses}
+                onChange={(e) => setDeferEmailAddresses(e.target.value)}
+              />
+              <p className="text-xs text-muted-foreground">Separate multiple addresses with commas.</p>
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setDeferDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={() => setDeferDialogOpen(false)}>
+              Submit Deferral
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* Attach Items Dialog */}
       <Dialog open={attachDialogOpen} onOpenChange={setAttachDialogOpen}>
