@@ -42,7 +42,6 @@ import {
   X,
   Image as ImageIcon,
   FileCheck2,
-  FlagUk,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -89,7 +88,7 @@ interface TicketDetailViewProps {
 }
 
 const metaItems = [
-  { icon: FlagUk,       label: "Origin",                  value: "UK",              iconColor: undefined },
+  { icon: Flag,         label: "Origin",                  value: "UK",              iconColor: undefined },
   { icon: RefreshCw,    label: "Defer/Review",            value: "1",               iconColor: undefined },
   { icon: MessageSquare,label: "Responded",               value: "1",               iconColor: undefined },
   { icon: BarChart2,    label: "Level",                   value: "L1 - Basic",      iconColor: undefined },
