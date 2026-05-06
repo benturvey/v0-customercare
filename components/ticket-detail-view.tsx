@@ -134,6 +134,9 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [reviewSendEmail, setReviewSendEmail] = useState(true)
   const [reviewEmailAddresses, setReviewEmailAddresses] = useState("")
 
+  const [internalNotesDialogOpen, setInternalNotesDialogOpen] = useState(false)
+  const [internalNotesComment, setInternalNotesComment] = useState("")
+
   const [mergeDialogOpen, setMergeDialogOpen] = useState(false)
   const [mergeCriteria, setMergeCriteria] = useState<string[]>([])
   const [mergeReason, setMergeReason] = useState("")
@@ -420,7 +423,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 <Link2 className="h-4 w-4" />
                 Merge / Link Tickets
               </Button>
-              <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
+              <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setInternalNotesDialogOpen(true)}>
                 <StickyNote className="h-4 w-4" />
                 Add Internal Notes
               </Button>
@@ -1183,6 +1186,32 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           <DialogFooter>
             <Button variant="outline" onClick={() => setMergeDialogOpen(false)}>Cancel</Button>
             <Button onClick={() => setMergeDialogOpen(false)}>Confirm Merge</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Add Internal Notes Dialog */}
+      <Dialog open={internalNotesDialogOpen} onOpenChange={(open) => { setInternalNotesDialogOpen(open); if (!open) setInternalNotesComment("") }}>
+        <DialogContent className="sm:max-w-lg">
+          <DialogHeader>
+            <DialogTitle>Add Internal Notes</DialogTitle>
+            <DialogDescription>
+              Add internal comments to this ticket. These are not visible to the customer.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-1.5">
+            <Label htmlFor="internal-notes-comment">Internal Comments</Label>
+            <Textarea
+              id="internal-notes-comment"
+              placeholder="Enter internal comments..."
+              rows={6}
+              value={internalNotesComment}
+              onChange={(e) => setInternalNotesComment(e.target.value)}
+            />
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setInternalNotesDialogOpen(false)}>Cancel</Button>
+            <Button onClick={() => setInternalNotesDialogOpen(false)}>Save Note</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
