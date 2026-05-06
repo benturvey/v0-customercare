@@ -143,6 +143,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [mergeSendEmail, setMergeSendEmail] = useState(true)
   const [mergeEmailAddresses, setMergeEmailAddresses] = useState("")
   const [mergeSelectedRows, setMergeSelectedRows] = useState<string[]>([])
+  const [mergeMatchesFound, setMergeMatchesFound] = useState(false)
   const [mergeCriteriaStore, setMergeCriteriaStore] = useState("")
   const [mergeCriteriaPostcode, setMergeCriteriaPostcode] = useState("")
   const [mergeCriteriaDate, setMergeCriteriaDate] = useState("")
@@ -915,7 +916,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
       </Dialog>
 
       {/* Merge / Link Tickets Dialog */}
-      <Dialog open={mergeDialogOpen} onOpenChange={setMergeDialogOpen}>
+      <Dialog open={mergeDialogOpen} onOpenChange={(open) => { setMergeDialogOpen(open); if (!open) setMergeMatchesFound(false) }}>
         <DialogContent className="sm:max-w-3xl">
           <DialogHeader>
             <DialogTitle>Merge / Link Tickets</DialogTitle>
@@ -1009,6 +1010,18 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               )}
             </div>
 
+            {/* Find Matches button */}
+            <div className="flex justify-end">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setMergeMatchesFound(true)}
+              >
+                Find Matches
+              </Button>
+            </div>
+
             {/* Matched tickets table */}
             <div className="space-y-2">
               <Label>Matched Tickets</Label>
@@ -1033,7 +1046,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                     </tr>
                   </thead>
                   <tbody>
-                    {mockMatchedTickets.map((t) => (
+                    {mergeMatchesFound ? mockMatchedTickets.map((t) => (
                       <tr
                         key={t.ticketNo}
                         className={`border-b border-border last:border-b-0 transition-colors cursor-pointer ${
@@ -1062,7 +1075,13 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                         </td>
                         <td className="px-3 py-2.5 text-foreground">{t.category}</td>
                       </tr>
-                    ))}
+                    )) : (
+                      <tr>
+                        <td colSpan={6} className="px-3 py-6 text-center text-sm text-muted-foreground">
+                          Click &quot;Find Matches&quot; to search for related tickets.
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
