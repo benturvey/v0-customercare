@@ -240,7 +240,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           return (
             <div
               key={item.label}
-              className={`flex flex-1 items-center gap-2 px-4 py-3 ${
+              className={`flex items-center gap-2 px-3 py-3 min-w-0 ${
                 index !== metaItems.length - 1 ? "border-r border-border" : ""
               }`}
             >
