@@ -372,9 +372,9 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         {/* Customer Conversation */}
         <div>
           <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Customer Conversation</h2>
-          <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 space-y-3">
+          <div className="space-y-3">
             {/* First message card */}
-            <div className="rounded-lg border border-blue-100 bg-white p-3">
+            <div className="rounded-lg border border-blue-100 bg-blue-50 p-3">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-[#1e3a5f]">CS Team</span>
                 <span className="text-xs text-muted-foreground">06/05/2026 09:49</span>
@@ -404,9 +404,9 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         {/* Team Conversation & Exceptions */}
         <div>
           <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Team Conversation & Exceptions</h2>
-          <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4 space-y-3">
+          <div className="space-y-3">
             {/* First message card */}
-            <div className="rounded-lg border border-yellow-100 bg-white p-3">
+            <div className="rounded-lg border border-yellow-100 bg-yellow-50 p-3">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-[#1e3a5f]">Agent - OZ-USER</span>
                 <span className="text-xs text-muted-foreground">06/05/2026 09:49</span>
