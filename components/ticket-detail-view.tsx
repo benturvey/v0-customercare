@@ -166,13 +166,13 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
     { ticketNo: "#4712301", raisedDate: "04/05/2026 09:15", raisedBy: "CS Team",   status: "Unassigned", category: "WHERE_IS_MY_PARCEL" },
     { ticketNo: "#4718844", raisedDate: "04/05/2026 11:42", raisedBy: "CS Team",   status: "Reviewing",  category: "WHERE_IS_MY_PARCEL" },
     { ticketNo: "#4721009", raisedDate: "05/05/2026 08:30", raisedBy: "Jane Doe",  status: "Deferred",   category: "WHERE_IS_MY_PARCEL" },
-    { ticketNo: "#4724115", raisedDate: "05/05/2026 10:05", raisedBy: "CS Team",   status: "Unassigned", category: "DISPUTED_DELIVERY" },
+    { ticketNo: "#4724115", raisedDate: "05/05/2026 10:05", raisedBy: "CS Team",   status: "Unassigned", category: "WHERE_IS_MY_PARCEL" },
     { ticketNo: "#4726830", raisedDate: "05/05/2026 11:17", raisedBy: "Mark Smith",status: "Reviewing",  category: "WHERE_IS_MY_PARCEL" },
-    { ticketNo: "#4729442", raisedDate: "05/05/2026 13:50", raisedBy: "CS Team",   status: "Deferred",   category: "PARCEL_DAMAGED" },
+    { ticketNo: "#4729442", raisedDate: "05/05/2026 13:50", raisedBy: "CS Team",   status: "Deferred",   category: "WHERE_IS_MY_PARCEL" },
     { ticketNo: "#4731067", raisedDate: "06/05/2026 08:22", raisedBy: "Jane Doe",  status: "Unassigned", category: "WHERE_IS_MY_PARCEL" },
-    { ticketNo: "#4733298", raisedDate: "06/05/2026 09:44", raisedBy: "CS Team",   status: "Reviewing",  category: "RETURN_TO_SENDER" },
+    { ticketNo: "#4733298", raisedDate: "06/05/2026 09:44", raisedBy: "CS Team",   status: "Reviewing",  category: "WHERE_IS_MY_PARCEL" },
     { ticketNo: "#4735814", raisedDate: "06/05/2026 11:30", raisedBy: "Mark Smith",status: "Unassigned", category: "WHERE_IS_MY_PARCEL" },
-    { ticketNo: "#4738521", raisedDate: "06/05/2026 14:12", raisedBy: "CS Team",   status: "Deferred",   category: "CHANGE_ADDRESS" },
+    { ticketNo: "#4738521", raisedDate: "06/05/2026 14:12", raisedBy: "CS Team",   status: "Deferred",   category: "WHERE_IS_MY_PARCEL" },
   ]
 
   const toggleMergeRow = (ticketNo: string) => {
