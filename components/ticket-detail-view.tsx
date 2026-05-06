@@ -373,6 +373,17 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         <div>
           <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Customer Conversation</h2>
           <div className="rounded-lg border border-blue-200 bg-blue-50 p-4">
+            <div className="rounded-lg border border-blue-100 bg-white p-3 mb-3">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-semibold text-[#1e3a5f]">CS Team</span>
+                <span className="text-xs text-muted-foreground">06/05/2026 09:49</span>
+              </div>
+              <p className="text-sm text-foreground">
+                <span className="font-medium">Where is my parcel?</span>
+                <br />
+                <span className="text-muted-foreground">Additional Information:</span> What is happening with the delivery?
+              </p>
+            </div>
             <div className="rounded-lg border border-blue-100 bg-white p-3">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-[#1e3a5f]">CS Team</span>
@@ -391,6 +402,15 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         <div>
           <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Team Conversation & Exceptions</h2>
           <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4">
+            <div className="rounded-lg border border-yellow-100 bg-white p-3 mb-3">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-semibold text-[#1e3a5f]">Agent - OZ-USER</span>
+                <span className="text-xs text-muted-foreground">06/05/2026 09:49</span>
+              </div>
+              <p className="text-sm text-foreground leading-relaxed">
+                Good morning, Evri are still experiencing delays. We apologise for the inconvenience and will continue to monitor. Kind regards -GFS Customer Care
+              </p>
+            </div>
             <div className="rounded-lg border border-yellow-100 bg-white p-3">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-[#1e3a5f]">Agent - OZ-USER</span>
