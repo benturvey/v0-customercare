@@ -137,6 +137,11 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [mergeDialogOpen, setMergeDialogOpen] = useState(false)
   const [mergeCriteria, setMergeCriteria] = useState<string[]>([])
   const [mergeReason, setMergeReason] = useState("")
+  const [mergeUpdateCategory, setMergeUpdateCategory] = useState("")
+  const [mergeCommentToCustomer, setMergeCommentToCustomer] = useState("")
+  const [mergeInternalComments, setMergeInternalComments] = useState("")
+  const [mergeSendEmail, setMergeSendEmail] = useState(true)
+  const [mergeEmailAddresses, setMergeEmailAddresses] = useState("")
 
   const mergeCriteriaOptions = [
     { value: "store",     label: "Store" },
@@ -970,6 +975,81 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                   <SelectItem value="related">Related Tickets — Single Resolution</SelectItem>
                 </SelectContent>
               </Select>
+            </div>
+
+            {/* Update Category */}
+            <div className="space-y-1.5">
+              <Label htmlFor="merge-update-category">Update Category</Label>
+              <Select value={mergeUpdateCategory} onValueChange={setMergeUpdateCategory}>
+                <SelectTrigger id="merge-update-category">
+                  <SelectValue placeholder="Select a category..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="address-query">GFS Investigation: Address Query</SelectItem>
+                  <SelectItem value="awaiting-information">GFS Investigation: Awaiting information from</SelectItem>
+                  <SelectItem value="customs">GFS Investigation: Customs require further information</SelectItem>
+                  <SelectItem value="eta-requested">GFS Investigation: ETA requested from carrier. Awaiting feedback</SelectItem>
+                  <SelectItem value="no-scan">GFS Investigation: No scan data, please confirm if label used</SelectItem>
+                  <SelectItem value="parcel-damaged">GFS Investigation: Parcel damaged</SelectItem>
+                  <SelectItem value="parcel-stolen">GFS Investigation: Parcel stolen</SelectItem>
+                  <SelectItem value="claim">Sender to raise claim within carrier set timelimit</SelectItem>
+                  <SelectItem value="part-delivery">GFS Investigation: Part delivery. Outstanding items due for delivery</SelectItem>
+                  <SelectItem value="packaging-description">GFS Investigation: Please supply a description of the packaging, contents and value</SelectItem>
+                  <SelectItem value="contact-number">GFS Investigation: Please supply consignee contact number</SelectItem>
+                  <SelectItem value="redelivery">GFS Investigation: Redelivery requested</SelectItem>
+                  <SelectItem value="searches-actioned">GFS Investigation: Searches being actioned. Awaiting carrier feedback</SelectItem>
+                  <SelectItem value="awaiting-carrier">GFS Investigation: Awaiting carrier feedback</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Comment to Customer */}
+            <div className="space-y-1.5">
+              <Label htmlFor="merge-customer-comment">Comment to Customer</Label>
+              <Textarea
+                id="merge-customer-comment"
+                placeholder="Enter a comment to send to the customer..."
+                rows={3}
+                value={mergeCommentToCustomer}
+                onChange={(e) => setMergeCommentToCustomer(e.target.value)}
+              />
+            </div>
+
+            {/* Internal Comments */}
+            <div className="space-y-1.5">
+              <Label htmlFor="merge-internal-comments">Internal Comments</Label>
+              <Textarea
+                id="merge-internal-comments"
+                placeholder="Enter internal comments (not visible to customer)..."
+                rows={3}
+                value={mergeInternalComments}
+                onChange={(e) => setMergeInternalComments(e.target.value)}
+              />
+            </div>
+
+            {/* Send Email checkbox */}
+            <div className="flex items-center gap-2">
+              <Checkbox
+                id="merge-send-email"
+                checked={mergeSendEmail}
+                onCheckedChange={(checked) => setMergeSendEmail(checked === true)}
+              />
+              <Label htmlFor="merge-send-email" className="cursor-pointer">
+                Must email be sent to customer?
+              </Label>
+            </div>
+
+            {/* Email addresses */}
+            <div className="space-y-1.5">
+              <Label htmlFor="merge-email">Email Address</Label>
+              <Input
+                id="merge-email"
+                type="text"
+                placeholder="Enter one or more email addresses, separated by commas..."
+                value={mergeEmailAddresses}
+                onChange={(e) => setMergeEmailAddresses(e.target.value)}
+              />
+              <p className="text-xs text-muted-foreground">Separate multiple addresses with commas.</p>
             </div>
           </div>
 
