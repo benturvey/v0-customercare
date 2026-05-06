@@ -144,17 +144,6 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [mergeEmailAddresses, setMergeEmailAddresses] = useState("")
   const [mergeSelectedRows, setMergeSelectedRows] = useState<string[]>([])
 
-  const toggleMergeRow = (ticketNo: string) => {
-    setMergeSelectedRows((prev) =>
-      prev.includes(ticketNo) ? prev.filter((t) => t !== ticketNo) : [...prev, ticketNo]
-    )
-  }
-  const allMergeRowsSelected = mergeSelectedRows.length === mockMatchedTickets.length && mockMatchedTickets.length > 0
-  const someMergeRowsSelected = mergeSelectedRows.length > 0 && !allMergeRowsSelected
-  const toggleAllMergeRows = () => {
-    setMergeSelectedRows(allMergeRowsSelected ? [] : mockMatchedTickets.map((t) => t.ticketNo))
-  }
-
   const mergeCriteriaOptions = [
     { value: "store",     label: "Store" },
     { value: "postcode",  label: "Postcode" },
@@ -173,6 +162,17 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
     { ticketNo: "#4718844", raisedDate: "04/05/2026 11:42", raisedBy: "CS Team",  status: "Reviewing",  category: "WHERE_IS_MY_PARCEL" },
     { ticketNo: "#4721009", raisedDate: "05/05/2026 08:30", raisedBy: "Jane Doe", status: "Deferred",   category: "WHERE_IS_MY_PARCEL" },
   ]
+
+  const toggleMergeRow = (ticketNo: string) => {
+    setMergeSelectedRows((prev) =>
+      prev.includes(ticketNo) ? prev.filter((t) => t !== ticketNo) : [...prev, ticketNo]
+    )
+  }
+  const allMergeRowsSelected = mergeSelectedRows.length === mockMatchedTickets.length && mockMatchedTickets.length > 0
+  const someMergeRowsSelected = mergeSelectedRows.length > 0 && !allMergeRowsSelected
+  const toggleAllMergeRows = () => {
+    setMergeSelectedRows(allMergeRowsSelected ? [] : mockMatchedTickets.map((t) => t.ticketNo))
+  }
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
