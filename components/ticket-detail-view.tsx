@@ -361,7 +361,33 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         )}
 
         {trackingView === "timeline" && (
-          <p className="text-sm text-muted-foreground italic">Timeline view coming soon.</p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border bg-muted/40">
+                  <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider whitespace-nowrap">Parcel No</th>
+                  <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider whitespace-nowrap">Consignment No</th>
+                  <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider whitespace-nowrap">Scan Date</th>
+                  <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider whitespace-nowrap">Scan Text</th>
+                  <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider whitespace-nowrap">Scan Location</th>
+                  <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider whitespace-nowrap">Insert Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-border last:border-b-0 hover:bg-muted/20 transition-colors">
+                  <td className="px-3 py-3 text-foreground font-mono text-xs">T06XUA0000734531</td>
+                  <td className="px-3 py-3 text-foreground font-mono text-xs">T06XUA0000734531</td>
+                  <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">04/05/2026 14:03</td>
+                  <td className="px-3 py-3 text-xs text-foreground max-w-sm">
+                    <div>WE HAVEN&apos;T BEEN ABLE TO DELIVER TO THE PARCELSHOP TODAY. WE&apos;LL RE-ATTEMPT ON THE NEXT WORKING DAY</div>
+                    <div className="text-blue-600 font-medium mt-1">UNABLE TO DELIVER; WILL RE-SCHEDULED DELIVERY</div>
+                  </td>
+                  <td className="px-3 py-3 text-sm text-muted-foreground">—</td>
+                  <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">04/05/2026 15:37</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     </div>
