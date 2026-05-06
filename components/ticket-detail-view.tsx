@@ -42,6 +42,9 @@ import {
   X,
   Image as ImageIcon,
   FileCheck2,
+  ToggleLeft,
+  Workflow,
+  CalendarClock,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -89,6 +92,9 @@ interface TicketDetailViewProps {
 
 const metaItems = [
   { icon: Globe,        label: "Origin",                  value: "UK",              iconColor: undefined },
+  { icon: ToggleLeft,   label: "State",                   value: "OPEN",            iconColor: undefined },
+  { icon: Workflow,     label: "Lifecycle",               value: "Reviewing",       iconColor: undefined },
+  { icon: CalendarClock,label: "Next Review",             value: (() => { const d = new Date(); d.setDate(d.getDate() + 1); return `${d.toLocaleDateString("en-GB")} 10:00`; })(), iconColor: undefined },
   { icon: RefreshCw,    label: "Defer/Review",            value: "1",               iconColor: undefined },
   { icon: MessageSquare,label: "Responded",               value: "1",               iconColor: undefined },
   { icon: BarChart2,    label: "Level",                   value: "L1 - Basic",      iconColor: undefined },
@@ -133,6 +139,16 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [reviewInternalComments, setReviewInternalComments] = useState("")
   const [reviewSendEmail, setReviewSendEmail] = useState(true)
   const [reviewEmailAddresses, setReviewEmailAddresses] = useState("")
+
+  const [internalNotesDialogOpen, setInternalNotesDialogOpen] = useState(false)
+  const [internalNotesComment, setInternalNotesComment] = useState("")
+
+  const [closeResolvedDialogOpen, setCloseResolvedDialogOpen] = useState(false)
+  const [closeResolvedCategory, setCloseResolvedCategory] = useState("")
+  const [closeResolvedCommentToCustomer, setCloseResolvedCommentToCustomer] = useState("")
+  const [closeResolvedInternalComments, setCloseResolvedInternalComments] = useState("")
+  const [closeResolvedSendEmail, setCloseResolvedSendEmail] = useState(true)
+  const [closeResolvedEmailAddresses, setCloseResolvedEmailAddresses] = useState("")
 
   const [mergeDialogOpen, setMergeDialogOpen] = useState(false)
   const [mergeCriteria, setMergeCriteria] = useState<string[]>([])
@@ -224,7 +240,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           return (
             <div
               key={item.label}
-              className={`flex flex-1 items-center gap-2 px-4 py-3 ${
+              className={`flex items-center gap-2 px-3 py-3 min-w-0 ${
                 index !== metaItems.length - 1 ? "border-r border-border" : ""
               }`}
             >
@@ -356,13 +372,27 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         {/* Customer Conversation */}
         <div>
           <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Customer Conversation</h2>
-          <div className="rounded-lg border border-blue-200 bg-blue-50 p-4">
-            <div className="rounded-lg border border-blue-100 bg-white p-3">
+          <div className="space-y-3">
+            {/* First message card */}
+            <div className="rounded-lg border border-blue-100 bg-blue-50 p-3">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-semibold text-[#1e3a5f]">CS Team</span>
+                <span className="text-xs text-muted-foreground">06/05/2026 09:49</span>
+              </div>
+              <p className="text-sm text-foreground leading-relaxed">
+                <span className="font-medium">Where is my parcel?</span>
+                <br />
+                <span className="text-muted-foreground">Additional Information:</span> What is happening with the delivery?
+              </p>
+            </div>
+
+            {/* Second message card */}
+            <div className="rounded-lg border border-blue-100 bg-blue-50 p-3">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-[#1e3a5f]">CS Team</span>
                 <span className="text-xs text-muted-foreground">05/05/2026 15:49</span>
               </div>
-              <p className="text-sm text-foreground">
+              <p className="text-sm text-foreground leading-relaxed">
                 <span className="font-medium">Where is my parcel?</span>
                 <br />
                 <span className="text-muted-foreground">Additional Information:</span> Parcel unable to be delivered to parcel shop and now shows delayed. Please could we have further information regarding this delay as customer is very unhappy and unsure why delivery failed
@@ -374,8 +404,20 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         {/* Team Conversation & Exceptions */}
         <div>
           <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Team Conversation & Exceptions</h2>
-          <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4">
-            <div className="rounded-lg border border-yellow-100 bg-white p-3">
+          <div className="space-y-3">
+            {/* First message card */}
+            <div className="rounded-lg border border-yellow-100 bg-yellow-50 p-3">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-semibold text-[#1e3a5f]">Agent - OZ-USER</span>
+                <span className="text-xs text-muted-foreground">06/05/2026 09:49</span>
+              </div>
+              <p className="text-sm text-foreground leading-relaxed">
+                Good morning, Evri are still experiencing delays. We apologise for the inconvenience and will continue to monitor. Kind regards -GFS Customer Care
+              </p>
+            </div>
+
+            {/* Second message card */}
+            <div className="rounded-lg border border-yellow-100 bg-yellow-50 p-3">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-[#1e3a5f]">Agent - OZ-USER</span>
                 <span className="text-xs text-muted-foreground">05/05/2026 15:49</span>
@@ -420,11 +462,11 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 <Link2 className="h-4 w-4" />
                 Merge / Link Tickets
               </Button>
-              <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
+              <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setInternalNotesDialogOpen(true)}>
                 <StickyNote className="h-4 w-4" />
                 Add Internal Notes
               </Button>
-              <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
+              <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setCloseResolvedDialogOpen(true)}>
                 <CheckCircle2 className="h-4 w-4" />
                 Close as Resolved
               </Button>
@@ -1183,6 +1225,126 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           <DialogFooter>
             <Button variant="outline" onClick={() => setMergeDialogOpen(false)}>Cancel</Button>
             <Button onClick={() => setMergeDialogOpen(false)}>Confirm Merge</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Close as Resolved Dialog */}
+      <Dialog open={closeResolvedDialogOpen} onOpenChange={setCloseResolvedDialogOpen}>
+        <DialogContent className="sm:max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>Close as Resolved</DialogTitle>
+            <DialogDescription>
+              Mark this ticket as resolved and optionally notify the customer.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-4">
+            {/* Resolution Category */}
+            <div className="space-y-1.5">
+              <Label htmlFor="close-resolved-category">Resolution Category</Label>
+              <Select value={closeResolvedCategory} onValueChange={setCloseResolvedCategory}>
+                <SelectTrigger id="close-resolved-category">
+                  <SelectValue placeholder="Select a category..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="address-query">GFS Investigation: Address Query</SelectItem>
+                  <SelectItem value="awaiting-information">GFS Investigation: Awaiting information from</SelectItem>
+                  <SelectItem value="customs">GFS Investigation: Customs require further information</SelectItem>
+                  <SelectItem value="eta-requested">GFS Investigation: ETA requested from carrier. Awaiting feedback</SelectItem>
+                  <SelectItem value="no-scan">GFS Investigation: No scan data, please confirm if label used</SelectItem>
+                  <SelectItem value="parcel-damaged">GFS Investigation: Parcel damaged</SelectItem>
+                  <SelectItem value="parcel-stolen">GFS Investigation: Parcel stolen</SelectItem>
+                  <SelectItem value="claim">Sender to raise claim within carrier set timelimit</SelectItem>
+                  <SelectItem value="part-delivery">GFS Investigation: Part delivery. Outstanding items due for delivery</SelectItem>
+                  <SelectItem value="packaging-description">GFS Investigation: Please supply a description of the packaging, contents and value</SelectItem>
+                  <SelectItem value="contact-number">GFS Investigation: Please supply consignee contact number</SelectItem>
+                  <SelectItem value="redelivery">GFS Investigation: Redelivery requested</SelectItem>
+                  <SelectItem value="searches-actioned">GFS Investigation: Searches being actioned. Awaiting carrier feedback</SelectItem>
+                  <SelectItem value="awaiting-carrier">GFS Investigation: Awaiting carrier feedback</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Comment to Customer */}
+            <div className="space-y-1.5">
+              <Label htmlFor="close-resolved-customer-comment">Comment to Customer</Label>
+              <Textarea
+                id="close-resolved-customer-comment"
+                placeholder="Enter a comment to send to the customer..."
+                rows={3}
+                value={closeResolvedCommentToCustomer}
+                onChange={(e) => setCloseResolvedCommentToCustomer(e.target.value)}
+              />
+            </div>
+
+            {/* Internal Comments */}
+            <div className="space-y-1.5">
+              <Label htmlFor="close-resolved-internal-comments">Internal Comments</Label>
+              <Textarea
+                id="close-resolved-internal-comments"
+                placeholder="Enter internal comments (not visible to customer)..."
+                rows={3}
+                value={closeResolvedInternalComments}
+                onChange={(e) => setCloseResolvedInternalComments(e.target.value)}
+              />
+            </div>
+
+            {/* Send Email checkbox */}
+            <div className="flex items-center gap-2">
+              <Checkbox
+                id="close-resolved-send-email"
+                checked={closeResolvedSendEmail}
+                onCheckedChange={(checked) => setCloseResolvedSendEmail(checked === true)}
+              />
+              <Label htmlFor="close-resolved-send-email" className="cursor-pointer">
+                Must email be sent to customer?
+              </Label>
+            </div>
+
+            {/* Email addresses */}
+            <div className="space-y-1.5">
+              <Label htmlFor="close-resolved-email">Email Address</Label>
+              <Input
+                id="close-resolved-email"
+                type="text"
+                placeholder="Enter one or more email addresses, separated by commas..."
+                value={closeResolvedEmailAddresses}
+                onChange={(e) => setCloseResolvedEmailAddresses(e.target.value)}
+              />
+              <p className="text-xs text-muted-foreground">Separate multiple addresses with commas.</p>
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setCloseResolvedDialogOpen(false)}>Cancel</Button>
+            <Button onClick={() => setCloseResolvedDialogOpen(false)}>Resolve Ticket</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Add Internal Notes Dialog */}
+      <Dialog open={internalNotesDialogOpen} onOpenChange={(open) => { setInternalNotesDialogOpen(open); if (!open) setInternalNotesComment("") }}>
+        <DialogContent className="sm:max-w-lg">
+          <DialogHeader>
+            <DialogTitle>Add Internal Notes</DialogTitle>
+            <DialogDescription>
+              Add internal comments to this ticket. These are not visible to the customer.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-1.5">
+            <Label htmlFor="internal-notes-comment">Internal Comments</Label>
+            <Textarea
+              id="internal-notes-comment"
+              placeholder="Enter internal comments..."
+              rows={6}
+              value={internalNotesComment}
+              onChange={(e) => setInternalNotesComment(e.target.value)}
+            />
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setInternalNotesDialogOpen(false)}>Cancel</Button>
+            <Button onClick={() => setInternalNotesDialogOpen(false)}>Save Note</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
