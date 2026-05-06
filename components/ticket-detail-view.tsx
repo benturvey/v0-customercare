@@ -143,11 +143,15 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [mergeSendEmail, setMergeSendEmail] = useState(true)
   const [mergeEmailAddresses, setMergeEmailAddresses] = useState("")
   const [mergeSelectedRows, setMergeSelectedRows] = useState<string[]>([])
+  const [mergeCriteriaStore, setMergeCriteriaStore] = useState("")
+  const [mergeCriteriaPostcode, setMergeCriteriaPostcode] = useState("")
+  const [mergeCriteriaDate, setMergeCriteriaDate] = useState("")
+  const [mergeCriteriaCategory, setMergeCriteriaCategory] = useState("")
 
   const mergeCriteriaOptions = [
     { value: "store",     label: "Store" },
     { value: "postcode",  label: "Postcode" },
-    { value: "day",       label: "Day" },
+    { value: "date",      label: "Date" },
     { value: "category",  label: "Category" },
   ]
 
@@ -915,7 +919,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
 
           <div className="space-y-5">
             {/* Criteria multi-select */}
-            <div className="space-y-2">
+            <div className="space-y-3">
               <Label>Criteria to Match</Label>
               <div className="flex flex-wrap gap-2">
                 {mergeCriteriaOptions.map((opt) => (
@@ -933,6 +937,71 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                   </button>
                 ))}
               </div>
+
+              {/* Contextual inputs for selected criteria */}
+              {mergeCriteria.length > 0 && (
+                <div className="grid grid-cols-2 gap-3 pt-1">
+                  {mergeCriteria.includes("store") && (
+                    <div className="space-y-1.5">
+                      <Label htmlFor="criteria-store">Store</Label>
+                      <Input
+                        id="criteria-store"
+                        placeholder="Enter store name or ID..."
+                        value={mergeCriteriaStore}
+                        onChange={(e) => setMergeCriteriaStore(e.target.value)}
+                      />
+                    </div>
+                  )}
+                  {mergeCriteria.includes("postcode") && (
+                    <div className="space-y-1.5">
+                      <Label htmlFor="criteria-postcode">Postcode</Label>
+                      <Input
+                        id="criteria-postcode"
+                        placeholder="Enter postcode..."
+                        value={mergeCriteriaPostcode}
+                        onChange={(e) => setMergeCriteriaPostcode(e.target.value)}
+                      />
+                    </div>
+                  )}
+                  {mergeCriteria.includes("date") && (
+                    <div className="space-y-1.5">
+                      <Label htmlFor="criteria-date">Date</Label>
+                      <Input
+                        id="criteria-date"
+                        type="date"
+                        value={mergeCriteriaDate}
+                        onChange={(e) => setMergeCriteriaDate(e.target.value)}
+                      />
+                    </div>
+                  )}
+                  {mergeCriteria.includes("category") && (
+                    <div className="space-y-1.5">
+                      <Label htmlFor="criteria-category">Category</Label>
+                      <Select value={mergeCriteriaCategory} onValueChange={setMergeCriteriaCategory}>
+                        <SelectTrigger id="criteria-category">
+                          <SelectValue placeholder="Select a category..." />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="address-query">GFS Investigation: Address Query</SelectItem>
+                          <SelectItem value="awaiting-information">GFS Investigation: Awaiting information from</SelectItem>
+                          <SelectItem value="customs">GFS Investigation: Customs require further information</SelectItem>
+                          <SelectItem value="eta-requested">GFS Investigation: ETA requested from carrier. Awaiting feedback</SelectItem>
+                          <SelectItem value="no-scan">GFS Investigation: No scan data, please confirm if label used</SelectItem>
+                          <SelectItem value="parcel-damaged">GFS Investigation: Parcel damaged</SelectItem>
+                          <SelectItem value="parcel-stolen">GFS Investigation: Parcel stolen</SelectItem>
+                          <SelectItem value="claim">Sender to raise claim within carrier set timelimit</SelectItem>
+                          <SelectItem value="part-delivery">GFS Investigation: Part delivery. Outstanding items due for delivery</SelectItem>
+                          <SelectItem value="packaging-description">GFS Investigation: Please supply a description of the packaging, contents and value</SelectItem>
+                          <SelectItem value="contact-number">GFS Investigation: Please supply consignee contact number</SelectItem>
+                          <SelectItem value="redelivery">GFS Investigation: Redelivery requested</SelectItem>
+                          <SelectItem value="searches-actioned">GFS Investigation: Searches being actioned. Awaiting carrier feedback</SelectItem>
+                          <SelectItem value="awaiting-carrier">GFS Investigation: Awaiting carrier feedback</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Matched tickets table */}
