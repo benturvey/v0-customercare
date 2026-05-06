@@ -121,16 +121,6 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [deferSendEmail, setDeferSendEmail] = useState(true)
   const [deferEmailAddresses, setDeferEmailAddresses] = useState("")
 
-  const [reviewDialogOpen, setReviewDialogOpen] = useState(false)
-  const [reviewDate, setReviewDate] = useState(getTomorrowDate)
-  const [reviewTime, setReviewTime] = useState(getCurrentTime)
-  const [reviewExpectedStatus, setReviewExpectedStatus] = useState("")
-  const [reviewReason, setReviewReason] = useState("")
-  const [reviewCommentToCustomer, setReviewCommentToCustomer] = useState("")
-  const [reviewInternalComments, setReviewInternalComments] = useState("")
-  const [reviewSendEmail, setReviewSendEmail] = useState(true)
-  const [reviewEmailAddresses, setReviewEmailAddresses] = useState("")
-
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
     if (files) {
