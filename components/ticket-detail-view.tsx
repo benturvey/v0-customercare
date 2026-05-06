@@ -142,6 +142,18 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [mergeInternalComments, setMergeInternalComments] = useState("")
   const [mergeSendEmail, setMergeSendEmail] = useState(true)
   const [mergeEmailAddresses, setMergeEmailAddresses] = useState("")
+  const [mergeSelectedRows, setMergeSelectedRows] = useState<string[]>([])
+
+  const toggleMergeRow = (ticketNo: string) => {
+    setMergeSelectedRows((prev) =>
+      prev.includes(ticketNo) ? prev.filter((t) => t !== ticketNo) : [...prev, ticketNo]
+    )
+  }
+  const allMergeRowsSelected = mergeSelectedRows.length === mockMatchedTickets.length && mockMatchedTickets.length > 0
+  const someMergeRowsSelected = mergeSelectedRows.length > 0 && !allMergeRowsSelected
+  const toggleAllMergeRows = () => {
+    setMergeSelectedRows(allMergeRowsSelected ? [] : mockMatchedTickets.map((t) => t.ticketNo))
+  }
 
   const mergeCriteriaOptions = [
     { value: "store",     label: "Store" },
@@ -930,6 +942,15 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="bg-muted/40 border-b border-border">
+                      <th className="px-3 py-2.5 w-8">
+                        <Checkbox
+                          checked={allMergeRowsSelected}
+                          data-indeterminate={someMergeRowsSelected}
+                          onCheckedChange={toggleAllMergeRows}
+                          aria-label="Select all tickets"
+                          className={someMergeRowsSelected ? "opacity-70" : ""}
+                        />
+                      </th>
                       <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider">Ticket No</th>
                       <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider">Raised Date</th>
                       <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider">Raised By</th>
@@ -939,7 +960,20 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                   </thead>
                   <tbody>
                     {mockMatchedTickets.map((t) => (
-                      <tr key={t.ticketNo} className="border-b border-border last:border-b-0 hover:bg-muted/20 transition-colors">
+                      <tr
+                        key={t.ticketNo}
+                        className={`border-b border-border last:border-b-0 transition-colors cursor-pointer ${
+                          mergeSelectedRows.includes(t.ticketNo) ? "bg-blue-50" : "hover:bg-muted/20"
+                        }`}
+                        onClick={() => toggleMergeRow(t.ticketNo)}
+                      >
+                        <td className="px-3 py-2.5" onClick={(e) => e.stopPropagation()}>
+                          <Checkbox
+                            checked={mergeSelectedRows.includes(t.ticketNo)}
+                            onCheckedChange={() => toggleMergeRow(t.ticketNo)}
+                            aria-label={`Select ticket ${t.ticketNo}`}
+                          />
+                        </td>
                         <td className="px-3 py-2.5 font-medium text-foreground">{t.ticketNo}</td>
                         <td className="px-3 py-2.5 text-foreground whitespace-nowrap">{t.raisedDate}</td>
                         <td className="px-3 py-2.5 text-foreground">{t.raisedBy}</td>
