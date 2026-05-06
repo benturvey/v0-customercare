@@ -88,7 +88,7 @@ interface TicketDetailViewProps {
 }
 
 const metaItems = [
-  { icon: Flag,         label: "Origin",                  value: "UK",              iconColor: undefined },
+  { icon: Globe,        label: "Origin",                  value: "UK",              iconColor: undefined },
   { icon: RefreshCw,    label: "Defer/Review",            value: "1",               iconColor: undefined },
   { icon: MessageSquare,label: "Responded",               value: "1",               iconColor: undefined },
   { icon: BarChart2,    label: "Level",                   value: "L1 - Basic",      iconColor: undefined },
