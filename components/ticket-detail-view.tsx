@@ -38,8 +38,25 @@ import {
   GitCommitHorizontal,
   ScanLine,
   Paperclip,
+  Upload,
+  X,
+  Image as ImageIcon,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog"
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet"
 
 type Ticket = {
   id: string
@@ -70,6 +87,24 @@ const metaItems = [
 
 export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [trackingView, setTrackingView] = useState<"list" | "timeline">("list")
+  const [attachDialogOpen, setAttachDialogOpen] = useState(false)
+  const [attachments, setAttachments] = useState<{ name: string; url: string }[]>([])
+  const [attachmentsSheetOpen, setAttachmentsSheetOpen] = useState(false)
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
+    if (files) {
+      const newAttachments = Array.from(files).map((file) => ({
+        name: file.name,
+        url: URL.createObjectURL(file),
+      }))
+      setAttachments((prev) => [...prev, ...newAttachments])
+    }
+  }
+
+  const removeAttachment = (index: number) => {
+    setAttachments((prev) => prev.filter((_, i) => i !== index))
+  }
 
   return (
     <div className="container mx-auto px-4 py-6">
@@ -204,7 +239,20 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               <DetailRow icon={FileText}  label="Additional Info" value="Parcel unable to be delivered to parcel shop and now shows delayed. Please could we have further information regarding this delay as customer is very unhappy and unsure why delivery failed" />
             </div>
           </div>
-          <DetailRow icon={User}      label="Contact"   value="CS Team (support@lisaeldridge.com)" />
+          <div>
+            <DetailRow icon={User}      label="Contact"   value="CS Team (support@lisaeldridge.com)" />
+            {attachments.length > 0 && (
+              <div className="mt-3">
+                <button
+                  onClick={() => setAttachmentsSheetOpen(true)}
+                  className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800 font-medium transition-colors"
+                >
+                  <Paperclip className="h-4 w-4" />
+                  View Attachments ({attachments.length})
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -249,7 +297,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Actions</h2>
           <div className="rounded-lg border border-border bg-card p-4">
             <div className="flex flex-col gap-2">
-              <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
+              <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setAttachDialogOpen(true)}>
                 <Paperclip className="h-4 w-4" />
                 Attach Items
               </Button>
@@ -516,6 +564,103 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           </div>
         )}
       </div>
+
+      {/* Attach Items Dialog */}
+      <Dialog open={attachDialogOpen} onOpenChange={setAttachDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Attach Items</DialogTitle>
+            <DialogDescription>
+              Upload files to attach to this ticket.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="flex items-center justify-center w-full">
+              <label
+                htmlFor="file-upload"
+                className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors"
+              >
+                <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                  <Upload className="w-8 h-8 mb-2 text-gray-500" />
+                  <p className="mb-2 text-sm text-gray-500">
+                    <span className="font-semibold">Click to upload</span> or drag and drop
+                  </p>
+                  <p className="text-xs text-gray-500">PNG, JPG, PDF up to 10MB</p>
+                </div>
+                <input
+                  id="file-upload"
+                  type="file"
+                  className="hidden"
+                  multiple
+                  accept="image/*,.pdf"
+                  onChange={handleFileUpload}
+                />
+              </label>
+            </div>
+            {attachments.length > 0 && (
+              <div className="space-y-2">
+                <p className="text-sm font-medium text-foreground">Uploaded files:</p>
+                <div className="max-h-40 overflow-y-auto space-y-2">
+                  {attachments.map((file, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center justify-between px-3 py-2 bg-muted/50 rounded-md"
+                    >
+                      <div className="flex items-center gap-2 min-w-0">
+                        <ImageIcon className="h-4 w-4 shrink-0 text-muted-foreground" />
+                        <span className="text-sm truncate">{file.name}</span>
+                      </div>
+                      <button
+                        onClick={() => removeAttachment(index)}
+                        className="p-1 hover:bg-muted rounded transition-colors"
+                      >
+                        <X className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setAttachDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={() => setAttachDialogOpen(false)}>
+              Done
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Attachments Sheet */}
+      <Sheet open={attachmentsSheetOpen} onOpenChange={setAttachmentsSheetOpen}>
+        <SheetContent side="right" className="sm:max-w-lg">
+          <SheetHeader>
+            <SheetTitle>Attachments ({attachments.length})</SheetTitle>
+          </SheetHeader>
+          <div className="p-4 space-y-4 overflow-y-auto flex-1">
+            {attachments.length === 0 ? (
+              <p className="text-sm text-muted-foreground text-center py-8">No attachments yet.</p>
+            ) : (
+              <div className="grid grid-cols-2 gap-3">
+                {attachments.map((file, index) => (
+                  <div key={index} className="relative group">
+                    <div className="aspect-square rounded-lg border border-border overflow-hidden bg-muted">
+                      <img
+                        src={file.url}
+                        alt={file.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <p className="mt-1 text-xs text-muted-foreground truncate">{file.name}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </SheetContent>
+      </Sheet>
     </div>
   )
 }
