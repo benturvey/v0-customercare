@@ -396,6 +396,17 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                   <td className="px-3 py-3 text-sm text-muted-foreground">—</td>
                   <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">07/05/2026 09:39</td>
                 </tr>
+                <tr className="border-b border-border last:border-b-0 hover:bg-muted/20 transition-colors">
+                  <td className="px-3 py-3 text-foreground font-mono text-xs">T06XUA0000734531</td>
+                  <td className="px-3 py-3 text-foreground font-mono text-xs">T06XUA0000734531</td>
+                  <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">02/05/2026 13:34</td>
+                  <td className="px-3 py-3 text-xs text-foreground max-w-sm">
+                    <div>WE HAVEN&apos;T BEEN ABLE TO DELIVER TO THE PARCELSHOP TODAY. WE&apos;LL RE-ATTEMPT ON THE NEXT WORKING DAY</div>
+                    <div className="text-blue-600 font-medium mt-1">UNABLE TO DELIVER; WILL RE-SCHEDULED DELIVERY</div>
+                  </td>
+                  <td className="px-3 py-3 text-sm text-muted-foreground">—</td>
+                  <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">02/05/2026 13:54</td>
+                </tr>
               </tbody>
             </table>
           </div>
