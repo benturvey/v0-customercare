@@ -418,6 +418,61 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                   <td className="px-3 py-3 text-sm text-muted-foreground">—</td>
                   <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">02/05/2026 11:54</td>
                 </tr>
+                <tr className="border-b border-border last:border-b-0 hover:bg-muted/20 transition-colors">
+                  <td className="px-3 py-3 text-foreground font-mono text-xs">T06XUA0000734531</td>
+                  <td className="px-3 py-3 text-foreground font-mono text-xs">T06XUA0000734531</td>
+                  <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">02/05/2026 08:53</td>
+                  <td className="px-3 py-3 text-xs text-foreground max-w-sm">
+                    <div>THE PARCEL IS AT THE LOCAL DEPOT AND IS BEING SORTED FOR DELIVERY WITHIN 24 HOURS</div>
+                    <div className="text-blue-600 font-medium mt-1">CONFIRMED AT DEPOT. PARCEL GOING OUT FOR DELIVERY</div>
+                  </td>
+                  <td className="px-3 py-3 text-sm text-muted-foreground">—</td>
+                  <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">02/05/2026 09:55</td>
+                </tr>
+                <tr className="border-b border-border last:border-b-0 hover:bg-muted/20 transition-colors">
+                  <td className="px-3 py-3 text-foreground font-mono text-xs">T06XUA0000734531</td>
+                  <td className="px-3 py-3 text-foreground font-mono text-xs">T06XUA0000734531</td>
+                  <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">02/05/2026 08:19</td>
+                  <td className="px-3 py-3 text-xs text-foreground max-w-sm">
+                    <div>THIS PARCEL WILL BE DELIVERED TO THE PARCELSHOP OR LOCKER TODAY</div>
+                    <div className="text-blue-600 font-medium mt-1">DELIVERY TO PARCEL SHOP/LOCKER SCHEDULED.</div>
+                  </td>
+                  <td className="px-3 py-3 text-sm text-muted-foreground">—</td>
+                  <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">02/05/2026 09:55</td>
+                </tr>
+                <tr className="border-b border-border last:border-b-0 hover:bg-muted/20 transition-colors">
+                  <td className="px-3 py-3 text-foreground font-mono text-xs">T06XUA0000734531</td>
+                  <td className="px-3 py-3 text-foreground font-mono text-xs">T06XUA0000734531</td>
+                  <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">02/05/2026 09:34</td>
+                  <td className="px-3 py-3 text-xs text-foreground max-w-sm">
+                    <div>MANIFESTED FOR DELIVERY</div>
+                    <div className="text-blue-600 font-medium mt-1">SCHEDULED FOR DELIVERY.</div>
+                  </td>
+                  <td className="px-3 py-3 text-sm text-muted-foreground">—</td>
+                  <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">02/05/2026 09:55</td>
+                </tr>
+                <tr className="border-b border-border last:border-b-0 hover:bg-muted/20 transition-colors">
+                  <td className="px-3 py-3 text-foreground font-mono text-xs">T06XUA0000734531</td>
+                  <td className="px-3 py-3 text-foreground font-mono text-xs">T06XUA0000734531</td>
+                  <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">01/05/2026 16:06</td>
+                  <td className="px-3 py-3 text-xs text-foreground max-w-sm">
+                    <div>THE PARCEL IS AT THE LOCAL DEPOT AND IS BEING SORTED FOR DELIVERY WITHIN 24 HOURS</div>
+                    <div className="text-blue-600 font-medium mt-1">CONFIRMED AT DEPOT. PARCEL GOING OUT FOR DELIVERY.</div>
+                  </td>
+                  <td className="px-3 py-3 text-sm text-muted-foreground">—</td>
+                  <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">01/05/2026 18:00</td>
+                </tr>
+                <tr className="border-b border-border last:border-b-0 hover:bg-muted/20 transition-colors">
+                  <td className="px-3 py-3 text-foreground font-mono text-xs">T06XUA0000734531</td>
+                  <td className="px-3 py-3 text-foreground font-mono text-xs">T06XUA0000734531</td>
+                  <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">01/05/2026 01:38</td>
+                  <td className="px-3 py-3 text-xs text-foreground max-w-sm">
+                    <div>PARCEL PROCESSED AT THE HUB</div>
+                    <div className="text-blue-600 font-medium mt-1">PROCESSED AT HUB.</div>
+                  </td>
+                  <td className="px-3 py-3 text-sm text-muted-foreground">—</td>
+                  <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">01/05/2026 06:03</td>
+                </tr>
               </tbody>
             </table>
           </div>
