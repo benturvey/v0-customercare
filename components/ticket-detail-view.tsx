@@ -381,7 +381,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               <p className="text-sm text-foreground">
                 <span className="font-medium">Where is my parcel?</span>
                 <br />
-                <span className="text-muted-foreground">Additional Information:</span> What is happening with the delivery?
+                <span className="text-muted-foreground">Additional Information:</span> What is happening with the delivery? Why is this taking so long?
               </p>
             </div>
             <div className="rounded-lg border border-blue-100 bg-white p-3">
