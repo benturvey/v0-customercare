@@ -96,7 +96,7 @@ const metaItems = [
   { icon: AlarmClock,   label: "SLA Due",                 value: "11:32 in 2h 15m", iconColor: undefined },
   { icon: Flag,         label: "Priority",                value: "Normal",          iconColor: undefined },
   { icon: Star,         label: "Customer Tier",           value: "Focus Customer",  iconColor: undefined },
-  { icon: FileCheck2,   label: "Descriptions Received",   value: "Received",        iconColor: "text-green-500" },
+  { icon: FileCheck2,   label: "Descriptions",   value: "Received",        iconColor: "text-green-500" },
 ]
 
 export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
