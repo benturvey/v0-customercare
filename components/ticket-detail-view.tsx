@@ -429,39 +429,39 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           <div className="rounded-lg border border-border bg-card p-4">
             <div className="flex flex-col gap-2">
               <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setAttachDialogOpen(true)}>
-                <Paperclip className="h-4 w-4" />
+                <Paperclip className="h-4 w-4" style={{ color: "#009eff" }} />
                 Attach Items
               </Button>
               <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
-                <Reply className="h-4 w-4" />
+                <Reply className="h-4 w-4" style={{ color: "#009eff" }} />
                 Reply to Customer
               </Button>
               <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setDeferDialogOpen(true)}>
-                <PauseCircle className="h-4 w-4" />
+                <PauseCircle className="h-4 w-4" style={{ color: "#009eff" }} />
                 Defer / Awaiting Carrier
               </Button>
               <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setReviewDialogOpen(true)}>
-                <Eye className="h-4 w-4" />
+                <Eye className="h-4 w-4" style={{ color: "#009eff" }} />
                 Review (Conditional)
               </Button>
               <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
-                <ArrowUpCircle className="h-4 w-4" />
+                <ArrowUpCircle className="h-4 w-4" style={{ color: "#009eff" }} />
                 Escalate to L2
               </Button>
               <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
-                <ArrowUpCircle className="h-4 w-4" />
+                <ArrowUpCircle className="h-4 w-4" style={{ color: "#009eff" }} />
                 Escalate to L3
               </Button>
               <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setMergeDialogOpen(true)}>
-                <Link2 className="h-4 w-4" />
+                <Link2 className="h-4 w-4" style={{ color: "#009eff" }} />
                 Merge / Link Tickets
               </Button>
               <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setInternalNotesDialogOpen(true)}>
-                <StickyNote className="h-4 w-4" />
+                <StickyNote className="h-4 w-4" style={{ color: "#009eff" }} />
                 Add Internal Notes
               </Button>
               <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setCloseResolvedDialogOpen(true)}>
-                <CheckCircle2 className="h-4 w-4" />
+                <CheckCircle2 className="h-4 w-4" style={{ color: "#009eff" }} />
                 Close as Resolved
               </Button>
             </div>
