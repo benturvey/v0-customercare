@@ -337,7 +337,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
       {/* Customer Query */}
       <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Customer Query</h2>
       <div className="rounded-lg border border-border bg-card p-4 mb-6">
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid gap-4" style={{ gridTemplateColumns: "0.8fr 1.8fr 1fr" }}>
           <div>
             <DetailRow icon={User}      label="Raised by" value="CS Team" />
             <div className="mt-3">
