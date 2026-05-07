@@ -401,7 +401,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         {/* Team Conversation & Exceptions */}
         <div>
           <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Team Conversation & Exceptions</h2>
-          <div className="rounded-lg border border-yellow-200 p-4" style={{ backgroundColor: "#98d9ff" }}>
+          <div className="rounded-lg border border-yellow-200 p-4" style={{ backgroundColor: "#3bc693" }}>
             <div className="rounded-lg border border-yellow-100 bg-white p-3 mb-3">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-[#1e3a5f]">Agent - OZ-USER</span>
