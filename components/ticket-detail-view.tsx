@@ -254,6 +254,25 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         })}
       </div>
 
+      {/* Customer Query */}
+      <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Customer Query</h2>
+      <div className="rounded-lg border border-border bg-card p-4 mb-6">
+        <div className="grid gap-4" style={{ gridTemplateColumns: "0.8fr 1fr 1fr" }}>
+          <div>
+            <DetailRow icon={User}      label="Raised by" value="CS Team (support@lisaeldridge.com)" />
+            <div className="mt-3">
+              <DetailRow icon={Tag}       label="Category"        value="WHERE_IS_MY_PARCEL" />
+            </div>
+          </div>
+          <div style={{ gridColumn: "span 2" }}>
+            <DetailRow icon={Building2} label="Company"   value="LISA ELDRIDGE" />
+            <div className="mt-3">
+              <DetailRow icon={FileText}  label="Additional Info" value="Parcel unable to be delivered to parcel shop and now shows delayed. Please could we have further information regarding this delay as customer is very unhappy and unsure why delivery failed" />
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Shipment Details Summary */}
       <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Shipment Details Summary</h2>
       <div className="grid gap-4 mb-6" style={{ gridTemplateColumns: "1fr 0.7fr 0.7fr 1.8fr" }}>
@@ -334,26 +353,6 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
 
       </div>
 
-      {/* Customer Query */}
-      <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Customer Query</h2>
-      <div className="rounded-lg border border-border bg-card p-4 mb-6">
-        <div className="grid gap-4" style={{ gridTemplateColumns: "0.8fr 1fr 1fr" }}>
-          <div>
-            <DetailRow icon={User}      label="Raised by" value="CS Team (support@lisaeldridge.com)" />
-            <div className="mt-3">
-              <DetailRow icon={Tag}       label="Category"        value="WHERE_IS_MY_PARCEL" />
-            </div>
-          </div>
-          <div style={{ gridColumn: "span 2" }}>
-            <DetailRow icon={Building2} label="Company"   value="LISA ELDRIDGE" />
-            <div className="mt-3">
-              <DetailRow icon={FileText}  label="Additional Info" value="Parcel unable to be delivered to parcel shop and now shows delayed. Please could we have further information regarding this delay as customer is very unhappy and unsure why delivery failed" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Customer Conversation, Team Conversation & Exceptions, and Actions */}
       <div className="grid grid-cols-3 gap-4 mb-6">
         {/* Customer Conversation */}
         <div>
