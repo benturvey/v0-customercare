@@ -156,6 +156,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [escalateDialogOpen, setEscalateDialogOpen] = useState(false)
   const [escalateLevel, setEscalateLevel] = useState("")
   const [escalatePerson, setEscalatePerson] = useState("")
+  const [escalateReason, setEscalateReason] = useState("")
   const [escalationEntries, setEscalationEntries] = useState<Array<{ agent: string; date: string; text: string }>>([])
 
   const [mergeReason, setMergeReason] = useState("")
@@ -1020,12 +1021,13 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 const newEntry = {
                   agent: "Jacquie Cadger",
                   date: formattedDate,
-                  text: `Escalated to ${escalateLevel || "Management"} as requested by my senior advisor Tracey`
+                  text: `Escalated to ${escalateLevel || "Management"} as requested by my senior advisor Tracey${escalateReason ? `. Reason: ${escalateReason}` : ""}`
                 }
                 setEscalationEntries([newEntry, ...escalationEntries])
                 setEscalateDialogOpen(false)
                 setEscalateLevel("")
                 setEscalatePerson("")
+                setEscalateReason("")
               }}
               style={{ backgroundColor: "#009eff", color: "#fff" }}
             >
@@ -1506,8 +1508,17 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                       </button>
                     </div>
                   ))}
-                </div>
-              </div>
+            <div className="space-y-1.5">
+              <label className="text-sm font-medium text-foreground">Reason for Escalation</label>
+              <textarea
+                value={escalateReason}
+                onChange={(e) => setEscalateReason(e.target.value)}
+                placeholder="Enter reason for escalation..."
+                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 resize-none"
+                rows={4}
+              />
+            </div>
+          </div>
             )}
           </div>
           <DialogFooter>
