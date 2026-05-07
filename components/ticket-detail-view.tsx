@@ -156,6 +156,8 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [escalateDialogOpen, setEscalateDialogOpen] = useState(false)
   const [escalateLevel, setEscalateLevel] = useState("")
   const [escalatePerson, setEscalatePerson] = useState("")
+  const [escalationEntries, setEscalationEntries] = useState<Array<{ agent: string; date: string; text: string }>>([])
+
   const [mergeReason, setMergeReason] = useState("")
   const [mergeUpdateCategory, setMergeUpdateCategory] = useState("")
   const [mergeCommentToCustomer, setMergeCommentToCustomer] = useState("")
@@ -361,6 +363,17 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         <div>
           <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Team Conversation & Exceptions</h2>
           <div className="rounded-lg border border-yellow-200 p-4" style={{ backgroundColor: "#ffbdad" }}>
+            {escalationEntries.map((entry, index) => (
+              <div key={index} className="rounded-lg border border-gray-200 bg-gray-100 p-3 mb-3">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm font-semibold text-[#1e3a5f]">{entry.agent}</span>
+                  <span className="text-xs text-muted-foreground">{entry.date}</span>
+                </div>
+                <p className="text-sm text-foreground leading-relaxed">
+                  {entry.text}
+                </p>
+              </div>
+            ))}
             <div className="rounded-lg border border-yellow-100 bg-white p-3 mb-3">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-[#1e3a5f]">Agent - OZ-USER</span>
@@ -1001,7 +1014,19 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
             <Button variant="outline" onClick={() => setEscalateDialogOpen(false)}>Cancel</Button>
             <Button
               disabled={!escalateLevel && !escalatePerson}
-              onClick={() => setEscalateDialogOpen(false)}
+              onClick={() => {
+                const now = new Date()
+                const formattedDate = now.toLocaleDateString("en-GB") + " " + now.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })
+                const newEntry = {
+                  agent: "Jacquie Cadger",
+                  date: formattedDate,
+                  text: `Escalated to ${escalateLevel || "Management"} as requested by my senior advisor Tracey`
+                }
+                setEscalationEntries([newEntry, ...escalationEntries])
+                setEscalateDialogOpen(false)
+                setEscalateLevel("")
+                setEscalatePerson("")
+              }}
               style={{ backgroundColor: "#009eff", color: "#fff" }}
             >
               Escalate
