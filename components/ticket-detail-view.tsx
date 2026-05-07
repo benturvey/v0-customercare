@@ -1454,7 +1454,7 @@ function DetailRow({
 }) {
   return (
     <div className="flex items-start gap-2">
-      <Icon className="h-4 w-4 shrink-0 text-muted-foreground mt-0.5" />
+      <Icon className="h-4 w-4 shrink-0 mt-0.5" style={{ color: "#009eff" }} />
       <div className="flex flex-col leading-tight min-w-0">
         <span className="text-xs text-muted-foreground">{label}</span>
         <span className="text-sm font-medium text-foreground break-words">{value}</span>
