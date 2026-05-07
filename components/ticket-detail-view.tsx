@@ -405,11 +405,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               </Button>
               <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
                 <ArrowUpCircle className="h-4 w-4" style={{ color: "#009eff" }} />
-                Escalate to L2
-              </Button>
-              <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
-                <ArrowUpCircle className="h-4 w-4" style={{ color: "#009eff" }} />
-                Escalate to L3
+                Escalate
               </Button>
               <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setMergeDialogOpen(true)}>
                 <Link2 className="h-4 w-4" style={{ color: "#009eff" }} />
