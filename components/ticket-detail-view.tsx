@@ -1010,6 +1010,16 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 <option value="manager">Manager - MG-USER</option>
               </select>
             </div>
+            <div className="space-y-1.5">
+              <label className="text-sm font-medium text-foreground">Reason for Escalation</label>
+              <textarea
+                value={escalateReason}
+                onChange={(e) => setEscalateReason(e.target.value)}
+                placeholder="Enter reason for escalation..."
+                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 resize-none"
+                rows={4}
+              />
+            </div>
           </div>
           <DialogFooter className="mt-4">
             <Button variant="outline" onClick={() => setEscalateDialogOpen(false)}>Cancel</Button>
@@ -1508,15 +1518,6 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                       </button>
                     </div>
                   ))}
-            <div className="space-y-1.5">
-              <label className="text-sm font-medium text-foreground">Reason for Escalation</label>
-              <textarea
-                value={escalateReason}
-                onChange={(e) => setEscalateReason(e.target.value)}
-                placeholder="Enter reason for escalation..."
-                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 resize-none"
-                rows={4}
-              />
             </div>
           </div>
           <DialogFooter>
