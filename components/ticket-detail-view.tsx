@@ -158,6 +158,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [escalatePerson, setEscalatePerson] = useState("")
   const [escalateReason, setEscalateReason] = useState("")
   const [escalationEntries, setEscalationEntries] = useState<Array<{ agent: string; date: string; text: string }>>([])
+  const [internalNoteEntries, setInternalNoteEntries] = useState<Array<{ agent: string; date: string; text: string }>>([])
 
   const [replyDialogOpen, setReplyDialogOpen] = useState(false)
   const [replyResponseCategory, setReplyResponseCategory] = useState("")
@@ -372,7 +373,18 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Team Conversation & Exceptions</h2>
           <div className="rounded-lg border border-yellow-200 p-4" style={{ backgroundColor: "#ffbdad" }}>
             {escalationEntries.map((entry, index) => (
-              <div key={index} className="rounded-lg border border-gray-200 bg-gray-100 p-3 mb-3">
+              <div key={`escalation-${index}`} className="rounded-lg border border-gray-200 bg-gray-100 p-3 mb-3">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm font-semibold text-[#1e3a5f]">{entry.agent}</span>
+                  <span className="text-xs text-muted-foreground">{entry.date}</span>
+                </div>
+                <p className="text-sm text-foreground leading-relaxed">
+                  {entry.text}
+                </p>
+              </div>
+            ))}
+            {internalNoteEntries.map((entry, index) => (
+              <div key={`internalnote-${index}`} className="rounded-lg border border-gray-200 bg-gray-100 p-3 mb-3">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm font-semibold text-[#1e3a5f]">{entry.agent}</span>
                   <span className="text-xs text-muted-foreground">{entry.date}</span>
@@ -1563,7 +1575,20 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setInternalNotesDialogOpen(false)}>Cancel</Button>
-            <Button onClick={() => setInternalNotesDialogOpen(false)}>Save Note</Button>
+            <Button onClick={() => {
+              if (internalNotesComment.trim()) {
+                const now = new Date()
+                const formattedDate = now.toLocaleDateString("en-GB") + " " + now.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })
+                const newEntry = {
+                  agent: "Jacquie Cadger",
+                  date: formattedDate,
+                  text: internalNotesComment
+                }
+                setInternalNoteEntries([newEntry, ...internalNoteEntries])
+                setInternalNotesDialogOpen(false)
+                setInternalNotesComment("")
+              }
+            }}>Save Note</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
