@@ -101,7 +101,7 @@ const metaItems = [
   { icon: Clock,        label: "Ticket Age",              value: "42m",             iconColor: undefined },
   { icon: AlarmClock,   label: "SLA Due",                 value: "11:32 in 2h 15m", iconColor: undefined },
   { icon: Flag,         label: "Priority",                value: "Normal",          iconColor: undefined },
-  { icon: Star,         label: "Customer Tier",           value: "Focus Customer",  iconColor: undefined },
+  { icon: Star,         label: "Customer Tier",           value: "Focus Customer",  iconColor: undefined, valueClass: "text-purple-600 font-bold" },
   { icon: FileCheck2,   label: "Descriptions",   value: "Received",        iconColor: "text-green-500" },
 ]
 
@@ -247,7 +247,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               <Icon className={`h-4 w-4 shrink-0 ${item.iconColor ?? "text-[#1e3a5f]"}`} />
               <div className="flex flex-col leading-tight">
                 <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">{item.label}</span>
-                <span className="text-sm font-semibold text-[#1e3a5f] whitespace-nowrap">{item.value}</span>
+                <span className={`text-sm font-semibold text-[#1e3a5f] whitespace-nowrap ${item.valueClass ?? ""}`}>{item.value}</span>
               </div>
             </div>
           )
