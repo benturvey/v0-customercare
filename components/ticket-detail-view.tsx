@@ -303,7 +303,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
             <div className="grid grid-cols-2 gap-2.5">
               <DetailRow icon={Globe}        label="Origin" value={
                 <span className="flex items-center gap-1.5">
-                  <span role="img" aria-label="UK flag" className="text-base leading-none">🇬🇧</span>
+                  <span role="img" aria-label="UK flag" className="text-base leading-none">����🇧</span>
                   <span>UK</span>
                 </span>
               } />
@@ -1413,29 +1413,45 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           <SheetHeader>
             <SheetTitle>Attachments ({attachments.length})</SheetTitle>
           </SheetHeader>
-          <div className="p-4 space-y-2 overflow-y-auto flex-1">
+          <div className="p-4 space-y-3 overflow-y-auto flex-1">
             {attachments.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-8">No attachments yet.</p>
             ) : (
-              <div className="space-y-2">
-                {attachments.map((file, index) => (
-                  <a
-                    key={index}
-                    href={file.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 rounded-lg border border-border bg-card p-3 hover:bg-muted transition-colors group"
-                  >
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border bg-muted">
-                      <FileText className="h-5 w-5" style={{ color: "#009eff" }} />
+              <div className="space-y-3">
+                {attachments.map((file, index) => {
+                  const isImage = /\.(png|jpe?g|gif|webp|svg|bmp)$/i.test(file.name) || file.type?.startsWith("image/")
+                  return isImage ? (
+                    <div key={index} className="rounded-lg border border-border overflow-hidden">
+                      <img
+                        src={file.url}
+                        alt={file.name}
+                        className="w-full object-contain max-h-64 bg-muted"
+                      />
+                      <div className="flex items-center gap-2 px-3 py-2 bg-card border-t border-border">
+                        <ImageIcon className="h-4 w-4 shrink-0" style={{ color: "#009eff" }} />
+                        <p className="text-sm font-medium text-foreground truncate flex-1">{file.name}</p>
+                        <a href={file.url} target="_blank" rel="noopener noreferrer" className="text-xs text-[#009eff] hover:underline shrink-0">Open</a>
+                      </div>
                     </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-sm font-medium text-foreground truncate">{file.name}</p>
-                      <p className="text-xs text-muted-foreground">Click to open</p>
-                    </div>
-                    <Eye className="h-4 w-4 text-muted-foreground group-hover:text-foreground shrink-0 transition-colors" />
-                  </a>
-                ))}
+                  ) : (
+                    <a
+                      key={index}
+                      href={file.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 rounded-lg border border-border bg-card p-3 hover:bg-muted transition-colors group"
+                    >
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border bg-muted">
+                        <FileText className="h-5 w-5" style={{ color: "#009eff" }} />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-medium text-foreground truncate">{file.name}</p>
+                        <p className="text-xs text-muted-foreground">Click to open</p>
+                      </div>
+                      <Eye className="h-4 w-4 text-muted-foreground group-hover:text-foreground shrink-0 transition-colors" />
+                    </a>
+                  )
+                })}
               </div>
             )}
           </div>
