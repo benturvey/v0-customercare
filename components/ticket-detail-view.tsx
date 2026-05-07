@@ -415,10 +415,6 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 <Paperclip className="h-4 w-4" style={{ color: "#009eff" }} />
                 Attach Items
               </Button>
-              <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setReplyDialogOpen(true)}>
-                <Reply className="h-4 w-4" style={{ color: "#009eff" }} />
-                Reply to Customer
-              </Button>
               <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setDeferDialogOpen(true)}>
                 <PauseCircle className="h-4 w-4" style={{ color: "#009eff" }} />
                 Defer / Awaiting Carrier
