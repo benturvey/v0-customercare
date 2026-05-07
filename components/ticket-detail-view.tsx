@@ -1348,7 +1348,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
 
             {/* Reason for merge */}
             <div className="space-y-1.5">
-              <Label htmlFor="merge-reason">Reason for Ticket Merge</Label>
+              <Label htmlFor="merge-reason">Reason for Ticket Linking</Label>
               <Select value={mergeReason} onValueChange={setMergeReason}>
                 <SelectTrigger id="merge-reason">
                   <SelectValue placeholder="Select a reason..." />
