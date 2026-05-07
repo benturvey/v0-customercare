@@ -159,6 +159,13 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [escalateReason, setEscalateReason] = useState("")
   const [escalationEntries, setEscalationEntries] = useState<Array<{ agent: string; date: string; text: string }>>([])
 
+  const [replyDialogOpen, setReplyDialogOpen] = useState(false)
+  const [replyResponseCategory, setReplyResponseCategory] = useState("")
+  const [replyCommentToCustomer, setReplyCommentToCustomer] = useState("")
+  const [replyInternalComments, setReplyInternalComments] = useState("")
+  const [replySendEmail, setReplySendEmail] = useState(true)
+  const [replyEmailAddresses, setReplyEmailAddresses] = useState("")
+
   const [mergeReason, setMergeReason] = useState("")
   const [mergeUpdateCategory, setMergeUpdateCategory] = useState("")
   const [mergeCommentToCustomer, setMergeCommentToCustomer] = useState("")
@@ -408,7 +415,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 <Paperclip className="h-4 w-4" style={{ color: "#009eff" }} />
                 Attach Items
               </Button>
-              <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
+              <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setReplyDialogOpen(true)}>
                 <Reply className="h-4 w-4" style={{ color: "#009eff" }} />
                 Reply to Customer
               </Button>
@@ -1042,6 +1049,100 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               style={{ backgroundColor: "#009eff", color: "#fff" }}
             >
               Escalate
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Reply to Customer Dialog */}
+      <Dialog open={replyDialogOpen} onOpenChange={(open) => { 
+        setReplyDialogOpen(open)
+        if (!open) {
+          setReplyResponseCategory("")
+          setReplyCommentToCustomer("")
+          setReplyInternalComments("")
+          setReplySendEmail(true)
+          setReplyEmailAddresses("")
+        }
+      }}>
+        <DialogContent className="sm:max-w-lg">
+          <DialogHeader>
+            <DialogTitle>Reply to Customer</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 max-h-[60vh] overflow-y-auto">
+            <div className="space-y-1.5">
+              <label className="text-sm font-medium text-foreground">Response Category</label>
+              <select
+                value={replyResponseCategory}
+                onChange={(e) => setReplyResponseCategory(e.target.value)}
+                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              >
+                <option value="">Select category...</option>
+                <option value="address_query">GFS Investigation: Address Query</option>
+                <option value="awaiting_info">GFS Investigation: Awaiting information from</option>
+                <option value="customs_info">GFS Investigation: Customs require further information</option>
+                <option value="eta_requested">GFS Investigation: ETA requested from carrier. Awaiting feedback</option>
+                <option value="no_scan_data">GFS Investigation: No scan data, please confirm if label used</option>
+                <option value="parcel_damaged">GFS Investigation: Parcel damaged</option>
+                <option value="parcel_stolen">GFS Investigation: Parcel stolen, Sender to raise claim within carrier set timelimit</option>
+                <option value="part_delivery">GFS Investigation: Part delivery. Outstanding items due for delivery</option>
+                <option value="packaging_desc">GFS Investigation: Please supply a description of the packaging, contents and value</option>
+                <option value="contact_number">GFS Investigation: Please supply consignee contact number</option>
+                <option value="redelivery">GFS Investigation: Redelivery requested</option>
+                <option value="searches">GFS Investigation: Searches being actioned. Awaiting carrier feedback</option>
+                <option value="awaiting_carrier">GFS Investigation: Awaiting carrier feedback</option>
+              </select>
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-sm font-medium text-foreground">Comment to Customer</label>
+              <textarea
+                value={replyCommentToCustomer}
+                onChange={(e) => setReplyCommentToCustomer(e.target.value)}
+                placeholder="Enter comment to customer..."
+                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 resize-none"
+                rows={4}
+              />
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-sm font-medium text-foreground">Internal Comments</label>
+              <textarea
+                value={replyInternalComments}
+                onChange={(e) => setReplyInternalComments(e.target.value)}
+                placeholder="Enter internal comments..."
+                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 resize-none"
+                rows={3}
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                id="replySendEmail"
+                checked={replySendEmail}
+                onChange={(e) => setReplySendEmail(e.target.checked)}
+                className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              />
+              <label htmlFor="replySendEmail" className="text-sm font-medium text-foreground">
+                Must email be sent to customer?
+              </label>
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-sm font-medium text-foreground">Email Address(es)</label>
+              <textarea
+                value={replyEmailAddresses}
+                onChange={(e) => setReplyEmailAddresses(e.target.value)}
+                placeholder="Enter email addresses (one per line or comma-separated)..."
+                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 resize-none"
+                rows={2}
+              />
+            </div>
+          </div>
+          <DialogFooter className="mt-4">
+            <Button variant="outline" onClick={() => setReplyDialogOpen(false)}>Cancel</Button>
+            <Button
+              onClick={() => setReplyDialogOpen(false)}
+              style={{ backgroundColor: "#009eff", color: "#fff" }}
+            >
+              Send Reply
             </Button>
           </DialogFooter>
         </DialogContent>
