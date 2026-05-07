@@ -160,6 +160,11 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [escalationEntries, setEscalationEntries] = useState<Array<{ agent: string; date: string; text: string }>>([])
   const [internalNoteEntries, setInternalNoteEntries] = useState<Array<{ agent: string; date: string; text: string }>>([])
 
+  const [snoozeDialogOpen, setSnoozeDialogOpen] = useState(false)
+  const [snoozeReason, setSnoozeReason] = useState("")
+  const [snoozeUntilDate, setSnoozeUntilDate] = useState("")
+  const [snoozeUntilTime, setSnoozeUntilTime] = useState("09:00")
+
   const [replyDialogOpen, setReplyDialogOpen] = useState(false)
   const [replyResponseCategory, setReplyResponseCategory] = useState("")
   const [replyCommentToCustomer, setReplyCommentToCustomer] = useState("")
@@ -435,7 +440,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 <Eye className="h-4 w-4" style={{ color: "#009eff" }} />
                 Review (Conditional)
               </Button>
-              <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
+              <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setSnoozeDialogOpen(true)}>
                 <AlarmClock className="h-4 w-4" style={{ color: "#009eff" }} />
                 Snooze Ticket
               </Button>
@@ -1061,6 +1066,67 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               style={{ backgroundColor: "#009eff", color: "#fff" }}
             >
               Escalate
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Snooze Ticket Dialog */}
+      <Dialog open={snoozeDialogOpen} onOpenChange={(open) => {
+        setSnoozeDialogOpen(open)
+        if (!open) { setSnoozeReason(""); setSnoozeUntilDate(""); setSnoozeUntilTime("09:00") }
+      }}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Snooze Ticket</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-1.5">
+              <label className="text-sm font-medium text-foreground">Snooze Reason</label>
+              <select
+                value={snoozeReason}
+                onChange={(e) => setSnoozeReason(e.target.value)}
+                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              >
+                <option value="">Select reason...</option>
+                <option value="carrier_closed">Carrier Closed</option>
+                <option value="weekend">Weekend</option>
+                <option value="bank_holiday">Bank Holiday</option>
+                <option value="out_of_hours">Out of Hours</option>
+                <option value="awaiting_customer">Awaiting Customer Response</option>
+              </select>
+            </div>
+            {snoozeReason && snoozeReason !== "awaiting_customer" && (
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1.5">
+                  <label className="text-sm font-medium text-foreground">Snooze Until (Date)</label>
+                  <input
+                    type="date"
+                    value={snoozeUntilDate}
+                    onChange={(e) => setSnoozeUntilDate(e.target.value)}
+                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-sm font-medium text-foreground">Time</label>
+                  <input
+                    type="time"
+                    value={snoozeUntilTime}
+                    onChange={(e) => setSnoozeUntilTime(e.target.value)}
+                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+          <DialogFooter className="mt-4">
+            <Button variant="outline" onClick={() => setSnoozeDialogOpen(false)}>Cancel</Button>
+            <Button
+              disabled={!snoozeReason}
+              onClick={() => setSnoozeDialogOpen(false)}
+              style={{ backgroundColor: "#009eff", color: "#fff" }}
+            >
+              Snooze
             </Button>
           </DialogFooter>
         </DialogContent>
