@@ -98,7 +98,7 @@ const metaItems = [
   { icon: RefreshCw,    label: "Defer/Review",            value: "1",               iconColor: undefined },
   { icon: MessageSquare,label: "Responded",               value: "1",               iconColor: undefined },
   { icon: BarChart2,    label: "Level",                   value: "L1 - Basic",      iconColor: undefined, valueClass: "text-green-600 font-bold" },
-  { icon: Clock,        label: "Ticket Age",              value: "42m",             iconColor: undefined, valueClass: "text-orange-600 font-bold" },
+  { icon: Clock,        label: "Ticket Age",              value: "42m",             iconColor: undefined, valueClass: "text-amber-600 font-bold" },
   { icon: AlarmClock,   label: "SLA Due",                 value: "11:32 in 2h 15m", iconColor: undefined },
   { icon: Flag,         label: "Priority",                value: "Normal",          iconColor: undefined },
   { icon: Star,         label: "Customer Tier",           value: "Focus Customer",  iconColor: undefined, valueClass: "text-purple-600 font-bold" },
