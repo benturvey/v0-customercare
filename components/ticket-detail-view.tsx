@@ -91,18 +91,24 @@ interface TicketDetailViewProps {
 }
 
 const metaItems = [
-  { icon: Globe,        label: "Origin",                  value: "UK",              iconColor: undefined },
-  { icon: ToggleLeft,   label: "State",                   value: "OPEN",            iconColor: undefined },
-  { icon: Workflow,     label: "Lifecycle",               value: "Reviewing",       iconColor: undefined },
-  { icon: CalendarClock,label: "Next Review",             value: (() => { const d = new Date(); d.setDate(d.getDate() + 1); return `${d.toLocaleDateString("en-GB")} 10:00`; })(), iconColor: undefined },
-  { icon: RefreshCw,    label: "Defer/Review",            value: "1",               iconColor: undefined },
-  { icon: MessageSquare,label: "Responded",               value: "1",               iconColor: undefined },
-  { icon: BarChart2,    label: "Level",                   value: "L1 - Basic",      iconColor: undefined, valueClass: "text-green-600 font-bold" },
-  { icon: Clock,        label: "Ticket Age",              value: "42m",             iconColor: undefined, valueClass: "text-amber-600 font-bold" },
-  { icon: AlarmClock,   label: "SLA Due",                 value: "11:32 in 2h 15m", iconColor: undefined },
-  { icon: Flag,         label: "Priority",                value: "Normal",          iconColor: undefined },
-  { icon: Star,         label: "Customer Tier",           value: "Focus Customer",  iconColor: undefined, valueClass: "text-purple-600 font-bold" },
-  { icon: FileCheck2,   label: "Descriptions",   value: "Received",        iconColor: "text-green-500" },
+  { icon: Globe,        label: "Origin",                  value: "UK",              iconColor: "#009eff" },
+  { icon: BarChart2,    label: "Level",                   value: "L1 - Basic",      iconColor: "#009eff", valueClass: "text-green-600 font-bold" },
+  { icon: Clock,        label: "Ticket Age",              value: "42m",             iconColor: "#009eff", valueClass: "text-amber-600 font-bold" },
+  { icon: AlarmClock,   label: "Response Time",           value: "2h 30m",          iconColor: "#009eff" },
+  { icon: Star,         label: "Customer Tier",           value: "Focus Customer",  iconColor: "#009eff", valueClass: "text-purple-600 font-bold" },
+  { icon: Truck,        label: "Carrier",                 value: "EVRI",            iconColor: "#009eff" },
+  { icon: MapPin,       label: "Destination",             value: "G73 4LZ",         iconColor: "#009eff" },
+  { icon: Layers,       label: "Service",                 value: "2 DAY SERVICE",   iconColor: "#009eff" },
+  { icon: Package,      label: "Total Parcels",           value: "1",               iconColor: "#009eff" },
+  { icon: CalendarDays, label: "Dispatch Date",           value: "02/05/2026",      iconColor: "#009eff" },
+  { icon: User,         label: "Assigned To",             value: "Unassigned",      iconColor: "#009eff" },
+  { icon: Building2,    label: "Store",                   value: "SOHO",            iconColor: "#009eff" },
+  { icon: Mail,         label: "Email",                   value: "james@company.com", iconColor: "#009eff" },
+  { icon: Phone,        label: "Phone",                   value: "+44 203 756 8876", iconColor: "#009eff" },
+  { icon: ToggleLeft,   label: "State",                   value: "OPEN",            iconColor: "#009eff" },
+  { icon: Workflow,     label: "Lifecycle",               value: "Reviewing",       iconColor: "#009eff" },
+  { icon: CalendarClock,label: "Next Review",             value: (() => { const d = new Date(); d.setDate(d.getDate() + 1); return `${d.toLocaleDateString("en-GB")} 10:00`; })(), iconColor: "#009eff" },
+  { icon: RefreshCw,    label: "Defer/Review",            value: "1",               iconColor: "#009eff" },
 ]
 
 export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
