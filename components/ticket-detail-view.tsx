@@ -1443,7 +1443,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
 
           <DialogFooter>
             <Button variant="outline" onClick={() => setMergeDialogOpen(false)}>Cancel</Button>
-            <Button onClick={() => setMergeDialogOpen(false)}>Confirm Merge</Button>
+            <Button onClick={() => setMergeDialogOpen(false)}>Confirm Link</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
