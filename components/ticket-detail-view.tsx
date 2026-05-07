@@ -268,17 +268,36 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         )}
       </div>
       <div className="rounded-lg border border-border bg-card p-4 mb-6">
-        <div className="grid gap-4" style={{ gridTemplateColumns: "0.8fr 1fr 1fr" }}>
-          <div>
-            <DetailRow icon={User}      label="Raised by" value="CS Team (support@lisaeldridge.com)" />
-            <div className="mt-3">
-              <DetailRow icon={Tag}       label="Category"        value="WHERE_IS_MY_PARCEL" />
+        <div className="flex gap-4">
+          {/* Summary card */}
+          <div className="rounded-lg border border-border bg-muted/40 p-3 flex-shrink-0 w-64 space-y-2.5">
+            <div className="space-y-0.5">
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Category</p>
+              <p className="text-sm font-semibold text-[#1e3a5f]">WHERE_IS_MY_PARCEL</p>
+            </div>
+            <div className="space-y-0.5">
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Raised by</p>
+              <p className="text-sm font-semibold text-[#1e3a5f]">CS Team</p>
+            </div>
+            <div className="space-y-0.5">
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Contact</p>
+              <p className="text-sm font-semibold text-[#1e3a5f] break-all">support@lisaeldridge.com</p>
             </div>
           </div>
-          <div style={{ gridColumn: "span 2" }}>
-            <DetailRow icon={Building2} label="Company"   value="LISA ELDRIDGE" />
-            <div className="mt-3">
-              <DetailRow icon={FileText}  label="Additional Info" value="Parcel unable to be delivered to parcel shop and now shows delayed. Please could we have further information regarding this delay as customer is very unhappy and unsure why delivery failed" />
+
+          {/* Main query content */}
+          <div className="flex-1 grid gap-4" style={{ gridTemplateColumns: "0.8fr 1fr 1fr" }}>
+            <div>
+              <DetailRow icon={User}      label="Raised by" value="CS Team (support@lisaeldridge.com)" />
+              <div className="mt-3">
+                <DetailRow icon={Tag}       label="Category"        value="WHERE_IS_MY_PARCEL" />
+              </div>
+            </div>
+            <div style={{ gridColumn: "span 2" }}>
+              <DetailRow icon={Building2} label="Company"   value="LISA ELDRIDGE" />
+              <div className="mt-3">
+                <DetailRow icon={FileText}  label="Additional Info" value="Parcel unable to be delivered to parcel shop and now shows delayed. Please could we have further information regarding this delay as customer is very unhappy and unsure why delivery failed" />
+              </div>
             </div>
           </div>
         </div>
