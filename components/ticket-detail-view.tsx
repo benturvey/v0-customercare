@@ -546,6 +546,13 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                     <span className="text-sm font-semibold text-orange-500">05/04/2026</span>
                   </td>
                 </tr>
+                <tr className="border-b border-border last:border-b-0 bg-blue-50/50">
+                  <td colSpan="7" className="px-3 py-2">
+                    <p className="text-sm font-medium" style={{ color: "#009eff" }}>
+                      UNABLE TO DELIVER; WILL RE-SCHEDULED DELIVERY
+                    </p>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
