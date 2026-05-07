@@ -1273,9 +1273,9 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
             <div className="flex justify-end">
               <Button
                 type="button"
-                variant="outline"
                 size="sm"
                 onClick={() => setMergeMatchesFound(true)}
+                style={{ backgroundColor: "#000", color: "#fff" }}
               >
                 Find Matches
               </Button>
