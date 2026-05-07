@@ -255,7 +255,18 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
       </div>
 
       {/* Customer Query */}
-      <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Customer Query</h2>
+      <div className="flex items-center justify-between mb-3">
+        <h2 className="text-base font-semibold text-[#1e3a5f]">Customer Query</h2>
+        {attachments.length > 0 && (
+          <button
+            onClick={() => setAttachmentsSheetOpen(true)}
+            className="flex items-center gap-1.5 text-sm font-medium text-[#009eff] hover:text-blue-700 transition-colors"
+          >
+            <Paperclip className="h-4 w-4" />
+            View Attachments ({attachments.length})
+          </button>
+        )}
+      </div>
       <div className="rounded-lg border border-border bg-card p-4 mb-6">
         <div className="grid gap-4" style={{ gridTemplateColumns: "0.8fr 1fr 1fr" }}>
           <div>
@@ -1402,22 +1413,28 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           <SheetHeader>
             <SheetTitle>Attachments ({attachments.length})</SheetTitle>
           </SheetHeader>
-          <div className="p-4 space-y-4 overflow-y-auto flex-1">
+          <div className="p-4 space-y-2 overflow-y-auto flex-1">
             {attachments.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-8">No attachments yet.</p>
             ) : (
-              <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-2">
                 {attachments.map((file, index) => (
-                  <div key={index} className="relative group">
-                    <div className="aspect-square rounded-lg border border-border overflow-hidden bg-muted">
-                      <img
-                        src={file.url}
-                        alt={file.name}
-                        className="w-full h-full object-cover"
-                      />
+                  <a
+                    key={index}
+                    href={file.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 rounded-lg border border-border bg-card p-3 hover:bg-muted transition-colors group"
+                  >
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border bg-muted">
+                      <FileText className="h-5 w-5" style={{ color: "#009eff" }} />
                     </div>
-                    <p className="mt-1 text-xs text-muted-foreground truncate">{file.name}</p>
-                  </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-medium text-foreground truncate">{file.name}</p>
+                      <p className="text-xs text-muted-foreground">Click to open</p>
+                    </div>
+                    <Eye className="h-4 w-4 text-muted-foreground group-hover:text-foreground shrink-0 transition-colors" />
+                  </a>
                 ))}
               </div>
             )}
