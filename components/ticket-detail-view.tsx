@@ -1519,8 +1519,6 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               />
             </div>
           </div>
-            )}
-          </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setAttachDialogOpen(false)}>
               Cancel
