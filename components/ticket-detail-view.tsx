@@ -159,6 +159,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [escalateReason, setEscalateReason] = useState("")
   const [escalationEntries, setEscalationEntries] = useState<Array<{ agent: string; date: string; text: string }>>([])
   const [internalNoteEntries, setInternalNoteEntries] = useState<Array<{ agent: string; date: string; text: string }>>([])
+  const [snoozeEntries, setSnoozeEntries] = useState<Array<{ agent: string; date: string; reason: string }>>([])
 
   const [snoozeDialogOpen, setSnoozeDialogOpen] = useState(false)
   const [snoozeReason, setSnoozeReason] = useState("")
@@ -396,6 +397,17 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 </div>
                 <p className="text-sm text-foreground leading-relaxed">
                   {entry.text}
+                </p>
+              </div>
+            ))}
+            {snoozeEntries.map((entry, index) => (
+              <div key={`snooze-${index}`} className="rounded-lg border border-gray-200 bg-gray-100 p-3 mb-3">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm font-semibold text-[#1e3a5f]">{entry.agent}</span>
+                  <span className="text-xs text-muted-foreground">{entry.date}</span>
+                </div>
+                <p className="text-sm text-foreground leading-relaxed">
+                  Ticket snoozed: {entry.reason}
                 </p>
               </div>
             ))}
@@ -1123,7 +1135,37 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
             <Button variant="outline" onClick={() => setSnoozeDialogOpen(false)}>Cancel</Button>
             <Button
               disabled={!snoozeReason}
-              onClick={() => setSnoozeDialogOpen(false)}
+              onClick={() => {
+                if (snoozeReason) {
+                  let dateTimeString = ""
+                  if (snoozeReason !== "awaiting_customer" && snoozeUntilDate && snoozeUntilTime) {
+                    const dateObj = new Date(snoozeUntilDate)
+                    dateTimeString = dateObj.toLocaleDateString("en-GB") + " " + snoozeUntilTime
+                  } else {
+                    const now = new Date()
+                    dateTimeString = now.toLocaleDateString("en-GB") + " " + now.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })
+                  }
+                  
+                  const reasonLabels: { [key: string]: string } = {
+                    carrier_closed: "Carrier Closed",
+                    weekend: "Weekend",
+                    bank_holiday: "Bank Holiday",
+                    out_of_hours: "Out of Hours",
+                    awaiting_customer: "Awaiting Customer Response"
+                  }
+                  
+                  const newEntry = {
+                    agent: "Jacquie Cadger",
+                    date: dateTimeString,
+                    reason: reasonLabels[snoozeReason] || snoozeReason
+                  }
+                  setSnoozeEntries([newEntry, ...snoozeEntries])
+                  setSnoozeDialogOpen(false)
+                  setSnoozeReason("")
+                  setSnoozeUntilDate("")
+                  setSnoozeUntilTime("09:00")
+                }
+              }}
               style={{ backgroundColor: "#009eff", color: "#fff" }}
             >
               Snooze
