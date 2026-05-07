@@ -535,6 +535,9 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                       <ScanLine className="h-3 w-3" />
                       DELIVERY ATTEMPTED
                     </span>
+                    <p className="text-sm font-medium mt-1" style={{ color: "#009eff" }}>
+                      UNABLE TO DELIVER; WILL RE-SCHEDULED DELIVERY
+                    </p>
                   </td>
                   <td className="px-3 py-3 text-xs text-foreground max-w-xs">
                     WE HAVEN&apos;T BEEN ABLE TO DELIVER TO THE PARCELSHOP TODAY. WE&apos;LL RE-ATTEMPT ON THE NEXT WORKING DAY
@@ -544,13 +547,6 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                     <span className="text-xs font-medium text-orange-500">EDD</span>
                     <br />
                     <span className="text-sm font-semibold text-orange-500">05/04/2026</span>
-                  </td>
-                </tr>
-                <tr className="border-b border-border last:border-b-0 bg-blue-50/50">
-                  <td colSpan="7" className="px-3 py-2">
-                    <p className="text-sm font-medium" style={{ color: "#009eff" }}>
-                      UNABLE TO DELIVER; WILL RE-SCHEDULED DELIVERY
-                    </p>
                   </td>
                 </tr>
               </tbody>
