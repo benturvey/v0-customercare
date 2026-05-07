@@ -263,7 +263,13 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           <h3 className="text-sm font-semibold text-[#1e3a5f] mb-3">Shipment Summary</h3>
           <div className="grid gap-2.5">
             <div className="grid grid-cols-2 gap-2.5">
-              <DetailRow icon={Truck}    label="Carrier"      value="EVRI" />
+              <DetailRow icon={Truck}    label="Carrier"      value={
+                <img 
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/evri%20test%20logo-UBvGG0sfs8RDLMP9oGrUvME2oSWjif.png" 
+                  alt="EVRI" 
+                  className="h-6"
+                />
+              } />
               <DetailRow icon={MapPin}   label="Destination"  value="G73 4LZ" />
             </div>
             <div className="grid grid-cols-2 gap-2.5">
