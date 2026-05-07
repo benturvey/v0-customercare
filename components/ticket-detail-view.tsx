@@ -283,7 +283,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         </div>
 
         {/* Card 2 — Customer Details */}
-        <div className="rounded-lg border border-border bg-card p-4">
+        <div className="rounded-lg border border-border bg-card p-4 max-w-xs">
           <h3 className="text-sm font-semibold text-[#1e3a5f] mb-3">Customer Details</h3>
           <div className="grid gap-2.5">
             <DetailRow icon={User}        label="Name"     value="CS Team" />
@@ -294,7 +294,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         </div>
 
         {/* Card 3 — Ticket Summary */}
-        <div className="rounded-lg border border-border bg-card p-4">
+        <div className="rounded-lg border border-border bg-card p-4 max-w-xs">
           <h3 className="text-sm font-semibold text-[#1e3a5f] mb-3">Ticket Summary</h3>
           <div className="grid gap-2.5">
             <DetailRow icon={PlusCircle}  label="Created"        value="05/05/2026 15:49" />
