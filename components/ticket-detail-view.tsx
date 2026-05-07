@@ -453,7 +453,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               </Button>
               <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setCloseResolvedDialogOpen(true)}>
                 <CheckCircle2 className="h-4 w-4" style={{ color: "#009eff" }} />
-                Close as Resolved
+                Resolve (Close ticket)
               </Button>
             </div>
           </div>
@@ -1460,11 +1460,11 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         </DialogContent>
       </Dialog>
 
-      {/* Close as Resolved Dialog */}
-      <Dialog open={closeResolvedDialogOpen} onOpenChange={setCloseResolvedDialogOpen}>
-        <DialogContent className="sm:max-w-2xl">
-          <DialogHeader>
-            <DialogTitle>Close as Resolved</DialogTitle>
+        {/* Resolve (Close ticket) Dialog */}
+        <Dialog open={closeResolvedDialogOpen} onOpenChange={setCloseResolvedDialogOpen}>
+          <DialogContent className="sm:max-w-2xl">
+            <DialogHeader>
+              <DialogTitle>Resolve (Close ticket)</DialogTitle>
             <DialogDescription>
               Mark this ticket as resolved and optionally notify the customer.
             </DialogDescription>
