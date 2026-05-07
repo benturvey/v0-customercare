@@ -417,7 +417,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               </Button>
               <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setDeferDialogOpen(true)}>
                 <PauseCircle className="h-4 w-4" style={{ color: "#009eff" }} />
-                Defer / Awaiting Carrier
+                Defer (Awaiting Carrier)
               </Button>
               <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setReviewDialogOpen(true)}>
                 <Eye className="h-4 w-4" style={{ color: "#009eff" }} />
@@ -726,11 +726,11 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         )}
       </div>
 
-      {/* Defer / Awaiting Carrier Dialog */}
-      <Dialog open={deferDialogOpen} onOpenChange={setDeferDialogOpen}>
-        <DialogContent className="sm:max-w-2xl">
-          <DialogHeader>
-            <DialogTitle>Defer / Awaiting Carrier</DialogTitle>
+        {/* Defer (Awaiting Carrier) Dialog */}
+        <Dialog open={deferDialogOpen} onOpenChange={setDeferDialogOpen}>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>Defer (Awaiting Carrier)</DialogTitle>
             <DialogDescription>
               Set a deferral date and reason for this ticket.
             </DialogDescription>
