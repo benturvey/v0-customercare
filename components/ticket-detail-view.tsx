@@ -277,11 +277,11 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
             </div>
             <div className="space-y-0.5">
               <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Raised by</p>
-              <p className="text-sm font-semibold text-[#1e3a5f]">CS Team</p>
+              <p className="text-sm font-semibold text-[#1e3a5f]">CS Team (support@lisaeldridge.com)</p>
             </div>
             <div className="space-y-0.5">
-              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Contact</p>
-              <p className="text-sm font-semibold text-[#1e3a5f] break-all">support@lisaeldridge.com</p>
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Customer</p>
+              <p className="text-sm font-semibold text-[#1e3a5f] break-all">LISA ELDRIDGE</p>
             </div>
           </div>
 
