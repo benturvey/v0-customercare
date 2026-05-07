@@ -307,7 +307,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
 
       {/* Shipment Details Summary */}
       <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Shipment Details Summary</h2>
-      <div className="grid gap-4 mb-6" style={{ gridTemplateColumns: "1fr 0.7fr 0.7fr 1.8fr" }}>
+      <div className="grid gap-4 mb-6" style={{ gridTemplateColumns: "0.9fr 0.8fr 2.5fr" }}>
 
         {/* Card 1 — Ticket Summary */}
         <div className="rounded-lg border border-border bg-card p-4">
