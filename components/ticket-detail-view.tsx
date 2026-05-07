@@ -441,10 +441,9 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               <DetailRow icon={Truck}        label="Carrier"       value="EVRI" />
               <DetailRow icon={Layers}       label="Service"       value="2 DAY SERVICE" />
             </div>
-            <div className="grid grid-cols-3 gap-2.5">
+            <div className="grid grid-cols-2 gap-2.5">
               <DetailRow icon={Package}      label="Total Parcels" value="1" />
               <DetailRow icon={Globe}        label="Origin"        value="UK" />
-              <DetailRow icon={MapPin}       label="Destination"   value="G73 4LZ" />
             </div>
           </div>
         </div>
