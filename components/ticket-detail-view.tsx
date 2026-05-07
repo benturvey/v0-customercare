@@ -423,6 +423,10 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 <Eye className="h-4 w-4" style={{ color: "#009eff" }} />
                 Review (Conditional)
               </Button>
+              <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
+                <AlarmClock className="h-4 w-4" style={{ color: "#009eff" }} />
+                Snooze Ticket
+              </Button>
               <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setEscalateDialogOpen(true)}>
                 <ArrowUpCircle className="h-4 w-4" style={{ color: "#009eff" }} />
                 Escalate
