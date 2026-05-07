@@ -91,18 +91,18 @@ interface TicketDetailViewProps {
 }
 
 const metaItems = [
-  { icon: Globe,        label: "Origin",                  value: "UK",              iconColor: undefined },
-  { icon: ToggleLeft,   label: "State",                   value: "OPEN",            iconColor: undefined },
-  { icon: Workflow,     label: "Lifecycle",               value: "Reviewing",       iconColor: undefined },
-  { icon: CalendarClock,label: "Next Review",             value: (() => { const d = new Date(); d.setDate(d.getDate() + 1); return `${d.toLocaleDateString("en-GB")} 10:00`; })(), iconColor: undefined },
-  { icon: RefreshCw,    label: "Defer/Review",            value: "1",               iconColor: undefined },
-  { icon: MessageSquare,label: "Responded",               value: "1",               iconColor: undefined },
-  { icon: BarChart2,    label: "Level",                   value: "L1 - Basic",      iconColor: undefined, valueClass: "text-green-600 font-bold" },
-  { icon: Clock,        label: "Ticket Age",              value: "42m",             iconColor: undefined, valueClass: "text-amber-600 font-bold" },
-  { icon: AlarmClock,   label: "SLA Due",                 value: "11:32 in 2h 15m", iconColor: undefined },
-  { icon: Flag,         label: "Priority",                value: "Normal",          iconColor: undefined },
-  { icon: Star,         label: "Customer Tier",           value: "Focus Customer",  iconColor: undefined, valueClass: "text-purple-600 font-bold" },
-  { icon: FileCheck2,   label: "Descriptions",   value: "Received",        iconColor: "text-green-500" },
+  { icon: Globe,        label: "Origin",                  value: "UK",              iconColor: "#009eff" },
+  { icon: ToggleLeft,   label: "State",                   value: "OPEN",            iconColor: "#009eff" },
+  { icon: Workflow,     label: "Lifecycle",               value: "Reviewing",       iconColor: "#009eff" },
+  { icon: CalendarClock,label: "Next Review",             value: (() => { const d = new Date(); d.setDate(d.getDate() + 1); return `${d.toLocaleDateString("en-GB")} 10:00`; })(), iconColor: "#009eff" },
+  { icon: RefreshCw,    label: "Defer/Review",            value: "1",               iconColor: "#009eff" },
+  { icon: MessageSquare,label: "Responded",               value: "1",               iconColor: "#009eff" },
+  { icon: BarChart2,    label: "Level",                   value: "L1 - Basic",      iconColor: "#009eff", valueClass: "text-green-600 font-bold" },
+  { icon: Clock,        label: "Ticket Age",              value: "42m",             iconColor: "#009eff", valueClass: "text-amber-600 font-bold" },
+  { icon: AlarmClock,   label: "SLA Due",                 value: "11:32 in 2h 15m", iconColor: "#009eff" },
+  { icon: Flag,         label: "Priority",                value: "Normal",          iconColor: "#009eff" },
+  { icon: Star,         label: "Customer Tier",           value: "Focus Customer",  iconColor: "#009eff", valueClass: "text-purple-600 font-bold" },
+  { icon: FileCheck2,   label: "Descriptions",   value: "Received",        iconColor: "#009eff" },
 ]
 
 export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
@@ -244,7 +244,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 index !== metaItems.length - 1 ? "border-r border-border" : ""
               }`}
             >
-              <Icon className={`h-4 w-4 shrink-0 ${item.iconColor ?? "text-[#1e3a5f]"}`} />
+              <Icon className={`h-4 w-4 shrink-0 ${typeof item.iconColor === "string" && item.iconColor.startsWith("text-") ? item.iconColor : "text-[#1e3a5f]"}`} style={typeof item.iconColor === "string" && item.iconColor.startsWith("#") ? { color: item.iconColor } : undefined} />
               <div className="flex flex-col leading-tight">
                 <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">{item.label}</span>
                 <span className={`text-sm font-semibold text-[#1e3a5f] whitespace-nowrap ${item.valueClass ?? ""}`}>{item.value}</span>
