@@ -153,6 +153,9 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [mergeDialogOpen, setMergeDialogOpen] = useState(false)
   const [mergeCriteria, setMergeCriteria] = useState<string[]>([])
   const [customerContactDialogOpen, setCustomerContactDialogOpen] = useState(false)
+  const [escalateDialogOpen, setEscalateDialogOpen] = useState(false)
+  const [escalateLevel, setEscalateLevel] = useState("")
+  const [escalatePerson, setEscalatePerson] = useState("")
   const [mergeReason, setMergeReason] = useState("")
   const [mergeUpdateCategory, setMergeUpdateCategory] = useState("")
   const [mergeCommentToCustomer, setMergeCommentToCustomer] = useState("")
@@ -403,7 +406,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 <Eye className="h-4 w-4" style={{ color: "#009eff" }} />
                 Review (Conditional)
               </Button>
-              <Button variant="outline" size="sm" className="justify-start gap-2 text-left">
+              <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setEscalateDialogOpen(true)}>
                 <ArrowUpCircle className="h-4 w-4" style={{ color: "#009eff" }} />
                 Escalate
               </Button>
@@ -952,6 +955,56 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
             </Button>
             <Button onClick={() => setReviewDialogOpen(false)}>
               Submit Review
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Escalate Dialog */}
+      <Dialog open={escalateDialogOpen} onOpenChange={(open) => { setEscalateDialogOpen(open); if (!open) { setEscalateLevel(""); setEscalatePerson("") } }}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Escalate Ticket</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-1.5">
+              <label className="text-sm font-medium text-foreground">Escalate to Level</label>
+              <select
+                value={escalateLevel}
+                onChange={(e) => setEscalateLevel(e.target.value)}
+                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              >
+                <option value="">Select level...</option>
+                <option value="L2">L2 - Specialist</option>
+                <option value="L3">L3 - Senior Specialist</option>
+                <option value="L4">L4 - Team Lead</option>
+                <option value="L5">L5 - Manager</option>
+              </select>
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-sm font-medium text-foreground">Escalate to Person</label>
+              <select
+                value={escalatePerson}
+                onChange={(e) => setEscalatePerson(e.target.value)}
+                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              >
+                <option value="">Select person...</option>
+                <option value="agent1">Agent - OZ-USER</option>
+                <option value="agent2">Agent - CS-USER</option>
+                <option value="agent3">Agent - SR-USER</option>
+                <option value="teamlead">Team Lead - TL-USER</option>
+                <option value="manager">Manager - MG-USER</option>
+              </select>
+            </div>
+          </div>
+          <DialogFooter className="mt-4">
+            <Button variant="outline" onClick={() => setEscalateDialogOpen(false)}>Cancel</Button>
+            <Button
+              disabled={!escalateLevel && !escalatePerson}
+              onClick={() => setEscalateDialogOpen(false)}
+              style={{ backgroundColor: "#009eff", color: "#fff" }}
+            >
+              Escalate
             </Button>
           </DialogFooter>
         </DialogContent>
