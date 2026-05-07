@@ -433,7 +433,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               </Button>
               <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setMergeDialogOpen(true)}>
                 <Link2 className="h-4 w-4" style={{ color: "#009eff" }} />
-                Merge / Link Tickets
+                Link Tickets
               </Button>
               <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setInternalNotesDialogOpen(true)}>
                 <StickyNote className="h-4 w-4" style={{ color: "#009eff" }} />
@@ -1174,11 +1174,11 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         </DialogContent>
       </Dialog>
 
-      {/* Merge / Link Tickets Dialog */}
-      <Dialog open={mergeDialogOpen} onOpenChange={(open) => { setMergeDialogOpen(open); if (!open) setMergeMatchesFound(false) }}>
-        <DialogContent className="sm:max-w-3xl">
-          <DialogHeader>
-            <DialogTitle>Merge / Link Tickets</DialogTitle>
+        {/* Link Tickets Dialog */}
+        <Dialog open={mergeDialogOpen} onOpenChange={(open) => { setMergeDialogOpen(open); if (!open) setMergeMatchesFound(false) }}>
+          <DialogContent className="sm:max-w-2xl">
+            <DialogHeader>
+              <DialogTitle>Link Tickets</DialogTitle>
             <DialogDescription>
               Select matching criteria to find related tickets, then choose a reason for the merge.
             </DialogDescription>
