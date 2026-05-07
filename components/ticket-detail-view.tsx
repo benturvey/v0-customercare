@@ -430,25 +430,9 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
 
       {/* Shipment Details Summary */}
       <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Shipment Details Summary</h2>
-      <div className="grid gap-4 mb-6" style={{ gridTemplateColumns: "1.3fr 1.3fr 1.8fr" }}>
+      <div className="grid gap-4 mb-6" style={{ gridTemplateColumns: "1.5fr 2fr" }}>
 
-        {/* Card 1 — Ticket Summary */}
-        <div className="rounded-lg border border-border bg-card p-4">
-          <h3 className="text-sm font-semibold text-[#1e3a5f] mb-3">Ticket Summary</h3>
-          <div className="grid gap-2.5">
-            <div className="grid grid-cols-2 gap-2.5">
-              <DetailRow icon={PlusCircle}  label="Created"        value="05/05/2026 15:49" />
-              <DetailRow icon={History}     label="Last Updated"   value="05/05/2026 15:49" />
-            </div>
-            <div className="grid grid-cols-2 gap-2.5">
-              <DetailRow icon={Activity}    label="Status"         value="Reviewing" />
-              <DetailRow icon={RefreshCw}   label="Defer/Review"   value="1" />
-            </div>
-            <DetailRow icon={UserCircle}  label="Assigned To"    value="Unassigned" />
-          </div>
-        </div>
-
-        {/* Card 2 — Shipment Summary */}
+        {/* Card 1 — Shipment Summary */}
         <div className="rounded-lg border border-border bg-card p-4">
           <h3 className="text-sm font-semibold text-[#1e3a5f] mb-3">Shipment Summary</h3>
           <div className="grid gap-2.5">
@@ -467,7 +451,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           </div>
         </div>
 
-        {/* Card 4 — Delivery Address */}
+        {/* Card 2 — Delivery Address */}
         <div className="rounded-lg border border-border bg-card p-4">
           <h3 className="text-sm font-semibold text-[#1e3a5f] mb-3">Delivery Address</h3>
           <div className="grid gap-2.5">
