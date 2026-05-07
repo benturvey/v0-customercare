@@ -301,12 +301,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               <DetailRow icon={Package}  label="Total Parcels"  value="1" />
             </div>
             <div className="grid grid-cols-2 gap-2.5">
-              <DetailRow icon={Globe}        label="Origin" value={
-                <span className="flex items-center gap-1.5">
-                  <span role="img" aria-label="UK flag" className="text-base leading-none">����🇧</span>
-                  <span>UK</span>
-                </span>
-              } />
+              <DetailRow icon={Globe}        label="Origin" value="UK" />
               <DetailRow icon={CalendarDays} label="Despatched" value="30/04/2026" />
             </div>
           </div>
