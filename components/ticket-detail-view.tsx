@@ -337,7 +337,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 <span className="text-muted-foreground">Additional Information:</span> What is happening with the delivery? Why is this taking so long?
               </p>
             </div>
-            <div className="rounded-lg border border-blue-100 bg-white p-3">
+            <div className="rounded-lg border border-blue-100 bg-white p-3 mb-3">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-[#1e3a5f]">CS Team</span>
                 <span className="text-xs text-muted-foreground">05/05/2026 15:49</span>
@@ -348,6 +348,9 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 <span className="text-muted-foreground">Additional Information:</span> Parcel unable to be delivered to parcel shop and now shows delayed. Please could we have further information regarding this delay as customer is very unhappy and unsure why delivery failed
               </p>
             </div>
+            <button className="w-full text-center text-sm text-[#009eff] hover:text-blue-700 font-medium transition-colors py-2 border-t border-blue-100">
+              View More
+            </button>
           </div>
         </div>
 
@@ -364,7 +367,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 Good morning, Evri are still experiencing delays. We apologise for the inconvenience and will continue to monitor. Kind regards -GFS Customer Care
               </p>
             </div>
-            <div className="rounded-lg border border-yellow-100 bg-white p-3">
+            <div className="rounded-lg border border-yellow-100 bg-white p-3 mb-3">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-[#1e3a5f]">Agent - OZ-USER</span>
                 <span className="text-xs text-muted-foreground">05/05/2026 15:49</span>
@@ -373,6 +376,9 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 Hello, Thanks for contacting GFS. I am sorry to advise the parcel has missed connection to the courier which has caused a delay. Evri are aiming to get this parcel back on track to your customer as soon as possible. We will check for further scans and update you daily. Kind regards -GFS Customer Care
               </p>
             </div>
+            <button className="w-full text-center text-sm text-[#009eff] hover:text-blue-700 font-medium transition-colors py-2 border-t border-yellow-100">
+              View More
+            </button>
           </div>
         </div>
 
