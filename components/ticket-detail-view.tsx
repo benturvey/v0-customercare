@@ -1285,6 +1285,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
             <div className="space-y-2">
               <Label>Matched Tickets</Label>
               <div className="rounded-lg border border-border overflow-hidden">
+                <div className="overflow-y-auto" style={{ maxHeight: "calc(8 * 41px + 41px)" }}>
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="bg-muted/40 border-b border-border">
@@ -1343,6 +1344,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                     )}
                   </tbody>
                 </table>
+                </div>
               </div>
             </div>
 
