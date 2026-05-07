@@ -1176,7 +1176,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
 
         {/* Link Tickets Dialog */}
         <Dialog open={mergeDialogOpen} onOpenChange={(open) => { setMergeDialogOpen(open); if (!open) setMergeMatchesFound(false) }}>
-          <DialogContent className="sm:max-w-2xl">
+          <DialogContent className="sm:max-w-5xl">
             <DialogHeader>
               <DialogTitle>Link Tickets</DialogTitle>
             <DialogDescription>
