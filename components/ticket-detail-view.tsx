@@ -97,7 +97,7 @@ const metaItems = [
   { icon: CalendarClock,label: "Next Review",             value: (() => { const d = new Date(); d.setDate(d.getDate() + 1); return `${d.toLocaleDateString("en-GB")} 10:00`; })(), iconColor: undefined },
   { icon: RefreshCw,    label: "Defer/Review",            value: "1",               iconColor: undefined },
   { icon: MessageSquare,label: "Responded",               value: "1",               iconColor: undefined },
-  { icon: BarChart2,    label: "Level",                   value: "L1 - Basic",      iconColor: undefined },
+  { icon: BarChart2,    label: "Level",                   value: "L1 - Basic",      iconColor: undefined, valueClass: "text-green-600 font-bold" },
   { icon: Clock,        label: "Ticket Age",              value: "42m",             iconColor: undefined },
   { icon: AlarmClock,   label: "SLA Due",                 value: "11:32 in 2h 15m", iconColor: undefined },
   { icon: Flag,         label: "Priority",                value: "Normal",          iconColor: undefined },
