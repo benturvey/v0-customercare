@@ -339,7 +339,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
       <div className="rounded-lg border border-border bg-card p-4 mb-6">
         <div className="grid gap-4" style={{ gridTemplateColumns: "0.8fr 1fr 1fr" }}>
           <div>
-            <DetailRow icon={User}      label="Raised by" value="CS Team" />
+            <DetailRow icon={User}      label="Raised by" value="CS Team (support@lisaeldridge.com)" />
             <div className="mt-3">
               <DetailRow icon={Tag}       label="Category"        value="WHERE_IS_MY_PARCEL" />
             </div>
