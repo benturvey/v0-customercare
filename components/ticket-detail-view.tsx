@@ -295,6 +295,22 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
             </div>
           </div>
 
+          {/* Ticket Info card */}
+          <div className="rounded-lg border border-border bg-muted/40 p-3 flex-shrink-0 w-52 space-y-2.5">
+            <div className="space-y-0.5">
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Created</p>
+              <p className="text-sm font-semibold text-[#1e3a5f]">05/05/2026 15:49</p>
+            </div>
+            <div className="space-y-0.5">
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Last Updated</p>
+              <p className="text-sm font-semibold text-[#1e3a5f]">05/05/2026 15:49</p>
+            </div>
+            <div className="space-y-0.5">
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Assigned To</p>
+              <p className="text-sm font-semibold text-[#1e3a5f]">—</p>
+            </div>
+          </div>
+
           {/* Additional Info card */}
           <div className="rounded-lg border border-border bg-muted/40 p-3 flex-1">
             <div className="space-y-0.5">
