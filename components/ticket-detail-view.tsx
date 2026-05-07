@@ -328,18 +328,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           </div>
         </div>
 
-        {/* Card 2 — Customer Details */}
-        <div className="rounded-lg border border-border bg-card p-4">
-          <h3 className="text-sm font-semibold text-[#1e3a5f] mb-3">Customer Details</h3>
-          <div className="grid gap-2.5">
-            <DetailRow icon={User}        label="Name"     value="CS Team" />
-            <DetailRow icon={Building2}   label="Company"  value="LISA ELDRIDGE" />
-            <DetailRow icon={Mail}        label="Email"    value="support@lisaeldridge.com" />
-            <DetailRow icon={Phone}       label="Phone"    value="—" />
-          </div>
-        </div>
-
-        {/* Card 3 — Ticket Summary */}
+        {/* Card 2 — Ticket Summary */}
         <div className="rounded-lg border border-border bg-card p-4">
           <h3 className="text-sm font-semibold text-[#1e3a5f] mb-3">Ticket Summary</h3>
           <div className="grid gap-2.5">
