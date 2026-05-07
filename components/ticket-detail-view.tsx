@@ -93,7 +93,7 @@ interface TicketDetailViewProps {
 const metaItems = [
   { icon: Globe,        label: "Origin",                  value: "UK",              iconColor: "#009eff" },
   { icon: ToggleLeft,   label: "State",                   value: "OPEN",            iconColor: "#009eff" },
-  { icon: Workflow,     label: "Lifecycle",               value: "Reviewing",       iconColor: "#009eff" },
+  { icon: Workflow,     label: "Status",                  value: "Reviewing",       iconColor: "#009eff" },
   { icon: CalendarClock,label: "Next Review",             value: (() => { const d = new Date(); d.setDate(d.getDate() + 1); return `${d.toLocaleDateString("en-GB")} 10:00`; })(), iconColor: "#009eff" },
   { icon: RefreshCw,    label: "Defer/Review",            value: "1",               iconColor: "#009eff" },
   { icon: MessageSquare,label: "Responded",               value: "1",               iconColor: "#009eff" },
