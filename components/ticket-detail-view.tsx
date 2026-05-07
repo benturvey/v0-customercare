@@ -152,6 +152,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
 
   const [mergeDialogOpen, setMergeDialogOpen] = useState(false)
   const [mergeCriteria, setMergeCriteria] = useState<string[]>([])
+  const [customerContactDialogOpen, setCustomerContactDialogOpen] = useState(false)
   const [mergeReason, setMergeReason] = useState("")
   const [mergeUpdateCategory, setMergeUpdateCategory] = useState("")
   const [mergeCommentToCustomer, setMergeCommentToCustomer] = useState("")
@@ -281,7 +282,16 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
             </div>
             <div className="space-y-0.5">
               <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Customer</p>
-              <p className="text-sm font-semibold text-[#1e3a5f] break-all">LISA ELDRIDGE</p>
+              <div className="flex items-center gap-2">
+                <p className="text-sm font-semibold text-[#1e3a5f]">LISA ELDRIDGE</p>
+                <button
+                  onClick={() => setCustomerContactDialogOpen(true)}
+                  className="text-[#009eff] hover:text-blue-700 transition-colors"
+                  aria-label="View customer contact details"
+                >
+                  <UserCircle className="h-4 w-4" />
+                </button>
+              </div>
             </div>
           </div>
 
@@ -949,6 +959,32 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
             <Button onClick={() => setReviewDialogOpen(false)}>
               Submit Review
             </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Customer Contact Dialog */}
+      <Dialog open={customerContactDialogOpen} onOpenChange={setCustomerContactDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>LISA ELDRIDGE Contact</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-1.5">
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Name</p>
+              <p className="text-sm text-foreground">CS Team</p>
+            </div>
+            <div className="space-y-1.5">
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Email</p>
+              <p className="text-sm text-foreground break-all">support@lisaeldridge.com</p>
+            </div>
+            <div className="space-y-1.5">
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Phone</p>
+              <p className="text-sm text-foreground">—</p>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button onClick={() => setCustomerContactDialogOpen(false)}>Close</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
