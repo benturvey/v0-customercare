@@ -1180,7 +1180,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
             <DialogHeader>
               <DialogTitle>Link Tickets</DialogTitle>
             <DialogDescription>
-              Select matching criteria to find related tickets, then choose a reason for the merge.
+              Find related tickets based on match criteria
             </DialogDescription>
           </DialogHeader>
 
