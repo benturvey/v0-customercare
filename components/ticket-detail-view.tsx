@@ -436,17 +436,15 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         <div className="rounded-lg border border-border bg-card p-4">
           <h3 className="text-sm font-semibold text-[#1e3a5f] mb-3">Shipment Summary</h3>
           <div className="grid gap-2.5">
-            <div className="grid grid-cols-2 gap-2.5">
-              <DetailRow icon={Truck}    label="Carrier"      value="EVRI" />
-              <DetailRow icon={MapPin}   label="Destination"  value="G73 4LZ" />
+            <div className="grid grid-cols-3 gap-2.5">
+              <DetailRow icon={CalendarDays} label="Despatched"    value="30/04/2026" />
+              <DetailRow icon={Truck}        label="Carrier"       value="EVRI" />
+              <DetailRow icon={Layers}       label="Service"       value="2 DAY SERVICE" />
             </div>
-            <div className="grid grid-cols-2 gap-2.5">
-              <DetailRow icon={Layers}   label="Service"        value="2 DAY SERVICE" />
-              <DetailRow icon={Package}  label="Total Parcels"  value="1" />
-            </div>
-            <div className="grid grid-cols-2 gap-2.5">
-              <DetailRow icon={Globe}        label="Origin" value="UK" />
-              <DetailRow icon={CalendarDays} label="Despatched" value="30/04/2026" />
+            <div className="grid grid-cols-3 gap-2.5">
+              <DetailRow icon={Package}      label="Total Parcels" value="1" />
+              <DetailRow icon={Globe}        label="Origin"        value="UK" />
+              <DetailRow icon={MapPin}       label="Destination"   value="G73 4LZ" />
             </div>
           </div>
         </div>
