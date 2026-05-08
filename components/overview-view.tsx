@@ -93,6 +93,8 @@ export function OverviewView() {
                   <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${
                     agent.status === "Idle"
                       ? "bg-amber-100 text-amber-700"
+                      : agent.status === "Out of Office"
+                      ? "bg-red-100 text-red-700"
                       : "bg-muted text-muted-foreground"
                   }`}>
                     {agent.status}
