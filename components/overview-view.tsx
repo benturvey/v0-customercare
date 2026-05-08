@@ -18,36 +18,36 @@ const stats = [
 ]
 
 const agents = [
-  { name: "Aaron Doherty", currentTicket: 4709708, status: "In Progress" },
-  { name: "Alex Lucy", currentTicket: null, status: "Idle" },
-  { name: "Andrei Costea", currentTicket: 4709707, status: "In Progress" },
-  { name: "Annette Davidson", currentTicket: null, status: "Idle" },
-  { name: "Apryl Watson", currentTicket: 4709685, status: "In Progress" },
-  { name: "Arlene Griffin", currentTicket: 4709696, status: "In Progress" },
-  { name: "Audrey Johnson", currentTicket: 4709683, status: "In Progress" },
-  { name: "Ben Lund", currentTicket: null, status: "Idle" },
-  { name: "Danielle Marcroft", currentTicket: 4709682, status: "In Progress" },
-  { name: "Francine Payne", currentTicket: null, status: "Idle" },
-  { name: "George Lilliston", currentTicket: 4709706, status: "In Progress" },
-  { name: "Georgia Collins", currentTicket: null, status: "Idle" },
-  { name: "Ibrahim Anidi", currentTicket: 4709690, status: "In Progress" },
-  { name: "Kimberley McCormick", currentTicket: null, status: "Idle" },
-  { name: "Kirsty Doyle", currentTicket: 4709697, status: "In Progress" },
-  { name: "Lee Higgins", currentTicket: null, status: "Idle" },
-  { name: "Lisa Yates", currentTicket: null, status: "Idle" },
-  { name: "Lucy King", currentTicket: null, status: "Idle" },
-  { name: "Lynn Forrest", currentTicket: null, status: "Idle" },
-  { name: "Olivia Liburd", currentTicket: null, status: "Idle" },
-  { name: "Patricia McGuire", currentTicket: null, status: "Idle" },
-  { name: "Rachel Martin", currentTicket: 4709691, status: "In Progress" },
-  { name: "Rebecca Gibson", currentTicket: 4709684, status: "In Progress" },
-  { name: "Sarah Adams", currentTicket: null, status: "Idle" },
-  { name: "Sarah Tshikuna", currentTicket: 4709688, status: "In Progress" },
-  { name: "Sharon Pearce", currentTicket: null, status: "Idle" },
-  { name: "Sue Foster", currentTicket: null, status: "Idle" },
-  { name: "Tracey Crooke", currentTicket: null, status: "Idle" },
-  { name: "Tracey Johnson", currentTicket: 4709709, status: "In Progress" },
-  { name: "Vicky Lomax", currentTicket: null, status: "Idle" },
+  { name: "Aaron Doherty", level: "L2", currentTicket: 4709708, status: "In Progress" },
+  { name: "Alex Lucy", level: "L1", currentTicket: null, status: "Idle" },
+  { name: "Andrei Costea", level: "L2", currentTicket: 4709707, status: "In Progress" },
+  { name: "Annette Davidson", level: "L1", currentTicket: null, status: "Idle" },
+  { name: "Apryl Watson", level: "L2", currentTicket: 4709685, status: "In Progress" },
+  { name: "Arlene Griffin", level: "L2", currentTicket: 4709696, status: "In Progress" },
+  { name: "Audrey Johnson", level: "L1", currentTicket: 4709683, status: "In Progress" },
+  { name: "Ben Lund", level: "L1", currentTicket: null, status: "Idle" },
+  { name: "Danielle Marcroft", level: "L2", currentTicket: 4709682, status: "In Progress" },
+  { name: "Francine Payne", level: "L1", currentTicket: null, status: "Idle" },
+  { name: "George Lilliston", level: "L3", currentTicket: 4709706, status: "In Progress" },
+  { name: "Georgia Collins", level: "L1", currentTicket: null, status: "Idle" },
+  { name: "Ibrahim Anidi", level: "L2", currentTicket: 4709690, status: "In Progress" },
+  { name: "Kimberley McCormick", level: "L1", currentTicket: null, status: "Idle" },
+  { name: "Kirsty Doyle", level: "L2", currentTicket: 4709697, status: "In Progress" },
+  { name: "Lee Higgins", level: "L2", currentTicket: null, status: "Idle" },
+  { name: "Lisa Yates", level: "L1", currentTicket: null, status: "Idle" },
+  { name: "Lucy King", level: "L1", currentTicket: null, status: "Idle" },
+  { name: "Lynn Forrest", level: "L1", currentTicket: null, status: "Idle" },
+  { name: "Olivia Liburd", level: "L2", currentTicket: null, status: "Idle" },
+  { name: "Patricia McGuire", level: "L3", currentTicket: null, status: "Idle" },
+  { name: "Rachel Martin", level: "L2", currentTicket: 4709691, status: "In Progress" },
+  { name: "Rebecca Gibson", level: "L1", currentTicket: 4709684, status: "In Progress" },
+  { name: "Sarah Adams", level: "L2", currentTicket: null, status: "Idle" },
+  { name: "Sarah Tshikuna", level: "L1", currentTicket: 4709688, status: "In Progress" },
+  { name: "Sharon Pearce", level: "L1", currentTicket: null, status: "Idle" },
+  { name: "Sue Foster", level: "L2", currentTicket: null, status: "Idle" },
+  { name: "Tracey Crooke", level: "L1", currentTicket: null, status: "Idle" },
+  { name: "Tracey Johnson", level: "L3", currentTicket: 4709709, status: "In Progress" },
+  { name: "Vicky Lomax", level: "L1", currentTicket: null, status: "Idle" },
 ]
 
 export function OverviewView() {
@@ -78,6 +78,7 @@ export function OverviewView() {
           <TableHeader>
             <TableRow>
               <TableHead className="font-semibold text-foreground">Name</TableHead>
+              <TableHead className="font-semibold text-foreground">Agent Level</TableHead>
               <TableHead className="font-semibold text-foreground">Current Ticket</TableHead>
               <TableHead className="font-semibold text-foreground">Status</TableHead>
             </TableRow>
@@ -86,6 +87,7 @@ export function OverviewView() {
             {agents.map((agent) => (
               <TableRow key={agent.name}>
                 <TableCell className="font-medium">{agent.name}</TableCell>
+                <TableCell className="text-muted-foreground">{agent.level}</TableCell>
                 <TableCell className="text-muted-foreground">
                   {agent.currentTicket || "—"}
                 </TableCell>
