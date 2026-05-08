@@ -59,17 +59,7 @@ export function ShipmentDetailsModal({
 
   const detailRows = [
     [
-      { label: "Consignment No", value: details.consignmentNo },
       { label: "Insert Date", value: details.insertDate },
-      { label: "Despatch Date", value: details.despatchDate },
-    ],
-    [
-      { label: "Customer", value: details.customer },
-      { label: "Carrier", value: details.carrier },
-      { label: "Service", value: details.service },
-    ],
-    [
-      { label: "Status", value: details.status },
       { label: "Weight", value: details.weight.toString() },
       { label: "Content", value: details.content },
     ],
@@ -83,14 +73,13 @@ export function ShipmentDetailsModal({
       { label: "Instructions", value: details.instructions || "-" },
     ],
     [
-      { label: "Shipment Ref", value: details.shipmentRef },
       { label: "Consignment Ref", value: details.consignmentRef || "-" },
-      { label: "Tracking No", value: details.trackingNo || "-" },
+      { label: "Origin Depot", value: details.originDepot },
+      { label: "Destination Depot", value: details.destinationDepot },
     ],
     [
       { label: "Collection ID", value: details.collectionId || "-" },
-      { label: "Origin Depot", value: details.originDepot },
-      { label: "Destination Depot", value: details.destinationDepot },
+      { label: "Tracking No(s)", value: details.trackingNo || "-" },
     ],
   ]
 
