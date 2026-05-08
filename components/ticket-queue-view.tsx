@@ -24,10 +24,10 @@ const ticketData = [
   { id: "#4709691", level: "L2", category: "WHERE_IS_MY_PARCEL", consignmentNo: "15504962021774", packs: 1, customer: "BAKER ROSS LTD", carrier: "DPD", agent: "Rachel Martin", status: "In Progress" },
   { id: "#4709690", level: "L1", category: "WHERE_IS_MY_PARCEL", consignmentNo: "31541840059656", packs: 1, customer: "MAMAS & PAPAS", carrier: "DHL ECOMMERCE UK", agent: "Ibrahim Anidi", status: "In Progress" },
   { id: "#4709688", level: "L1", category: "RETURN_TO_SENDER", consignmentNo: "T03IZA0007079400", packs: 1, customer: "PROCOOK UK LTD", carrier: "UPS", agent: "Sarah Tshikuna", status: "In Progress" },
-  { id: "#4709685", level: "L2", category: "RETURN_TO_SENDER", consignmentNo: "T00PXA0022199208", packs: 1, customer: "THE DUNE GROUP", carrier: "EVRI", agent: "Apryl Watson", status: "In Progress" },
+  { id: "#4709685", level: "L1", category: "RETURN_TO_SENDER", consignmentNo: "T00PXA0022199208", packs: 1, customer: "THE DUNE GROUP", carrier: "EVRI", agent: "Apryl Watson", status: "In Progress" },
   { id: "#4709684", level: "L1", category: "RETURN_TO_SENDER", consignmentNo: "T03IZA0007096608", packs: 1, customer: "PROCOOK UK LTD", carrier: "DPD LOCAL", agent: "Rebecca Gibson", status: "In Progress" },
   { id: "#4709683", level: "L1", category: "WHERE_IS_MY_PARCEL", consignmentNo: "T0158A0008208726", packs: 1, customer: "WOODLAND GROUP LIMITED - WGAC", carrier: "EVRI", agent: "Audrey Johnson", status: "In Progress" },
-  { id: "#4709682", level: "L2", category: "WHERE_IS_MY_PARCEL", consignmentNo: "T0158A0030206249", packs: 1, customer: "WOODLAND-DONCASTER2025", carrier: "EVRI", agent: "Danielle Marcroft", status: "In Progress" },
+  { id: "#4709682", level: "L1", category: "WHERE_IS_MY_PARCEL", consignmentNo: "T0158A0030206249", packs: 1, customer: "WOODLAND-DONCASTER2025", carrier: "EVRI", agent: "Danielle Marcroft", status: "In Progress" },
 ]
 
 const filters = [
