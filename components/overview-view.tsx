@@ -44,7 +44,7 @@ const agents = [
   { name: "Sarah Adams", currentTicket: null, status: "Idle" },
   { name: "Sarah Tshikuna", currentTicket: 4709688, status: "In Progress" },
   { name: "Sharon Pearce", currentTicket: null, status: "Idle" },
-  { name: "Sue Foster", currentTicket: null, status: "Idle" },
+  { name: "Sue Foster", currentTicket: null, status: "Out of Office" },
   { name: "Tracey Crooke", currentTicket: null, status: "Idle" },
   { name: "Tracey Johnson", currentTicket: 4709709, status: "In Progress" },
   { name: "Vicky Lomax", currentTicket: null, status: "Idle" },
