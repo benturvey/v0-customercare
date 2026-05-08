@@ -95,6 +95,8 @@ export function OverviewView() {
                       ? "bg-amber-100 text-amber-700"
                       : agent.status === "Out of Office"
                       ? "bg-red-100 text-red-700"
+                      : agent.status === "In Progress"
+                      ? "bg-green-100 text-green-700"
                       : "bg-muted text-muted-foreground"
                   }`}>
                     {agent.status}
