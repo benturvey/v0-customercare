@@ -13,7 +13,7 @@ import {
 import { TicketDetailView } from "@/components/ticket-detail-view"
 
 const ticketData = [
-  { id: "#4772374", level: "L1", category: "WHERE_IS_MY_PARCEL", consignmentNo: "T06XUA0000734531", packs: 1, customer: "LISA ELDRIDGE", carrier: "EVRI", agent: "", status: "Unassigned" },
+  { id: "#4772374", level: "L4", category: "WHERE_IS_MY_PARCEL", consignmentNo: "T06XUA0000734531", packs: 1, customer: "LISA ELDRIDGE", carrier: "EVRI", agent: "", status: "Unassigned" },
   { id: "#4709717", level: "L1", category: "DELIVERY_DISPUTED", consignmentNo: "02770302900031291", packs: 1, customer: "ABBOTT LYON LTD", carrier: "GFS INTERNATIONAL", agent: "", status: "Unassigned" },
   { id: "#4709709", level: "L3", category: "DELIVERY_DISPUTED", consignmentNo: "02770302900031750", packs: 1, customer: "ABBOTT LYON LTD", carrier: "GFS INTERNATIONAL", agent: "Tracey Johnson", status: "In Progress" },
   { id: "#4709708", level: "L2", category: "RETURN_TO_SENDER", consignmentNo: "T04DDA5012749184", packs: 1, customer: "ABBOTT LYON LTD", carrier: "EVRI", agent: "Aaron Doherty", status: "In Progress" },
@@ -22,7 +22,7 @@ const ticketData = [
   { id: "#4709697", level: "L1", category: "RETURN_TO_SENDER", consignmentNo: "65433138", packs: 4, customer: "GALLEON SUPPLIES LIMITED", carrier: "DX FREIGHT", agent: "Kirsty Doyle", status: "In Progress" },
   { id: "#4709696", level: "L2", category: "RETURN_TO_SENDER", consignmentNo: "T03ZFA0008231375", packs: 1, customer: "HIGH STREET TV", carrier: "EVRI", agent: "Arlene Griffin", status: "In Progress" },
   { id: "#4709691", level: "L2", category: "WHERE_IS_MY_PARCEL", consignmentNo: "15504962021774", packs: 1, customer: "BAKER ROSS LTD", carrier: "DPD", agent: "Rachel Martin", status: "In Progress" },
-  { id: "#4709690", level: "L1", category: "WHERE_IS_MY_PARCEL", consignmentNo: "31541840059656", packs: 1, customer: "MAMAS & PAPAS", carrier: "DHL ECOMMERCE UK", agent: "Ibrahim Anidi", status: "In Progress" },
+  { id: "#4709690", level: "L2", category: "WHERE_IS_MY_PARCEL", consignmentNo: "31541840059656", packs: 1, customer: "MAMAS & PAPAS", carrier: "DHL ECOMMERCE UK", agent: "Ibrahim Anidi", status: "In Progress" },
   { id: "#4709688", level: "L1", category: "RETURN_TO_SENDER", consignmentNo: "T03IZA0007079400", packs: 1, customer: "PROCOOK UK LTD", carrier: "UPS", agent: "Sarah Tshikuna", status: "In Progress" },
   { id: "#4709685", level: "L1", category: "RETURN_TO_SENDER", consignmentNo: "T00PXA0022199208", packs: 1, customer: "THE DUNE GROUP", carrier: "EVRI", agent: "Apryl Watson", status: "In Progress" },
   { id: "#4709684", level: "L1", category: "RETURN_TO_SENDER", consignmentNo: "T03IZA0007096608", packs: 1, customer: "PROCOOK UK LTD", carrier: "DPD LOCAL", agent: "Rebecca Gibson", status: "In Progress" },
