@@ -147,7 +147,7 @@ export function ShipmentDetailsModal({
         </DialogHeader>
 
         {/* Info strip — matches ticket detail page style */}
-        <div className="grid grid-cols-7 gap-0 rounded-lg border border-border bg-muted/30 mb-4 -mx-8 px-8">
+        <div className="grid grid-cols-7 gap-0 rounded-lg border border-border bg-muted/30 mb-4">
           {[
             { icon: Truck,        label: "Carrier",        value: "DPD" },
             { icon: Zap,          label: "Service",        value: "NEXT DAY" },
