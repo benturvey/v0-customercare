@@ -215,67 +215,6 @@ export function ShipmentDetailsModal({
               </CardContent>
             </Card>
 
-            {details.deliveryAddress && (
-              <Card>
-                <CardHeader className="pb-1">
-                  <CardTitle className="text-lg font-medium">Delivery Address</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-col gap-4">
-                    {deliveryAddressRows.map((row, rowIndex) => (
-                      <div key={rowIndex} className="grid grid-cols-4 gap-4">
-                        {row.map((item) => (
-                          <div key={item.label} className="flex flex-col gap-1">
-                            <span className="text-sm font-medium text-muted-foreground">
-                              {item.label}
-                            </span>
-                            <span className="text-sm whitespace-nowrap">
-                              {item.value}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-
-            {details.collectionAddress && (
-              <Collapsible open={collectionAddressOpen} onOpenChange={setCollectionAddressOpen}>
-                <Card>
-                  <CardHeader className="pb-1">
-                    <CollapsibleTrigger asChild>
-                      <button className="flex items-center justify-between w-full text-left">
-                        <CardTitle className="text-lg font-medium">Collection Address</CardTitle>
-                        <ChevronDown className={`h-5 w-5 transition-transform ${collectionAddressOpen ? "rotate-180" : ""}`} />
-                      </button>
-                    </CollapsibleTrigger>
-                  </CardHeader>
-                  <CollapsibleContent>
-                    <CardContent>
-                      <div className="flex flex-col gap-4">
-                        {collectionAddressRows.map((row, rowIndex) => (
-                          <div key={rowIndex} className="grid grid-cols-4 gap-4">
-                            {row.map((item) => (
-                              <div key={item.label} className="flex flex-col gap-1">
-                                <span className="text-sm font-medium text-muted-foreground">
-                                  {item.label}
-                                </span>
-                                <span className="text-sm whitespace-nowrap">
-                                  {item.value}
-                                </span>
-                              </div>
-                            ))}
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </CollapsibleContent>
-                </Card>
-              </Collapsible>
-            )}
-
             {details.customsDetails && (
               <Card>
                 <CardHeader className="pb-1">
