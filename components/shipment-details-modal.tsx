@@ -142,7 +142,7 @@ export function ShipmentDetailsModal({
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-[#1e3a5f]">
             Consignment #15500306013410
-            <div className="text-sm font-normal text-muted-foreground mt-1">MAMAS & PAPAS</div>
+            <div className="text-lg font-semibold text-foreground mt-2">MAMAS & PAPAS</div>
           </DialogTitle>
         </DialogHeader>
 
