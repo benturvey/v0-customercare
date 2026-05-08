@@ -99,7 +99,7 @@ export function TicketQueueView() {
             <tr className="bg-muted/30 border-b border-border">
               <th className="text-left px-4 py-3 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider">
                 <div className="flex items-center gap-1">
-                  #
+                  Ticket No
                   <ArrowUpDown className="h-3 w-3" />
                 </div>
               </th>
