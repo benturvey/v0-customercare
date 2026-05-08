@@ -149,13 +149,13 @@ export function ShipmentDetailsModal({
         </DialogHeader>
 
         {/* Info strip — matches ticket detail page style */}
-        <div className="flex items-center gap-0 rounded-lg border border-border bg-muted/30 overflow-hidden mb-2">
+        <div className="flex items-center gap-0 rounded-lg border border-border bg-muted/30 overflow-hidden mb-4 flex-wrap">
           {[
             { icon: Truck,        label: "Carrier",        value: "DPD" },
             { icon: Zap,          label: "Service",        value: "NEXT DAY" },
             { icon: Hash,         label: "Ship Ref",       value: "67020805" },
             { icon: CalendarDays, label: "Despatch Date",  value: "14/03/2026" },
-            { icon: Activity,     label: "Status",         value: "PARCEL LABEL APPLIED", valueClass: "text-amber-600 font-bold" },
+            { icon: Activity,     label: "Status",         value: "PARCEL LABEL APPLIED", isHighlight: true },
             { icon: Clock,        label: "ETA",            value: "—" },
             { icon: PenLine,      label: "Sign By",        value: "—" },
           ].map((item, index, arr) => {
@@ -163,12 +163,12 @@ export function ShipmentDetailsModal({
             return (
               <div
                 key={item.label}
-                className={`flex items-center gap-2 px-3 py-3 min-w-0 ${index !== arr.length - 1 ? "border-r border-border" : ""}`}
+                className={`flex items-center gap-2 px-4 py-3 min-w-fit ${index !== arr.length - 1 ? "border-r border-border" : ""}`}
               >
                 <Icon className="h-4 w-4 shrink-0 text-[#009eff]" />
                 <div className="flex flex-col leading-tight">
                   <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">{item.label}</span>
-                  <span className={`text-sm font-semibold text-[#1e3a5f] whitespace-nowrap ${"valueClass" in item ? item.valueClass : ""}`}>{item.value}</span>
+                  <span className={`text-sm font-semibold ${item.isHighlight ? "text-amber-600" : "text-[#1e3a5f]"}`}>{item.value}</span>
                 </div>
               </div>
             )
