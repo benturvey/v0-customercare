@@ -28,7 +28,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-import { ChevronDown, User } from "lucide-react"
+import { ChevronDown, User, Truck, Zap, Hash, CalendarDays, Activity, Clock, PenLine } from "lucide-react"
 import { useState } from "react"
 import type { ShipmentDetails } from "@/types/shipment"
 
@@ -140,13 +140,40 @@ export function ShipmentDetailsModal({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="!w-[98vw] !max-w-[98vw] !h-[95vh] !max-h-[95vh] !translate-x-[-50%] !translate-y-[-50%] overflow-y-auto p-8">
         <DialogHeader>
-          <DialogTitle className="text-xl font-semibold">
-            View Shipment Details
+          <DialogTitle className="text-2xl font-bold text-[#1e3a5f]">
+            Consignment #15500306013410
           </DialogTitle>
-          <DialogDescription>
+          <DialogDescription className="sr-only">
             Shipment and delivery address information for consignment {details.consignmentNo}
           </DialogDescription>
         </DialogHeader>
+
+        {/* Info strip — matches ticket detail page style */}
+        <div className="flex items-center gap-0 rounded-lg border border-border bg-muted/30 overflow-hidden mb-2">
+          {[
+            { icon: Truck,        label: "Carrier",        value: "DPD" },
+            { icon: Zap,          label: "Service",        value: "NEXT DAY" },
+            { icon: Hash,         label: "Ship Ref",       value: "67020805" },
+            { icon: CalendarDays, label: "Despatch Date",  value: "14/03/2026" },
+            { icon: Activity,     label: "Status",         value: "PARCEL LABEL APPLIED", valueClass: "text-amber-600 font-bold" },
+            { icon: Clock,        label: "ETA",            value: "—" },
+            { icon: PenLine,      label: "Sign By",        value: "—" },
+          ].map((item, index, arr) => {
+            const Icon = item.icon
+            return (
+              <div
+                key={item.label}
+                className={`flex items-center gap-2 px-3 py-3 min-w-0 ${index !== arr.length - 1 ? "border-r border-border" : ""}`}
+              >
+                <Icon className="h-4 w-4 shrink-0 text-[#009eff]" />
+                <div className="flex flex-col leading-tight">
+                  <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">{item.label}</span>
+                  <span className={`text-sm font-semibold text-[#1e3a5f] whitespace-nowrap ${"valueClass" in item ? item.valueClass : ""}`}>{item.value}</span>
+                </div>
+              </div>
+            )
+          })}
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
           <div className="flex flex-col gap-4">
