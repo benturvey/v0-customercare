@@ -78,7 +78,7 @@ export function OverviewView() {
           <TableHeader>
             <TableRow>
               <TableHead className="font-semibold text-foreground">Name</TableHead>
-              <TableHead className="font-semibold text-foreground">Level</TableHead>
+              <TableHead className="font-semibold text-foreground">Agent Level</TableHead>
               <TableHead className="font-semibold text-foreground">Current Ticket</TableHead>
               <TableHead className="font-semibold text-foreground">Status</TableHead>
             </TableRow>
