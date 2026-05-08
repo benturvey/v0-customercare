@@ -90,7 +90,11 @@ export function OverviewView() {
                   {agent.currentTicket || "—"}
                 </TableCell>
                 <TableCell>
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-muted text-muted-foreground">
+                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${
+                    agent.status === "Idle"
+                      ? "bg-amber-100 text-amber-700"
+                      : "bg-muted text-muted-foreground"
+                  }`}>
                     {agent.status}
                   </span>
                 </TableCell>
