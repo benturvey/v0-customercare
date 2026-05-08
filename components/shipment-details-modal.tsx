@@ -161,7 +161,7 @@ export function ShipmentDetailsModal({
             return (
               <div
                 key={item.label}
-                className={`flex items-center gap-2 py-3 ${idx < 6 ? "border-r border-border pr-4" : ""}`}
+                className={`flex items-center gap-2 py-3 pl-4 ${idx < 6 ? "border-r border-border pr-4" : "pr-4"}`}
               >
                 <Icon className="h-4 w-4 flex-shrink-0 text-[#009eff]" />
                 <div className="flex flex-col leading-tight">
