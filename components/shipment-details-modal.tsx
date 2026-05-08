@@ -149,30 +149,32 @@ export function ShipmentDetailsModal({
         </DialogHeader>
 
         {/* Info strip — matches ticket detail page style */}
-        <div className="flex items-center gap-0 rounded-lg border border-border bg-muted/30 overflow-hidden mb-4 flex-wrap">
-          {[
-            { icon: Truck,        label: "Carrier",        value: "DPD" },
-            { icon: Zap,          label: "Service",        value: "NEXT DAY" },
-            { icon: Hash,         label: "Ship Ref",       value: "67020805" },
-            { icon: CalendarDays, label: "Despatch Date",  value: "14/03/2026" },
-            { icon: Activity,     label: "Status",         value: "PARCEL LABEL APPLIED", isHighlight: true },
-            { icon: Clock,        label: "ETA",            value: "—" },
-            { icon: PenLine,      label: "Sign By",        value: "—" },
-          ].map((item, index, arr) => {
-            const Icon = item.icon
-            return (
-              <div
-                key={item.label}
-                className={`flex items-center gap-2 px-4 py-3 min-w-fit ${index !== arr.length - 1 ? "border-r border-border" : ""}`}
-              >
-                <Icon className="h-4 w-4 shrink-0 text-[#009eff]" />
-                <div className="flex flex-col leading-tight">
-                  <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">{item.label}</span>
-                  <span className={`text-sm font-semibold ${item.isHighlight ? "text-amber-600" : "text-[#1e3a5f]"}`}>{item.value}</span>
+        <div className="w-full rounded-lg border border-border bg-muted/30 overflow-x-auto mb-4">
+          <div className="flex items-stretch divide-x divide-border">
+            {[
+              { icon: Truck,        label: "Carrier",        value: "DPD" },
+              { icon: Zap,          label: "Service",        value: "NEXT DAY" },
+              { icon: Hash,         label: "Ship Ref",       value: "67020805" },
+              { icon: CalendarDays, label: "Despatch Date",  value: "14/03/2026" },
+              { icon: Activity,     label: "Status",         value: "PARCEL LABEL APPLIED", isHighlight: true },
+              { icon: Clock,        label: "ETA",            value: "—" },
+              { icon: PenLine,      label: "Sign By",        value: "—" },
+            ].map((item) => {
+              const Icon = item.icon
+              return (
+                <div
+                  key={item.label}
+                  className="flex items-center gap-2 px-4 py-3 whitespace-nowrap flex-shrink-0"
+                >
+                  <Icon className="h-4 w-4 flex-shrink-0 text-[#009eff]" />
+                  <div className="flex flex-col leading-tight">
+                    <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">{item.label}</span>
+                    <span className={`text-sm font-semibold ${item.isHighlight ? "text-amber-600" : "text-[#1e3a5f]"}`}>{item.value}</span>
+                  </div>
                 </div>
-              </div>
-            )
-          })}
+              )
+            })}
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
