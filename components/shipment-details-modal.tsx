@@ -345,6 +345,32 @@ export function ShipmentDetailsModal({
               </Card>
             )}
 
+            {details.deliveryAddress && (
+              <Card>
+                <CardHeader className="pb-1">
+                  <CardTitle className="text-lg font-medium">Delivery Address</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-col gap-4">
+                    {deliveryAddressRows.map((row, rowIndex) => (
+                      <div key={rowIndex} className="grid grid-cols-4 gap-4">
+                        {row.map((item) => (
+                          <div key={item.label} className="flex flex-col gap-1">
+                            <span className="text-sm font-medium text-muted-foreground">
+                              {item.label}
+                            </span>
+                            <span className="text-sm whitespace-nowrap">
+                              {item.value}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
             <Card>
               <CardHeader className="pb-1">
                 <CardTitle className="text-lg font-medium">Queries</CardTitle>
