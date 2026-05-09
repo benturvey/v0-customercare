@@ -269,46 +269,6 @@ export function ShipmentDetailsModal({
                 </div>
               </CardContent>
             </Card>
-
-                  {parcelsView === "tracking" && details.pieceHistory && details.pieceHistory.length > 0 && (
-                    <div className={`relative ${details.pieceHistory.length > 5 ? "max-h-[400px] overflow-y-auto pr-2" : ""}`}>
-                      {details.pieceHistory.map((history, index) => (
-                        <div key={index} className="flex gap-4 pb-6 last:pb-0">
-                          <div className="flex flex-col items-center">
-                            <div className="w-3 h-3 rounded-full bg-[#98d9ff] shrink-0" />
-                            {index < details.pieceHistory!.length - 1 && (
-                              <div className="w-0.5 h-full bg-border mt-1" />
-                            )}
-                          </div>
-                          <div className="flex-1 pb-2">
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                              <span>{history.carrierScanDate}</span>
-                              {history.scanDepot && <span>· {history.scanDepot}</span>}
-                              {history.scanDeptName && <span>· {history.scanDeptName}</span>}
-                            </div>
-                            <div className="font-medium text-sm mt-1">{history.carrierScanText}</div>
-                            <div className="text-sm text-blue-600 mt-0.5">{history.gfsScanText}</div>
-                            <div className="text-xs text-muted-foreground mt-1">Received by GFS: {history.receivedByGfs}</div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {parcelsView === "tracking" && (!details.pieceHistory || details.pieceHistory.length === 0) && (
-                    <div className="text-center py-4 text-muted-foreground">
-                      No tracking history available.
-                    </div>
-                  )}
-
-                  {parcelsView === "parcels" && (!details.pieces || details.pieces.length === 0) && (
-                    <div className="text-center py-4 text-muted-foreground">
-                      No parcels available.
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            ) : null}
           </div>
 
           <div className="flex flex-col gap-4">
