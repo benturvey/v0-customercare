@@ -311,7 +311,7 @@ export function ShipmentDetailsModal({
                 className="text-sm bg-[#98d9ff] hover:bg-[#7cc9f0] text-foreground"
                 onClick={() => setQueriesSheetOpen(true)}
               >
-                View Queries
+                View Tickets
               </Button>
             </div>
 
