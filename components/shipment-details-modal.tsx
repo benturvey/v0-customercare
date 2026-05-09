@@ -46,6 +46,7 @@ export function ShipmentDetailsModal({
   const [collectionAddressOpen, setCollectionAddressOpen] = useState(false)
   const [collectionAddressSheetOpen, setCollectionAddressSheetOpen] = useState(false)
   const [relatedDocumentsSheetOpen, setRelatedDocumentsSheetOpen] = useState(false)
+  const [customsDetailsSheetOpen, setCustomsDetailsSheetOpen] = useState(false)
   const [queryHistoryOpen, setQueryHistoryOpen] = useState(false)
   const [customerContactModalOpen, setCustomerContactModalOpen] = useState(false)
   const [parcelsView, setParcelsView] = useState<"parcels" | "tracking">("parcels")
@@ -361,10 +362,7 @@ export function ShipmentDetailsModal({
                 variant="outline" 
                 size="sm" 
                 className="text-sm"
-                onClick={() => {
-                  const customsSection = document.getElementById('customs-details-section');
-                  customsSection?.scrollIntoView({ behavior: 'smooth' });
-                }}
+                onClick={() => setCustomsDetailsSheetOpen(true)}
               >
                 View Customs Details
               </Button>
@@ -629,6 +627,69 @@ export function ShipmentDetailsModal({
                 <span className="text-sm font-medium text-[#1e3a5f]">Invoice No</span>
                 <span className="text-sm">1374819</span>
               </div>
+            </div>
+          </div>
+        </SheetContent>
+      </Sheet>
+
+      <Sheet open={customsDetailsSheetOpen} onOpenChange={setCustomsDetailsSheetOpen}>
+        <SheetContent className="w-[700px] sm:w-[800px] sm:max-w-[800px] px-8">
+          <SheetHeader className="pb-2">
+            <button
+              onClick={() => setCustomsDetailsSheetOpen(false)}
+              className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-3 -ml-1"
+            >
+              <ChevronDown className="h-4 w-4 rotate-90" />
+              Back to Shipment
+            </button>
+            <SheetTitle className="text-xl font-semibold">Customs Details</SheetTitle>
+          </SheetHeader>
+          <div className="mt-6 flex flex-col gap-8">
+            <div className="grid grid-cols-3 gap-x-8 gap-y-4">
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium text-[#1e3a5f]">EORI Number</span>
+                <span className="text-sm">{details.customsDetails?.eoriNumber || "-"}</span>
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium text-[#1e3a5f]">IOSS Number</span>
+                <span className="text-sm">{details.customsDetails?.iossNumber || "-"}</span>
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium text-[#1e3a5f]">Consignment Value</span>
+                <span className="text-sm">{details.customsDetails?.consignmentValue || "-"}</span>
+              </div>
+            </div>
+            <div className="rounded-md border overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="whitespace-nowrap">Item</TableHead>
+                    <TableHead className="whitespace-nowrap">Product Description</TableHead>
+                    <TableHead className="whitespace-nowrap">Country of Manufacture</TableHead>
+                    <TableHead className="whitespace-nowrap">Value</TableHead>
+                    <TableHead className="whitespace-nowrap">HS Code</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {details.customsDetails?.items && details.customsDetails.items.length > 0 ? (
+                    details.customsDetails.items.map((item) => (
+                      <TableRow key={item.item}>
+                        <TableCell>{item.item}</TableCell>
+                        <TableCell>{item.productDescription || "-"}</TableCell>
+                        <TableCell>{item.countryOfManufacture || "-"}</TableCell>
+                        <TableCell>{item.value || "-"}</TableCell>
+                        <TableCell>{item.hsCode || "-"}</TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={5} className="text-center py-4 text-muted-foreground">
+                        No customs items found.
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
             </div>
           </div>
         </SheetContent>
