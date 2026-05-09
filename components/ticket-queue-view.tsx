@@ -43,12 +43,32 @@ type Ticket = typeof ticketData[number]
 export function TicketQueueView() {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedTicket, setSelectedTicket] = useState<Ticket | null>(null)
+  const [sortField, setSortField] = useState<"packs" | "carrier" | "agent" | null>(null)
+  const [sortDir, setSortDir] = useState<"asc" | "desc">("asc")
   const [selectedFilters, setSelectedFilters] = useState<Record<string, string>>({
     "All Statuses": "All Statuses",
     "All Carriers": "All Carriers",
     "All Customers": "All Customers",
     "All Agents": "All Agents",
     "All Regions": "All Regions",
+  })
+
+  const handleSort = (field: "packs" | "carrier" | "agent") => {
+    if (sortField === field) {
+      setSortDir(sortDir === "asc" ? "desc" : "asc")
+    } else {
+      setSortField(field)
+      setSortDir("asc")
+    }
+  }
+
+  const sortedTickets = [...ticketData].sort((a, b) => {
+    if (!sortField) return 0
+    const aVal = sortField === "packs" ? a.packs : (a[sortField] || "").toLowerCase()
+    const bVal = sortField === "packs" ? b.packs : (b[sortField] || "").toLowerCase()
+    if (aVal < bVal) return sortDir === "asc" ? -1 : 1
+    if (aVal > bVal) return sortDir === "asc" ? 1 : -1
+    return 0
   })
 
   if (selectedTicket) {
@@ -121,8 +141,11 @@ export function TicketQueueView() {
                   <ArrowUpDown className="h-3 w-3" />
                 </div>
               </th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                No. Parcels
+              <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider cursor-pointer select-none" onClick={() => handleSort("packs")}>
+                <div className="flex items-center gap-1">
+                  No. Parcels
+                  <ArrowUpDown className={`h-3 w-3 ${sortField === "packs" ? "text-blue-600" : ""}`} />
+                </div>
               </th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                 <div className="flex items-center gap-1">
@@ -130,11 +153,17 @@ export function TicketQueueView() {
                   <ArrowUpDown className="h-3 w-3" />
                 </div>
               </th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                Carrier
+              <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider cursor-pointer select-none" onClick={() => handleSort("carrier")}>
+                <div className="flex items-center gap-1">
+                  Carrier
+                  <ArrowUpDown className={`h-3 w-3 ${sortField === "carrier" ? "text-blue-600" : ""}`} />
+                </div>
               </th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                Agent
+              <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider cursor-pointer select-none" onClick={() => handleSort("agent")}>
+                <div className="flex items-center gap-1">
+                  Agent
+                  <ArrowUpDown className={`h-3 w-3 ${sortField === "agent" ? "text-blue-600" : ""}`} />
+                </div>
               </th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                 <div className="flex items-center gap-1">
@@ -145,7 +174,7 @@ export function TicketQueueView() {
             </tr>
           </thead>
           <tbody>
-            {ticketData.map((ticket, index) => (
+            {sortedTickets.map((ticket, index) => (
               <tr
                 key={ticket.id}
                 onClick={() => setSelectedTicket(ticket)}
