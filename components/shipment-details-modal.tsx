@@ -497,7 +497,10 @@ export function ShipmentDetailsModal({
               <ChevronDown className="h-4 w-4 rotate-90" />
               Back to Shipment
             </button>
-            <SheetTitle className="text-xl font-semibold">Customs Details</SheetTitle>
+            <SheetTitle className="text-xl font-semibold flex items-center gap-2">
+              <Zap className="h-5 w-5 text-blue-600" />
+              Customs Details
+            </SheetTitle>
           </SheetHeader>
           <div className="mt-6 flex flex-col gap-8">
             <div className="grid grid-cols-3 gap-x-8 gap-y-4">
