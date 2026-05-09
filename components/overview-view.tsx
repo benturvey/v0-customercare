@@ -117,7 +117,11 @@ export function OverviewView() {
                   {agent.ticketLevel || "—"}
                 </TableCell>
                 <TableCell>
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-muted text-muted-foreground">
+                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium ${
+                    agent.status === "In Progress"
+                      ? "bg-green-100 text-green-800"
+                      : "bg-muted text-muted-foreground"
+                  }`}>
                     {agent.status}
                   </span>
                 </TableCell>
