@@ -28,7 +28,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-import { ChevronDown, User, Truck, Zap, Hash, CalendarDays, Activity, Clock, PenLine, List, GitCommitHorizontal, Package, MapPin, Home, FileText, Ticket } from "lucide-react"
+import { ChevronDown, User, Truck, Zap, Hash, CalendarDays, Activity, Clock, PenLine, List, GitCommitHorizontal, Package, MapPin, Home, FileText, Ticket, Eye, PlusCircle, CheckCircle, ClipboardList, UserCheck } from "lucide-react"
 import { useState, useEffect } from "react"
 import type { ShipmentDetails } from "@/types/shipment"
 
@@ -605,13 +605,13 @@ export function ShipmentDetailsModal({
               </Table>
             </div>
             <div className="flex justify-end gap-2">
-              <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => setQueryHistoryOpen(true)}>View</Button>
-              <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Raise Query functionality")}>Raise</Button>
-              <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Update Query functionality")}>Update</Button>
-              <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Resolve Query functionality")}>Resolve</Button>
-              <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Defer functionality")}>Defer</Button>
-              <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Review functionality")}>Review</Button>
-              <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Delegate functionality")}>Delegate</Button>
+              <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white flex items-center gap-1.5" onClick={() => setQueryHistoryOpen(true)}><Eye className="h-3.5 w-3.5" />View</Button>
+              <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white flex items-center gap-1.5" onClick={() => alert("Raise Query functionality")}><PlusCircle className="h-3.5 w-3.5" />Raise</Button>
+              <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white flex items-center gap-1.5" onClick={() => alert("Update Query functionality")}><PenLine className="h-3.5 w-3.5" />Update</Button>
+              <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white flex items-center gap-1.5" onClick={() => alert("Resolve Query functionality")}><CheckCircle className="h-3.5 w-3.5" />Resolve</Button>
+              <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white flex items-center gap-1.5" onClick={() => alert("Defer functionality")}><Clock className="h-3.5 w-3.5" />Defer</Button>
+              <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white flex items-center gap-1.5" onClick={() => alert("Review functionality")}><ClipboardList className="h-3.5 w-3.5" />Review</Button>
+              <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white flex items-center gap-1.5" onClick={() => alert("Delegate functionality")}><UserCheck className="h-3.5 w-3.5" />Delegate</Button>
             </div>
           </div>
         </SheetContent>
