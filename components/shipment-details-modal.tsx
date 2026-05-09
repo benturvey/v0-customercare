@@ -419,7 +419,7 @@ export function ShipmentDetailsModal({
               </Collapsible>
             )}
 
-            {details.pieceHistory && details.pieceHistory.length > 0 && (
+            {details.pieceHistory && details.pieceHistory.length > 0 ? (
               <Card>
                 <CardHeader className="pb-1">
                   <CardTitle className="text-lg font-medium">Tracking</CardTitle>
@@ -446,6 +446,17 @@ export function ShipmentDetailsModal({
                         </div>
                       </div>
                     ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ) : (
+              <Card>
+                <CardHeader className="pb-1">
+                  <CardTitle className="text-lg font-medium">Tracking</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-center py-4 text-muted-foreground">
+                    No tracking history available.
                   </div>
                 </CardContent>
               </Card>
