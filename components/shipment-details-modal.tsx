@@ -410,47 +410,47 @@ export function ShipmentDetailsModal({
                 <span className="text-sm">{details.collectionAddress?.contact || "-"}</span>
               </div>
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium text-[#1e3a5f]">Contact Mobile</span>
+                <span className="text-sm font-medium text-muted-foreground">Contact Mobile</span>
                 <span className="text-sm">{details.collectionAddress?.contactMobile || "-"}</span>
               </div>
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium text-[#1e3a5f]">Contact Phone</span>
+                <span className="text-sm font-medium text-muted-foreground">Contact Phone</span>
                 <span className="text-sm">{details.collectionAddress?.contactPhone || "-"}</span>
               </div>
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium text-[#1e3a5f]">Company</span>
+                <span className="text-sm font-medium text-muted-foreground">Company</span>
                 <span className="text-sm">{details.collectionAddress?.company || "-"}</span>
               </div>
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium text-[#1e3a5f]">Address Line 1</span>
+                <span className="text-sm font-medium text-muted-foreground">Address Line 1</span>
                 <span className="text-sm">{details.collectionAddress?.addressLine1 || "-"}</span>
               </div>
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium text-[#1e3a5f]">Address Line 2</span>
+                <span className="text-sm font-medium text-muted-foreground">Address Line 2</span>
                 <span className="text-sm">{details.collectionAddress?.addressLine2 || "-"}</span>
               </div>
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium text-[#1e3a5f]">District</span>
+                <span className="text-sm font-medium text-muted-foreground">District</span>
                 <span className="text-sm">{details.collectionAddress?.district || "-"}</span>
               </div>
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium text-[#1e3a5f]">County</span>
+                <span className="text-sm font-medium text-muted-foreground">County</span>
                 <span className="text-sm">{details.collectionAddress?.county || "-"}</span>
               </div>
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium text-[#1e3a5f]">Town</span>
+                <span className="text-sm font-medium text-muted-foreground">Town</span>
                 <span className="text-sm">{details.collectionAddress?.town || "-"}</span>
               </div>
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium text-[#1e3a5f]">Country</span>
+                <span className="text-sm font-medium text-muted-foreground">Country</span>
                 <span className="text-sm">{details.collectionAddress?.country || "-"}</span>
               </div>
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium text-[#1e3a5f]">Postcode</span>
+                <span className="text-sm font-medium text-muted-foreground">Postcode</span>
                 <span className="text-sm">{details.collectionAddress?.postcode || "-"}</span>
               </div>
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium text-[#1e3a5f]">Email</span>
+                <span className="text-sm font-medium text-muted-foreground">Email</span>
                 <span className="text-sm">{details.collectionAddress?.email || "-"}</span>
               </div>
             </div>
