@@ -536,6 +536,13 @@ export function ShipmentDetailsModal({
       <Sheet open={collectionAddressSheetOpen} onOpenChange={setCollectionAddressSheetOpen}>
         <SheetContent className="w-[600px] sm:w-[700px] sm:max-w-[700px] px-8">
           <SheetHeader className="pb-2">
+            <button
+              onClick={() => setCollectionAddressSheetOpen(false)}
+              className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-3 -ml-1"
+            >
+              <ChevronDown className="h-4 w-4 rotate-90" />
+              Back to Shipment
+            </button>
             <SheetTitle className="text-xl font-semibold">Collection Address</SheetTitle>
           </SheetHeader>
           <div className="mt-6 flex flex-col gap-6">
