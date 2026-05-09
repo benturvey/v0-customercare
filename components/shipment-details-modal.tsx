@@ -51,6 +51,7 @@ export function ShipmentDetailsModal({
   const [queryHistoryOpen, setQueryHistoryOpen] = useState(false)
   const [customerContactModalOpen, setCustomerContactModalOpen] = useState(false)
   const [parcelsView, setParcelsView] = useState<"parcels" | "tracking">("parcels")
+  const [selectedParcelNo, setSelectedParcelNo] = useState<string | null>(null)
 
   // Customer contact details
   const customerContactDetails = {
@@ -230,7 +231,11 @@ export function ShipmentDetailsModal({
                         </TableHeader>
                         <TableBody>
                           {details.pieces.map((piece) => (
-                            <TableRow key={piece.itemNo}>
+                            <TableRow
+                              key={piece.itemNo}
+                              onClick={() => setSelectedParcelNo(piece.parcelNo)}
+                              className={`cursor-pointer ${selectedParcelNo === piece.parcelNo ? "bg-blue-50 dark:bg-blue-950/30" : ""}`}
+                            >
                               <TableCell>{piece.itemNo}</TableCell>
                               <TableCell className="font-mono text-sm">{piece.parcelNo}</TableCell>
                               <TableCell>{piece.carrierScanDate}</TableCell>
@@ -319,7 +324,7 @@ export function ShipmentDetailsModal({
                 <CardHeader className="pb-1">
                   <CardTitle className="text-lg font-medium flex items-center gap-2">
                     <GitCommitHorizontal className="h-4 w-4" />
-                    Tracking
+                    {selectedParcelNo ? `Tracking #${selectedParcelNo}` : "Tracking"}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
