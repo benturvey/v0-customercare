@@ -88,19 +88,18 @@ export function ShipmentDetailsModal({
       { label: "Contact", value: details.deliveryAddress.contact },
       { label: "Contact Mobile", value: details.deliveryAddress.contactMobile || "-" },
       { label: "Contact Phone", value: details.deliveryAddress.contactPhone },
-      { label: "Company", value: details.deliveryAddress.company },
+    ],
+    [
+      { label: "Contact Email", value: details.deliveryAddress.email },
     ],
     [
       { label: "Address Line 1", value: details.deliveryAddress.addressLine1 },
       { label: "Address Line 2", value: details.deliveryAddress.addressLine2 || "-" },
-      { label: "District", value: details.deliveryAddress.district || "-" },
-      { label: "County", value: details.deliveryAddress.county },
+      { label: "Town", value: details.deliveryAddress.town },
     ],
     [
-      { label: "Town", value: details.deliveryAddress.town },
-      { label: "Country", value: details.deliveryAddress.country || "-" },
+      { label: "County", value: details.deliveryAddress.county },
       { label: "Postcode", value: details.deliveryAddress.postcode },
-      { label: "Email", value: details.deliveryAddress.email },
     ],
   ] : []
 
