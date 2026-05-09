@@ -214,7 +214,6 @@ export function ShipmentDetailsModal({
                 </div>
                 </CardContent>
               </Card>
-            )}
 
             <Card>
               <CardHeader className="pb-1">
