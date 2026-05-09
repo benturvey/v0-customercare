@@ -36,7 +36,6 @@ interface TimeInputProps {
 
 function TimeInput({ value, onChange, label, isActive }: TimeInputProps) {
   const [isOpen, setIsOpen] = useState(false)
-  console.log("[v0] TimeInput isActive:", isActive, "label:", label)
   const [inputValue, setInputValue] = useState(value)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,10 +85,9 @@ function TimeInput({ value, onChange, label, isActive }: TimeInputProps) {
               className="absolute right-0 top-0 h-full px-2 hover:bg-transparent"
               onClick={() => setIsOpen(!isOpen)}
             >
-              <ChevronDown 
-                className="h-4 w-4" 
-                style={isActive ? { color: '#2563eb', fontWeight: 'bold' } : { color: '#9ca3af' }}
-              />
+              <span style={{ color: isActive ? '#2563eb' : '#9ca3af', display: 'flex' }}>
+                <ChevronDown className="h-4 w-4" />
+              </span>
             </Button>
           </div>
         </PopoverTrigger>
