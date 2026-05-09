@@ -298,8 +298,8 @@ export function ShipmentDetailsModal({
                               {history.scanDepot && <span>· {history.scanDepot}</span>}
                               {history.scanDeptName && <span>· {history.scanDeptName}</span>}
                             </div>
-                            <div className="font-medium text-sm mt-1 text-blue-600">{history.carrierScanText}</div>
-                            <div className="text-sm text-muted-foreground mt-0.5">{history.gfsScanText}</div>
+                            <div className="font-medium text-sm mt-1">{history.carrierScanText}</div>
+                            <div className="text-sm text-blue-600 mt-0.5">{history.gfsScanText}</div>
                             <div className="text-xs text-muted-foreground mt-1">Received by GFS: {history.receivedByGfs}</div>
                           </div>
                         </div>
