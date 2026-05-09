@@ -28,7 +28,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-import { ChevronDown, User, Truck, Zap, Hash, CalendarDays, Activity, Clock, PenLine, List, GitCommitHorizontal } from "lucide-react"
+import { ChevronDown, User, Truck, Zap, Hash, CalendarDays, Activity, Clock, PenLine, List, GitCommitHorizontal, Package, MapPin } from "lucide-react"
 import { useState } from "react"
 import type { ShipmentDetails } from "@/types/shipment"
 
@@ -173,7 +173,10 @@ export function ShipmentDetailsModal({
           <div className="flex flex-col gap-4">
             <Card>
               <CardHeader className="pb-1">
-                <CardTitle className="text-lg font-medium">Shipment Details</CardTitle>
+                <CardTitle className="text-lg font-medium flex items-center gap-2">
+                  <Package className="h-4 w-4" />
+                  Shipment Details
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-col gap-4">
@@ -267,7 +270,10 @@ export function ShipmentDetailsModal({
             {details.deliveryAddress && (
               <Card>
                 <CardHeader className="pb-1">
-                  <CardTitle className="text-lg font-medium">Delivery Address</CardTitle>
+                  <CardTitle className="text-lg font-medium flex items-center gap-2">
+                    <MapPin className="h-4 w-4" />
+                    Delivery Address
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-col gap-6">
