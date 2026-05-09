@@ -238,7 +238,12 @@ export function ShipmentDetailsModal({
                             <TableCell>{piece.itemNo}</TableCell>
                             <TableCell className="font-mono text-sm">{piece.parcelNo}</TableCell>
                             <TableCell>{piece.carrierScanDate}</TableCell>
-                            <TableCell>{piece.carrierText}</TableCell>
+                            <TableCell>
+                              <div className="flex flex-col gap-1">
+                                <span>{piece.carrierText}</span>
+                                <span className="text-xs font-semibold text-blue-600">PARCEL LABEL APPLIED</span>
+                              </div>
+                            </TableCell>
                             <TableCell>{piece.swap || "-"}</TableCell>
                           </TableRow>
                         ))}
