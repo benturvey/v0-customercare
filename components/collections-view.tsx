@@ -195,7 +195,7 @@ export function CollectionsView() {
                   <TableHead className="whitespace-nowrap text-muted-foreground">Collection Date</TableHead>
                   <TableHead className="whitespace-nowrap text-muted-foreground">Consignment No</TableHead>
                   <TableHead className="whitespace-nowrap text-muted-foreground">Customer Ref</TableHead>
-                  <TableHead className="whitespace-nowrap text-right text-muted-foreground">Packs</TableHead>
+                  <TableHead className="whitespace-nowrap text-right text-muted-foreground">No. Parcels</TableHead>
                   <TableHead className="whitespace-nowrap text-muted-foreground">Contract No</TableHead>
                   <TableHead className="whitespace-nowrap text-muted-foreground">Actions</TableHead>
                 </TableRow>
