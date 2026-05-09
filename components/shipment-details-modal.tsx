@@ -51,7 +51,9 @@ export function ShipmentDetailsModal({
   const [queryHistoryOpen, setQueryHistoryOpen] = useState(false)
   const [customerContactModalOpen, setCustomerContactModalOpen] = useState(false)
   const [parcelsView, setParcelsView] = useState<"parcels" | "tracking">("parcels")
-  const [selectedParcelNo, setSelectedParcelNo] = useState<string | null>(null)
+  const [selectedParcelNo, setSelectedParcelNo] = useState<string | null>(
+    details?.pieces && details.pieces.length > 0 ? details.pieces[0].parcelNo : null
+  )
 
   // Customer contact details
   const customerContactDetails = {
