@@ -322,62 +322,6 @@ export function ShipmentDetailsModal({
               </Card>
             ) : null}
 
-            {details.customsDetails && (
-              <Card>
-                <CardHeader className="pb-1">
-                  <CardTitle className="text-lg font-medium">Customs Details</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-3 gap-4 mb-4">
-                    <div className="flex flex-col gap-1">
-                      <span className="text-sm font-medium text-muted-foreground">EORI Number</span>
-                      <span className="text-sm whitespace-nowrap">{details.customsDetails.eoriNumber || "-"}</span>
-                    </div>
-                    <div className="flex flex-col gap-1">
-                      <span className="text-sm font-medium text-muted-foreground">IOSS Number</span>
-                      <span className="text-sm whitespace-nowrap">{details.customsDetails.iossNumber || "-"}</span>
-                    </div>
-                    <div className="flex flex-col gap-1">
-                      <span className="text-sm font-medium text-muted-foreground">Consignment Value</span>
-                      <span className="text-sm whitespace-nowrap">{details.customsDetails.consignmentValue || "-"}</span>
-                    </div>
-                  </div>
-                  <div className="rounded-md border overflow-x-auto">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="whitespace-nowrap">Item</TableHead>
-                          <TableHead className="whitespace-nowrap">Product Description</TableHead>
-                          <TableHead className="whitespace-nowrap">Country of Manufacture</TableHead>
-                          <TableHead className="whitespace-nowrap">Value</TableHead>
-                          <TableHead className="whitespace-nowrap">HS Code</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {details.customsDetails.items && details.customsDetails.items.length > 0 ? (
-                          details.customsDetails.items.map((item) => (
-                            <TableRow key={item.item}>
-                              <TableCell>{item.item}</TableCell>
-                              <TableCell>{item.productDescription || "-"}</TableCell>
-                              <TableCell>{item.countryOfManufacture || "-"}</TableCell>
-                              <TableCell>{item.value || "-"}</TableCell>
-                              <TableCell>{item.hsCode || "-"}</TableCell>
-                            </TableRow>
-                          ))
-                        ) : (
-                          <TableRow>
-                            <TableCell colSpan={5} className="text-center py-4 text-muted-foreground">
-                              No customs items found.
-                            </TableCell>
-                          </TableRow>
-                        )}
-                      </TableBody>
-                    </Table>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-
             <Card>
               <CardHeader className="pb-1">
                 <CardTitle className="text-lg font-medium">Queries</CardTitle>
@@ -486,6 +430,62 @@ export function ShipmentDetailsModal({
                   </CollapsibleContent>
                 </Card>
               </Collapsible>
+            )}
+
+            {details.customsDetails && (
+              <Card>
+                <CardHeader className="pb-1">
+                  <CardTitle className="text-lg font-medium">Customs Details</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-3 gap-4 mb-4">
+                    <div className="flex flex-col gap-1">
+                      <span className="text-sm font-medium text-muted-foreground">EORI Number</span>
+                      <span className="text-sm whitespace-nowrap">{details.customsDetails.eoriNumber || "-"}</span>
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <span className="text-sm font-medium text-muted-foreground">IOSS Number</span>
+                      <span className="text-sm whitespace-nowrap">{details.customsDetails.iossNumber || "-"}</span>
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <span className="text-sm font-medium text-muted-foreground">Consignment Value</span>
+                      <span className="text-sm whitespace-nowrap">{details.customsDetails.consignmentValue || "-"}</span>
+                    </div>
+                  </div>
+                  <div className="rounded-md border overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="whitespace-nowrap">Item</TableHead>
+                          <TableHead className="whitespace-nowrap">Product Description</TableHead>
+                          <TableHead className="whitespace-nowrap">Country of Manufacture</TableHead>
+                          <TableHead className="whitespace-nowrap">Value</TableHead>
+                          <TableHead className="whitespace-nowrap">HS Code</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {details.customsDetails.items && details.customsDetails.items.length > 0 ? (
+                          details.customsDetails.items.map((item) => (
+                            <TableRow key={item.item}>
+                              <TableCell>{item.item}</TableCell>
+                              <TableCell>{item.productDescription || "-"}</TableCell>
+                              <TableCell>{item.countryOfManufacture || "-"}</TableCell>
+                              <TableCell>{item.value || "-"}</TableCell>
+                              <TableCell>{item.hsCode || "-"}</TableCell>
+                            </TableRow>
+                          ))
+                        ) : (
+                          <TableRow>
+                            <TableCell colSpan={5} className="text-center py-4 text-muted-foreground">
+                              No customs items found.
+                            </TableCell>
+                          </TableRow>
+                        )}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </CardContent>
+              </Card>
             )}
 
 
