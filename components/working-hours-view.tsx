@@ -85,9 +85,13 @@ function TimeInput({ value, onChange, label, isActive }: TimeInputProps) {
               className="absolute right-0 top-0 h-full px-2 hover:bg-transparent"
               onClick={() => setIsOpen(!isOpen)}
             >
-              <span style={{ color: isActive ? '#2563eb' : '#9ca3af', display: 'flex' }}>
-                <ChevronDown className="h-4 w-4" />
-              </span>
+              <ChevronDown 
+                className="h-4 w-4" 
+                style={{ 
+                  stroke: isActive ? '#2563eb' : '#9ca3af',
+                  color: isActive ? '#2563eb' : '#9ca3af'
+                }} 
+              />
             </Button>
           </div>
         </PopoverTrigger>
