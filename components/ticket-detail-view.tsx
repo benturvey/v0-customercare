@@ -540,7 +540,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               }`}
             >
               <List className="h-3.5 w-3.5" />
-              List
+              Parcels
             </button>
             <button
               onClick={() => setTrackingView("timeline")}
@@ -551,7 +551,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               }`}
             >
               <GitCommitHorizontal className="h-3.5 w-3.5" />
-              Timeline
+              Tracking
             </button>
           </div>
         </div>
