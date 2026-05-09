@@ -28,7 +28,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-import { ChevronDown, User, Truck, Zap, Hash, CalendarDays, Activity, Clock, PenLine } from "lucide-react"
+import { ChevronDown, User, Truck, Zap, Hash, CalendarDays, Activity, Clock, PenLine, List, GitCommitHorizontal } from "lucide-react"
 import { useState } from "react"
 import type { ShipmentDetails } from "@/types/shipment"
 
@@ -46,6 +46,7 @@ export function ShipmentDetailsModal({
   const [collectionAddressOpen, setCollectionAddressOpen] = useState(false)
   const [queryHistoryOpen, setQueryHistoryOpen] = useState(false)
   const [customerContactModalOpen, setCustomerContactModalOpen] = useState(false)
+  const [parcelsView, setParcelsView] = useState<"parcels" | "tracking">("parcels")
 
   // Customer contact details
   const customerContactDetails = {
@@ -214,44 +215,112 @@ export function ShipmentDetailsModal({
               </CardContent>
             </Card>
 
-            {details.pieces && details.pieces.length > 0 && (
+            {(details.pieces && details.pieces.length > 0) || (details.pieceHistory && details.pieceHistory.length > 0) ? (
               <Card>
-                <CardHeader className="pb-1">
-                  <CardTitle className="text-lg font-medium">Parcels</CardTitle>
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="text-lg font-medium">Parcels & Tracking</CardTitle>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-muted-foreground font-medium">View as:</span>
+                      <div className="flex rounded-md border border-border overflow-hidden">
+                        <button
+                          onClick={() => setParcelsView("parcels")}
+                          className={`flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium transition-colors ${
+                            parcelsView === "parcels"
+                              ? "bg-[#1e3a5f] text-white"
+                              : "bg-background text-muted-foreground hover:bg-muted"
+                          }`}
+                        >
+                          <List className="h-3.5 w-3.5" />
+                          Parcels
+                        </button>
+                        <button
+                          onClick={() => setParcelsView("tracking")}
+                          className={`flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium transition-colors border-l border-border ${
+                            parcelsView === "tracking"
+                              ? "bg-[#1e3a5f] text-white"
+                              : "bg-background text-muted-foreground hover:bg-muted"
+                          }`}
+                        >
+                          <GitCommitHorizontal className="h-3.5 w-3.5" />
+                          Tracking
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="rounded-md border overflow-x-auto">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="whitespace-nowrap">Parcel No</TableHead>
-                          <TableHead className="whitespace-nowrap">Tracking No</TableHead>
-                          <TableHead className="whitespace-nowrap">Latest Carrier Update</TableHead>
-                          <TableHead className="whitespace-nowrap">Carrier Scan Text</TableHead>
-                          <TableHead className="whitespace-nowrap">Swap</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {details.pieces.map((piece) => (
-                          <TableRow key={piece.itemNo}>
-                            <TableCell>{piece.itemNo}</TableCell>
-                            <TableCell className="font-mono text-sm">{piece.parcelNo}</TableCell>
-                            <TableCell>{piece.carrierScanDate}</TableCell>
-                            <TableCell>
-                              <div className="flex flex-col gap-1">
-                                <span>{piece.carrierText}</span>
-                                <span className="text-xs font-semibold text-blue-600">PARCEL LABEL APPLIED</span>
-                              </div>
-                            </TableCell>
-                            <TableCell>{piece.swap || "-"}</TableCell>
+                  {parcelsView === "parcels" && details.pieces && details.pieces.length > 0 && (
+                    <div className="rounded-md border overflow-x-auto">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead className="whitespace-nowrap">Parcel No</TableHead>
+                            <TableHead className="whitespace-nowrap">Tracking No</TableHead>
+                            <TableHead className="whitespace-nowrap">Latest Carrier Update</TableHead>
+                            <TableHead className="whitespace-nowrap">Carrier Scan Text</TableHead>
+                            <TableHead className="whitespace-nowrap">Swap</TableHead>
                           </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </div>
+                        </TableHeader>
+                        <TableBody>
+                          {details.pieces.map((piece) => (
+                            <TableRow key={piece.itemNo}>
+                              <TableCell>{piece.itemNo}</TableCell>
+                              <TableCell className="font-mono text-sm">{piece.parcelNo}</TableCell>
+                              <TableCell>{piece.carrierScanDate}</TableCell>
+                              <TableCell>
+                                <div className="flex flex-col gap-1">
+                                  <span>{piece.carrierText}</span>
+                                  <span className="text-xs font-semibold text-blue-600">PARCEL LABEL APPLIED</span>
+                                </div>
+                              </TableCell>
+                              <TableCell>{piece.swap || "-"}</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
+                  )}
+
+                  {parcelsView === "tracking" && details.pieceHistory && details.pieceHistory.length > 0 && (
+                    <div className={`relative ${details.pieceHistory.length > 5 ? "max-h-[400px] overflow-y-auto pr-2" : ""}`}>
+                      {details.pieceHistory.map((history, index) => (
+                        <div key={index} className="flex gap-4 pb-6 last:pb-0">
+                          <div className="flex flex-col items-center">
+                            <div className="w-3 h-3 rounded-full bg-[#98d9ff] shrink-0" />
+                            {index < details.pieceHistory!.length - 1 && (
+                              <div className="w-0.5 h-full bg-border mt-1" />
+                            )}
+                          </div>
+                          <div className="flex-1 pb-2">
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <span>{history.carrierScanDate}</span>
+                              {history.scanDepot && <span>· {history.scanDepot}</span>}
+                              {history.scanDeptName && <span>· {history.scanDeptName}</span>}
+                            </div>
+                            <div className="font-medium text-sm mt-1">{history.carrierScanText}</div>
+                            <div className="text-sm text-muted-foreground mt-0.5">{history.gfsScanText}</div>
+                            <div className="text-xs text-muted-foreground mt-1">Received by GFS: {history.receivedByGfs}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {parcelsView === "tracking" && (!details.pieceHistory || details.pieceHistory.length === 0) && (
+                    <div className="text-center py-4 text-muted-foreground">
+                      No tracking history available.
+                    </div>
+                  )}
+
+                  {parcelsView === "parcels" && (!details.pieces || details.pieces.length === 0) && (
+                    <div className="text-center py-4 text-muted-foreground">
+                      No parcels available.
+                    </div>
+                  )}
                 </CardContent>
               </Card>
-            )}
+            ) : null}
 
             {details.customsDetails && (
               <Card>
@@ -419,48 +488,7 @@ export function ShipmentDetailsModal({
               </Collapsible>
             )}
 
-            {details.pieceHistory && details.pieceHistory.length > 0 ? (
-              <Card>
-                <CardHeader className="pb-1">
-                  <CardTitle className="text-lg font-medium">Tracking</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className={`relative ${details.pieceHistory.length > 5 ? "max-h-[400px] overflow-y-auto pr-2" : ""}`}>
-                    {details.pieceHistory.map((history, index) => (
-                      <div key={index} className="flex gap-4 pb-6 last:pb-0">
-                        <div className="flex flex-col items-center">
-                          <div className="w-3 h-3 rounded-full bg-[#98d9ff] shrink-0" />
-                          {index < details.pieceHistory!.length - 1 && (
-                            <div className="w-0.5 h-full bg-border mt-1" />
-                          )}
-                        </div>
-                        <div className="flex-1 pb-2">
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <span>{history.carrierScanDate}</span>
-                            {history.scanDepot && <span>· {history.scanDepot}</span>}
-                            {history.scanDeptName && <span>· {history.scanDeptName}</span>}
-                          </div>
-                          <div className="font-medium text-sm mt-1">{history.carrierScanText}</div>
-                          <div className="text-sm text-muted-foreground mt-0.5">{history.gfsScanText}</div>
-                          <div className="text-xs text-muted-foreground mt-1">Received by GFS: {history.receivedByGfs}</div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ) : (
-              <Card>
-                <CardHeader className="pb-1">
-                  <CardTitle className="text-lg font-medium">Tracking</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center py-4 text-muted-foreground">
-                    No tracking history available.
-                  </div>
-                </CardContent>
-              </Card>
-            )}
+
 
           </div>
         </div>
