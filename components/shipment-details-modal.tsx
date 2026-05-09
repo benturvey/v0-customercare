@@ -238,11 +238,11 @@ export function ShipmentDetailsModal({
                       <Table>
                         <TableHeader>
                           <TableRow>
-                            <TableHead className="whitespace-nowrap">Item No</TableHead>
-                            <TableHead className="whitespace-nowrap">Parcel No</TableHead>
-                            <TableHead className="whitespace-nowrap">Latest Carrier Update</TableHead>
-                            <TableHead className="whitespace-nowrap">Carrier Scan Text</TableHead>
-                            <TableHead className="whitespace-nowrap">Swap</TableHead>
+                            <TableHead className="whitespace-nowrap text-muted-foreground">Item No</TableHead>
+                            <TableHead className="whitespace-nowrap text-muted-foreground">Parcel No</TableHead>
+                            <TableHead className="whitespace-nowrap text-muted-foreground">Latest Carrier Update</TableHead>
+                            <TableHead className="whitespace-nowrap text-muted-foreground">Carrier Scan Text</TableHead>
+                            <TableHead className="whitespace-nowrap text-muted-foreground">Swap</TableHead>
                           </TableRow>
                         </TableHeader>
                         <TableBody>
