@@ -211,7 +211,10 @@ export function ShipmentDetailsModal({
               <Card>
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
-                    <CardTitle className="text-lg font-medium">Parcels & Tracking</CardTitle>
+                    <CardTitle className="text-lg font-medium flex items-center gap-2">
+                      <List className="h-4 w-4" />
+                      Parcels
+                    </CardTitle>
                     <div className="flex items-center gap-2">
                       <span className="text-sm text-muted-foreground font-medium">View as:</span>
                       <div className="flex rounded-md border border-border overflow-hidden">
