@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { Input } from "@/components/ui/input"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   Popover,
   PopoverContent,
@@ -205,6 +206,89 @@ export function WorkingHoursView() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Carrier Working Hours Table */}
+      <div className="mt-8">
+        <CarrierWorkingHoursTable />
+      </div>
     </div>
+  )
+}
+
+const CARRIERS = [
+  "Amazon Logistics UK",
+  "BJS",
+  "Coll-8",
+  "DHL ECommerce UK",
+  "DHL Express",
+  "DPD",
+  "DPD Germany",
+  "DPD Local",
+  "DPD Netherlands",
+  "DX Freight",
+  "Evri",
+  "Exelot",
+  "FedEx",
+  "GFS International",
+  "OCS",
+  "Royal Mail",
+  "UPS",
+]
+
+type CarrierRow = {
+  monFri: boolean
+  sat: boolean
+  sun: boolean
+  bankHolidays: boolean
+}
+
+function CarrierWorkingHoursTable() {
+  const [rows, setRows] = useState<Record<string, CarrierRow>>(
+    Object.fromEntries(
+      CARRIERS.map((c) => [c, { monFri: false, sat: false, sun: false, bankHolidays: false }])
+    )
+  )
+
+  const toggle = (carrier: string, field: keyof CarrierRow) => {
+    setRows((prev) => ({
+      ...prev,
+      [carrier]: { ...prev[carrier], [field]: !prev[carrier][field] },
+    }))
+  }
+
+  return (
+    <Card>
+      <CardContent className="p-0">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b">
+                <th className="text-left px-4 py-3 font-semibold text-muted-foreground">Carrier</th>
+                <th className="text-center px-4 py-3 font-semibold text-muted-foreground">Mon - Fri</th>
+                <th className="text-center px-4 py-3 font-semibold text-muted-foreground">Sat</th>
+                <th className="text-center px-4 py-3 font-semibold text-muted-foreground">Sun</th>
+                <th className="text-center px-4 py-3 font-semibold text-muted-foreground">Bank Holidays</th>
+              </tr>
+            </thead>
+            <tbody>
+              {CARRIERS.map((carrier, index) => (
+                <tr key={carrier} className={index % 2 === 0 ? "bg-muted/30" : ""}>
+                  <td className="px-4 py-3 font-medium text-foreground">{carrier}</td>
+                  {(["monFri", "sat", "sun", "bankHolidays"] as (keyof CarrierRow)[]).map((field) => (
+                    <td key={field} className="px-4 py-3 text-center">
+                      <Checkbox
+                        checked={rows[carrier][field]}
+                        onCheckedChange={() => toggle(carrier, field)}
+                        className="data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600 mx-auto"
+                      />
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </CardContent>
+    </Card>
   )
 }
