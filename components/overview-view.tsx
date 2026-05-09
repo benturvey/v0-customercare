@@ -109,11 +109,11 @@ export function OverviewView() {
                     )}
                   </span>
                 </TableCell>
-                <TableCell className="text-muted-foreground">{agent.level}</TableCell>
-                <TableCell className="text-muted-foreground">
+                <TableCell className="text-foreground font-medium">{agent.level}</TableCell>
+                <TableCell className="text-foreground font-medium">
                   {agent.currentTicket || "—"}
                 </TableCell>
-                <TableCell className="text-muted-foreground">
+                <TableCell className="text-foreground font-medium">
                   {agent.ticketLevel || "—"}
                 </TableCell>
                 <TableCell>
