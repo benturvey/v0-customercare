@@ -10,7 +10,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import { ChevronDown } from "lucide-react"
+import { ChevronDown, Clock } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 // Generate time options in 15-minute increments (24-hour format)
@@ -137,7 +137,10 @@ export function WorkingHoursView() {
         <Card className={activeHoursType !== "standard" ? "opacity-60" : ""}>
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-medium text-foreground">Standard Working Hours</h2>
+              <div className="flex items-center gap-2">
+                <Clock className="h-5 w-5 text-blue-600" />
+                <h2 className="text-lg font-medium text-foreground">Standard Working Hours</h2>
+              </div>
               <div className="flex items-center gap-2">
                 <Label htmlFor="standard-toggle" className="text-sm text-muted-foreground">
                   {activeHoursType === "standard" ? "Active" : "Inactive"}
@@ -170,7 +173,10 @@ export function WorkingHoursView() {
         <Card className={activeHoursType !== "extended" ? "opacity-60" : ""}>
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-medium text-foreground">Extended Working Hours</h2>
+              <div className="flex items-center gap-2">
+                <Clock className="h-5 w-5 text-blue-600" />
+                <h2 className="text-lg font-medium text-foreground">Extended Working Hours</h2>
+              </div>
               <div className="flex items-center gap-2">
                 <Label htmlFor="extended-toggle" className="text-sm text-muted-foreground">
                   {activeHoursType === "extended" ? "Active" : "Inactive"}
