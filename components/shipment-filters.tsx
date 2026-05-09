@@ -48,7 +48,7 @@ export function ShipmentFilters({
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7 gap-4">
           {/* Customer Dropdown */}
           <div className="space-y-2 min-w-[200px]">
-            <Label htmlFor="customer" className="whitespace-nowrap">Customer</Label>
+            <Label htmlFor="customer" className="whitespace-nowrap text-muted-foreground">Customer</Label>
             <Select
               value={filters.customer}
               onValueChange={(value) => updateFilter("customer", value)}
@@ -68,7 +68,7 @@ export function ShipmentFilters({
 
           {/* Carrier Dropdown */}
           <div className="space-y-2 min-w-[180px]">
-            <Label htmlFor="carrier" className="whitespace-nowrap">Carrier</Label>
+            <Label htmlFor="carrier" className="whitespace-nowrap text-muted-foreground">Carrier</Label>
             <Select
               value={filters.carrier}
               onValueChange={(value) => updateFilter("carrier", value)}
@@ -88,7 +88,7 @@ export function ShipmentFilters({
 
           {/* Service Dropdown */}
           <div className="space-y-2 min-w-[180px]">
-            <Label htmlFor="service" className="whitespace-nowrap">Service</Label>
+            <Label htmlFor="service" className="whitespace-nowrap text-muted-foreground">Service</Label>
             <Select
               value={filters.service}
               onValueChange={(value) => updateFilter("service", value)}
@@ -108,7 +108,7 @@ export function ShipmentFilters({
 
           {/* Consignment No */}
           <div className="space-y-2 min-w-[160px]">
-            <Label htmlFor="consignmentNo" className="whitespace-nowrap">Consignment No</Label>
+            <Label htmlFor="consignmentNo" className="whitespace-nowrap text-muted-foreground">Consignment No</Label>
             <Input
               id="consignmentNo"
               placeholder="Enter consignment no"
@@ -119,7 +119,7 @@ export function ShipmentFilters({
 
           {/* Parcel No */}
           <div className="space-y-2 min-w-[140px]">
-            <Label htmlFor="parcelNo" className="whitespace-nowrap">Parcel No</Label>
+            <Label htmlFor="parcelNo" className="whitespace-nowrap text-muted-foreground">Parcel No</Label>
             <Input
               id="parcelNo"
               placeholder="Enter parcel no"
@@ -130,7 +130,7 @@ export function ShipmentFilters({
 
           {/* Tracking No */}
           <div className="space-y-2 min-w-[140px]">
-            <Label htmlFor="trackingNo" className="whitespace-nowrap">Tracking No</Label>
+            <Label htmlFor="trackingNo" className="whitespace-nowrap text-muted-foreground">Tracking No</Label>
             <Input
               id="trackingNo"
               placeholder="Enter tracking no"
@@ -141,7 +141,7 @@ export function ShipmentFilters({
 
           {/* Shipment Reference No */}
           <div className="space-y-2 min-w-[180px]">
-            <Label htmlFor="shipmentReferenceNo" className="whitespace-nowrap">Shipment Reference No</Label>
+            <Label htmlFor="shipmentReferenceNo" className="whitespace-nowrap text-muted-foreground">Shipment Reference No</Label>
             <Input
               id="shipmentReferenceNo"
               placeholder="Enter reference no"
