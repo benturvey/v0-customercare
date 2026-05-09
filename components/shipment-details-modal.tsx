@@ -306,30 +306,34 @@ export function ShipmentDetailsModal({
             <div className="flex flex-wrap gap-2">
               <Button 
                 size="sm" 
-                className="text-sm bg-[#98d9ff] hover:bg-[#7cc9f0] text-foreground"
+                className="text-sm bg-[#98d9ff] hover:bg-[#7cc9f0] text-foreground flex items-center gap-1.5"
                 onClick={() => setCollectionAddressSheetOpen(true)}
               >
+                <Home className="h-3.5 w-3.5" />
                 View Collection Address
               </Button>
               <Button 
                 size="sm" 
-                className="text-sm bg-[#98d9ff] hover:bg-[#7cc9f0] text-foreground"
+                className="text-sm bg-[#98d9ff] hover:bg-[#7cc9f0] text-foreground flex items-center gap-1.5"
                 onClick={() => setCustomsDetailsSheetOpen(true)}
               >
+                <Zap className="h-3.5 w-3.5" />
                 View Customs Details
               </Button>
               <Button 
                 size="sm" 
-                className="text-sm bg-[#98d9ff] hover:bg-[#7cc9f0] text-foreground"
+                className="text-sm bg-[#98d9ff] hover:bg-[#7cc9f0] text-foreground flex items-center gap-1.5"
                 onClick={() => setRelatedDocumentsSheetOpen(true)}
               >
+                <FileText className="h-3.5 w-3.5" />
                 View Related Documents
               </Button>
               <Button 
                 size="sm" 
-                className="text-sm bg-[#98d9ff] hover:bg-[#7cc9f0] text-foreground"
+                className="text-sm bg-[#98d9ff] hover:bg-[#7cc9f0] text-foreground flex items-center gap-1.5"
                 onClick={() => setQueriesSheetOpen(true)}
               >
+                <Ticket className="h-3.5 w-3.5" />
                 View Tickets
               </Button>
             </div>
