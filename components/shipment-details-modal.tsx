@@ -45,6 +45,7 @@ export function ShipmentDetailsModal({
 }: ShipmentDetailsModalProps) {
   const [collectionAddressOpen, setCollectionAddressOpen] = useState(false)
   const [collectionAddressSheetOpen, setCollectionAddressSheetOpen] = useState(false)
+  const [relatedDocumentsSheetOpen, setRelatedDocumentsSheetOpen] = useState(false)
   const [queryHistoryOpen, setQueryHistoryOpen] = useState(false)
   const [customerContactModalOpen, setCustomerContactModalOpen] = useState(false)
   const [parcelsView, setParcelsView] = useState<"parcels" | "tracking">("parcels")
@@ -371,7 +372,7 @@ export function ShipmentDetailsModal({
                 variant="outline" 
                 size="sm" 
                 className="text-sm"
-                onClick={() => alert("View Related Documents functionality")}
+                onClick={() => setRelatedDocumentsSheetOpen(true)}
               >
                 View Related Documents
               </Button>
@@ -594,6 +595,39 @@ export function ShipmentDetailsModal({
               <div className="flex flex-col gap-1">
                 <span className="text-sm font-medium text-[#1e3a5f]">Email</span>
                 <span className="text-sm">{details.collectionAddress?.email || "-"}</span>
+              </div>
+            </div>
+          </div>
+        </SheetContent>
+      </Sheet>
+
+      <Sheet open={relatedDocumentsSheetOpen} onOpenChange={setRelatedDocumentsSheetOpen}>
+        <SheetContent className="w-[500px] sm:w-[550px] sm:max-w-[550px] px-8">
+          <SheetHeader className="pb-2">
+            <button
+              onClick={() => setRelatedDocumentsSheetOpen(false)}
+              className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-3 -ml-1"
+            >
+              <ChevronDown className="h-4 w-4 rotate-90" />
+              Back to Shipment
+            </button>
+            <SheetTitle className="text-xl font-semibold">Related Documents</SheetTitle>
+          </SheetHeader>
+          <div className="mt-6 flex flex-col gap-6">
+            <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium text-[#1e3a5f]">Claim ID</span>
+                <span className="text-sm">9051562</span>
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium text-[#1e3a5f]">Status</span>
+                <span className="text-sm">Claim incomplete</span>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium text-[#1e3a5f]">Invoice No</span>
+                <span className="text-sm">1374819</span>
               </div>
             </div>
           </div>
