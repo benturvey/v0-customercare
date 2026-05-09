@@ -265,7 +265,7 @@ export function ShipmentDetailsModal({
                       <span className="text-sm whitespace-nowrap">{details.customsDetails.eoriNumber || "-"}</span>
                     </div>
                     <div className="flex flex-col gap-1">
-                      <span className="text-sm font-medium text-muted-foreground">Ioss Number</span>
+                      <span className="text-sm font-medium text-muted-foreground">IOSS Number</span>
                       <span className="text-sm whitespace-nowrap">{details.customsDetails.iossNumber || "-"}</span>
                     </div>
                     <div className="flex flex-col gap-1">
