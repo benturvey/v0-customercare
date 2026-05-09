@@ -50,7 +50,7 @@ function NavButton({ item, active, onSelect }: { item: NavItem; active: boolean;
           : "text-muted-foreground hover:bg-muted hover:text-foreground"
       )}
     >
-      <Icon className="h-4 w-4 shrink-0" />
+      <Icon className={cn("h-4 w-4 shrink-0", active ? "" : "text-blue-600")} />
       <span className="truncate">{item.label}</span>
     </button>
   )
