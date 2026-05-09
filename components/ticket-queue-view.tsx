@@ -152,7 +152,7 @@ export function TicketQueueView() {
                 className={`border-b border-border last:border-b-0 cursor-pointer ${index % 2 === 0 ? "bg-background" : "bg-muted/20"
                   } hover:bg-muted/40 transition-colors`}
               >
-                <td className="px-4 py-3 text-sm font-medium text-[#1e3a5f]">
+                <td className="px-4 py-3 text-sm font-medium text-blue-600">
                   {ticket.id}
                 </td>
                 <td className="px-4 py-3 text-sm text-[#1e3a5f]">
