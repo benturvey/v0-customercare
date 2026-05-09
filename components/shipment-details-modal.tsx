@@ -47,6 +47,7 @@ export function ShipmentDetailsModal({
   const [collectionAddressSheetOpen, setCollectionAddressSheetOpen] = useState(false)
   const [relatedDocumentsSheetOpen, setRelatedDocumentsSheetOpen] = useState(false)
   const [customsDetailsSheetOpen, setCustomsDetailsSheetOpen] = useState(false)
+  const [queriesSheetOpen, setQueriesSheetOpen] = useState(false)
   const [queryHistoryOpen, setQueryHistoryOpen] = useState(false)
   const [customerContactModalOpen, setCustomerContactModalOpen] = useState(false)
   const [parcelsView, setParcelsView] = useState<"parcels" | "tracking">("parcels")
@@ -366,10 +367,7 @@ export function ShipmentDetailsModal({
                 variant="outline" 
                 size="sm" 
                 className="text-sm"
-                onClick={() => {
-                  const queriesSection = document.getElementById('queries-section');
-                  queriesSection?.scrollIntoView({ behavior: 'smooth' });
-                }}
+                onClick={() => setQueriesSheetOpen(true)}
               >
                 View Queries
               </Button>
@@ -591,6 +589,60 @@ export function ShipmentDetailsModal({
                   )}
                 </TableBody>
               </Table>
+            </div>
+          </div>
+        </SheetContent>
+      </Sheet>
+
+      <Sheet open={queriesSheetOpen} onOpenChange={setQueriesSheetOpen}>
+        <SheetContent className="w-[900px] sm:w-[1000px] sm:max-w-[1000px] px-8">
+          <SheetHeader className="pb-2">
+            <button
+              onClick={() => setQueriesSheetOpen(false)}
+              className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-3 -ml-1"
+            >
+              <ChevronDown className="h-4 w-4 rotate-90" />
+              Back to Shipment
+            </button>
+            <SheetTitle className="text-xl font-semibold">Queries</SheetTitle>
+          </SheetHeader>
+          <div className="mt-6 flex flex-col gap-6">
+            <div className="rounded-md border overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="whitespace-nowrap">No</TableHead>
+                    <TableHead className="whitespace-nowrap">Query ID</TableHead>
+                    <TableHead className="whitespace-nowrap">State</TableHead>
+                    <TableHead className="whitespace-nowrap">Raised By</TableHead>
+                    <TableHead className="whitespace-nowrap">Created Date</TableHead>
+                    <TableHead className="whitespace-nowrap">Preferred Contact Type</TableHead>
+                    <TableHead className="whitespace-nowrap">Tel No</TableHead>
+                    <TableHead className="whitespace-nowrap">Email</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>1</TableCell>
+                    <TableCell>4696387</TableCell>
+                    <TableCell>Open</TableCell>
+                    <TableCell>Arfeen Mulla</TableCell>
+                    <TableCell>18/03/2026 10:15</TableCell>
+                    <TableCell>-</TableCell>
+                    <TableCell>-</TableCell>
+                    <TableCell>arfeen.mulla@mamasandpapas.com</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
+            <div className="flex justify-end gap-2">
+              <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => setQueryHistoryOpen(true)}>View</Button>
+              <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Raise Query functionality")}>Raise</Button>
+              <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Update Query functionality")}>Update</Button>
+              <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Resolve Query functionality")}>Resolve</Button>
+              <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Defer functionality")}>Defer</Button>
+              <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Review functionality")}>Review</Button>
+              <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Delegate functionality")}>Delegate</Button>
             </div>
           </div>
         </SheetContent>
