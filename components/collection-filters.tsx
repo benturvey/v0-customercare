@@ -45,7 +45,7 @@ export function CollectionFilters({
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {/* Customer Dropdown */}
           <div className="space-y-2">
-            <Label htmlFor="customer">Customer</Label>
+            <Label htmlFor="customer" className="text-muted-foreground">Customer</Label>
             <Select
               value={filters.customer}
               onValueChange={(value) => updateFilter("customer", value)}
@@ -65,7 +65,7 @@ export function CollectionFilters({
 
           {/* Carrier Dropdown */}
           <div className="space-y-2">
-            <Label htmlFor="carrier">Carrier</Label>
+            <Label htmlFor="carrier" className="text-muted-foreground">Carrier</Label>
             <Select
               value={filters.carrier}
               onValueChange={(value) => updateFilter("carrier", value)}
@@ -85,7 +85,7 @@ export function CollectionFilters({
 
           {/* Collection ID (was Tracking No) */}
           <div className="space-y-2">
-            <Label htmlFor="trackingNo">Collection ID</Label>
+            <Label htmlFor="trackingNo" className="text-muted-foreground">Collection ID</Label>
             <Input
               id="trackingNo"
               placeholder="Enter collection ID"
@@ -96,7 +96,7 @@ export function CollectionFilters({
 
           {/* Customer Reference (was Shipment Reference No) */}
           <div className="space-y-2">
-            <Label htmlFor="shipmentReferenceNo">Customer Reference</Label>
+            <Label htmlFor="shipmentReferenceNo" className="text-muted-foreground">Customer Reference</Label>
             <Input
               id="shipmentReferenceNo"
               placeholder="Enter customer reference"
@@ -107,7 +107,7 @@ export function CollectionFilters({
 
           {/* Postcode */}
           <div className="space-y-2">
-            <Label htmlFor="postcode">Postcode</Label>
+            <Label htmlFor="postcode" className="text-muted-foreground">Postcode</Label>
             <Input
               id="postcode"
               placeholder="Enter postcode"
@@ -118,7 +118,7 @@ export function CollectionFilters({
 
           {/* Set Collection Date Period (was Set Despatch Date Period) */}
           <div className="space-y-2">
-            <Label htmlFor="despatchDatePeriod">Set Collection Date Period</Label>
+            <Label htmlFor="despatchDatePeriod" className="text-muted-foreground">Set Collection Date Period</Label>
             <Select
               value={filters.despatchDatePeriod}
               onValueChange={(value) => updateFilter("despatchDatePeriod", value)}
@@ -138,7 +138,7 @@ export function CollectionFilters({
 
           {/* Collection Date From (was Despatch Date From) */}
           <div className="space-y-2">
-            <Label htmlFor="despatchDateFrom">Collection Date From</Label>
+            <Label htmlFor="despatchDateFrom" className="text-muted-foreground">Collection Date From</Label>
             <Input
               id="despatchDateFrom"
               type="date"
@@ -149,7 +149,7 @@ export function CollectionFilters({
 
           {/* Collection Date To (was Despatch Date To) */}
           <div className="space-y-2">
-            <Label htmlFor="despatchDateTo">Collection Date To</Label>
+            <Label htmlFor="despatchDateTo" className="text-muted-foreground">Collection Date To</Label>
             <Input
               id="despatchDateTo"
               type="date"
