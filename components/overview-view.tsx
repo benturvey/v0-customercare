@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Loader2, Clock, PlaneTakeoff } from "lucide-react"
+import { Loader2, Clock, PlaneTakeoff, ShieldCheck } from "lucide-react"
 import {
   Table,
   TableBody,
@@ -100,6 +100,9 @@ export function OverviewView() {
                     )}
                     {agent.status === "Out of Office" && (
                       <PlaneTakeoff className="h-3.5 w-3.5 text-red-500" />
+                    )}
+                    {agent.status === "ADM" && (
+                      <ShieldCheck className="h-3.5 w-3.5 text-purple-600" />
                     )}
                   </span>
                 </TableCell>
