@@ -87,7 +87,7 @@ function TimeInput({ value, onChange, label, isActive }: TimeInputProps) {
             >
               <ChevronDown 
                 className="h-4 w-4" 
-                style={isActive ? { color: '#2563eb' } : undefined}
+                style={isActive ? { color: '#2563eb', fontWeight: 'bold' } : { color: '#9ca3af' }}
               />
             </Button>
           </div>
