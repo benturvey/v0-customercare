@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Loader2 } from "lucide-react"
+import { Loader2, Clock } from "lucide-react"
 import {
   Table,
   TableBody,
@@ -94,6 +94,9 @@ export function OverviewView() {
                     {agent.name}
                     {agent.status === "In Progress" && (
                       <Loader2 className="h-3.5 w-3.5 text-green-600 animate-spin" />
+                    )}
+                    {agent.status === "Idle" && (
+                      <Clock className="h-3.5 w-3.5 text-amber-500" />
                     )}
                   </span>
                 </TableCell>
