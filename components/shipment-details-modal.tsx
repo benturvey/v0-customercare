@@ -346,6 +346,47 @@ export function ShipmentDetailsModal({
               </Card>
             )}
 
+            <div className="flex flex-wrap gap-2">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="text-sm"
+                onClick={() => setCollectionAddressOpen(!collectionAddressOpen)}
+              >
+                View Collection Address
+              </Button>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="text-sm"
+                onClick={() => {
+                  const customsSection = document.getElementById('customs-details-section');
+                  customsSection?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                View Customs Details
+              </Button>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="text-sm"
+                onClick={() => alert("View Related Documents functionality")}
+              >
+                View Related Documents
+              </Button>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="text-sm"
+                onClick={() => {
+                  const queriesSection = document.getElementById('queries-section');
+                  queriesSection?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                View Queries
+              </Button>
+            </div>
+
             {details.collectionAddress && (
               <Collapsible open={collectionAddressOpen} onOpenChange={setCollectionAddressOpen}>
                 <Card>
@@ -378,7 +419,7 @@ export function ShipmentDetailsModal({
             )}
 
             {details.customsDetails && (
-              <Card>
+              <Card id="customs-details-section">
                 <CardHeader className="pb-1">
                   <CardTitle className="text-lg font-medium">Customs Details</CardTitle>
                 </CardHeader>
@@ -433,7 +474,7 @@ export function ShipmentDetailsModal({
               </Card>
             )}
 
-            <Card>
+            <Card id="queries-section">
               <CardHeader className="pb-1">
                 <CardTitle className="text-lg font-medium">Queries</CardTitle>
               </CardHeader>
