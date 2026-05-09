@@ -1,6 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+import { Loader2 } from "lucide-react"
 import {
   Table,
   TableBody,
@@ -88,7 +89,14 @@ export function OverviewView() {
           <TableBody>
             {agents.map((agent) => (
               <TableRow key={agent.name} className={agent.status === "In Progress" ? "bg-green-50" : agent.status === "Idle" ? "bg-amber-50" : agent.status === "Out of Office" ? "bg-red-50" : (agent.status === "ADM" || agent.status === "MGM") ? "bg-purple-50" : ""}>
-                <TableCell className="font-medium">{agent.name}</TableCell>
+                <TableCell className="font-medium">
+                  <span className="flex items-center gap-2">
+                    {agent.name}
+                    {agent.status === "In Progress" && (
+                      <Loader2 className="h-3.5 w-3.5 text-green-600 animate-spin" />
+                    )}
+                  </span>
+                </TableCell>
                 <TableCell className="text-muted-foreground">{agent.level}</TableCell>
                 <TableCell className="text-muted-foreground">
                   {agent.currentTicket || "—"}
