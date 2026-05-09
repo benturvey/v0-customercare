@@ -580,14 +580,14 @@ export function ShipmentDetailsModal({
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="whitespace-nowrap">No</TableHead>
-                    <TableHead className="whitespace-nowrap">Ticket #</TableHead>
-                    <TableHead className="whitespace-nowrap">State</TableHead>
-                    <TableHead className="whitespace-nowrap">Raised By</TableHead>
-                    <TableHead className="whitespace-nowrap">Created Date</TableHead>
-                    <TableHead className="whitespace-nowrap">Preferred Contact Type</TableHead>
-                    <TableHead className="whitespace-nowrap">Tel No</TableHead>
-                    <TableHead className="whitespace-nowrap">Email</TableHead>
+                    <TableHead className="whitespace-nowrap text-muted-foreground">No</TableHead>
+                    <TableHead className="whitespace-nowrap text-muted-foreground">Ticket #</TableHead>
+                    <TableHead className="whitespace-nowrap text-muted-foreground">State</TableHead>
+                    <TableHead className="whitespace-nowrap text-muted-foreground">Raised By</TableHead>
+                    <TableHead className="whitespace-nowrap text-muted-foreground">Created Date</TableHead>
+                    <TableHead className="whitespace-nowrap text-muted-foreground">Preferred Contact Type</TableHead>
+                    <TableHead className="whitespace-nowrap text-muted-foreground">Tel No</TableHead>
+                    <TableHead className="whitespace-nowrap text-muted-foreground">Email</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
