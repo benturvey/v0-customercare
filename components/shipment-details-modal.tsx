@@ -388,6 +388,37 @@ export function ShipmentDetailsModal({
               </Card>
             )}
 
+            {details.collectionAddress && (
+              <Collapsible open={collectionAddressOpen} onOpenChange={setCollectionAddressOpen}>
+                <Card>
+                  <CardHeader className="pb-1">
+                    <CollapsibleTrigger asChild>
+                      <button className="flex items-center justify-between w-full text-left">
+                        <CardTitle className="text-lg font-medium">Collection Address</CardTitle>
+                        <ChevronDown className={`h-5 w-5 transition-transform ${collectionAddressOpen ? "rotate-180" : ""}`} />
+                      </button>
+                    </CollapsibleTrigger>
+                  </CardHeader>
+                  <CollapsibleContent>
+                    <CardContent>
+                      <div className="flex flex-col gap-4">
+                        {collectionAddressRows.map((row, rowIndex) => (
+                          <div key={rowIndex} className="grid grid-cols-4 gap-4">
+                            {row.map((item) => (
+                              <div key={item.label} className="flex flex-col gap-1">
+                                <span className="text-sm font-medium text-muted-foreground">{item.label}</span>
+                                <span className="text-sm whitespace-nowrap">{item.value}</span>
+                              </div>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </CollapsibleContent>
+                </Card>
+              </Collapsible>
+            )}
+
             {details.pieceHistory && details.pieceHistory.length > 0 ? (
               <Card>
                 <CardHeader className="pb-1">
@@ -431,39 +462,92 @@ export function ShipmentDetailsModal({
               </Card>
             )}
 
-            {details.collectionAddress && (
-              <Collapsible open={collectionAddressOpen} onOpenChange={setCollectionAddressOpen}>
-                <Card>
-                  <CardHeader className="pb-1">
-                    <CollapsibleTrigger asChild>
-                      <button className="flex items-center justify-between w-full text-left">
-                        <CardTitle className="text-lg font-medium">Collection Address</CardTitle>
-                        <ChevronDown className={`h-5 w-5 transition-transform ${collectionAddressOpen ? "rotate-180" : ""}`} />
-                      </button>
-                    </CollapsibleTrigger>
-                  </CardHeader>
-                  <CollapsibleContent>
-                    <CardContent>
-                      <div className="flex flex-col gap-4">
-                        {collectionAddressRows.map((row, rowIndex) => (
-                          <div key={rowIndex} className="grid grid-cols-4 gap-4">
-                            {row.map((item) => (
-                              <div key={item.label} className="flex flex-col gap-1">
-                                <span className="text-sm font-medium text-muted-foreground">{item.label}</span>
-                                <span className="text-sm whitespace-nowrap">{item.value}</span>
-                              </div>
-                            ))}
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </CollapsibleContent>
-                </Card>
-              </Collapsible>
-            )}
           </div>
         </div>
       </DialogContent>
+
+      <Sheet open={queryHistoryOpen} onOpenChange={setQueryHistoryOpen}>
+        <SheetContent className="w-[600px] sm:w-[800px] sm:max-w-[800px]">
+          <SheetHeader>
+            <SheetTitle className="text-xl font-semibold">Query History</SheetTitle>
+          </SheetHeader>
+          <div className="mt-6">
+            <div className="rounded-md border overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="whitespace-nowrap">Message Time</TableHead>
+                    <TableHead className="whitespace-nowrap">Message Text</TableHead>
+                    <TableHead className="whitespace-nowrap">Source</TableHead>
+                    <TableHead className="whitespace-nowrap">Life Cycle</TableHead>
+                    <TableHead className="whitespace-nowrap">User Name</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {details.queryHistory && details.queryHistory.length > 0 ? (
+                    details.queryHistory.map((item, index) => (
+                      <TableRow key={index}>
+                        <TableCell className="whitespace-nowrap">{item.messageTime}</TableCell>
+                        <TableCell>{item.messageText}</TableCell>
+                        <TableCell>{item.source}</TableCell>
+                        <TableCell>{item.lifeCycle}</TableCell>
+                        <TableCell>{item.userName}</TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={5} className="text-center py-4 text-muted-foreground">
+                        No query history found.
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+        </SheetContent>
+      </Sheet>
+
+      {/* Customer Contact Details Modal */}
+      <Dialog open={customerContactModalOpen} onOpenChange={setCustomerContactModalOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-semibold">Customer Contact Details</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 pt-4">
+            <div>
+              <p className="text-sm text-muted-foreground">Contact Name</p>
+              <p className="font-medium">{customerContactDetails.contactName}</p>
+            </div>
+            <div>
+              <p className="text-sm text-muted-foreground">Contact Phone</p>
+              <p className="font-medium">{customerContactDetails.contactPhone}</p>
+            </div>
+            <div>
+              <p className="text-sm text-muted-foreground">Contact Email</p>
+              <div className="flex flex-wrap gap-2 mt-1">
+                {customerContactDetails.contactEmails.map((email, index) => (
+                  <span
+                    key={index}
+                    className="inline-flex items-center px-2.5 py-1 rounded-md bg-muted text-sm font-medium"
+                  >
+                    {email}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <p className="text-sm text-muted-foreground">Address</p>
+              <p className="font-medium">{customerContactDetails.address}</p>
+            </div>
+          </div>
+          <div className="flex justify-end pt-4">
+            <Button variant="outline" onClick={() => setCustomerContactModalOpen(false)}>
+              Close
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </Dialog>
   )
 }
