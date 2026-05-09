@@ -152,7 +152,7 @@ export function ShipmentFilters({
 
           {/* Company */}
           <div className="space-y-2 min-w-[140px]">
-            <Label htmlFor="company" className="whitespace-nowrap">Company</Label>
+            <Label htmlFor="company" className="whitespace-nowrap text-muted-foreground">Company</Label>
             <Input
               id="company"
               placeholder="Enter company"
@@ -163,7 +163,7 @@ export function ShipmentFilters({
 
           {/* County */}
           <div className="space-y-2 min-w-[140px]">
-            <Label htmlFor="county" className="whitespace-nowrap">County</Label>
+            <Label htmlFor="county" className="whitespace-nowrap text-muted-foreground">County</Label>
             <Input
               id="county"
               placeholder="Enter county"
@@ -174,7 +174,7 @@ export function ShipmentFilters({
 
           {/* Postcode */}
           <div className="space-y-2 min-w-[120px]">
-            <Label htmlFor="postcode" className="whitespace-nowrap">Postcode</Label>
+            <Label htmlFor="postcode" className="whitespace-nowrap text-muted-foreground">Postcode</Label>
             <Input
               id="postcode"
               placeholder="Enter postcode"
@@ -185,7 +185,7 @@ export function ShipmentFilters({
 
           {/* Country Dropdown */}
           <div className="space-y-2 min-w-[140px]">
-            <Label htmlFor="country" className="whitespace-nowrap">Country</Label>
+            <Label htmlFor="country" className="whitespace-nowrap text-muted-foreground">Country</Label>
             <Select
               value={filters.country}
               onValueChange={(value) => updateFilter("country", value)}
@@ -205,7 +205,7 @@ export function ShipmentFilters({
 
           {/* Set Despatch Date Period Dropdown */}
           <div className="space-y-2 min-w-[200px]">
-            <Label htmlFor="despatchDatePeriod" className="whitespace-nowrap">Set Despatch Date Period</Label>
+            <Label htmlFor="despatchDatePeriod" className="whitespace-nowrap text-muted-foreground">Set Despatch Date Period</Label>
             <Select
               value={filters.despatchDatePeriod}
               onValueChange={(value) => updateFilter("despatchDatePeriod", value)}
@@ -225,7 +225,7 @@ export function ShipmentFilters({
 
           {/* Despatch Date From */}
           <div className="space-y-2 min-w-[160px]">
-            <Label htmlFor="despatchDateFrom" className="whitespace-nowrap">Despatch Date From</Label>
+            <Label htmlFor="despatchDateFrom" className="whitespace-nowrap text-muted-foreground">Despatch Date From</Label>
             <Input
               id="despatchDateFrom"
               type="date"
@@ -236,7 +236,7 @@ export function ShipmentFilters({
 
           {/* Despatch Date To */}
           <div className="space-y-2 min-w-[160px]">
-            <Label htmlFor="despatchDateTo" className="whitespace-nowrap">Despatch Date To</Label>
+            <Label htmlFor="despatchDateTo" className="whitespace-nowrap text-muted-foreground">Despatch Date To</Label>
             <Input
               id="despatchDateTo"
               type="date"
