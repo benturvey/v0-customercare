@@ -217,7 +217,7 @@ export function ShipmentDetailsModal({
             {details.pieces && details.pieces.length > 0 && (
               <Card>
                 <CardHeader className="pb-1">
-                  <CardTitle className="text-lg font-medium">Pieces</CardTitle>
+                  <CardTitle className="text-lg font-medium">Tracking</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="rounded-md border overflow-x-auto">
@@ -256,7 +256,7 @@ export function ShipmentDetailsModal({
             {details.pieceHistory && details.pieceHistory.length > 0 && (
               <Card>
                 <CardHeader className="pb-1">
-                  <CardTitle className="text-lg font-medium">Piece History</CardTitle>
+                  <CardTitle className="text-lg font-medium">Tracking History</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className={`relative ${details.pieceHistory.length > 5 ? "max-h-[400px] overflow-y-auto pr-2" : ""}`}>
