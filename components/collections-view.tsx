@@ -224,10 +224,10 @@ export function CollectionsView() {
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="flex items-center gap-1"
+                          className="flex items-center gap-1 text-blue-600 hover:text-blue-700 hover:bg-blue-50"
                           onClick={() => handleViewDetails(collection)}
                         >
-                          <Eye className="h-4 w-4" />
+                          <Eye className="h-4 w-4 text-blue-600" />
                           Details
                         </Button>
                       </TableCell>
