@@ -187,17 +187,17 @@ export function CollectionsView() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="whitespace-nowrap">Collection ID</TableHead>
-                  <TableHead className="whitespace-nowrap">Carrier</TableHead>
-                  <TableHead className="whitespace-nowrap">Customer</TableHead>
-                  <TableHead className="whitespace-nowrap">Service Code</TableHead>
-                  <TableHead className="whitespace-nowrap">Service Desc</TableHead>
-                  <TableHead className="whitespace-nowrap">Collection Date</TableHead>
-                  <TableHead className="whitespace-nowrap">Consignment No</TableHead>
-                  <TableHead className="whitespace-nowrap">Customer Ref</TableHead>
-                  <TableHead className="whitespace-nowrap text-right">Packs</TableHead>
-                  <TableHead className="whitespace-nowrap">Contract No</TableHead>
-                  <TableHead className="whitespace-nowrap">Actions</TableHead>
+                  <TableHead className="whitespace-nowrap text-muted-foreground">Collection ID</TableHead>
+                  <TableHead className="whitespace-nowrap text-muted-foreground">Carrier</TableHead>
+                  <TableHead className="whitespace-nowrap text-muted-foreground">Customer</TableHead>
+                  <TableHead className="whitespace-nowrap text-muted-foreground">Service Code</TableHead>
+                  <TableHead className="whitespace-nowrap text-muted-foreground">Service Desc</TableHead>
+                  <TableHead className="whitespace-nowrap text-muted-foreground">Collection Date</TableHead>
+                  <TableHead className="whitespace-nowrap text-muted-foreground">Consignment No</TableHead>
+                  <TableHead className="whitespace-nowrap text-muted-foreground">Customer Ref</TableHead>
+                  <TableHead className="whitespace-nowrap text-right text-muted-foreground">Packs</TableHead>
+                  <TableHead className="whitespace-nowrap text-muted-foreground">Contract No</TableHead>
+                  <TableHead className="whitespace-nowrap text-muted-foreground">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
