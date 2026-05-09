@@ -140,6 +140,13 @@ export function ShipmentDetailsModal({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="!w-[98vw] !max-w-[98vw] !h-[95vh] !max-h-[95vh] !translate-x-[-50%] !translate-y-[-50%] overflow-y-auto p-8">
         <DialogHeader>
+          <button
+            onClick={() => onOpenChange(false)}
+            className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-2 -ml-1 w-fit"
+          >
+            <ChevronDown className="h-4 w-4 rotate-90" />
+            Back to Shipments
+          </button>
           <DialogTitle className="text-2xl font-bold text-[#1e3a5f]">
             Consignment #15500306013410
             <div className="text-lg font-semibold text-foreground mt-2">MAMAS & PAPAS</div>
