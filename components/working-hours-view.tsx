@@ -209,6 +209,7 @@ export function WorkingHoursView() {
 
       {/* Carrier Working Hours Table */}
       <div className="mt-8">
+        <h2 className="text-lg font-semibold text-foreground mb-4">Carrier Working Times</h2>
         <CarrierWorkingHoursTable />
       </div>
     </div>
