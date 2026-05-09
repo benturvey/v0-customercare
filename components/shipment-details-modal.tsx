@@ -379,7 +379,10 @@ export function ShipmentDetailsModal({
             {details.pieceHistory && details.pieceHistory.length > 0 ? (
               <Card>
                 <CardHeader className="pb-1">
-                  <CardTitle className="text-lg font-medium">Tracking</CardTitle>
+                  <CardTitle className="text-lg font-medium flex items-center gap-2">
+                    <GitCommitHorizontal className="h-4 w-4" />
+                    Tracking
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className={`relative ${details.pieceHistory.length > 5 ? "max-h-[400px] overflow-y-auto pr-2" : ""}`}>
