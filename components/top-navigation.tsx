@@ -38,7 +38,7 @@ const navItems: NavItem[] = [
   { id: "working-hours", label: "Working Hours", icon: Clock, section: "configuration" },
 ]
 
-const blackTextSections = ["dashboard", "operations"]
+const blackTextSections = ["dashboard", "operations", "configuration"]
 
 function NavButton({ item, active, onSelect }: { item: NavItem; active: boolean; onSelect: (id: string) => void }) {
   const Icon = item.icon
