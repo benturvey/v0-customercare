@@ -84,7 +84,7 @@ function TimeInput({ value, onChange, label }: TimeInputProps) {
               className="absolute right-0 top-0 h-full px-2 hover:bg-transparent"
               onClick={() => setIsOpen(!isOpen)}
             >
-              <ChevronDown className="h-4 w-4 text-muted-foreground" />
+              <ChevronDown className="h-4 w-4 text-blue-600" />
             </Button>
           </div>
         </PopoverTrigger>
