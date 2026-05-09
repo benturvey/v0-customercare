@@ -56,7 +56,7 @@ function NavButton({ item, active, onSelect }: { item: NavItem; active: boolean;
       )}
     >
       <Icon className={cn("h-4 w-4 shrink-0", active ? "" : "text-blue-600")} />
-      <span className="truncate">{item.label}</span>
+      <span className={item.id === "raise-non-shipment-ticket" ? "whitespace-normal text-left" : "truncate"}>{item.label}</span>
     </button>
   )
 }
