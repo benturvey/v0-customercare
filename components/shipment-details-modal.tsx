@@ -512,15 +512,15 @@ export function ShipmentDetailsModal({
           <div className="mt-6 flex flex-col gap-8">
             <div className="grid grid-cols-3 gap-x-8 gap-y-4">
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium text-[#1e3a5f]">EORI Number</span>
+                <span className="text-sm font-medium text-muted-foreground">EORI Number</span>
                 <span className="text-sm">{details.customsDetails?.eoriNumber || "-"}</span>
               </div>
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium text-[#1e3a5f]">IOSS Number</span>
+                <span className="text-sm font-medium text-muted-foreground">IOSS Number</span>
                 <span className="text-sm">{details.customsDetails?.iossNumber || "-"}</span>
               </div>
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium text-[#1e3a5f]">Consignment Value</span>
+                <span className="text-sm font-medium text-muted-foreground">Consignment Value</span>
                 <span className="text-sm">{details.customsDetails?.consignmentValue || "-"}</span>
               </div>
             </div>
@@ -528,11 +528,11 @@ export function ShipmentDetailsModal({
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="whitespace-nowrap">Item</TableHead>
-                    <TableHead className="whitespace-nowrap">Product Description</TableHead>
-                    <TableHead className="whitespace-nowrap">Country of Manufacture</TableHead>
-                    <TableHead className="whitespace-nowrap">Value</TableHead>
-                    <TableHead className="whitespace-nowrap">HS Code</TableHead>
+                    <TableHead className="whitespace-nowrap text-muted-foreground">Item</TableHead>
+                    <TableHead className="whitespace-nowrap text-muted-foreground">Product Description</TableHead>
+                    <TableHead className="whitespace-nowrap text-muted-foreground">Country of Manufacture</TableHead>
+                    <TableHead className="whitespace-nowrap text-muted-foreground">Value</TableHead>
+                    <TableHead className="whitespace-nowrap text-muted-foreground">HS Code</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
