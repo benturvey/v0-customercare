@@ -79,11 +79,11 @@ export function OverviewView() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="font-semibold text-foreground">Name</TableHead>
-              <TableHead className="font-semibold text-foreground">Agent Level</TableHead>
-              <TableHead className="font-semibold text-foreground">Current Ticket</TableHead>
-              <TableHead className="font-semibold text-foreground">Ticket Level</TableHead>
-              <TableHead className="font-semibold text-foreground">Status</TableHead>
+              <TableHead className="font-semibold text-muted-foreground">Name</TableHead>
+              <TableHead className="font-semibold text-muted-foreground">Agent Level</TableHead>
+              <TableHead className="font-semibold text-muted-foreground">Current Ticket</TableHead>
+              <TableHead className="font-semibold text-muted-foreground">Ticket Level</TableHead>
+              <TableHead className="font-semibold text-muted-foreground">Status</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
