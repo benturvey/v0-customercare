@@ -538,7 +538,7 @@ export function ShipmentDetailsModal({
               <ChevronDown className="h-4 w-4 rotate-90" />
               Back to Shipment
             </button>
-            <SheetTitle className="text-xl font-semibold">Queries</SheetTitle>
+            <SheetTitle className="text-xl font-semibold">Tickets</SheetTitle>
           </SheetHeader>
           <div className="mt-6 flex flex-col gap-6">
             <div className="rounded-md border overflow-x-auto">
@@ -546,7 +546,7 @@ export function ShipmentDetailsModal({
                 <TableHeader>
                   <TableRow>
                     <TableHead className="whitespace-nowrap">No</TableHead>
-                    <TableHead className="whitespace-nowrap">Query ID</TableHead>
+                    <TableHead className="whitespace-nowrap">Ticket #</TableHead>
                     <TableHead className="whitespace-nowrap">State</TableHead>
                     <TableHead className="whitespace-nowrap">Raised By</TableHead>
                     <TableHead className="whitespace-nowrap">Created Date</TableHead>
