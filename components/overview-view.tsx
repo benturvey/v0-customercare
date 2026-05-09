@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Loader2, Clock, PlaneTakeoff, ShieldCheck } from "lucide-react"
+import { Loader2, Clock, PlaneTakeoff, ShieldCheck, Crown } from "lucide-react"
 import {
   Table,
   TableBody,
@@ -103,6 +103,9 @@ export function OverviewView() {
                     )}
                     {agent.status === "ADM" && (
                       <ShieldCheck className="h-3.5 w-3.5 text-purple-600" />
+                    )}
+                    {agent.status === "MGM" && (
+                      <Crown className="h-3.5 w-3.5 text-yellow-600" />
                     )}
                   </span>
                 </TableCell>
