@@ -28,7 +28,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-import { ChevronDown, User, Truck, Zap, Hash, CalendarDays, Activity, Clock, PenLine, List, GitCommitHorizontal, Package, MapPin, Home } from "lucide-react"
+import { ChevronDown, User, Truck, Zap, Hash, CalendarDays, Activity, Clock, PenLine, List, GitCommitHorizontal, Package, MapPin, Home, FileText } from "lucide-react"
 import { useState, useEffect } from "react"
 import type { ShipmentDetails } from "@/types/shipment"
 
@@ -464,7 +464,10 @@ export function ShipmentDetailsModal({
               <ChevronDown className="h-4 w-4 rotate-90" />
               Back to Shipment
             </button>
-            <SheetTitle className="text-xl font-semibold">Related Documents</SheetTitle>
+            <SheetTitle className="text-xl font-semibold flex items-center gap-2">
+              <FileText className="h-5 w-5 text-blue-600" />
+              Related Documents
+            </SheetTitle>
           </SheetHeader>
           <div className="mt-6 flex flex-col gap-6">
             <div className="grid grid-cols-2 gap-x-8 gap-y-4">
