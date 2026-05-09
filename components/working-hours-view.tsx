@@ -64,7 +64,7 @@ function TimeInput({ value, onChange, label }: TimeInputProps) {
 
   return (
     <div className="grid gap-2">
-      <Label className="text-sm font-medium">{label}</Label>
+      <Label className="text-sm font-medium text-muted-foreground">{label}</Label>
       <Popover open={isOpen} onOpenChange={setIsOpen}>
         <PopoverTrigger asChild>
           <div className="relative">
