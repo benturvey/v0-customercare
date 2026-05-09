@@ -31,9 +31,10 @@ interface TimeInputProps {
   value: string
   onChange: (value: string) => void
   label: string
+  isActive?: boolean
 }
 
-function TimeInput({ value, onChange, label }: TimeInputProps) {
+function TimeInput({ value, onChange, label, isActive }: TimeInputProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [inputValue, setInputValue] = useState(value)
 
@@ -84,7 +85,7 @@ function TimeInput({ value, onChange, label }: TimeInputProps) {
               className="absolute right-0 top-0 h-full px-2 hover:bg-transparent"
               onClick={() => setIsOpen(!isOpen)}
             >
-              <ChevronDown className="h-4 w-4 text-blue-600" />
+              <ChevronDown className={`h-4 w-4 ${isActive ? "text-blue-600" : "text-muted-foreground"}`} />
             </Button>
           </div>
         </PopoverTrigger>
@@ -147,11 +148,13 @@ export function WorkingHoursView() {
                 label="Start Time"
                 value={standardStartTime}
                 onChange={setStandardStartTime}
+                isActive={activeHoursType === "standard"}
               />
               <TimeInput
                 label="End Time"
                 value={standardEndTime}
                 onChange={setStandardEndTime}
+                isActive={activeHoursType === "standard"}
               />
             </div>
           </CardContent>
@@ -178,11 +181,13 @@ export function WorkingHoursView() {
                 label="Start Time"
                 value={extendedStartTime}
                 onChange={setExtendedStartTime}
+                isActive={activeHoursType === "extended"}
               />
               <TimeInput
                 label="End Time"
                 value={extendedEndTime}
                 onChange={setExtendedEndTime}
+                isActive={activeHoursType === "extended"}
               />
             </div>
           </CardContent>
