@@ -122,7 +122,7 @@ export function TicketQueueView() {
                 </div>
               </th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider">
-                Packs
+                No. Parcels
               </th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider">
                 <div className="flex items-center gap-1">
