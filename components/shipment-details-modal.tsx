@@ -476,17 +476,17 @@ export function ShipmentDetailsModal({
           <div className="mt-6 flex flex-col gap-6">
             <div className="grid grid-cols-2 gap-x-8 gap-y-4">
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium text-[#1e3a5f]">Claim ID</span>
+                <span className="text-sm font-medium text-muted-foreground">Claim ID</span>
                 <span className="text-sm">9051562</span>
               </div>
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium text-[#1e3a5f]">Status</span>
+                <span className="text-sm font-medium text-muted-foreground">Status</span>
                 <span className="text-sm">Claim incomplete</span>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-x-8 gap-y-4">
               <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium text-[#1e3a5f]">Invoice No</span>
+                <span className="text-sm font-medium text-muted-foreground">Invoice No</span>
                 <span className="text-sm">1374819</span>
               </div>
             </div>
