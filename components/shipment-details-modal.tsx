@@ -210,42 +210,13 @@ export function ShipmentDetailsModal({
             {(details.pieces && details.pieces.length > 0) || (details.pieceHistory && details.pieceHistory.length > 0) ? (
               <Card>
                 <CardHeader className="pb-3">
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-lg font-medium flex items-center gap-2">
-                      <List className="h-4 w-4" />
-                      Parcels
-                    </CardTitle>
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm text-muted-foreground font-medium">View as:</span>
-                      <div className="flex rounded-md border border-border overflow-hidden">
-                        <button
-                          onClick={() => setParcelsView("parcels")}
-                          className={`flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium transition-colors ${
-                            parcelsView === "parcels"
-                              ? "bg-[#1e3a5f] text-white"
-                              : "bg-background text-muted-foreground hover:bg-muted"
-                          }`}
-                        >
-                          <List className="h-3.5 w-3.5" />
-                          Parcels
-                        </button>
-                        <button
-                          onClick={() => setParcelsView("tracking")}
-                          className={`flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium transition-colors border-l border-border ${
-                            parcelsView === "tracking"
-                              ? "bg-[#1e3a5f] text-white"
-                              : "bg-background text-muted-foreground hover:bg-muted"
-                          }`}
-                        >
-                          <GitCommitHorizontal className="h-3.5 w-3.5" />
-                          Tracking
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                  <CardTitle className="text-lg font-medium flex items-center gap-2">
+                    <List className="h-4 w-4" />
+                    Parcels
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  {parcelsView === "parcels" && details.pieces && details.pieces.length > 0 && (
+                  {details.pieces && details.pieces.length > 0 ? (
                     <div className="rounded-md border overflow-x-auto">
                       <Table>
                         <TableHeader>
@@ -275,40 +246,7 @@ export function ShipmentDetailsModal({
                         </TableBody>
                       </Table>
                     </div>
-                  )}
-
-                  {parcelsView === "tracking" && details.pieceHistory && details.pieceHistory.length > 0 && (
-                    <div className={`relative ${details.pieceHistory.length > 5 ? "max-h-[400px] overflow-y-auto pr-2" : ""}`}>
-                      {details.pieceHistory.map((history, index) => (
-                        <div key={index} className="flex gap-4 pb-6 last:pb-0">
-                          <div className="flex flex-col items-center">
-                            <div className="w-3 h-3 rounded-full bg-[#98d9ff] shrink-0" />
-                            {index < details.pieceHistory!.length - 1 && (
-                              <div className="w-0.5 h-full bg-border mt-1" />
-                            )}
-                          </div>
-                          <div className="flex-1 pb-2">
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                              <span>{history.carrierScanDate}</span>
-                              {history.scanDepot && <span>· {history.scanDepot}</span>}
-                              {history.scanDeptName && <span>· {history.scanDeptName}</span>}
-                            </div>
-                            <div className="font-medium text-sm mt-1">{history.carrierScanText}</div>
-                            <div className="text-sm text-blue-600 mt-0.5">{history.gfsScanText}</div>
-                            <div className="text-xs text-muted-foreground mt-1">Received by GFS: {history.receivedByGfs}</div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {parcelsView === "tracking" && (!details.pieceHistory || details.pieceHistory.length === 0) && (
-                    <div className="text-center py-4 text-muted-foreground">
-                      No tracking history available.
-                    </div>
-                  )}
-
-                  {parcelsView === "parcels" && (!details.pieces || details.pieces.length === 0) && (
+                  ) : (
                     <div className="text-center py-4 text-muted-foreground">
                       No parcels available.
                     </div>
