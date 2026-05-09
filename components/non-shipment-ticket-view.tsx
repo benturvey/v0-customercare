@@ -134,12 +134,12 @@ export function NonShipmentTicketView() {
                 className="flex gap-4"
               >
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="person" id="person" />
-                  <Label htmlFor="person" className="cursor-pointer font-normal">Person</Label>
+                  <RadioGroupItem value="person" id="person" className="border-blue-600 text-blue-600 data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600" />
+                  <Label htmlFor="person" className={`cursor-pointer font-normal ${formData.assignType === "person" ? "text-blue-600" : ""}`}>Person</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="group" id="group" />
-                  <Label htmlFor="group" className="cursor-pointer font-normal">Group</Label>
+                  <RadioGroupItem value="group" id="group" className="border-blue-600 text-blue-600 data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600" />
+                  <Label htmlFor="group" className={`cursor-pointer font-normal ${formData.assignType === "group" ? "text-blue-600" : ""}`}>Group</Label>
                 </div>
               </RadioGroup>
 
@@ -199,6 +199,7 @@ export function NonShipmentTicketView() {
                 <Checkbox
                   id="emailCommentsTo"
                   checked={formData.emailCommentsTo}
+                  className="data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
                   onCheckedChange={(checked) => 
                     setFormData(prev => ({ 
                       ...prev, 
