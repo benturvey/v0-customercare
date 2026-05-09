@@ -235,16 +235,16 @@ export function ShipmentTable({ shipments }: ShipmentTableProps) {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="whitespace-nowrap">Sender</TableHead>
-                  <TableHead className="whitespace-nowrap">Despatch Date</TableHead>
-                  <TableHead className="whitespace-nowrap">Carrier</TableHead>
-                  <TableHead className="whitespace-nowrap">Service</TableHead>
-                  <TableHead className="whitespace-nowrap">Consignment No</TableHead>
-                  <TableHead className="whitespace-nowrap">Ship Ref</TableHead>
-                  <TableHead className="whitespace-nowrap">Scan Text</TableHead>
-                  <TableHead className="whitespace-nowrap text-right">No. Parcels</TableHead>
-                  <TableHead className="whitespace-nowrap">Country</TableHead>
-                  <TableHead className="whitespace-nowrap">Actions</TableHead>
+                  <TableHead className="whitespace-nowrap text-muted-foreground">Sender</TableHead>
+                  <TableHead className="whitespace-nowrap text-muted-foreground">Despatch Date</TableHead>
+                  <TableHead className="whitespace-nowrap text-muted-foreground">Carrier</TableHead>
+                  <TableHead className="whitespace-nowrap text-muted-foreground">Service</TableHead>
+                  <TableHead className="whitespace-nowrap text-muted-foreground">Consignment No</TableHead>
+                  <TableHead className="whitespace-nowrap text-muted-foreground">Ship Ref</TableHead>
+                  <TableHead className="whitespace-nowrap text-muted-foreground">Scan Text</TableHead>
+                  <TableHead className="whitespace-nowrap text-right text-muted-foreground">No. Parcels</TableHead>
+                  <TableHead className="whitespace-nowrap text-muted-foreground">Country</TableHead>
+                  <TableHead className="whitespace-nowrap text-muted-foreground">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
