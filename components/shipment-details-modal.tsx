@@ -185,7 +185,7 @@ export function ShipmentDetailsModal({
             <Card>
               <CardHeader className="pb-1">
                 <CardTitle className="text-lg font-medium flex items-center gap-2">
-                  <Package className="h-4 w-4" />
+                  <Package className="h-4 w-4 text-blue-600" />
                   Shipment Details
                 </CardTitle>
               </CardHeader>
@@ -228,7 +228,7 @@ export function ShipmentDetailsModal({
               <Card>
                 <CardHeader className="pb-3">
                   <CardTitle className="text-lg font-medium flex items-center gap-2">
-                    <List className="h-4 w-4" />
+                    <List className="h-4 w-4 text-blue-600" />
                     Parcels
                   </CardTitle>
                 </CardHeader>
@@ -282,7 +282,7 @@ export function ShipmentDetailsModal({
               <Card>
                 <CardHeader className="pb-1">
                   <CardTitle className="text-lg font-medium flex items-center gap-2">
-                    <MapPin className="h-4 w-4" />
+                    <MapPin className="h-4 w-4 text-blue-600" />
                     Delivery Address
                   </CardTitle>
                 </CardHeader>
@@ -338,7 +338,7 @@ export function ShipmentDetailsModal({
               <Card>
                 <CardHeader className="pb-1">
                   <CardTitle className="text-lg font-medium flex items-center gap-2">
-                    <GitCommitHorizontal className="h-4 w-4" />
+                    <GitCommitHorizontal className="h-4 w-4 text-blue-600" />
                     {selectedParcelNo ? `Tracking #${selectedParcelNo}` : "Tracking"}
                   </CardTitle>
                 </CardHeader>
