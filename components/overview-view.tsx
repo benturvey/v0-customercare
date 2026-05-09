@@ -88,7 +88,7 @@ export function OverviewView() {
           </TableHeader>
           <TableBody>
             {agents.map((agent) => (
-              <TableRow key={agent.name}>
+              <TableRow key={agent.name} className={agent.status === "In Progress" ? "bg-green-50" : ""}>
                 <TableCell className="font-medium">
                   <span className="flex items-center gap-2">
                     {agent.name}
