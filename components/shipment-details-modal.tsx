@@ -650,7 +650,10 @@ export function ShipmentDetailsModal({
       <Dialog open={customerContactModalOpen} onOpenChange={setCustomerContactModalOpen}>
         <DialogContent className="max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-xl font-semibold">Customer Contact Details</DialogTitle>
+            <DialogTitle className="text-xl font-semibold flex items-center gap-2">
+              <User className="h-5 w-5 text-blue-600" />
+              Customer Contact Details
+            </DialogTitle>
           </DialogHeader>
           <div className="space-y-4 pt-4">
             <div>
