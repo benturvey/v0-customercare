@@ -122,6 +122,8 @@ export function OverviewView() {
                       ? "bg-green-100 text-green-800"
                       : agent.status === "Idle"
                       ? "bg-amber-100 text-amber-800"
+                      : agent.status === "ADM"
+                      ? "bg-purple-100 text-purple-800"
                       : "bg-muted text-muted-foreground"
                   }`}>
                     {agent.status}
