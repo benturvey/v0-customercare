@@ -286,33 +286,29 @@ export function ShipmentDetailsModal({
 
             <div className="flex flex-wrap gap-2">
               <Button 
-                variant="outline" 
                 size="sm" 
-                className="text-sm"
+                className="text-sm bg-[#98d9ff] hover:bg-[#7cc9f0] text-foreground"
                 onClick={() => setCollectionAddressSheetOpen(true)}
               >
                 View Collection Address
               </Button>
               <Button 
-                variant="outline" 
                 size="sm" 
-                className="text-sm"
+                className="text-sm bg-[#98d9ff] hover:bg-[#7cc9f0] text-foreground"
                 onClick={() => setCustomsDetailsSheetOpen(true)}
               >
                 View Customs Details
               </Button>
               <Button 
-                variant="outline" 
                 size="sm" 
-                className="text-sm"
+                className="text-sm bg-[#98d9ff] hover:bg-[#7cc9f0] text-foreground"
                 onClick={() => setRelatedDocumentsSheetOpen(true)}
               >
                 View Related Documents
               </Button>
               <Button 
-                variant="outline" 
                 size="sm" 
-                className="text-sm"
+                className="text-sm bg-[#98d9ff] hover:bg-[#7cc9f0] text-foreground"
                 onClick={() => setQueriesSheetOpen(true)}
               >
                 View Queries
