@@ -534,12 +534,12 @@ export function ShipmentDetailsModal({
       </DialogContent>
 
       <Sheet open={collectionAddressSheetOpen} onOpenChange={setCollectionAddressSheetOpen}>
-        <SheetContent className="w-[600px] sm:w-[700px] sm:max-w-[700px]">
-          <SheetHeader>
+        <SheetContent className="w-[600px] sm:w-[700px] sm:max-w-[700px] px-8">
+          <SheetHeader className="pb-2">
             <SheetTitle className="text-xl font-semibold">Collection Address</SheetTitle>
           </SheetHeader>
           <div className="mt-6 flex flex-col gap-6">
-            <div className="grid grid-cols-4 gap-x-4 gap-y-6">
+            <div className="grid grid-cols-4 gap-x-6 gap-y-8">
               <div className="flex flex-col gap-1">
                 <span className="text-sm font-medium text-[#1e3a5f]">Contact</span>
                 <span className="text-sm">{details.collectionAddress?.contact || "-"}</span>
