@@ -56,9 +56,9 @@ export function OverviewView() {
     <div className="container mx-auto px-4 py-6 space-y-6">
       {/* Stats Card */}
       <div className="border border-border rounded-lg bg-card p-6">
-        <div className="flex gap-8">
+        <div className="flex gap-8 justify-between items-end">
           {stats.map((stat) => (
-            <div key={stat.label} className="text-left">
+            <div key={stat.label} className="text-left flex-1">
               <p className="text-3xl font-bold text-[#1e3a5f]">{stat.value}</p>
               <p className="text-xs text-muted-foreground tracking-wide mt-1">
                 {stat.label}
