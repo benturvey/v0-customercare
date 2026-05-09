@@ -242,7 +242,7 @@ export function ShipmentTable({ shipments }: ShipmentTableProps) {
                   <TableHead className="whitespace-nowrap">Consignment No</TableHead>
                   <TableHead className="whitespace-nowrap">Ship Ref</TableHead>
                   <TableHead className="whitespace-nowrap">Scan Text</TableHead>
-                  <TableHead className="whitespace-nowrap text-right">Packs</TableHead>
+                  <TableHead className="whitespace-nowrap text-right">No. Parcels</TableHead>
                   <TableHead className="whitespace-nowrap">Country</TableHead>
                   <TableHead className="whitespace-nowrap">Actions</TableHead>
                 </TableRow>
