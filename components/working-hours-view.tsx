@@ -246,7 +246,7 @@ type CarrierRow = {
 function CarrierWorkingHoursTable() {
   const [rows, setRows] = useState<Record<string, CarrierRow>>(
     Object.fromEntries(
-      CARRIERS.map((c) => [c, { monFri: false, sat: false, sun: false, bankHolidays: false }])
+      CARRIERS.map((c) => [c, { monFri: true, sat: false, sun: false, bankHolidays: false }])
     )
   )
 
