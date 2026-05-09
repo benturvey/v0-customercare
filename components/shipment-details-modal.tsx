@@ -29,7 +29,7 @@ import {
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { ChevronDown, User, Truck, Zap, Hash, CalendarDays, Activity, Clock, PenLine, List, GitCommitHorizontal, Package, MapPin } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import type { ShipmentDetails } from "@/types/shipment"
 
 interface ShipmentDetailsModalProps {
@@ -51,9 +51,13 @@ export function ShipmentDetailsModal({
   const [queryHistoryOpen, setQueryHistoryOpen] = useState(false)
   const [customerContactModalOpen, setCustomerContactModalOpen] = useState(false)
   const [parcelsView, setParcelsView] = useState<"parcels" | "tracking">("parcels")
-  const [selectedParcelNo, setSelectedParcelNo] = useState<string | null>(
-    details?.pieces && details.pieces.length > 0 ? details.pieces[0].parcelNo : null
-  )
+  const [selectedParcelNo, setSelectedParcelNo] = useState<string | null>(null)
+
+  useEffect(() => {
+    setSelectedParcelNo(
+      details?.pieces && details.pieces.length > 0 ? details.pieces[0].parcelNo : null
+    )
+  }, [details])
 
   // Customer contact details
   const customerContactDetails = {
