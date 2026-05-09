@@ -44,6 +44,7 @@ export function ShipmentDetailsModal({
   details,
 }: ShipmentDetailsModalProps) {
   const [collectionAddressOpen, setCollectionAddressOpen] = useState(false)
+  const [collectionAddressSheetOpen, setCollectionAddressSheetOpen] = useState(false)
   const [queryHistoryOpen, setQueryHistoryOpen] = useState(false)
   const [customerContactModalOpen, setCustomerContactModalOpen] = useState(false)
   const [parcelsView, setParcelsView] = useState<"parcels" | "tracking">("parcels")
@@ -351,7 +352,7 @@ export function ShipmentDetailsModal({
                 variant="outline" 
                 size="sm" 
                 className="text-sm"
-                onClick={() => setCollectionAddressOpen(!collectionAddressOpen)}
+                onClick={() => setCollectionAddressSheetOpen(true)}
               >
                 View Collection Address
               </Button>
@@ -531,6 +532,66 @@ export function ShipmentDetailsModal({
           </div>
         </div>
       </DialogContent>
+
+      <Sheet open={collectionAddressSheetOpen} onOpenChange={setCollectionAddressSheetOpen}>
+        <SheetContent className="w-[600px] sm:w-[700px] sm:max-w-[700px]">
+          <SheetHeader>
+            <SheetTitle className="text-xl font-semibold">Collection Address</SheetTitle>
+          </SheetHeader>
+          <div className="mt-6 flex flex-col gap-6">
+            <div className="grid grid-cols-4 gap-x-4 gap-y-6">
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium text-[#1e3a5f]">Contact</span>
+                <span className="text-sm">{details.collectionAddress?.contact || "-"}</span>
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium text-[#1e3a5f]">Contact Mobile</span>
+                <span className="text-sm">{details.collectionAddress?.contactMobile || "-"}</span>
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium text-[#1e3a5f]">Contact Phone</span>
+                <span className="text-sm">{details.collectionAddress?.contactPhone || "-"}</span>
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium text-[#1e3a5f]">Company</span>
+                <span className="text-sm">{details.collectionAddress?.company || "-"}</span>
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium text-[#1e3a5f]">Address Line 1</span>
+                <span className="text-sm">{details.collectionAddress?.addressLine1 || "-"}</span>
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium text-[#1e3a5f]">Address Line 2</span>
+                <span className="text-sm">{details.collectionAddress?.addressLine2 || "-"}</span>
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium text-[#1e3a5f]">District</span>
+                <span className="text-sm">{details.collectionAddress?.district || "-"}</span>
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium text-[#1e3a5f]">County</span>
+                <span className="text-sm">{details.collectionAddress?.county || "-"}</span>
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium text-[#1e3a5f]">Town</span>
+                <span className="text-sm">{details.collectionAddress?.town || "-"}</span>
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium text-[#1e3a5f]">Country</span>
+                <span className="text-sm">{details.collectionAddress?.country || "-"}</span>
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium text-[#1e3a5f]">Postcode</span>
+                <span className="text-sm">{details.collectionAddress?.postcode || "-"}</span>
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium text-[#1e3a5f]">Email</span>
+                <span className="text-sm">{details.collectionAddress?.email || "-"}</span>
+              </div>
+            </div>
+          </div>
+        </SheetContent>
+      </Sheet>
 
       <Sheet open={queryHistoryOpen} onOpenChange={setQueryHistoryOpen}>
         <SheetContent className="w-[600px] sm:w-[800px] sm:max-w-[800px]">
