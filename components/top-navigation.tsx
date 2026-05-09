@@ -38,8 +38,11 @@ const navItems: NavItem[] = [
   { id: "working-hours", label: "Working Hours", icon: Clock, section: "configuration" },
 ]
 
+const blackTextSections = ["dashboard", "operations"]
+
 function NavButton({ item, active, onSelect }: { item: NavItem; active: boolean; onSelect: (id: string) => void }) {
   const Icon = item.icon
+  const isBlackText = item.section && blackTextSections.includes(item.section)
   return (
     <button
       onClick={() => onSelect(item.id)}
@@ -47,6 +50,8 @@ function NavButton({ item, active, onSelect }: { item: NavItem; active: boolean;
         "w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm font-medium transition-colors",
         active
           ? "bg-primary text-primary-foreground"
+          : isBlackText
+          ? "text-foreground hover:bg-muted"
           : "text-muted-foreground hover:bg-muted hover:text-foreground"
       )}
     >
