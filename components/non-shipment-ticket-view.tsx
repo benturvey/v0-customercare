@@ -102,7 +102,7 @@ export function NonShipmentTicketView() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Contact Name */}
               <div className="space-y-2">
-                <Label htmlFor="contactName">Contact Name</Label>
+                <Label htmlFor="contactName" className="text-muted-foreground">Contact Name</Label>
                 <Input
                   id="contactName"
                   value={formData.contactName}
@@ -113,7 +113,7 @@ export function NonShipmentTicketView() {
 
               {/* Contact No */}
               <div className="space-y-2">
-                <Label htmlFor="contactNo">Contact No</Label>
+                <Label htmlFor="contactNo" className="text-muted-foreground">Contact No</Label>
                 <Input
                   id="contactNo"
                   value={formData.contactNo}
@@ -125,7 +125,7 @@ export function NonShipmentTicketView() {
 
             {/* Assign Ticket To - Below Contact Name */}
             <div className="space-y-3 max-w-md">
-              <Label>Assign Ticket To</Label>
+              <Label className="text-muted-foreground">Assign Ticket To</Label>
               <RadioGroup
                 value={formData.assignType}
                 onValueChange={(value: "person" | "group") => 
@@ -182,7 +182,7 @@ export function NonShipmentTicketView() {
 
             {/* Comments */}
             <div className="space-y-2">
-              <Label htmlFor="comments">Comments</Label>
+              <Label htmlFor="comments" className="text-muted-foreground">Comments</Label>
               <Textarea
                 id="comments"
                 value={formData.comments}
@@ -230,7 +230,7 @@ export function NonShipmentTicketView() {
             <div className="flex gap-2 pt-4">
               <Button
                 onClick={handleSubmit}
-                className="bg-[#1a1a1a] hover:bg-[#2a2a2a] text-white"
+                className="bg-blue-600 hover:bg-blue-700 text-white"
               >
                 Submit Ticket
               </Button>
