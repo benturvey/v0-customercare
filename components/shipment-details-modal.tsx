@@ -227,8 +227,8 @@ export function ShipmentDetailsModal({
                         <TableRow>
                           <TableHead className="whitespace-nowrap">Parcel No</TableHead>
                           <TableHead className="whitespace-nowrap">Tracking No</TableHead>
-                          <TableHead className="whitespace-nowrap">Carrier Scan Date</TableHead>
-                          <TableHead className="whitespace-nowrap">Carrier Text</TableHead>
+                          <TableHead className="whitespace-nowrap">Latest Carrier Update</TableHead>
+                          <TableHead className="whitespace-nowrap">Carrier Scan Text</TableHead>
                           <TableHead className="whitespace-nowrap">Swap</TableHead>
                         </TableRow>
                       </TableHeader>
