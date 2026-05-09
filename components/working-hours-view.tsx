@@ -36,6 +36,7 @@ interface TimeInputProps {
 
 function TimeInput({ value, onChange, label, isActive }: TimeInputProps) {
   const [isOpen, setIsOpen] = useState(false)
+  console.log("[v0] TimeInput isActive:", isActive, "label:", label)
   const [inputValue, setInputValue] = useState(value)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
