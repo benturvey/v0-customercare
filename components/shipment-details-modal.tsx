@@ -214,61 +214,6 @@ export function ShipmentDetailsModal({
                 </div>
                 </CardContent>
               </Card>
-
-            <Card>
-              <CardHeader className="pb-1">
-                <CardTitle className="text-lg font-medium">Queries</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="rounded-md border overflow-x-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="whitespace-nowrap">No</TableHead>
-                        <TableHead className="whitespace-nowrap">Query ID</TableHead>
-                        <TableHead className="whitespace-nowrap">State</TableHead>
-                        <TableHead className="whitespace-nowrap">Raised By</TableHead>
-                        <TableHead className="whitespace-nowrap">Created Date</TableHead>
-                        <TableHead className="whitespace-nowrap">Preferred Contact Type</TableHead>
-                        <TableHead className="whitespace-nowrap">Tel No</TableHead>
-                        <TableHead className="whitespace-nowrap">Email</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {details.queries && details.queries.length > 0 ? (
-                        details.queries.map((query) => (
-                          <TableRow key={query.no}>
-                            <TableCell>{query.no}</TableCell>
-                            <TableCell>{query.queryId || "-"}</TableCell>
-                            <TableCell>{query.state || "-"}</TableCell>
-                            <TableCell>{query.raisedBy || "-"}</TableCell>
-                            <TableCell>{query.createdDate || "-"}</TableCell>
-                            <TableCell>{query.preferredContactType || "-"}</TableCell>
-                            <TableCell>{query.telNo || "-"}</TableCell>
-                            <TableCell>{query.email || "-"}</TableCell>
-                          </TableRow>
-                        ))
-                      ) : (
-                        <TableRow>
-                          <TableCell colSpan={8} className="text-center py-4 text-muted-foreground">
-                            No queries found.
-                          </TableCell>
-                        </TableRow>
-                      )}
-                    </TableBody>
-                  </Table>
-                </div>
-                <div className="flex justify-end gap-2 mt-4">
-                  <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => setQueryHistoryOpen(true)}>View Query</Button>
-                  <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Raise Query functionality")}>Raise Query</Button>
-                  <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Update Query functionality")}>Update Query</Button>
-                  <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Resolve Query functionality")}>Resolve Query</Button>
-                  <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Defer functionality")}>Defer</Button>
-                  <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Review functionality")}>Review</Button>
-                  <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Delegate functionality")}>Delegate</Button>
-                </div>
-              </CardContent>
-            </Card>
           </div>
 
           <div className="flex flex-col gap-4">
@@ -381,8 +326,60 @@ export function ShipmentDetailsModal({
               </Card>
             )}
 
-
-
+            <Card>
+              <CardHeader className="pb-1">
+                <CardTitle className="text-lg font-medium">Queries</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="rounded-md border overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="whitespace-nowrap">No</TableHead>
+                        <TableHead className="whitespace-nowrap">Query ID</TableHead>
+                        <TableHead className="whitespace-nowrap">State</TableHead>
+                        <TableHead className="whitespace-nowrap">Raised By</TableHead>
+                        <TableHead className="whitespace-nowrap">Created Date</TableHead>
+                        <TableHead className="whitespace-nowrap">Preferred Contact Type</TableHead>
+                        <TableHead className="whitespace-nowrap">Tel No</TableHead>
+                        <TableHead className="whitespace-nowrap">Email</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {details.queries && details.queries.length > 0 ? (
+                        details.queries.map((query) => (
+                          <TableRow key={query.no}>
+                            <TableCell>{query.no}</TableCell>
+                            <TableCell>{query.queryId || "-"}</TableCell>
+                            <TableCell>{query.state || "-"}</TableCell>
+                            <TableCell>{query.raisedBy || "-"}</TableCell>
+                            <TableCell>{query.createdDate || "-"}</TableCell>
+                            <TableCell>{query.preferredContactType || "-"}</TableCell>
+                            <TableCell>{query.telNo || "-"}</TableCell>
+                            <TableCell>{query.email || "-"}</TableCell>
+                          </TableRow>
+                        ))
+                      ) : (
+                        <TableRow>
+                          <TableCell colSpan={8} className="text-center py-4 text-muted-foreground">
+                            No queries found.
+                          </TableCell>
+                        </TableRow>
+                      )}
+                    </TableBody>
+                  </Table>
+                </div>
+                <div className="flex justify-end gap-2 mt-4">
+                  <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => setQueryHistoryOpen(true)}>View Query</Button>
+                  <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Raise Query functionality")}>Raise Query</Button>
+                  <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Update Query functionality")}>Update Query</Button>
+                  <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Resolve Query functionality")}>Resolve Query</Button>
+                  <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Defer functionality")}>Defer</Button>
+                  <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Review functionality")}>Review</Button>
+                  <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Delegate functionality")}>Delegate</Button>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </DialogContent>
