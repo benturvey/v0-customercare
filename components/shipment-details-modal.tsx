@@ -355,9 +355,9 @@ export function ShipmentDetailsModal({
                   <CardTitle className="text-lg font-medium">Delivery Address</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-6">
                     {deliveryAddressRows.map((row, rowIndex) => (
-                      <div key={rowIndex} className="grid grid-cols-4 gap-4">
+                      <div key={rowIndex} className="grid grid-cols-3 gap-4">
                         {row.map((item) => (
                           <div key={item.label} className="flex flex-col gap-1">
                             <span className="text-sm font-medium text-muted-foreground">{item.label}</span>
