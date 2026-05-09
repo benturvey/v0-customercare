@@ -79,21 +79,21 @@ export function TopNavigation({ activeItem, onItemSelect }: TopNavigationProps) 
         />
       </div>
       <div className="flex flex-col gap-1 p-3 pt-6">
-        <p className="px-3 pb-2 text-xs font-semibold text-muted-foreground">Dashboard</p>
+        <p className="px-3 pb-2 text-sm font-semibold text-muted-foreground">Dashboard</p>
         {navItems.filter(item => item.section === "dashboard").map((item) => (
           <NavButton key={item.id} item={item} active={activeItem === item.id} onSelect={onItemSelect} />
         ))}
 
         <div className="my-2" />
 
-        <p className="px-3 pb-2 text-xs font-semibold text-muted-foreground">Operations</p>
+        <p className="px-3 pb-2 text-sm font-semibold text-muted-foreground">Operations</p>
         {navItems.filter(item => item.section === "operations").map((item) => (
           <NavButton key={item.id} item={item} active={activeItem === item.id} onSelect={onItemSelect} />
         ))}
 
         <div className="my-2" />
 
-        <p className="px-3 pb-2 text-xs font-semibold text-muted-foreground">Configuration</p>
+        <p className="px-3 pb-2 text-sm font-semibold text-muted-foreground">Configuration</p>
         {navItems.filter(item => item.section === "configuration").map((item) => (
           <NavButton key={item.id} item={item} active={activeItem === item.id} onSelect={onItemSelect} />
         ))}
