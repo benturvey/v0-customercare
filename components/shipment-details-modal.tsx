@@ -253,43 +253,60 @@ export function ShipmentDetailsModal({
               </Card>
             )}
 
-            {details.pieceHistory && details.pieceHistory.length > 0 && (
-              <Card>
-                <CardHeader className="pb-1">
-                  <CardTitle className="text-lg font-medium">Tracking</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className={`relative ${details.pieceHistory.length > 5 ? "max-h-[400px] overflow-y-auto pr-2" : ""}`}>
-                    {details.pieceHistory.map((history, index) => (
-                      <div key={index} className="flex gap-4 pb-6 last:pb-0">
-                        <div className="flex flex-col items-center">
-                          <div className="w-3 h-3 rounded-full bg-[#98d9ff] shrink-0" />
-                          {index < details.pieceHistory!.length - 1 && (
-                            <div className="w-0.5 h-full bg-border mt-1" />
-                          )}
-                        </div>
-                        <div className="flex-1 pb-2">
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <span>{history.carrierScanDate}</span>
-                            {history.scanDepot && <span>· {history.scanDepot}</span>}
-                            {history.scanDeptName && <span>· {history.scanDeptName}</span>}
-                          </div>
-                          <div className="font-medium text-sm mt-1">
-                            {history.carrierScanText}
-                          </div>
-                          <div className="text-sm text-muted-foreground mt-0.5">
-                            {history.gfsScanText}
-                          </div>
-                          <div className="text-xs text-muted-foreground mt-1">
-                            Received by GFS: {history.receivedByGfs}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            )}
+            <Card>
+              <CardHeader className="pb-1">
+                <CardTitle className="text-lg font-medium">Queries</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="rounded-md border overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="whitespace-nowrap">No</TableHead>
+                        <TableHead className="whitespace-nowrap">Query ID</TableHead>
+                        <TableHead className="whitespace-nowrap">State</TableHead>
+                        <TableHead className="whitespace-nowrap">Raised By</TableHead>
+                        <TableHead className="whitespace-nowrap">Created Date</TableHead>
+                        <TableHead className="whitespace-nowrap">Preferred Contact Type</TableHead>
+                        <TableHead className="whitespace-nowrap">Tel No</TableHead>
+                        <TableHead className="whitespace-nowrap">Email</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {details.queries && details.queries.length > 0 ? (
+                        details.queries.map((query) => (
+                          <TableRow key={query.no}>
+                            <TableCell>{query.no}</TableCell>
+                            <TableCell>{query.queryId || "-"}</TableCell>
+                            <TableCell>{query.state || "-"}</TableCell>
+                            <TableCell>{query.raisedBy || "-"}</TableCell>
+                            <TableCell>{query.createdDate || "-"}</TableCell>
+                            <TableCell>{query.preferredContactType || "-"}</TableCell>
+                            <TableCell>{query.telNo || "-"}</TableCell>
+                            <TableCell>{query.email || "-"}</TableCell>
+                          </TableRow>
+                        ))
+                      ) : (
+                        <TableRow>
+                          <TableCell colSpan={8} className="text-center py-4 text-muted-foreground">
+                            No queries found.
+                          </TableCell>
+                        </TableRow>
+                      )}
+                    </TableBody>
+                  </Table>
+                </div>
+                <div className="flex justify-end gap-2 mt-4">
+                  <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => setQueryHistoryOpen(true)}>View Query</Button>
+                  <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Raise Query functionality")}>Raise Query</Button>
+                  <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Update Query functionality")}>Update Query</Button>
+                  <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Resolve Query functionality")}>Resolve Query</Button>
+                  <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Defer functionality")}>Defer</Button>
+                  <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Review functionality")}>Review</Button>
+                  <Button className="bg-[#009eff] hover:bg-[#007ecc] text-white" onClick={() => alert("Delegate functionality")}>Delegate</Button>
+                </div>
+              </CardContent>
+            </Card>
 
             {details.customsDetails && (
               <Card>
@@ -402,95 +419,38 @@ export function ShipmentDetailsModal({
               </Collapsible>
             )}
 
-            <Card>
-              <CardHeader className="pb-1">
-                <CardTitle className="text-lg font-medium">Queries</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="rounded-md border overflow-x-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="whitespace-nowrap">No</TableHead>
-                        <TableHead className="whitespace-nowrap">Query ID</TableHead>
-                        <TableHead className="whitespace-nowrap">State</TableHead>
-                        <TableHead className="whitespace-nowrap">Raised By</TableHead>
-                        <TableHead className="whitespace-nowrap">Created Date</TableHead>
-                        <TableHead className="whitespace-nowrap">Preferred Contact Type</TableHead>
-                        <TableHead className="whitespace-nowrap">Tel No</TableHead>
-                        <TableHead className="whitespace-nowrap">Email</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {details.queries && details.queries.length > 0 ? (
-                        details.queries.map((query) => (
-                          <TableRow key={query.no}>
-                            <TableCell>{query.no}</TableCell>
-                            <TableCell>{query.queryId || "-"}</TableCell>
-                            <TableCell>{query.state || "-"}</TableCell>
-                            <TableCell>{query.raisedBy || "-"}</TableCell>
-                            <TableCell>{query.createdDate || "-"}</TableCell>
-                            <TableCell>{query.preferredContactType || "-"}</TableCell>
-                            <TableCell>{query.telNo || "-"}</TableCell>
-                            <TableCell>{query.email || "-"}</TableCell>
-                          </TableRow>
-                        ))
-                      ) : (
-                        <TableRow>
-                          <TableCell colSpan={8} className="text-center py-4 text-muted-foreground">
-                            No queries found.
-                          </TableCell>
-                        </TableRow>
-                      )}
-                    </TableBody>
-                  </Table>
-                </div>
-                <div className="flex justify-end gap-2 mt-4">
-                  <Button 
-                    className="bg-[#009eff] hover:bg-[#007ecc] text-white"
-                    onClick={() => setQueryHistoryOpen(true)}
-                  >
-                    View Query
-                  </Button>
-                  <Button 
-                    className="bg-[#009eff] hover:bg-[#007ecc] text-white"
-                    onClick={() => alert("Raise Query functionality")}
-                  >
-                    Raise Query
-                  </Button>
-                  <Button 
-                    className="bg-[#009eff] hover:bg-[#007ecc] text-white"
-                    onClick={() => alert("Update Query functionality")}
-                  >
-                    Update Query
-                  </Button>
-                  <Button 
-                    className="bg-[#009eff] hover:bg-[#007ecc] text-white"
-                    onClick={() => alert("Resolve Query functionality")}
-                  >
-                    Resolve Query
-                  </Button>
-                  <Button 
-                    className="bg-[#009eff] hover:bg-[#007ecc] text-white"
-                    onClick={() => alert("Defer functionality")}
-                  >
-                    Defer
-                  </Button>
-                  <Button 
-                    className="bg-[#009eff] hover:bg-[#007ecc] text-white"
-                    onClick={() => alert("Review functionality")}
-                  >
-                    Review
-                  </Button>
-                  <Button 
-                    className="bg-[#009eff] hover:bg-[#007ecc] text-white"
-                    onClick={() => alert("Delegate functionality")}
-                  >
-                    Delegate
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            {details.pieceHistory && details.pieceHistory.length > 0 && (
+              <Card>
+                <CardHeader className="pb-1">
+                  <CardTitle className="text-lg font-medium">Tracking</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className={`relative ${details.pieceHistory.length > 5 ? "max-h-[400px] overflow-y-auto pr-2" : ""}`}>
+                    {details.pieceHistory.map((history, index) => (
+                      <div key={index} className="flex gap-4 pb-6 last:pb-0">
+                        <div className="flex flex-col items-center">
+                          <div className="w-3 h-3 rounded-full bg-[#98d9ff] shrink-0" />
+                          {index < details.pieceHistory!.length - 1 && (
+                            <div className="w-0.5 h-full bg-border mt-1" />
+                          )}
+                        </div>
+                        <div className="flex-1 pb-2">
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <span>{history.carrierScanDate}</span>
+                            {history.scanDepot && <span>· {history.scanDepot}</span>}
+                            {history.scanDeptName && <span>· {history.scanDeptName}</span>}
+                          </div>
+                          <div className="font-medium text-sm mt-1">{history.carrierScanText}</div>
+                          <div className="text-sm text-muted-foreground mt-0.5">{history.gfsScanText}</div>
+                          <div className="text-xs text-muted-foreground mt-1">Received by GFS: {history.receivedByGfs}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
           </div>
         </div>
       </DialogContent>
