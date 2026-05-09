@@ -202,18 +202,6 @@ export function ShipmentDetailsModal({
                                       ))}
                                     </div>
                                   ))}
-
-                  <div className="mt-4 pt-4 border-t">
-                    <h4 className="text-sm font-semibold mb-2">Related documents</h4>
-                    <div className="flex flex-col gap-1">
-                      <div className="text-sm">
-                        <span className="text-muted-foreground">Claim ID:</span> 9051562 <span className="text-muted-foreground ml-4">Status:</span> Claim Incomplete
-                      </div>
-                      <div className="text-sm">
-                        <span className="text-muted-foreground">Invoice No:</span> 1374819
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 </CardContent>
               </Card>
