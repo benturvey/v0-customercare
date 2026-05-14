@@ -4,6 +4,8 @@ import { useState } from "react"
 import { ShipmentFilters } from "@/components/shipment-filters"
 import { ShipmentTable } from "@/components/shipment-table"
 import type { ShipmentFilters as ShipmentFiltersType, Shipment } from "@/types/shipment"
+import { List, CalendarDays, Truck, User, Hash, SlidersHorizontal } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 // Sample data for demonstration
 const sampleShipments: Shipment[] = [
@@ -153,14 +155,83 @@ export function ShipmentsView() {
     return true
   })
 
+  const [activeStatus, setActiveStatus] = useState("ANY STATUS")
+  const [activePeriod, setActivePeriod] = useState("YESTERDAY")
+  const [activeCarrier, setActiveCarrier] = useState("ANY CARRIER")
+  const [activeRecipient, setActiveRecipient] = useState("ANY RECIPIENT")
+
   return (
     <div className="w-full px-4 py-6">
-      <header className="mb-6">
-        <h1 className="text-2xl font-semibold text-foreground">Shipments</h1>
-        <p className="text-sm text-muted-foreground mt-1">
-          Search and view shipment details
-        </p>
-      </header>
+      {/* Filter pill bar */}
+      <div className="flex items-center justify-between mb-6 border-b pb-3">
+        <div className="flex items-center flex-wrap gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            className="flex items-center gap-1.5 text-xs font-semibold text-foreground border rounded-sm px-3 py-1.5 h-auto"
+          >
+            <List className="h-3.5 w-3.5 text-muted-foreground" />
+            {activeStatus}
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            className="flex items-center gap-1.5 text-xs font-bold text-foreground border rounded-sm px-3 py-1.5 h-auto"
+          >
+            <CalendarDays className="h-3.5 w-3.5 text-muted-foreground" />
+            {activePeriod}
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            className="flex items-center gap-1.5 text-xs font-semibold text-foreground border rounded-sm px-3 py-1.5 h-auto"
+          >
+            <Truck className="h-3.5 w-3.5 text-muted-foreground" />
+            {activeCarrier}
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            className="flex items-center gap-1.5 text-xs font-semibold text-foreground border rounded-sm px-3 py-1.5 h-auto"
+          >
+            <User className="h-3.5 w-3.5 text-muted-foreground" />
+            {activeRecipient}
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            className="flex items-center gap-1.5 text-xs font-semibold text-foreground border rounded-sm px-3 py-1.5 h-auto"
+          >
+            <Hash className="h-3.5 w-3.5 text-muted-foreground" />
+            REFERENCES
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            className="flex items-center gap-1.5 text-xs font-semibold text-foreground border rounded-sm px-3 py-1.5 h-auto"
+          >
+            <SlidersHorizontal className="h-3.5 w-3.5 text-muted-foreground" />
+            OTHER
+          </Button>
+          <button
+            onClick={handleReset}
+            className="text-xs text-foreground hover:text-muted-foreground ml-1"
+          >
+            Reset
+          </button>
+        </div>
+
+        {/* User info */}
+        <div className="flex items-center gap-3 shrink-0">
+          <div className="h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
+            JA
+          </div>
+          <div className="text-right">
+            <p className="text-xs font-semibold text-foreground leading-tight">jacquie.cadger@gfsdeliver.com</p>
+            <p className="text-xs text-muted-foreground leading-tight">MAMAS &amp; PAPAS</p>
+          </div>
+        </div>
+      </div>
 
       <ShipmentFilters
         filters={filters}
