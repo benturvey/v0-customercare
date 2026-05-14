@@ -155,7 +155,7 @@ export function ShipmentsView() {
     return true
   })
 
-  const [activeStatus, setActiveStatus] = useState("ANY STATUS")
+  const [activeStatus, setActiveStatus] = useState("ANY CUSTOMER")
   const [activePeriod, setActivePeriod] = useState("YESTERDAY")
   const [activeCarrier, setActiveCarrier] = useState("ANY CARRIER")
   const [activeRecipient, setActiveRecipient] = useState("ANY RECIPIENT")
