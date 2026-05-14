@@ -4,7 +4,7 @@ import { useState } from "react"
 import { ShipmentFilters } from "@/components/shipment-filters"
 import { ShipmentTable } from "@/components/shipment-table"
 import type { ShipmentFilters as ShipmentFiltersType, Shipment } from "@/types/shipment"
-import { List, CalendarDays, Truck, User, Hash, SlidersHorizontal, LayoutDashboard } from "lucide-react"
+import { Users, CalendarDays, Truck, User, Hash, SlidersHorizontal, LayoutDashboard } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 // Sample data for demonstration
@@ -172,7 +172,7 @@ export function ShipmentsView() {
             size="sm"
             className="flex items-center gap-1.5 text-xs font-semibold text-foreground border rounded-sm px-3 py-1.5 h-auto"
           >
-            <List className="h-3.5 w-3.5 text-muted-foreground" />
+            <Users className="h-3.5 w-3.5 text-muted-foreground" />
             {activeStatus}
           </Button>
           <Button
