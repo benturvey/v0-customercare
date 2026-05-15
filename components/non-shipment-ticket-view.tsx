@@ -128,8 +128,8 @@ export function NonShipmentTicketView() {
               <td className="px-4 py-3 text-foreground">13/05/2026 10:33</td>
               <td className="px-4 py-3 text-foreground">Alex Lucy</td>
               <td className="px-4 py-3">
-                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
-                  Defer
+                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-200 text-gray-800">
+                  Closed
                 </span>
               </td>
               <td className="px-4 py-3 text-foreground">General</td>
