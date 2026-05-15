@@ -671,7 +671,7 @@ export function ShipmentsView() {
                   {/* Checkboxes */}
                   <div className="space-y-3">
                     {[
-                      { id: "hasComments", label: "Has Comments", checked: hasComments, set: setHasComments, info: false },
+                      { id: "hasComments", label: "Include Deleted Shipments", checked: hasComments, set: setHasComments, info: false },
                       { id: "deletedOnly", label: "Deleted shipments only", checked: deletedOnly, set: setDeletedOnly, info: false },
                       { id: "withClaims", label: "Shipments with claims", checked: withClaims, set: setWithClaims, info: true },
                       { id: "exceptionStatus", label: "Exception Status (Red & Amber)", checked: exceptionStatus, set: setExceptionStatus, info: false },
