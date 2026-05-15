@@ -72,27 +72,27 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
                 </div>
                 <div className="grid grid-cols-2 gap-x-8 gap-y-4">
                   <div>
-                    <p className="text-sm text-orange-500 mb-1">Registered Name</p>
+                    <p className="text-sm text-muted-foreground mb-1">Registered Name</p>
                     <p className="text-sm font-medium text-foreground">ABBOTT LYON LTD</p>
                   </div>
                   <div>
-                    <p className="text-sm text-orange-500 mb-1">Trading Name</p>
+                    <p className="text-sm text-muted-foreground mb-1">Trading Name</p>
                     <p className="text-sm font-medium text-foreground">ABBOTT LYON LTD</p>
                   </div>
                   <div>
-                    <p className="text-sm text-orange-500 mb-1">Customer ID</p>
+                    <p className="text-sm text-muted-foreground mb-1">Customer ID</p>
                     <p className="text-sm font-medium text-foreground">3225</p>
                   </div>
                   <div>
-                    <p className="text-sm text-orange-500 mb-1">NetSuite Code</p>
+                    <p className="text-sm text-muted-foreground mb-1">NetSuite Code</p>
                     <p className="text-sm font-medium text-foreground">ABBO0001</p>
                   </div>
                   <div>
-                    <p className="text-sm text-orange-500 mb-1">Company Reg No.</p>
+                    <p className="text-sm text-muted-foreground mb-1">Company Reg No.</p>
                     <p className="text-sm font-medium text-foreground">08953621</p>
                   </div>
                   <div>
-                    <p className="text-sm text-orange-500 mb-1">Website</p>
+                    <p className="text-sm text-muted-foreground mb-1">Website</p>
                     <p className="text-sm font-medium text-blue-600">www.abbottlyon.com</p>
                   </div>
                 </div>
@@ -106,23 +106,23 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
                 </div>
                 <div className="grid grid-cols-2 gap-x-8 gap-y-4">
                   <div className="col-span-2">
-                    <p className="text-sm text-orange-500 mb-1">Address</p>
+                    <p className="text-sm text-muted-foreground mb-1">Address</p>
                     <p className="text-sm font-medium text-foreground">12 Bond Street</p>
                   </div>
                   <div>
-                    <p className="text-sm text-orange-500 mb-1">City</p>
+                    <p className="text-sm text-muted-foreground mb-1">City</p>
                     <p className="text-sm font-medium text-foreground">Bath</p>
                   </div>
                   <div>
-                    <p className="text-sm text-orange-500 mb-1">Postcode</p>
+                    <p className="text-sm text-muted-foreground mb-1">Postcode</p>
                     <p className="text-sm font-medium text-foreground">BA1 1BP</p>
                   </div>
                   <div>
-                    <p className="text-sm text-orange-500 mb-1">County</p>
+                    <p className="text-sm text-muted-foreground mb-1">County</p>
                     <p className="text-sm font-medium text-foreground">Somerset</p>
                   </div>
                   <div>
-                    <p className="text-sm text-orange-500 mb-1">Country</p>
+                    <p className="text-sm text-muted-foreground mb-1">Country</p>
                     <p className="text-sm font-medium text-foreground">United Kingdom</p>
                   </div>
                 </div>
@@ -160,19 +160,19 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
                 <h3 className="text-lg font-semibold text-foreground mb-6">Service Status</h3>
                 <div className="grid grid-cols-2 gap-x-8 gap-y-4">
                   <div>
-                    <p className="text-sm text-orange-500 mb-1">Customer Since</p>
+                    <p className="text-sm text-muted-foreground mb-1">Customer Since</p>
                     <p className="text-sm font-medium text-foreground">2021</p>
                   </div>
                   <div>
-                    <p className="text-sm text-orange-500 mb-1">Account Manager</p>
+                    <p className="text-sm text-muted-foreground mb-1">Account Manager</p>
                     <p className="text-sm font-medium text-foreground">Simon Binns</p>
                   </div>
                   <div>
-                    <p className="text-sm text-orange-500 mb-1">Sector</p>
+                    <p className="text-sm text-muted-foreground mb-1">Sector</p>
                     <p className="text-sm font-medium text-foreground">INDUSTRIAL GOODS</p>
                   </div>
                   <div>
-                    <p className="text-sm text-orange-500 mb-1">Partnership Status</p>
+                    <p className="text-sm text-muted-foreground mb-1">Partnership Status</p>
                     <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-700">
                       Active
                     </span>
