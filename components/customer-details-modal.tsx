@@ -423,37 +423,24 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
                 <tbody>
                   {[
                     {
-                      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/contracts-YEJsO6t6kcm34HXfCJ7lwxhqFSSvDR.png",
                       logoComponent: (
-                        <div className="flex items-center gap-1">
-                          <span className="inline-block bg-red-600 text-white rounded p-1">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2L4 7v10l8 5 8-5V7z"/></svg>
-                          </span>
-                          <span className="font-bold text-gray-800 text-lg tracking-tight">dpd</span>
-                        </div>
+                        <img src="/dpd-logo.png" alt="DPD" className="h-12 w-auto" />
                       ),
                       contract: "3300",
                       suite: "Domestic Standard, European Standard, Domestic Expresspaks < 5kg",
                     },
                     {
                       logoComponent: (
-                        <div className="flex items-center gap-1">
-                          <span className="inline-block bg-red-600 text-white rounded p-1">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2L4 7v10l8 5 8-5V7z"/></svg>
-                          </span>
-                          <span className="font-bold text-gray-800 text-lg tracking-tight">dpd</span>
-                        </div>
+                        <img src="/dpd-logo.png" alt="DPD" className="h-12 w-auto" />
                       ),
                       contract: "3518",
                       suite: "Domestic Standard, European Standard, Domestic Expresspaks < 5kg",
                     },
                     {
                       logoComponent: (
-                        <div className="flex items-center gap-1">
-                          <span className="inline-block bg-blue-500 text-white rounded p-1">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2L4 7v10l8 5 8-5V7z"/></svg>
-                          </span>
-                          <span className="font-bold text-gray-800 text-base tracking-tight">dpd<span className="text-xs align-sub ml-0.5">local</span></span>
+                        <div className="flex items-center gap-2">
+                          <img src="/dpd-logo.png" alt="DPD Local" className="h-10 w-auto" />
+                          <span className="text-xs text-gray-600 font-medium">local</span>
                         </div>
                       ),
                       contract: "3024907",
