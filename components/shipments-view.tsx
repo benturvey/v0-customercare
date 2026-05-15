@@ -236,7 +236,6 @@ export function ShipmentsView() {
   const [refConsignment, setRefConsignment] = useState("")
   const [refParcel, setRefParcel] = useState("")
   const [refShipment, setRefShipment] = useState("")
-  const [refConsignee, setRefConsignee] = useState("")
   const [otherOpen, setOtherOpen] = useState(false)
   const [claimId, setClaimId] = useState("")
   const [hasComments, setHasComments] = useState(false)
@@ -645,15 +644,6 @@ export function ShipmentsView() {
                       type="text"
                       value={refShipment}
                       onChange={(e) => setRefShipment(e.target.value)}
-                      className="w-full border rounded-md px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-blue-500"
-                    />
-                  </div>
-                  <div className="space-y-1.5">
-                    <label className="text-sm font-semibold text-foreground">Consignee Ref.</label>
-                    <input
-                      type="text"
-                      value={refConsignee}
-                      onChange={(e) => setRefConsignee(e.target.value)}
                       className="w-full border rounded-md px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-blue-500"
                     />
                   </div>
