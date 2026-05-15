@@ -8,6 +8,26 @@ import { Users, CalendarDays, Truck, User, Hash, SlidersHorizontal, LayoutDashbo
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 
+const CARRIERS_LIST = [
+  "Amazon Logistics UK",
+  "BJS",
+  "Coll-8",
+  "DHL ECommerce UK",
+  "DHL Express",
+  "DPD",
+  "DPD Germany",
+  "DPD Local",
+  "DPD Netherlands",
+  "DX Freight",
+  "Evri",
+  "Exelot",
+  "FedEx",
+  "GFS International",
+  "OCS",
+  "Royal Mail",
+  "UPS",
+]
+
 const CUSTOMERS = [
   "365 Engines Ltd",
   "3PL UK Limited",
@@ -208,7 +228,8 @@ export function ShipmentsView() {
   const [recipientTown, setRecipientTown] = useState("")
   const [recipientCounty, setRecipientCounty] = useState("")
   const [recipientCountry, setRecipientCountry] = useState("Any country")
-  const [selectedCarrier, setSelectedCarrier] = useState("All carriers")
+  const [selectedCarrier, setSelectedCarrier] = useState<string[]>([])
+  const [carrierSearch, setCarrierSearch] = useState("")
   const [selectedContract, setSelectedContract] = useState("All contracts")
   const [selectedService, setSelectedService] = useState("All services")
   const [refsOpen, setRefsOpen] = useState(false)
@@ -399,7 +420,7 @@ export function ShipmentsView() {
               onClick={() => setCarrierOpen((o) => !o)}
             >
               <Truck className="h-3.5 w-3.5 text-muted-foreground" />
-              ANY CARRIER
+              {selectedCarrier.length > 0 ? `${selectedCarrier.length} CARRIER${selectedCarrier.length > 1 ? "S" : ""}` : "ANY CARRIER"}
             </Button>
             {carrierOpen && (
               <div className="absolute left-0 top-full mt-1 z-50 bg-white border rounded-md shadow-lg w-72">
@@ -410,32 +431,54 @@ export function ShipmentsView() {
                   {/* Carrier */}
                   <div className="space-y-1.5">
                     <label className="text-sm font-semibold text-foreground">Carrier</label>
-                    <div className="relative">
-                      <select
-                        value={selectedCarrier}
-                        onChange={(e) => setSelectedCarrier(e.target.value)}
-                        className="w-full border rounded-md px-3 py-2 text-sm text-foreground appearance-none focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white pr-8"
-                      >
-                        <option>All carriers</option>
-                        <option>Amazon Logistics UK</option>
-                        <option>BJS</option>
-                        <option>Coll-8</option>
-                        <option>DHL ECommerce UK</option>
-                        <option>DHL Express</option>
-                        <option>DPD</option>
-                        <option>DPD Germany</option>
-                        <option>DPD Local</option>
-                        <option>DPD Netherlands</option>
-                        <option>DX Freight</option>
-                        <option>Evri</option>
-                        <option>Exelot</option>
-                        <option>FedEx</option>
-                        <option>GFS International</option>
-                        <option>OCS</option>
-                        <option>Royal Mail</option>
-                        <option>UPS</option>
-                      </select>
-                      <Check className="absolute right-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+                    {/* Search */}
+                    <div className="flex items-center gap-2 px-2 py-1.5 border rounded-md">
+                      <Search className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+                      <input
+                        type="text"
+                        value={carrierSearch}
+                        onChange={(e) => setCarrierSearch(e.target.value)}
+                        placeholder="Search options..."
+                        className="flex-1 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
+                      />
+                    </div>
+                    {/* Scrollable checkbox list */}
+                    <div className="max-h-48 overflow-y-auto border rounded-md py-1">
+                      {(() => {
+                        const filtered = CARRIERS_LIST.filter((c) =>
+                          c.toLowerCase().includes(carrierSearch.toLowerCase())
+                        )
+                        const allSelected = filtered.length > 0 && filtered.every((c) => selectedCarrier.includes(c))
+                        return (
+                          <>
+                            <label className="flex items-center gap-2.5 px-3 py-2 hover:bg-muted cursor-pointer">
+                              <Checkbox
+                                checked={allSelected}
+                                onCheckedChange={(v) => {
+                                  if (v) setSelectedCarrier((prev) => Array.from(new Set([...prev, ...filtered])))
+                                  else setSelectedCarrier((prev) => prev.filter((c) => !filtered.includes(c)))
+                                }}
+                                className="data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
+                              />
+                              <span className="text-sm text-foreground">(Select All)</span>
+                            </label>
+                            {filtered.map((carrier) => (
+                              <label key={carrier} className="flex items-center gap-2.5 px-3 py-2 hover:bg-muted cursor-pointer">
+                                <Checkbox
+                                  checked={selectedCarrier.includes(carrier)}
+                                  onCheckedChange={(v) => {
+                                    setSelectedCarrier((prev) =>
+                                      v ? [...prev, carrier] : prev.filter((c) => c !== carrier)
+                                    )
+                                  }}
+                                  className="data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
+                                />
+                                <span className="text-sm text-foreground">{carrier}</span>
+                              </label>
+                            ))}
+                          </>
+                        )
+                      })()}
                     </div>
                   </div>
                   {/* Contract */}
