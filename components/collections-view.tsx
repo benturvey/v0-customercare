@@ -538,41 +538,6 @@ export function CollectionsView() {
             )}
           </div>
 
-          {/* OTHER */}
-          <div ref={otherRef} className="relative">
-            <Button
-              variant="outline"
-              size="sm"
-              className="flex items-center gap-1.5 text-xs font-semibold text-foreground border rounded-sm px-3 py-1.5 h-auto"
-              onClick={() => setOtherOpen((o) => !o)}
-            >
-              <SlidersHorizontal className="h-3.5 w-3.5 text-muted-foreground" />
-              OTHER
-            </Button>
-            {otherOpen && (
-              <div className="absolute left-0 top-full mt-1 z-50 bg-white border rounded-md shadow-lg w-72">
-                <div className="px-4 py-3 border-b">
-                  <span className="text-xs font-bold text-foreground tracking-wide">OTHER</span>
-                </div>
-                <div className="px-4 py-4 space-y-4">
-                  <div className="border-t" />
-                  <div className="space-y-3">
-                    {[
-                      { id: "hasComments", label: "Include Deleted Shipments", checked: hasComments, set: setHasComments },
-                      { id: "deletedOnly", label: "Deleted shipments only", checked: deletedOnly, set: setDeletedOnly },
-                      { id: "exceptionStatus", label: "Exceptions Only", checked: exceptionStatus, set: setExceptionStatus },
-                    ].map(({ id, label, checked, set }) => (
-                      <label key={id} className="flex items-center gap-2.5 cursor-pointer">
-                        <Checkbox id={id} checked={checked} onCheckedChange={(v) => set(!!v)} className="data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600" />
-                        <span className="text-sm text-foreground">{label}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
           <button onClick={handleReset} className="text-xs text-foreground hover:text-muted-foreground ml-1">
             Reset
           </button>
