@@ -219,7 +219,7 @@ export function NonShipmentTicketView() {
               <td className="px-4 py-3 text-foreground font-medium">4785607</td>
               <td className="px-4 py-3 text-foreground">13/05/2026 11:17</td>
               <td className="px-4 py-3 text-foreground">Alex Lucy</td>
-              <td className="px-4 py-3 text-foreground">13/05/2026 11:20</td>
+              <td className="px-4 py-3 text-foreground">14/05/2026 11:02</td>
               <td className="px-4 py-3 text-foreground">Alex Lucy</td>
               <td className="px-4 py-3">
                 <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
