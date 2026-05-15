@@ -95,6 +95,29 @@ export function NonShipmentTicketView() {
         </p>
       </header>
 
+      {/* Tickets List */}
+      <div className="mb-6 border rounded-lg overflow-hidden">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b bg-muted/40">
+              <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Ticket ID</th>
+              <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Raised</th>
+              <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Raised By</th>
+              <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">State</th>
+              <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Category</th>
+              <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Delegated To</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colSpan={6} className="px-4 py-6 text-center text-sm text-muted-foreground">
+                No tickets found
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <Card>
         <CardContent className="p-6">
           <div className="space-y-6 max-w-4xl">
