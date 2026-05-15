@@ -448,14 +448,14 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
                     },
                     {
                       logoComponent: (
-                        <span className="font-extrabold text-2xl tracking-tight" style={{ color: "#00AEEF", fontStyle: "italic" }}>EVRi</span>
+                        <img src="/evri-logo.png" alt="EVRi" className="h-12 w-auto" />
                       ),
                       contract: "1RY011",
                       suite: "1 Hr ETA - New Business Service Suite POD",
                     },
                     {
                       logoComponent: (
-                        <span className="font-extrabold text-2xl tracking-tight" style={{ color: "#00AEEF", fontStyle: "italic" }}>EVRi</span>
+                        <img src="/evri-logo.png" alt="EVRi" className="h-12 w-auto" />
                       ),
                       contract: "7RY071",
                       suite: "1 Hr ETA - New Business Service Suite IOD",
