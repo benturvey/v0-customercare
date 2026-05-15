@@ -438,10 +438,7 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
                     },
                     {
                       logoComponent: (
-                        <div className="flex items-center gap-2">
-                          <img src="/dpd-logo.png" alt="DPD Local" className="h-10 w-auto" />
-                          <span className="text-xs text-gray-600 font-medium">local</span>
-                        </div>
+                        <img src="/dpd-local-logo.png" alt="DPD Local" className="h-10 w-auto" />
                       ),
                       contract: "3024907",
                       suite: "Domestic Standard, Domestic Expresspaks < 5kg",
