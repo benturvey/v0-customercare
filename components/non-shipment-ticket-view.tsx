@@ -63,14 +63,23 @@ export function NonShipmentTicketView() {
   const [commentsModalOpen, setCommentsModalOpen] = useState(false)
   const [selectedTicket, setSelectedTicket] = useState<{
     ticketId: string
-    raised: string
-    raisedBy: string
-    state: string
-    comment: string
+    rows: { date: string; updatedBy: string; state: string; comment: string }[]
   } | null>(null)
 
-  const handleViewComments = (ticketId: string, raised: string, raisedBy: string, state: string, comment: string) => {
-    setSelectedTicket({ ticketId, raised, raisedBy, state, comment })
+  const ticketComments: Record<string, { date: string; updatedBy: string; state: string; comment: string }[]> = {
+    "4785452": [
+      { date: "13/05/2026 10:36", updatedBy: "Alex Lucy", state: "Deferring", comment: "Book in" },
+      { date: "13/05/2026 10:31", updatedBy: "Alex Lucy", state: "Opening", comment: "1089538 - Book this Omlet one in for 15/05" },
+    ],
+    "4785455": [{ date: "13/05/2026 10:33", updatedBy: "Alex Lucy", state: "Closed", comment: "1ZH9R8139533951209 - Alex Lucy" }],
+    "4785564": [{ date: "13/05/2026 11:00", updatedBy: "Alex Lucy", state: "Closed", comment: "1ZH9R8139539677791 - Alex Lucy" }],
+    "4785607": [{ date: "13/05/2026 11:17", updatedBy: "Alex Lucy", state: "Defer", comment: "Book in - Alex Lucy" }],
+    "4786110": [{ date: "13/05/2026 13:15", updatedBy: "Alex Lucy", state: "Defer", comment: "Book in - Alex Lucy" }],
+    "4786662": [{ date: "13/05/2026 15:25", updatedBy: "Annette Davidson", state: "Defer", comment: "1089726 Monitor this collection for OKA" }],
+  }
+
+  const handleViewComments = (ticketId: string) => {
+    setSelectedTicket({ ticketId, rows: ticketComments[ticketId] ?? [] })
     setCommentsModalOpen(true)
   }
 
@@ -140,7 +149,7 @@ export function NonShipmentTicketView() {
               <td className="px-4 py-3 text-foreground">Cancelled as change of address required - Alex Lucy</td>
               <td className="px-4 py-3">
                 <button
-                  onClick={() => handleViewComments("4785452", "13/05/2026 10:31", "Alex Lucy", "Closed", "Cancelled as change of address required - Alex Lucy")}
+                  onClick={() => handleViewComments("4785452")}
                   className="p-1 rounded hover:bg-muted transition-colors"
                   title="View comments"
                 >
@@ -162,7 +171,7 @@ export function NonShipmentTicketView() {
               <td className="px-4 py-3 text-foreground">1ZH9R8139533951209 - Alex Lucy</td>
               <td className="px-4 py-3">
                 <button
-                  onClick={() => handleViewComments("4785455", "13/05/2026 10:33", "Alex Lucy", "Closed", "1ZH9R8139533951209 - Alex Lucy")}
+                  onClick={() => handleViewComments("4785455")}
                   className="p-1 rounded hover:bg-muted transition-colors"
                   title="View comments"
                 >
@@ -184,7 +193,7 @@ export function NonShipmentTicketView() {
               <td className="px-4 py-3 text-foreground">1ZH9R8139539677791 - Alex Lucy</td>
               <td className="px-4 py-3">
                 <button
-                  onClick={() => handleViewComments("4785564", "13/05/2026 11:00", "Alex Lucy", "Closed", "1ZH9R8139539677791 - Alex Lucy")}
+                  onClick={() => handleViewComments("4785564")}
                   className="p-1 rounded hover:bg-muted transition-colors"
                   title="View comments"
                 >
@@ -206,7 +215,7 @@ export function NonShipmentTicketView() {
               <td className="px-4 py-3 text-foreground">Book in - Alex Lucy</td>
               <td className="px-4 py-3">
                 <button
-                  onClick={() => handleViewComments("4785607", "13/05/2026 11:17", "Alex Lucy", "Defer", "Book in - Alex Lucy")}
+                  onClick={() => handleViewComments("4785607")}
                   className="p-1 rounded hover:bg-muted transition-colors"
                   title="View comments"
                 >
@@ -228,7 +237,7 @@ export function NonShipmentTicketView() {
               <td className="px-4 py-3 text-foreground">Book in - Alex Lucy</td>
               <td className="px-4 py-3">
                 <button
-                  onClick={() => handleViewComments("4786110", "13/05/2026 13:15", "Alex Lucy", "Defer", "Book in - Alex Lucy")}
+                  onClick={() => handleViewComments("4786110")}
                   className="p-1 rounded hover:bg-muted transition-colors"
                   title="View comments"
                 >
@@ -250,7 +259,7 @@ export function NonShipmentTicketView() {
               <td className="px-4 py-3 text-foreground">1089726 Monitor this collection for OKA</td>
               <td className="px-4 py-3">
                 <button
-                  onClick={() => handleViewComments("4786662", "13/05/2026 15:25", "Annette Davidson", "Defer", "1089726 Monitor this collection for OKA")}
+                  onClick={() => handleViewComments("4786662")}
                   className="p-1 rounded hover:bg-muted transition-colors"
                   title="View comments"
                 >
@@ -447,20 +456,26 @@ export function NonShipmentTicketView() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td className="px-4 py-3 text-foreground">{selectedTicket.raised}</td>
-                      <td className="px-4 py-3 text-foreground">{selectedTicket.raisedBy}</td>
-                      <td className="px-4 py-3">
-                        <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
-                          selectedTicket.state === "Closed"
-                            ? "bg-gray-200 text-gray-800"
-                            : "bg-yellow-100 text-yellow-800"
-                        }`}>
-                          {selectedTicket.state}
-                        </span>
-                      </td>
-                      <td className="px-4 py-3 text-foreground">{selectedTicket.comment}</td>
-                    </tr>
+                    {selectedTicket.rows.map((row, i) => (
+                      <tr key={i} className="border-b last:border-0">
+                        <td className="px-4 py-3 text-foreground">{row.date}</td>
+                        <td className="px-4 py-3 text-foreground">{row.updatedBy}</td>
+                        <td className="px-4 py-3">
+                          <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
+                            row.state === "Closed"
+                              ? "bg-gray-200 text-gray-800"
+                              : row.state === "Opening"
+                              ? "bg-blue-100 text-blue-800"
+                              : row.state === "Deferring"
+                              ? "bg-orange-100 text-orange-800"
+                              : "bg-yellow-100 text-yellow-800"
+                          }`}>
+                            {row.state}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3 text-foreground">{row.comment}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
