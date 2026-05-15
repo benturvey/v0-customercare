@@ -500,7 +500,7 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
                         <button 
                           className="p-1 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
                           onClick={() => {
-                            if (row.contract === "3300" || row.contract === "3518" || row.contract === "3024907" || row.contract === "1RY011" || row.contract === "7RY071" || row.contract === "3RY031") {
+                            if (row.contract === "3300" || row.contract === "3518" || row.contract === "3024907" || row.contract === "1RY011" || row.contract === "7RY071" || row.contract === "3RY031" || row.contract === "GFS900277") {
                               setSelectedContract(row.contract)
                               setContractDetailOpen(true)
                             }
@@ -836,6 +836,87 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
                       <td className="px-4 py-3">
                         <div className="flex flex-wrap gap-1.5">
                           <span className="inline-block px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded">HOME</span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* GFS International Contract Detail Modal */}
+      {contractDetailOpen && selectedContract === "GFS900277" && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/50" onClick={() => setContractDetailOpen(false)} />
+          <div className="relative bg-white rounded-lg shadow-xl w-full max-w-5xl max-h-[90vh] overflow-y-auto mx-4">
+            <button
+              onClick={() => setContractDetailOpen(false)}
+              className="absolute top-4 right-4 p-2 rounded-full hover:bg-muted transition-colors z-10"
+            >
+              <X className="h-5 w-5 text-muted-foreground" />
+            </button>
+
+            <div className="p-8">
+              {/* GFS International Logo */}
+              <div className="mb-8">
+                <img src="/gfs-international-logo.png" alt="GFS International" className="h-12 w-auto" />
+              </div>
+
+              {/* Contract fields - Row 1 */}
+              <div className="grid grid-cols-3 gap-8 mb-4">
+                <div>
+                  <p className="text-sm text-muted-foreground mb-1">Source</p>
+                  <p className="text-sm font-medium text-foreground">Onboarding</p>
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground mb-1">Contract</p>
+                  <p className="text-sm font-medium text-foreground">GFS900277</p>
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground mb-1">Range From</p>
+                  <p className="text-sm font-medium text-foreground">—</p>
+                </div>
+              </div>
+
+              {/* Contract fields - Row 2 */}
+              <div className="grid grid-cols-3 gap-8 mb-6">
+                <div>
+                  <p className="text-sm text-muted-foreground mb-1">Range To</p>
+                  <p className="text-sm font-medium text-foreground">—</p>
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground mb-1">API Key</p>
+                  <p className="text-sm font-medium text-foreground">—</p>
+                </div>
+                <div></div>
+              </div>
+
+              {/* Service Suite Table */}
+              <div className="border rounded-lg overflow-hidden">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b bg-muted/30">
+                      <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3 w-40">Service Suite</th>
+                      <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Service Codes</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="px-4 py-3 text-foreground align-top">International</td>
+                      <td className="px-4 py-3">
+                        <div className="flex flex-wrap gap-1.5">
+                          {[
+                            "EECO - eCommerce Economy (DDU/DAP Tracked up to 2 kgs)",
+                            "EEDP - eCommerce Economy (IOSS Tracked up to 2 kgs)",
+                            "EEUT - eCommerce Economy Un-Tracked (DDU/DAP up to 2 kgs)",
+                            "EPDP - eCommerce Plus IOSS (Tracked up to 30 kgs)",
+                            "EPLU - eCommerce Plus (DDU/DAP Tracked up to 30 kgs)"
+                          ].map((code) => (
+                            <span key={code} className="inline-block px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded">{code}</span>
+                          ))}
                         </div>
                       </td>
                     </tr>
