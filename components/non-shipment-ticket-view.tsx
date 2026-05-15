@@ -63,11 +63,14 @@ export function NonShipmentTicketView() {
   const [commentsModalOpen, setCommentsModalOpen] = useState(false)
   const [selectedTicket, setSelectedTicket] = useState<{
     ticketId: string
-    comments: string
+    raised: string
+    raisedBy: string
+    state: string
+    comment: string
   } | null>(null)
 
-  const handleViewComments = (ticketId: string, comments: string) => {
-    setSelectedTicket({ ticketId, comments })
+  const handleViewComments = (ticketId: string, raised: string, raisedBy: string, state: string, comment: string) => {
+    setSelectedTicket({ ticketId, raised, raisedBy, state, comment })
     setCommentsModalOpen(true)
   }
 
@@ -137,7 +140,7 @@ export function NonShipmentTicketView() {
               <td className="px-4 py-3 text-foreground">Cancelled as change of address required - Alex Lucy</td>
               <td className="px-4 py-3">
                 <button
-                  onClick={() => handleViewComments("4785452", "Cancelled as change of address required - Alex Lucy")}
+                  onClick={() => handleViewComments("4785452", "13/05/2026 10:31", "Alex Lucy", "Closed", "Cancelled as change of address required - Alex Lucy")}
                   className="p-1 rounded hover:bg-muted transition-colors"
                   title="View comments"
                 >
@@ -159,7 +162,7 @@ export function NonShipmentTicketView() {
               <td className="px-4 py-3 text-foreground">1ZH9R8139533951209 - Alex Lucy</td>
               <td className="px-4 py-3">
                 <button
-                  onClick={() => handleViewComments("4785455", "1ZH9R8139533951209 - Alex Lucy")}
+                  onClick={() => handleViewComments("4785455", "13/05/2026 10:33", "Alex Lucy", "Closed", "1ZH9R8139533951209 - Alex Lucy")}
                   className="p-1 rounded hover:bg-muted transition-colors"
                   title="View comments"
                 >
@@ -181,7 +184,7 @@ export function NonShipmentTicketView() {
               <td className="px-4 py-3 text-foreground">1ZH9R8139539677791 - Alex Lucy</td>
               <td className="px-4 py-3">
                 <button
-                  onClick={() => handleViewComments("4785564", "1ZH9R8139539677791 - Alex Lucy")}
+                  onClick={() => handleViewComments("4785564", "13/05/2026 11:00", "Alex Lucy", "Closed", "1ZH9R8139539677791 - Alex Lucy")}
                   className="p-1 rounded hover:bg-muted transition-colors"
                   title="View comments"
                 >
@@ -203,7 +206,7 @@ export function NonShipmentTicketView() {
               <td className="px-4 py-3 text-foreground">Book in - Alex Lucy</td>
               <td className="px-4 py-3">
                 <button
-                  onClick={() => handleViewComments("4785607", "Book in - Alex Lucy")}
+                  onClick={() => handleViewComments("4785607", "13/05/2026 11:17", "Alex Lucy", "Defer", "Book in - Alex Lucy")}
                   className="p-1 rounded hover:bg-muted transition-colors"
                   title="View comments"
                 >
@@ -225,7 +228,7 @@ export function NonShipmentTicketView() {
               <td className="px-4 py-3 text-foreground">Book in - Alex Lucy</td>
               <td className="px-4 py-3">
                 <button
-                  onClick={() => handleViewComments("4786110", "Book in - Alex Lucy")}
+                  onClick={() => handleViewComments("4786110", "13/05/2026 13:15", "Alex Lucy", "Defer", "Book in - Alex Lucy")}
                   className="p-1 rounded hover:bg-muted transition-colors"
                   title="View comments"
                 >
@@ -398,7 +401,7 @@ export function NonShipmentTicketView() {
       {commentsModalOpen && selectedTicket && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div className="absolute inset-0 bg-black/50" onClick={() => setCommentsModalOpen(false)} />
-          <div className="relative bg-white rounded-lg shadow-xl w-full max-w-lg mx-4">
+          <div className="relative bg-white rounded-lg shadow-xl w-full max-w-3xl mx-4">
             <div className="flex items-center justify-between p-4 border-b">
               <h2 className="text-lg font-semibold text-foreground">
                 Comments - Ticket #{selectedTicket.ticketId}
@@ -411,15 +414,37 @@ export function NonShipmentTicketView() {
               </button>
             </div>
             <div className="p-4">
-              <div className="bg-muted/30 rounded-lg p-4">
-                <p className="text-sm text-foreground">{selectedTicket.comments}</p>
+              <div className="border rounded-lg overflow-hidden">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b bg-muted/40">
+                      <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Date</th>
+                      <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Updated By</th>
+                      <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">State</th>
+                      <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Comment</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="px-4 py-3 text-foreground">{selectedTicket.raised}</td>
+                      <td className="px-4 py-3 text-foreground">{selectedTicket.raisedBy}</td>
+                      <td className="px-4 py-3">
+                        <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
+                          selectedTicket.state === "Closed"
+                            ? "bg-gray-200 text-gray-800"
+                            : "bg-yellow-100 text-yellow-800"
+                        }`}>
+                          {selectedTicket.state}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 text-foreground">{selectedTicket.comment}</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
             <div className="flex justify-end p-4 border-t">
-              <Button
-                variant="outline"
-                onClick={() => setCommentsModalOpen(false)}
-              >
+              <Button variant="outline" onClick={() => setCommentsModalOpen(false)}>
                 Close
               </Button>
             </div>
