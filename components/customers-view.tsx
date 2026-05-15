@@ -19,6 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { CustomerDetailsModal } from "@/components/customer-details-modal"
 
 const SKILL_LEVELS = ["L1", "L2", "L3", "L4", "MGM", "ADM"]
 
@@ -62,6 +63,13 @@ export function CustomersView() {
     receiveEmails: false,
   })
   const [newEmailInput, setNewEmailInput] = useState("")
+  const [customerDetailsOpen, setCustomerDetailsOpen] = useState(false)
+  const [selectedCustomerForDetails, setSelectedCustomerForDetails] = useState<Customer | null>(null)
+
+  const handleViewCustomerDetails = (customer: Customer) => {
+    setSelectedCustomerForDetails(customer)
+    setCustomerDetailsOpen(true)
+  }
 
   const handleEditSkillLevel = (customerId: string) => {
     setEditingId(customerId)
@@ -263,6 +271,11 @@ export function CustomersView() {
                     variant="ghost"
                     size="icon"
                     className="h-8 w-8 text-muted-foreground hover:text-foreground"
+                    onClick={() => {
+                      if (customer.company === "ABBOTT LYON LTD") {
+                        handleViewCustomerDetails(customer)
+                      }
+                    }}
                   >
                     <MoreVertical className="h-4 w-4" />
                   </Button>
@@ -389,6 +402,18 @@ export function CustomersView() {
           )}
         </SheetContent>
       </Sheet>
+
+      {/* Customer Details Modal */}
+      {selectedCustomerForDetails && (
+        <CustomerDetailsModal
+          open={customerDetailsOpen}
+          onClose={() => {
+            setCustomerDetailsOpen(false)
+            setSelectedCustomerForDetails(null)
+          }}
+          customer={selectedCustomerForDetails}
+        />
+      )}
     </div>
   )
 }
