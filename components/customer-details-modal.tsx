@@ -181,6 +181,7 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
           )}
 
           {activeTab === "Addresses & Contacts" && (
+            <>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Invoice Address */}
               <div className="border rounded-lg p-6">
@@ -400,6 +401,7 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
                 ))}
               </div>
             </div>
+            </>
           )}
 
           {activeTab !== "Overview" && activeTab !== "Addresses & Contacts" && (
