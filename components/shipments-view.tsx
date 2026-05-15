@@ -6,6 +6,7 @@ import { ShipmentTable } from "@/components/shipment-table"
 import type { ShipmentFilters as ShipmentFiltersType, Shipment } from "@/types/shipment"
 import { Users, CalendarDays, Truck, User, Hash, SlidersHorizontal, LayoutDashboard, Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 
 const PERIOD_OPTIONS = [
   "Today",
@@ -187,27 +188,27 @@ export function ShipmentsView() {
   const [refParcel, setRefParcel] = useState("")
   const [refShipment, setRefShipment] = useState("")
   const [refConsignee, setRefConsignee] = useState("")
+  const [otherOpen, setOtherOpen] = useState(false)
+  const [claimId, setClaimId] = useState("")
+  const [hasComments, setHasComments] = useState(false)
+  const [deletedOnly, setDeletedOnly] = useState(false)
+  const [withClaims, setWithClaims] = useState(false)
+  const [exceptionStatus, setExceptionStatus] = useState(false)
   const [customFrom, setCustomFrom] = useState("2026-05-14")
   const [customTo, setCustomTo] = useState("2026-05-14")
   const periodRef = useRef<HTMLDivElement>(null)
   const carrierRef = useRef<HTMLDivElement>(null)
   const recipientRef = useRef<HTMLDivElement>(null)
   const refsRef = useRef<HTMLDivElement>(null)
+  const otherRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      if (periodRef.current && !periodRef.current.contains(e.target as Node)) {
-        setPeriodOpen(false)
-      }
-      if (carrierRef.current && !carrierRef.current.contains(e.target as Node)) {
-        setCarrierOpen(false)
-      }
-      if (recipientRef.current && !recipientRef.current.contains(e.target as Node)) {
-        setRecipientOpen(false)
-      }
-      if (refsRef.current && !refsRef.current.contains(e.target as Node)) {
-        setRefsOpen(false)
-      }
+      if (periodRef.current && !periodRef.current.contains(e.target as Node)) setPeriodOpen(false)
+      if (carrierRef.current && !carrierRef.current.contains(e.target as Node)) setCarrierOpen(false)
+      if (recipientRef.current && !recipientRef.current.contains(e.target as Node)) setRecipientOpen(false)
+      if (refsRef.current && !refsRef.current.contains(e.target as Node)) setRefsOpen(false)
+      if (otherRef.current && !otherRef.current.contains(e.target as Node)) setOtherOpen(false)
     }
     document.addEventListener("mousedown", handleClickOutside)
     return () => document.removeEventListener("mousedown", handleClickOutside)
@@ -529,14 +530,64 @@ export function ShipmentsView() {
               </div>
             )}
           </div>
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex items-center gap-1.5 text-xs font-semibold text-foreground border rounded-sm px-3 py-1.5 h-auto"
-          >
-            <SlidersHorizontal className="h-3.5 w-3.5 text-muted-foreground" />
-            OTHER
-          </Button>
+          <div ref={otherRef} className="relative">
+            <Button
+              variant="outline"
+              size="sm"
+              className="flex items-center gap-1.5 text-xs font-semibold text-foreground border rounded-sm px-3 py-1.5 h-auto"
+              onClick={() => setOtherOpen((o) => !o)}
+            >
+              <SlidersHorizontal className="h-3.5 w-3.5 text-muted-foreground" />
+              OTHER
+            </Button>
+            {otherOpen && (
+              <div className="absolute left-0 top-full mt-1 z-50 bg-white border rounded-md shadow-lg w-72">
+                <div className="px-4 py-3 border-b">
+                  <span className="text-xs font-bold text-foreground tracking-wide">OTHER</span>
+                </div>
+                <div className="px-4 py-4 space-y-4">
+                  {/* Claim ID */}
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-bold text-foreground">Claim ID</label>
+                    <input
+                      autoFocus
+                      type="text"
+                      value={claimId}
+                      onChange={(e) => setClaimId(e.target.value)}
+                      className="w-full border rounded-md px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    <p className="text-xs text-muted-foreground">Searches by claim only — other filters are ignored</p>
+                  </div>
+                  {/* Divider */}
+                  <div className="border-t" />
+                  {/* Checkboxes */}
+                  <div className="space-y-3">
+                    {[
+                      { id: "hasComments", label: "Has Comments", checked: hasComments, set: setHasComments, info: false },
+                      { id: "deletedOnly", label: "Deleted shipments only", checked: deletedOnly, set: setDeletedOnly, info: false },
+                      { id: "withClaims", label: "Shipments with claims", checked: withClaims, set: setWithClaims, info: true },
+                      { id: "exceptionStatus", label: "Exception Status (Red & Amber)", checked: exceptionStatus, set: setExceptionStatus, info: false },
+                    ].map(({ id, label, checked, set, info }) => (
+                      <label key={id} className="flex items-center gap-2.5 cursor-pointer">
+                        <Checkbox
+                          id={id}
+                          checked={checked}
+                          onCheckedChange={(v) => set(!!v)}
+                          className="data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
+                        />
+                        <span className="text-sm text-foreground flex items-center gap-1.5">
+                          {label}
+                          {info && (
+                            <span className="inline-flex items-center justify-center h-4 w-4 rounded-full border border-blue-500 text-blue-500 text-[10px] font-bold cursor-help" title="Includes shipments with associated claims">i</span>
+                          )}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
           <button
             onClick={handleReset}
             className="text-xs text-foreground hover:text-muted-foreground ml-1"
