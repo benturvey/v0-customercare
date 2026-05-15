@@ -75,7 +75,10 @@ export function NonShipmentTicketView() {
       { date: "13/05/2026 10:35", updatedBy: "Alex Lucy", state: "Deferring", comment: "Book in" },
       { date: "13/05/2026 10:33", updatedBy: "Alex Lucy", state: "Opening", comment: "1089538 - Book this Omlet one in for 15/05" },
     ],
-    "4785564": [{ date: "13/05/2026 11:00", updatedBy: "Alex Lucy", state: "Closed", comment: "1ZH9R8139539677791" }],
+    "4785564": [
+      { date: "13/05/2026 11:01", updatedBy: "Alex Lucy", state: "Deferring", comment: "Book in" },
+      { date: "13/05/2026 10:33", updatedBy: "Alex Lucy", state: "Opening", comment: "1089596 - Book this Omlet one in for 15/05" },
+    ],
     "4785607": [{ date: "13/05/2026 11:17", updatedBy: "Alex Lucy", state: "Defer", comment: "Book in" }],
     "4786110": [{ date: "13/05/2026 13:15", updatedBy: "Alex Lucy", state: "Defer", comment: "Book in" }],
     "4786662": [{ date: "13/05/2026 15:25", updatedBy: "Annette Davidson", state: "Defer", comment: "1089726 Monitor this collection for OKA" }],
