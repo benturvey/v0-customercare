@@ -713,13 +713,6 @@ export function ShipmentsView() {
         </div>
       </div>
 
-      <ShipmentFilters
-        filters={filters}
-        onFilterChange={handleFilterChange}
-        onSearch={handleSearch}
-        onReset={handleReset}
-      />
-
       <div className="mt-6">
         <ShipmentTable shipments={filteredShipments} />
       </div>
