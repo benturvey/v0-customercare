@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { X, Building2, MapPin, User, Mail, Phone } from "lucide-react"
+import { X, Building2, MapPin, User, Mail, Phone, MoreVertical } from "lucide-react"
 
 interface CustomerDetailsModalProps {
   open: boolean
@@ -418,6 +418,7 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
                     <th className="text-left text-xs text-muted-foreground font-medium px-6 py-3 w-48">Carrier</th>
                     <th className="text-left text-xs text-muted-foreground font-medium px-6 py-3 w-40">Contract</th>
                     <th className="text-left text-xs text-muted-foreground font-medium px-6 py-3">Service Suite</th>
+                    <th className="w-10"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -493,6 +494,11 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
                       <td className="px-6 py-4">{row.logoComponent}</td>
                       <td className="px-6 py-4 text-foreground">{row.contract}</td>
                       <td className="px-6 py-4 text-muted-foreground">{row.suite}</td>
+                      <td className="px-2 py-4">
+                        <button className="p-1 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors">
+                          <MoreVertical className="h-4 w-4" />
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
