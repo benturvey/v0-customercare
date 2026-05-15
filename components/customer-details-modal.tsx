@@ -537,7 +537,7 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
               </div>
 
               {/* Contract 3300 Section */}
-              <div className="mb-10">
+              <div>
                 <div className="grid grid-cols-4 gap-8 mb-4">
                   <div>
                     <p className="text-sm text-muted-foreground mb-1">Source</p>
@@ -559,76 +559,6 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
                 <div className="mb-6">
                   <p className="text-sm text-muted-foreground mb-1">Description</p>
                   <p className="text-sm font-medium text-foreground">DDP</p>
-                </div>
-
-                {/* Service Suite Table */}
-                <div className="border rounded-lg overflow-hidden">
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr className="border-b bg-muted/30">
-                        <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3 w-56">Service Suite</th>
-                        <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Service Codes</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr className="border-b">
-                        <td className="px-4 py-3 text-foreground align-top">Domestic Standard</td>
-                        <td className="px-4 py-3">
-                          <div className="flex flex-wrap gap-1.5">
-                            {["01 - Sunday", "11 - 2 Day", "12 - Next Day", "13 - Next Day by 12:00", "14 - Next Day by 10:30", "16 - Saturday", "18 - Saturday by 10:30", "29 - Sunday by 12:00"].map((code) => (
-                              <span key={code} className="inline-block px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded">{code}</span>
-                            ))}
-                          </div>
-                        </td>
-                      </tr>
-                      <tr className="border-b">
-                        <td className="px-4 py-3 text-foreground align-top">European Standard</td>
-                        <td className="px-4 py-3">
-                          <div className="flex flex-wrap gap-1.5">
-                            {["19 - Parcel", "39 - Expresspak"].map((code) => (
-                              <span key={code} className="inline-block px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded">{code}</span>
-                            ))}
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="px-4 py-3 text-foreground align-top">{"Domestic Expresspaks < 5kg"}</td>
-                        <td className="px-4 py-3">
-                          <div className="flex flex-wrap gap-1.5">
-                            {["09 - Sunday", "23 - Sunday by 10:30", "32 - Next Day", "33 - Next Day by 12:00", "34 - Next Day by 10:30", "36 - Saturday", "37 - Saturday by 12:00", "38 - Saturday by 10:30", "51 - Sunday by 12:00"].map((code) => (
-                              <span key={code} className="inline-block px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded">{code}</span>
-                            ))}
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-
-              {/* Contract 3518 Section */}
-              <div>
-                <div className="grid grid-cols-4 gap-8 mb-4">
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">Source</p>
-                    <p className="text-sm font-medium text-foreground">CHG-001</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">Contract</p>
-                    <p className="text-sm font-medium text-foreground">3518</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">SLID</p>
-                    <p className="text-sm font-medium text-foreground">3518</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">Auth Code</p>
-                    <p className="text-sm font-medium text-foreground">—</p>
-                  </div>
-                </div>
-                <div className="mb-6">
-                  <p className="text-sm text-muted-foreground mb-1">Description</p>
-                  <p className="text-sm font-medium text-foreground">ILG</p>
                 </div>
 
                 {/* Service Suite Table */}
