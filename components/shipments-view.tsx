@@ -4,9 +4,29 @@ import { useState, useRef, useEffect } from "react"
 import { ShipmentFilters } from "@/components/shipment-filters"
 import { ShipmentTable } from "@/components/shipment-table"
 import type { ShipmentFilters as ShipmentFiltersType, Shipment } from "@/types/shipment"
-import { Users, CalendarDays, Truck, User, Hash, SlidersHorizontal, LayoutDashboard, Check } from "lucide-react"
+import { Users, CalendarDays, Truck, User, Hash, SlidersHorizontal, LayoutDashboard, Check, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
+
+const CUSTOMERS = [
+  "Amazon",
+  "ASOS",
+  "Boots",
+  "Currys",
+  "GFS Direct",
+  "John Lewis",
+  "Mamas & Papas",
+  "Marks & Spencer",
+  "Next",
+  "Primark",
+  "River Island",
+  "Sainsbury's",
+  "Sports Direct",
+  "Tesco",
+  "The Very Group",
+  "Waitrose",
+  "Zara",
+]
 
 const PERIOD_OPTIONS = [
   "Today",
@@ -171,6 +191,9 @@ export function ShipmentsView() {
   const [activePeriod, setActivePeriod] = useState("Yesterday")
   const [activeCarrier, setActiveCarrier] = useState("ANY CARRIER")
   const [activeRecipient, setActiveRecipient] = useState("ANY RECIPIENT")
+  const [customerOpen, setCustomerOpen] = useState(false)
+  const [customerSearch, setCustomerSearch] = useState("")
+  const [selectedCustomers, setSelectedCustomers] = useState<string[]>([])
   const [periodOpen, setPeriodOpen] = useState(false)
   const [carrierOpen, setCarrierOpen] = useState(false)
   const [recipientOpen, setRecipientOpen] = useState(false)
@@ -197,6 +220,7 @@ export function ShipmentsView() {
   const [customFrom, setCustomFrom] = useState("2026-05-14")
   const [customTo, setCustomTo] = useState("2026-05-14")
   const periodRef = useRef<HTMLDivElement>(null)
+  const customerRef = useRef<HTMLDivElement>(null)
   const carrierRef = useRef<HTMLDivElement>(null)
   const recipientRef = useRef<HTMLDivElement>(null)
   const refsRef = useRef<HTMLDivElement>(null)
@@ -204,6 +228,7 @@ export function ShipmentsView() {
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
+      if (customerRef.current && !customerRef.current.contains(e.target as Node)) setCustomerOpen(false)
       if (periodRef.current && !periodRef.current.contains(e.target as Node)) setPeriodOpen(false)
       if (carrierRef.current && !carrierRef.current.contains(e.target as Node)) setCarrierOpen(false)
       if (recipientRef.current && !recipientRef.current.contains(e.target as Node)) setRecipientOpen(false)
@@ -221,14 +246,72 @@ export function ShipmentsView() {
         <div className="flex items-center flex-wrap gap-3">
           <LayoutDashboard className="h-5 w-5 text-foreground shrink-0" />
           <span className="text-sm font-bold text-foreground whitespace-nowrap">Search Shipments</span>
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex items-center gap-1.5 text-xs font-semibold text-foreground border rounded-sm px-3 py-1.5 h-auto"
-          >
-            <Users className="h-3.5 w-3.5 text-muted-foreground" />
-            {activeStatus}
-          </Button>
+          <div ref={customerRef} className="relative">
+            <Button
+              variant="outline"
+              size="sm"
+              className="flex items-center gap-1.5 text-xs font-semibold text-foreground border rounded-sm px-3 py-1.5 h-auto"
+              onClick={() => setCustomerOpen((o) => !o)}
+            >
+              <Users className="h-3.5 w-3.5 text-muted-foreground" />
+              {selectedCustomers.length > 0 ? `${selectedCustomers.length} CUSTOMER${selectedCustomers.length > 1 ? "S" : ""}` : "ANY CUSTOMER"}
+            </Button>
+            {customerOpen && (
+              <div className="absolute left-0 top-full mt-1 z-50 bg-white border rounded-md shadow-lg w-64">
+                {/* Search */}
+                <div className="flex items-center gap-2 px-3 py-2 border-b">
+                  <Search className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+                  <input
+                    autoFocus
+                    type="text"
+                    value={customerSearch}
+                    onChange={(e) => setCustomerSearch(e.target.value)}
+                    placeholder="Search options..."
+                    className="flex-1 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
+                  />
+                </div>
+                {/* Scrollable list */}
+                <div className="max-h-64 overflow-y-auto py-1">
+                  {/* Select All */}
+                  {(() => {
+                    const filtered = CUSTOMERS.filter((c) =>
+                      c.toLowerCase().includes(customerSearch.toLowerCase())
+                    )
+                    const allSelected = filtered.length > 0 && filtered.every((c) => selectedCustomers.includes(c))
+                    return (
+                      <>
+                        <label className="flex items-center gap-2.5 px-3 py-2 hover:bg-muted cursor-pointer">
+                          <Checkbox
+                            checked={allSelected}
+                            onCheckedChange={(v) => {
+                              if (v) setSelectedCustomers((prev) => Array.from(new Set([...prev, ...filtered])))
+                              else setSelectedCustomers((prev) => prev.filter((c) => !filtered.includes(c)))
+                            }}
+                            className="data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
+                          />
+                          <span className="text-sm text-foreground">(Select All)</span>
+                        </label>
+                        {filtered.map((customer) => (
+                          <label key={customer} className="flex items-center gap-2.5 px-3 py-2 hover:bg-muted cursor-pointer">
+                            <Checkbox
+                              checked={selectedCustomers.includes(customer)}
+                              onCheckedChange={(v) => {
+                                setSelectedCustomers((prev) =>
+                                  v ? [...prev, customer] : prev.filter((c) => c !== customer)
+                                )
+                              }}
+                              className="data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
+                            />
+                            <span className="text-sm text-foreground">{customer}</span>
+                          </label>
+                        ))}
+                      </>
+                    )
+                  })()}
+                </div>
+              </div>
+            )}
+          </div>
           <div ref={periodRef} className="relative">
             <Button
               variant="outline"
