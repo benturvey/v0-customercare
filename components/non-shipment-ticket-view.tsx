@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { MessageSquare, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -59,6 +60,17 @@ export function NonShipmentTicketView() {
     assignTo: "",
   })
 
+  const [commentsModalOpen, setCommentsModalOpen] = useState(false)
+  const [selectedTicket, setSelectedTicket] = useState<{
+    ticketId: string
+    comments: string
+  } | null>(null)
+
+  const handleViewComments = (ticketId: string, comments: string) => {
+    setSelectedTicket({ ticketId, comments })
+    setCommentsModalOpen(true)
+  }
+
   const handleSubmit = () => {
     console.log("Submitting non-shipment ticket:", formData)
     // In a real application, this would submit to an API
@@ -107,6 +119,7 @@ export function NonShipmentTicketView() {
               <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Category</th>
               <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Delegated To</th>
               <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Comments</th>
+              <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3 w-12"></th>
             </tr>
           </thead>
           <tbody>
@@ -122,6 +135,15 @@ export function NonShipmentTicketView() {
               <td className="px-4 py-3 text-foreground">General</td>
               <td className="px-4 py-3 text-foreground">Collections</td>
               <td className="px-4 py-3 text-foreground">Cancelled as change of address required - Alex Lucy</td>
+              <td className="px-4 py-3">
+                <button
+                  onClick={() => handleViewComments("4785452", "Cancelled as change of address required - Alex Lucy")}
+                  className="p-1 rounded hover:bg-muted transition-colors"
+                  title="View comments"
+                >
+                  <MessageSquare className="h-4 w-4 text-muted-foreground" />
+                </button>
+              </td>
             </tr>
             <tr className="border-b hover:bg-muted/20">
               <td className="px-4 py-3 text-foreground font-medium">4785455</td>
@@ -135,6 +157,15 @@ export function NonShipmentTicketView() {
               <td className="px-4 py-3 text-foreground">General</td>
               <td className="px-4 py-3 text-foreground">Collections</td>
               <td className="px-4 py-3 text-foreground">1ZH9R8139533951209 - Alex Lucy</td>
+              <td className="px-4 py-3">
+                <button
+                  onClick={() => handleViewComments("4785455", "1ZH9R8139533951209 - Alex Lucy")}
+                  className="p-1 rounded hover:bg-muted transition-colors"
+                  title="View comments"
+                >
+                  <MessageSquare className="h-4 w-4 text-muted-foreground" />
+                </button>
+              </td>
             </tr>
             <tr className="border-b hover:bg-muted/20">
               <td className="px-4 py-3 text-foreground font-medium">4785564</td>
@@ -148,6 +179,15 @@ export function NonShipmentTicketView() {
               <td className="px-4 py-3 text-foreground">General</td>
               <td className="px-4 py-3 text-foreground">Collections</td>
               <td className="px-4 py-3 text-foreground">1ZH9R8139539677791 - Alex Lucy</td>
+              <td className="px-4 py-3">
+                <button
+                  onClick={() => handleViewComments("4785564", "1ZH9R8139539677791 - Alex Lucy")}
+                  className="p-1 rounded hover:bg-muted transition-colors"
+                  title="View comments"
+                >
+                  <MessageSquare className="h-4 w-4 text-muted-foreground" />
+                </button>
+              </td>
             </tr>
             <tr className="border-b hover:bg-muted/20">
               <td className="px-4 py-3 text-foreground font-medium">4785607</td>
@@ -161,6 +201,15 @@ export function NonShipmentTicketView() {
               <td className="px-4 py-3 text-foreground">General</td>
               <td className="px-4 py-3 text-foreground">Collections</td>
               <td className="px-4 py-3 text-foreground">Book in - Alex Lucy</td>
+              <td className="px-4 py-3">
+                <button
+                  onClick={() => handleViewComments("4785607", "Book in - Alex Lucy")}
+                  className="p-1 rounded hover:bg-muted transition-colors"
+                  title="View comments"
+                >
+                  <MessageSquare className="h-4 w-4 text-muted-foreground" />
+                </button>
+              </td>
             </tr>
             <tr className="border-b hover:bg-muted/20">
               <td className="px-4 py-3 text-foreground font-medium">4786110</td>
@@ -174,6 +223,15 @@ export function NonShipmentTicketView() {
               <td className="px-4 py-3 text-foreground">General</td>
               <td className="px-4 py-3 text-foreground">Collections</td>
               <td className="px-4 py-3 text-foreground">Book in - Alex Lucy</td>
+              <td className="px-4 py-3">
+                <button
+                  onClick={() => handleViewComments("4786110", "Book in - Alex Lucy")}
+                  className="p-1 rounded hover:bg-muted transition-colors"
+                  title="View comments"
+                >
+                  <MessageSquare className="h-4 w-4 text-muted-foreground" />
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -335,6 +393,39 @@ export function NonShipmentTicketView() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Comments Modal */}
+      {commentsModalOpen && selectedTicket && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/50" onClick={() => setCommentsModalOpen(false)} />
+          <div className="relative bg-white rounded-lg shadow-xl w-full max-w-lg mx-4">
+            <div className="flex items-center justify-between p-4 border-b">
+              <h2 className="text-lg font-semibold text-foreground">
+                Comments - Ticket #{selectedTicket.ticketId}
+              </h2>
+              <button
+                onClick={() => setCommentsModalOpen(false)}
+                className="p-1 rounded-full hover:bg-muted transition-colors"
+              >
+                <X className="h-5 w-5 text-muted-foreground" />
+              </button>
+            </div>
+            <div className="p-4">
+              <div className="bg-muted/30 rounded-lg p-4">
+                <p className="text-sm text-foreground">{selectedTicket.comments}</p>
+              </div>
+            </div>
+            <div className="flex justify-end p-4 border-t">
+              <Button
+                variant="outline"
+                onClick={() => setCommentsModalOpen(false)}
+              >
+                Close
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
