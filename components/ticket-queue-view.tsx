@@ -203,7 +203,7 @@ export function TicketQueueView() {
                 </div>
                 <div className="py-1">
                   {(() => {
-                    const statuses = ["Open", "In Progress", "Deferred", "Reviewed", "Resolved"]
+                    const statuses = ["Open", "In Progress", "Deferred", "Reviewed", "Resolved", "Snoozed"]
                     const allSelected = statuses.every((s) => selectedStatuses.includes(s))
                     return (
                       <>
