@@ -61,6 +61,7 @@ export function NonShipmentTicketView() {
   })
 
   const [commentsModalOpen, setCommentsModalOpen] = useState(false)
+  const [raiseTicketModalOpen, setRaiseTicketModalOpen] = useState(false)
   const [selectedTicket, setSelectedTicket] = useState<{
     ticketId: string
     rows: { date: string; updatedBy: string; state: string; comment: string }[]
@@ -137,7 +138,10 @@ export function NonShipmentTicketView() {
             Raise a ticket not related to a specific shipment
           </p>
         </div>
-        <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+        <Button 
+          className="bg-blue-600 hover:bg-blue-700 text-white"
+          onClick={() => setRaiseTicketModalOpen(true)}
+        >
           Raise Ticket
         </Button>
       </header>
@@ -364,6 +368,178 @@ export function NonShipmentTicketView() {
               <Button variant="outline" onClick={() => setCommentsModalOpen(false)}>
                 Close
               </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Raise Ticket Modal */}
+      {raiseTicketModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/50" onClick={() => setRaiseTicketModalOpen(false)} />
+          <div className="relative bg-white rounded-lg shadow-xl w-full max-w-3xl mx-4">
+            <button
+              onClick={() => setRaiseTicketModalOpen(false)}
+              className="absolute top-4 right-4 p-1 rounded-full hover:bg-muted transition-colors"
+            >
+              <X className="h-5 w-5 text-muted-foreground" />
+            </button>
+            <div className="p-6">
+              <div className="space-y-6">
+                {/* Contact Name and Contact No - Side by Side */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="contactName" className="text-muted-foreground">Contact Name</Label>
+                    <Input
+                      id="contactName"
+                      value={formData.contactName}
+                      onChange={(e) => setFormData(prev => ({ ...prev, contactName: e.target.value }))}
+                      placeholder="Enter contact name"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="contactNo" className="text-muted-foreground">Contact No</Label>
+                    <Input
+                      id="contactNo"
+                      value={formData.contactNo}
+                      onChange={(e) => setFormData(prev => ({ ...prev, contactNo: e.target.value }))}
+                      placeholder="Enter contact number"
+                    />
+                  </div>
+                </div>
+
+                {/* Assign Ticket To */}
+                <div className="space-y-3">
+                  <Label className="text-muted-foreground">Assign Ticket To</Label>
+                  <RadioGroup
+                    value={formData.assignType}
+                    onValueChange={(value: "person" | "group") => 
+                      setFormData(prev => ({ ...prev, assignType: value, assignTo: "" }))
+                    }
+                    className="flex gap-4"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="person" id="modal-person" className="border-blue-600 text-blue-600 data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600" />
+                      <Label htmlFor="modal-person" className={`cursor-pointer font-normal ${formData.assignType === "person" ? "text-blue-600" : ""}`}>Person</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="group" id="modal-group" className="border-blue-600 text-blue-600 data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600" />
+                      <Label htmlFor="modal-group" className={`cursor-pointer font-normal ${formData.assignType === "group" ? "text-blue-600" : ""}`}>Group</Label>
+                    </div>
+                  </RadioGroup>
+
+                  {formData.assignType === "person" && (
+                    <Select
+                      value={formData.assignTo}
+                      onValueChange={(value) => setFormData(prev => ({ ...prev, assignTo: value }))}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select employee" />
+                      </SelectTrigger>
+                      <SelectContent className="max-h-[200px] overflow-y-auto">
+                        {EMPLOYEES.map((employee) => (
+                          <SelectItem key={employee.value} value={employee.value}>
+                            {employee.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )}
+
+                  {formData.assignType === "group" && (
+                    <Select
+                      value={formData.assignTo}
+                      onValueChange={(value) => setFormData(prev => ({ ...prev, assignTo: value }))}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select group" />
+                      </SelectTrigger>
+                      <SelectContent className="max-h-[200px] overflow-y-auto">
+                        {GROUPS.map((group) => (
+                          <SelectItem key={group.value} value={group.value}>
+                            {group.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )}
+                </div>
+
+                {/* Comments */}
+                <div className="space-y-2">
+                  <Label htmlFor="modal-comments" className="text-muted-foreground">Comments</Label>
+                  <Textarea
+                    id="modal-comments"
+                    value={formData.comments}
+                    onChange={(e) => setFormData(prev => ({ ...prev, comments: e.target.value }))}
+                    placeholder="Enter your comments here..."
+                    rows={4}
+                    className="resize-y"
+                  />
+                </div>
+
+                {/* Email Comments To */}
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="modal-emailCommentsTo"
+                      checked={formData.emailCommentsTo}
+                      className="data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
+                      onCheckedChange={(checked) => 
+                        setFormData(prev => ({ 
+                          ...prev, 
+                          emailCommentsTo: checked === true,
+                          emailAddress: checked === true ? prev.emailAddress : ""
+                        }))
+                      }
+                    />
+                    <Label htmlFor="modal-emailCommentsTo" className="cursor-pointer">
+                      Email Comments To
+                    </Label>
+                  </div>
+
+                  {formData.emailCommentsTo && (
+                    <div className="ml-6 space-y-2">
+                      <Label htmlFor="modal-emailAddress">Email Address</Label>
+                      <Input
+                        id="modal-emailAddress"
+                        type="email"
+                        value={formData.emailAddress}
+                        onChange={(e) => setFormData(prev => ({ ...prev, emailAddress: e.target.value }))}
+                        placeholder="Enter email address"
+                      />
+                    </div>
+                  )}
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex gap-2 pt-4">
+                  <Button
+                    onClick={() => {
+                      handleSubmit()
+                      setRaiseTicketModalOpen(false)
+                    }}
+                    className="bg-blue-600 hover:bg-blue-700 text-white"
+                  >
+                    Submit Ticket
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      handleSubmit()
+                      setRaiseTicketModalOpen(false)
+                    }}
+                    className="bg-blue-400 hover:bg-blue-500 text-white"
+                  >
+                    Submit &amp; Resolve Ticket
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={handleReset}
+                  >
+                    Reset
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
