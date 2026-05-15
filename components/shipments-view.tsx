@@ -237,7 +237,6 @@ export function ShipmentsView() {
   const [refParcel, setRefParcel] = useState("")
   const [refShipment, setRefShipment] = useState("")
   const [otherOpen, setOtherOpen] = useState(false)
-  const [claimId, setClaimId] = useState("")
   const [hasComments, setHasComments] = useState(false)
   const [deletedOnly, setDeletedOnly] = useState(false)
   const [withClaims, setWithClaims] = useState(false)
@@ -667,18 +666,6 @@ export function ShipmentsView() {
                   <span className="text-xs font-bold text-foreground tracking-wide">OTHER</span>
                 </div>
                 <div className="px-4 py-4 space-y-4">
-                  {/* Claim ID */}
-                  <div className="space-y-1.5">
-                    <label className="text-sm font-bold text-foreground">Claim ID</label>
-                    <input
-                      autoFocus
-                      type="text"
-                      value={claimId}
-                      onChange={(e) => setClaimId(e.target.value)}
-                      className="w-full border rounded-md px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    <p className="text-xs text-muted-foreground">Searches by claim only — other filters are ignored</p>
-                  </div>
                   {/* Divider */}
                   <div className="border-t" />
                   {/* Checkboxes */}
