@@ -237,7 +237,7 @@ export function NonShipmentTicketView() {
               </Button>
               <Button
                 onClick={handleSubmit}
-                className="bg-green-600 hover:bg-green-700 text-white"
+                className="bg-blue-400 hover:bg-blue-500 text-white"
               >
                 Submit &amp; Resolve Ticket
               </Button>
