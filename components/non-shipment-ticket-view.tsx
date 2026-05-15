@@ -71,10 +71,10 @@ export function NonShipmentTicketView() {
       { date: "13/05/2026 10:36", updatedBy: "Alex Lucy", state: "Deferring", comment: "Book in" },
       { date: "13/05/2026 10:31", updatedBy: "Alex Lucy", state: "Opening", comment: "1089538 - Book this Omlet one in for 15/05" },
     ],
-    "4785455": [{ date: "13/05/2026 10:33", updatedBy: "Alex Lucy", state: "Closed", comment: "1ZH9R8139533951209 - Alex Lucy" }],
-    "4785564": [{ date: "13/05/2026 11:00", updatedBy: "Alex Lucy", state: "Closed", comment: "1ZH9R8139539677791 - Alex Lucy" }],
-    "4785607": [{ date: "13/05/2026 11:17", updatedBy: "Alex Lucy", state: "Defer", comment: "Book in - Alex Lucy" }],
-    "4786110": [{ date: "13/05/2026 13:15", updatedBy: "Alex Lucy", state: "Defer", comment: "Book in - Alex Lucy" }],
+    "4785455": [{ date: "13/05/2026 10:33", updatedBy: "Alex Lucy", state: "Closed", comment: "1ZH9R8139533951209" }],
+    "4785564": [{ date: "13/05/2026 11:00", updatedBy: "Alex Lucy", state: "Closed", comment: "1ZH9R8139539677791" }],
+    "4785607": [{ date: "13/05/2026 11:17", updatedBy: "Alex Lucy", state: "Defer", comment: "Book in" }],
+    "4786110": [{ date: "13/05/2026 13:15", updatedBy: "Alex Lucy", state: "Defer", comment: "Book in" }],
     "4786662": [{ date: "13/05/2026 15:25", updatedBy: "Annette Davidson", state: "Defer", comment: "1089726 Monitor this collection for OKA" }],
   }
 
@@ -150,7 +150,7 @@ export function NonShipmentTicketView() {
               </td>
               <td className="px-4 py-3 text-foreground">General</td>
               <td className="px-4 py-3 text-foreground">Collections</td>
-              <td className="px-4 py-3 text-foreground">Cancelled as change of address required - Alex Lucy</td>
+              <td className="px-4 py-3 text-foreground">Cancelled as change of address required</td>
               <td className="px-4 py-3">
                 <button
                   onClick={() => handleViewComments("4785452")}
@@ -174,7 +174,7 @@ export function NonShipmentTicketView() {
               </td>
               <td className="px-4 py-3 text-foreground">General</td>
               <td className="px-4 py-3 text-foreground">Collections</td>
-              <td className="px-4 py-3 text-foreground">1ZH9R8139533951209 - Alex Lucy</td>
+              <td className="px-4 py-3 text-foreground">1ZH9R8139533951209</td>
               <td className="px-4 py-3">
                 <button
                   onClick={() => handleViewComments("4785455")}
@@ -198,7 +198,7 @@ export function NonShipmentTicketView() {
               </td>
               <td className="px-4 py-3 text-foreground">General</td>
               <td className="px-4 py-3 text-foreground">Collections</td>
-              <td className="px-4 py-3 text-foreground">1ZH9R8139539677791 - Alex Lucy</td>
+              <td className="px-4 py-3 text-foreground">1ZH9R8139539677791</td>
               <td className="px-4 py-3">
                 <button
                   onClick={() => handleViewComments("4785564")}
@@ -222,7 +222,7 @@ export function NonShipmentTicketView() {
               </td>
               <td className="px-4 py-3 text-foreground">General</td>
               <td className="px-4 py-3 text-foreground">Collections</td>
-              <td className="px-4 py-3 text-foreground">Book in - Alex Lucy</td>
+              <td className="px-4 py-3 text-foreground">Book in</td>
               <td className="px-4 py-3">
                 <button
                   onClick={() => handleViewComments("4785607")}
@@ -246,7 +246,7 @@ export function NonShipmentTicketView() {
               </td>
               <td className="px-4 py-3 text-foreground">General</td>
               <td className="px-4 py-3 text-foreground">Collections</td>
-              <td className="px-4 py-3 text-foreground">Book in - Alex Lucy</td>
+              <td className="px-4 py-3 text-foreground">Book in</td>
               <td className="px-4 py-3">
                 <button
                   onClick={() => handleViewComments("4786110")}
