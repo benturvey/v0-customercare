@@ -476,18 +476,14 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
                     },
                     {
                       logoComponent: (
-                        <div className="h-9 w-9 rounded-full flex items-center justify-center" style={{ backgroundColor: "#351C15" }}>
-                          <span className="font-bold text-xs" style={{ color: "#FFB500" }}>UPS</span>
-                        </div>
+                        <img src="/ups-logo.png" alt="UPS" className="h-10 w-auto" />
                       ),
                       contract: "CW7297",
                       suite: "Standard, Express",
                     },
                     {
                       logoComponent: (
-                        <div className="h-9 w-9 rounded-full flex items-center justify-center" style={{ backgroundColor: "#351C15" }}>
-                          <span className="font-bold text-xs" style={{ color: "#FFB500" }}>UPS</span>
-                        </div>
+                        <img src="/ups-logo.png" alt="UPS" className="h-10 w-auto" />
                       ),
                       contract: "E7714J",
                       suite: "Standard, Express",
