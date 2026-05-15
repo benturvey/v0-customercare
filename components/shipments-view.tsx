@@ -618,7 +618,7 @@ export function ShipmentsView() {
                   <div className="space-y-1.5">
                     <label className="text-sm font-semibold text-foreground flex items-center gap-1.5">
                       Consignment No(s).
-                      <span className="inline-flex items-center justify-center h-4 w-4 rounded-full border border-blue-500 text-blue-500 text-[10px] font-bold cursor-help" title="Type a consignment number and press Enter to add multiple">i</span>
+                      <span className="inline-flex items-center justify-center h-4 w-4 rounded-full border border-blue-500 text-blue-500 text-[10px] font-bold cursor-help" title="Key in or paste consignment numbers and press Enter or comma to add.">i</span>
                     </label>
                     <input
                       autoFocus
