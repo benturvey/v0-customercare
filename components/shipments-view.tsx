@@ -171,14 +171,22 @@ export function ShipmentsView() {
   const [activeCarrier, setActiveCarrier] = useState("ANY CARRIER")
   const [activeRecipient, setActiveRecipient] = useState("ANY RECIPIENT")
   const [periodOpen, setPeriodOpen] = useState(false)
+  const [carrierOpen, setCarrierOpen] = useState(false)
+  const [selectedCarrier, setSelectedCarrier] = useState("All carriers")
+  const [selectedContract, setSelectedContract] = useState("All contracts")
+  const [selectedService, setSelectedService] = useState("All services")
   const [customFrom, setCustomFrom] = useState("2026-05-14")
   const [customTo, setCustomTo] = useState("2026-05-14")
   const periodRef = useRef<HTMLDivElement>(null)
+  const carrierRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (periodRef.current && !periodRef.current.contains(e.target as Node)) {
         setPeriodOpen(false)
+      }
+      if (carrierRef.current && !carrierRef.current.contains(e.target as Node)) {
+        setCarrierOpen(false)
       }
     }
     document.addEventListener("mousedown", handleClickOutside)
@@ -274,14 +282,85 @@ export function ShipmentsView() {
               </div>
             )}
           </div>
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex items-center gap-1.5 text-xs font-semibold text-foreground border rounded-sm px-3 py-1.5 h-auto"
-          >
-            <Truck className="h-3.5 w-3.5 text-muted-foreground" />
-            {activeCarrier}
-          </Button>
+          <div ref={carrierRef} className="relative">
+            <Button
+              variant="outline"
+              size="sm"
+              className="flex items-center gap-1.5 text-xs font-semibold text-foreground border rounded-sm px-3 py-1.5 h-auto"
+              onClick={() => setCarrierOpen((o) => !o)}
+            >
+              <Truck className="h-3.5 w-3.5 text-muted-foreground" />
+              ANY CARRIER
+            </Button>
+            {carrierOpen && (
+              <div className="absolute left-0 top-full mt-1 z-50 bg-white border rounded-md shadow-lg w-72">
+                <div className="px-4 py-3 border-b">
+                  <span className="text-xs font-bold text-foreground tracking-wide">CARRIER FILTERS</span>
+                </div>
+                <div className="px-4 py-4 space-y-4">
+                  {/* Carrier */}
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-semibold text-foreground">Carrier</label>
+                    <div className="relative">
+                      <select
+                        value={selectedCarrier}
+                        onChange={(e) => setSelectedCarrier(e.target.value)}
+                        className="w-full border rounded-md px-3 py-2 text-sm text-foreground appearance-none focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white pr-8"
+                      >
+                        <option>All carriers</option>
+                        <option>Amazon Logistics UK</option>
+                        <option>BJS</option>
+                        <option>Coll-8</option>
+                        <option>DHL ECommerce UK</option>
+                        <option>DHL Express</option>
+                        <option>DPD</option>
+                        <option>DPD Germany</option>
+                        <option>DPD Local</option>
+                        <option>DPD Netherlands</option>
+                        <option>DX Freight</option>
+                        <option>Evri</option>
+                        <option>Exelot</option>
+                        <option>FedEx</option>
+                        <option>GFS International</option>
+                        <option>OCS</option>
+                        <option>Royal Mail</option>
+                        <option>UPS</option>
+                      </select>
+                      <Check className="absolute right-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+                    </div>
+                  </div>
+                  {/* Contract */}
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-semibold text-foreground">Contract</label>
+                    <div className="relative">
+                      <select
+                        value={selectedContract}
+                        onChange={(e) => setSelectedContract(e.target.value)}
+                        className="w-full border rounded-md px-3 py-2 text-sm text-foreground appearance-none focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white pr-8"
+                      >
+                        <option>All contracts</option>
+                      </select>
+                      <Check className="absolute right-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+                    </div>
+                  </div>
+                  {/* Service */}
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-semibold text-foreground">Service</label>
+                    <div className="relative">
+                      <select
+                        value={selectedService}
+                        onChange={(e) => setSelectedService(e.target.value)}
+                        className="w-full border rounded-md px-3 py-2 text-sm text-foreground appearance-none focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white pr-8"
+                      >
+                        <option>All services</option>
+                      </select>
+                      <Check className="absolute right-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
           <Button
             variant="outline"
             size="sm"
