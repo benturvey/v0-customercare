@@ -171,6 +171,8 @@ export function ShipmentsView() {
   const [activeCarrier, setActiveCarrier] = useState("ANY CARRIER")
   const [activeRecipient, setActiveRecipient] = useState("ANY RECIPIENT")
   const [periodOpen, setPeriodOpen] = useState(false)
+  const [customFrom, setCustomFrom] = useState("2026-05-14")
+  const [customTo, setCustomTo] = useState("2026-05-14")
   const periodRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -225,7 +227,7 @@ export function ShipmentsView() {
                     return (
                       <button
                         key={option}
-                        onClick={() => { setActivePeriod(option); setPeriodOpen(false) }}
+                        onClick={() => { setActivePeriod(option); if (option !== "Custom") setPeriodOpen(false) }}
                         className={`w-full flex items-center gap-3 px-4 py-2 text-sm mx-2 my-0.5 rounded-full transition-colors ${
                           isSelected
                             ? "bg-blue-600 text-white font-semibold"
@@ -242,6 +244,32 @@ export function ShipmentsView() {
                       </button>
                     )
                   })}
+                  {activePeriod === "Custom" && (
+                    <div className="px-4 pt-3 pb-2 space-y-3 border-t mt-2">
+                      <div className="space-y-1">
+                        <label className="text-xs text-muted-foreground">From</label>
+                        <div className="relative">
+                          <input
+                            type="date"
+                            value={customFrom}
+                            onChange={(e) => setCustomFrom(e.target.value)}
+                            className="w-full border rounded-md px-3 py-2 text-sm text-foreground appearance-none focus:outline-none focus:ring-1 focus:ring-blue-500"
+                          />
+                        </div>
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-xs text-muted-foreground">To</label>
+                        <div className="relative">
+                          <input
+                            type="date"
+                            value={customTo}
+                            onChange={(e) => setCustomTo(e.target.value)}
+                            className="w-full border rounded-md px-3 py-2 text-sm text-foreground appearance-none focus:outline-none focus:ring-1 focus:ring-blue-500"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             )}
