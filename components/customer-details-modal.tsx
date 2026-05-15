@@ -354,6 +354,52 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
                 </div>
               </div>
             </div>
+
+            {/* Contacts section */}
+            <div className="mt-8">
+              <h3 className="text-base font-semibold text-foreground mb-4">Contacts</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {[
+                  "Service Agreement",
+                  "Admin",
+                  "Billing",
+                  "Technical",
+                  "Customer Service",
+                  "Operations",
+                  "Marketing",
+                  "ECM Owner",
+                ].map((role) => (
+                  <div key={role} className="border rounded-lg p-5">
+                    <div className="flex items-center gap-2 mb-4">
+                      <User className="h-4 w-4 text-muted-foreground" />
+                      <span className="text-sm font-medium text-foreground">{role}</span>
+                    </div>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="h-9 w-9 rounded-full bg-muted flex items-center justify-center text-xs font-semibold text-foreground shrink-0">
+                        SD
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-1.5">
+                          <User className="h-3.5 w-3.5 text-muted-foreground" />
+                          <span className="text-sm font-medium text-foreground">Steve Davies</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground">Operations Director</p>
+                      </div>
+                    </div>
+                    <div className="space-y-1.5 pl-0.5">
+                      <div className="flex items-center gap-2">
+                        <Mail className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+                        <span className="text-sm text-foreground">steve@abbottlyon.com</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Phone className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+                        <span className="text-sm text-foreground">07837 560610</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           )}
 
           {activeTab !== "Overview" && activeTab !== "Addresses & Contacts" && (
