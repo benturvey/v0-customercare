@@ -500,7 +500,7 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
                         <button 
                           className="p-1 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
                           onClick={() => {
-                            if (row.contract === "3300" || row.contract === "3518" || row.contract === "3024907" || row.contract === "1RY011") {
+                            if (row.contract === "3300" || row.contract === "3518" || row.contract === "3024907" || row.contract === "1RY011" || row.contract === "7RY071") {
                               setSelectedContract(row.contract)
                               setContractDetailOpen(true)
                             }
@@ -689,7 +689,7 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
       )}
 
       {/* EVRi Contract Detail Modal */}
-      {contractDetailOpen && selectedContract === "1RY011" && (
+      {contractDetailOpen && (selectedContract === "1RY011" || selectedContract === "7RY071") && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center">
           <div className="absolute inset-0 bg-black/50" onClick={() => setContractDetailOpen(false)} />
           <div className="relative bg-white rounded-lg shadow-xl w-full max-w-5xl max-h-[90vh] overflow-y-auto mx-4">
@@ -714,7 +714,7 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">Contract</p>
-                  <p className="text-sm font-medium text-foreground">1RY011</p>
+                  <p className="text-sm font-medium text-foreground">{selectedContract}</p>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">Client ID</p>
@@ -749,7 +749,9 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="px-4 py-3 text-foreground align-top">1 Hr ETA - New Business Service Suite POD</td>
+                      <td className="px-4 py-3 text-foreground align-top">
+                        {selectedContract === "1RY011" ? "1 Hr ETA - New Business Service Suite POD" : "1 Hr ETA - New Business Service Suite IOD"}
+                      </td>
                       <td className="px-4 py-3">
                         <div className="flex flex-wrap gap-1.5">
                           {["2 Day", "Next Day"].map((code) => (
