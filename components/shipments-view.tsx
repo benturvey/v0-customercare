@@ -672,7 +672,7 @@ export function ShipmentsView() {
                     {[
                       { id: "hasComments", label: "Include Deleted Shipments", checked: hasComments, set: setHasComments, info: false },
                       { id: "deletedOnly", label: "Deleted shipments only", checked: deletedOnly, set: setDeletedOnly, info: false },
-                      { id: "exceptionStatus", label: "Exception Status (Red & Amber)", checked: exceptionStatus, set: setExceptionStatus, info: false },
+                      { id: "exceptionStatus", label: "Exceptions Only", checked: exceptionStatus, set: setExceptionStatus, info: false },
                     ].map(({ id, label, checked, set, info }) => (
                       <label key={id} className="flex items-center gap-2.5 cursor-pointer">
                         <Checkbox
