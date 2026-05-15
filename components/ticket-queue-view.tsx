@@ -129,9 +129,7 @@ export function TicketQueueView() {
   const [recipientCounty, setRecipientCounty] = useState("")
   const [recipientCountry, setRecipientCountry] = useState("Any country")
   const [refsOpen, setRefsOpen] = useState(false)
-  const [refConsignment, setRefConsignment] = useState("")
-  const [refParcel, setRefParcel] = useState("")
-  const [refShipment, setRefShipment] = useState("")
+  const [selectedStatuses, setSelectedStatuses] = useState<string[]>([])
   const [otherOpen, setOtherOpen] = useState(false)
   const [hasComments, setHasComments] = useState(false)
   const [deletedOnly, setDeletedOnly] = useState(false)
@@ -196,36 +194,44 @@ export function TicketQueueView() {
               onClick={() => setRefsOpen((o) => !o)}
             >
               <CircleDot className="h-3.5 w-3.5 text-muted-foreground" />
-              {refConsignment ? refConsignment.toUpperCase() : "ANY STATUS"}
+              {selectedStatuses.length > 0 ? `${selectedStatuses.length} STATUS${selectedStatuses.length > 1 ? "ES" : ""}` : "ANY STATUS"}
             </Button>
             {refsOpen && (
-              <div className="absolute left-0 top-full mt-1 z-50 bg-white border rounded-md shadow-lg w-56">
+              <div className="absolute left-0 top-full mt-1 z-50 bg-white border rounded-md shadow-lg w-52">
                 <div className="px-4 py-3 border-b">
                   <span className="text-xs font-bold text-foreground tracking-wide">STATUS</span>
                 </div>
                 <div className="py-1">
-                  {["Any Status", "Open", "Pending", "In Progress", "On Hold", "Resolved", "Closed"].map((status) => {
-                    const isSelected = (refConsignment || "Any Status") === status
+                  {(() => {
+                    const statuses = ["Open", "In Progress", "Deferred", "Reviewed", "Resolved"]
+                    const allSelected = statuses.every((s) => selectedStatuses.includes(s))
                     return (
-                      <button
-                        key={status}
-                        onClick={() => {
-                          setRefConsignment(status === "Any Status" ? "" : status)
-                          setRefsOpen(false)
-                        }}
-                        className={`w-full flex items-center gap-3 px-4 py-2 text-sm transition-colors ${
-                          isSelected ? "bg-blue-600 text-white font-semibold" : "text-foreground hover:bg-muted"
-                        }`}
-                      >
-                        {isSelected ? (
-                          <Check className="h-3.5 w-3.5 shrink-0" />
-                        ) : (
-                          <span className="h-3.5 w-3.5 shrink-0" />
-                        )}
-                        {status}
-                      </button>
+                      <>
+                        <label className="flex items-center gap-2.5 px-3 py-2 hover:bg-muted cursor-pointer">
+                          <Checkbox
+                            checked={allSelected}
+                            onCheckedChange={(v) => setSelectedStatuses(v ? [...statuses] : [])}
+                            className="data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
+                          />
+                          <span className="text-sm text-foreground">(Select All)</span>
+                        </label>
+                        {statuses.map((status) => (
+                          <label key={status} className="flex items-center gap-2.5 px-3 py-2 hover:bg-muted cursor-pointer">
+                            <Checkbox
+                              checked={selectedStatuses.includes(status)}
+                              onCheckedChange={(v) => {
+                                setSelectedStatuses((prev) =>
+                                  v ? [...prev, status] : prev.filter((s) => s !== status)
+                                )
+                              }}
+                              className="data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
+                            />
+                            <span className="text-sm text-foreground">{status}</span>
+                          </label>
+                        ))}
+                      </>
                     )
-                  })}
+                  })()}
                 </div>
               </div>
             )}
@@ -579,15 +585,13 @@ export function TicketQueueView() {
               setSelectedCustomers([])
               setActivePeriod("Yesterday")
               setSelectedCarrier([])
+              setSelectedStatuses([])
               setRecipientPostcode("")
               setRecipientName("")
               setRecipientCompany("")
               setRecipientTown("")
               setRecipientCounty("")
               setRecipientCountry("Any country")
-              setRefConsignment("")
-              setRefParcel("")
-              setRefShipment("")
               setHasComments(false)
               setDeletedOnly(false)
               setExceptionStatus(false)
