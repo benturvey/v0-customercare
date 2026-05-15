@@ -106,13 +106,22 @@ export function NonShipmentTicketView() {
               <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">State</th>
               <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Category</th>
               <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Delegated To</th>
+              <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Comments</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td colSpan={6} className="px-4 py-6 text-center text-sm text-muted-foreground">
-                No tickets found
+            <tr className="border-b hover:bg-muted/20">
+              <td className="px-4 py-3 text-foreground font-medium">4785452</td>
+              <td className="px-4 py-3 text-foreground">13/05/2026 10:31</td>
+              <td className="px-4 py-3 text-foreground">Alex Lucy</td>
+              <td className="px-4 py-3">
+                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-200 text-gray-800">
+                  Closed
+                </span>
               </td>
+              <td className="px-4 py-3 text-foreground">General</td>
+              <td className="px-4 py-3 text-foreground">Collections</td>
+              <td className="px-4 py-3 text-foreground">Cancelled as change of address required - Alex Lucy</td>
             </tr>
           </tbody>
         </table>
