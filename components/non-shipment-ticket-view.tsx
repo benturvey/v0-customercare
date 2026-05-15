@@ -236,6 +236,28 @@ export function NonShipmentTicketView() {
                 </button>
               </td>
             </tr>
+            <tr className="border-b hover:bg-muted/20">
+              <td className="px-4 py-3 text-foreground font-medium">4786662</td>
+              <td className="px-4 py-3 text-foreground">13/05/2026 15:25</td>
+              <td className="px-4 py-3 text-foreground">Annette Davidson</td>
+              <td className="px-4 py-3">
+                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
+                  Defer
+                </span>
+              </td>
+              <td className="px-4 py-3 text-foreground">General</td>
+              <td className="px-4 py-3 text-foreground">Collections</td>
+              <td className="px-4 py-3 text-foreground">1089726 Monitor this collection for OKA</td>
+              <td className="px-4 py-3">
+                <button
+                  onClick={() => handleViewComments("4786662", "13/05/2026 15:25", "Annette Davidson", "Defer", "1089726 Monitor this collection for OKA")}
+                  className="p-1 rounded hover:bg-muted transition-colors"
+                  title="View comments"
+                >
+                  <MessageSquare className="h-4 w-4 text-muted-foreground" />
+                </button>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
