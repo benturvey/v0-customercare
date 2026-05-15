@@ -469,12 +469,7 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
                     },
                     {
                       logoComponent: (
-                        <div className="flex items-center gap-1.5">
-                          <div className="border rounded px-1.5 py-0.5 flex items-center gap-1">
-                            <span className="font-bold text-sm text-green-600">GFS</span>
-                          </div>
-                          <span className="text-xs text-red-600 font-semibold uppercase tracking-wide">International</span>
-                        </div>
+                        <img src="/gfs-international-logo.png" alt="GFS International" className="h-10 w-auto" />
                       ),
                       contract: "GFS900277",
                       suite: "International",
