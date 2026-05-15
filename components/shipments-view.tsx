@@ -1,11 +1,22 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { ShipmentFilters } from "@/components/shipment-filters"
 import { ShipmentTable } from "@/components/shipment-table"
 import type { ShipmentFilters as ShipmentFiltersType, Shipment } from "@/types/shipment"
-import { Users, CalendarDays, Truck, User, Hash, SlidersHorizontal, LayoutDashboard } from "lucide-react"
+import { Users, CalendarDays, Truck, User, Hash, SlidersHorizontal, LayoutDashboard, Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
+
+const PERIOD_OPTIONS = [
+  "Today",
+  "Yesterday",
+  "Last 7 Days",
+  "Last 14 Days",
+  "Last 30 Days",
+  "Last Month",
+  "This Month",
+  "Custom",
+]
 
 // Sample data for demonstration
 const sampleShipments: Shipment[] = [
@@ -156,9 +167,21 @@ export function ShipmentsView() {
   })
 
   const [activeStatus, setActiveStatus] = useState("ANY CUSTOMER")
-  const [activePeriod, setActivePeriod] = useState("YESTERDAY")
+  const [activePeriod, setActivePeriod] = useState("Yesterday")
   const [activeCarrier, setActiveCarrier] = useState("ANY CARRIER")
   const [activeRecipient, setActiveRecipient] = useState("ANY RECIPIENT")
+  const [periodOpen, setPeriodOpen] = useState(false)
+  const periodRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (periodRef.current && !periodRef.current.contains(e.target as Node)) {
+        setPeriodOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => document.removeEventListener("mousedown", handleClickOutside)
+  }, [])
 
   return (
     <div className="w-full px-4 py-6">
@@ -175,14 +198,54 @@ export function ShipmentsView() {
             <Users className="h-3.5 w-3.5 text-muted-foreground" />
             {activeStatus}
           </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex items-center gap-1.5 text-xs font-bold text-foreground border rounded-sm px-3 py-1.5 h-auto"
-          >
-            <CalendarDays className="h-3.5 w-3.5 text-muted-foreground" />
-            {activePeriod}
-          </Button>
+          <div ref={periodRef} className="relative">
+            <Button
+              variant="outline"
+              size="sm"
+              className="flex items-center gap-1.5 text-xs font-bold text-foreground border rounded-sm px-3 py-1.5 h-auto"
+              onClick={() => setPeriodOpen((o) => !o)}
+            >
+              <CalendarDays className="h-3.5 w-3.5 text-muted-foreground" />
+              {activePeriod.toUpperCase()}
+            </Button>
+            {periodOpen && (
+              <div className="absolute left-0 top-full mt-1 z-50 bg-white border rounded-md shadow-lg w-56">
+                <div className="flex items-center justify-between px-4 py-3 border-b">
+                  <span className="text-xs font-bold text-foreground tracking-wide">SHIPMENT DESPATCHED</span>
+                  <button
+                    className="text-xs text-blue-600 hover:underline"
+                    onClick={() => { setActivePeriod("Yesterday"); setPeriodOpen(false) }}
+                  >
+                    Reset
+                  </button>
+                </div>
+                <div className="py-2">
+                  {PERIOD_OPTIONS.map((option) => {
+                    const isSelected = activePeriod === option
+                    return (
+                      <button
+                        key={option}
+                        onClick={() => { setActivePeriod(option); setPeriodOpen(false) }}
+                        className={`w-full flex items-center gap-3 px-4 py-2 text-sm mx-2 my-0.5 rounded-full transition-colors ${
+                          isSelected
+                            ? "bg-blue-600 text-white font-semibold"
+                            : "text-foreground hover:bg-muted"
+                        }`}
+                        style={{ width: "calc(100% - 16px)" }}
+                      >
+                        {isSelected ? (
+                          <Check className="h-3.5 w-3.5 shrink-0" />
+                        ) : (
+                          <span className="h-3.5 w-3.5 shrink-0 rounded-full border border-muted-foreground inline-block" />
+                        )}
+                        {option}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
           <Button
             variant="outline"
             size="sm"
