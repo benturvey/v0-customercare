@@ -709,7 +709,6 @@ export function ShipmentsView() {
           </div>
           <div className="text-right">
             <p className="text-xs font-semibold text-foreground leading-tight">jacquie.cadger@gfsdeliver.com</p>
-            <p className="text-xs text-muted-foreground leading-tight">MAMAS &amp; PAPAS</p>
           </div>
         </div>
       </div>
