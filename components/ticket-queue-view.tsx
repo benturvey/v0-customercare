@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { ChevronDown, Search, ArrowUpDown, LayoutDashboard, Users, CalendarDays, Truck, User, Hash, SlidersHorizontal, Check, CircleDot } from "lucide-react"
+import { ChevronDown, Search, ArrowUpDown, LayoutDashboard, Users, CalendarDays, Truck, User, Hash, Check, CircleDot } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -121,13 +121,9 @@ export function TicketQueueView() {
   const [carrierOpen, setCarrierOpen] = useState(false)
   const [carrierSearch, setCarrierSearch] = useState("")
   const [selectedCarrier, setSelectedCarrier] = useState<string[]>([])
-  const [recipientOpen, setRecipientOpen] = useState(false)
-  const [recipientPostcode, setRecipientPostcode] = useState("")
-  const [recipientName, setRecipientName] = useState("")
-  const [recipientCompany, setRecipientCompany] = useState("")
-  const [recipientTown, setRecipientTown] = useState("")
-  const [recipientCounty, setRecipientCounty] = useState("")
-  const [recipientCountry, setRecipientCountry] = useState("Any country")
+  const [agentOpen, setAgentOpen] = useState(false)
+  const [agentSearch, setAgentSearch] = useState("")
+  const [selectedAgents, setSelectedAgents] = useState<string[]>([])
   const [refsOpen, setRefsOpen] = useState(false)
   const [selectedStatuses, setSelectedStatuses] = useState<string[]>([])
   const [otherOpen, setOtherOpen] = useState(false)
@@ -138,18 +134,16 @@ export function TicketQueueView() {
   const customerRef = useRef<HTMLDivElement>(null)
   const periodRef = useRef<HTMLDivElement>(null)
   const carrierRef = useRef<HTMLDivElement>(null)
-  const recipientRef = useRef<HTMLDivElement>(null)
+  const agentRef = useRef<HTMLDivElement>(null)
   const refsRef = useRef<HTMLDivElement>(null)
-  const otherRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (customerRef.current && !customerRef.current.contains(e.target as Node)) setCustomerOpen(false)
       if (periodRef.current && !periodRef.current.contains(e.target as Node)) setPeriodOpen(false)
       if (carrierRef.current && !carrierRef.current.contains(e.target as Node)) setCarrierOpen(false)
-      if (recipientRef.current && !recipientRef.current.contains(e.target as Node)) setRecipientOpen(false)
+      if (agentRef.current && !agentRef.current.contains(e.target as Node)) setAgentOpen(false)
       if (refsRef.current && !refsRef.current.contains(e.target as Node)) setRefsOpen(false)
-      if (otherRef.current && !otherRef.current.contains(e.target as Node)) setOtherOpen(false)
     }
     document.addEventListener("mousedown", handleClickOutside)
     return () => document.removeEventListener("mousedown", handleClickOutside)
@@ -446,135 +440,73 @@ export function TicketQueueView() {
             )}
           </div>
 
-          {/* ANY RECIPIENT */}
-          <div ref={recipientRef} className="relative">
+          {/* ANY AGENT */}
+          <div ref={agentRef} className="relative">
             <Button
               variant="outline"
               size="sm"
               className="flex items-center gap-1.5 text-xs font-semibold text-foreground border rounded-sm px-3 py-1.5 h-auto"
-              onClick={() => setRecipientOpen((o) => !o)}
+              onClick={() => setAgentOpen((o) => !o)}
             >
               <User className="h-3.5 w-3.5 text-muted-foreground" />
-              ANY RECIPIENT
+              {selectedAgents.length > 0 ? `${selectedAgents.length} AGENT${selectedAgents.length > 1 ? "S" : ""}` : "ANY AGENT"}
             </Button>
-            {recipientOpen && (
-              <div className="absolute left-0 top-full mt-1 z-50 bg-white border rounded-md shadow-lg w-72">
-                <div className="px-4 py-3 border-b">
-                  <span className="text-xs font-bold text-foreground tracking-wide">RECIPIENT FILTERS</span>
+            {agentOpen && (
+              <div className="absolute left-0 top-full mt-1 z-50 bg-white border rounded-md shadow-lg w-64">
+                <div className="flex items-center gap-2 px-3 py-2 border-b">
+                  <Search className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+                  <input
+                    autoFocus
+                    type="text"
+                    value={agentSearch}
+                    onChange={(e) => setAgentSearch(e.target.value)}
+                    placeholder="Search options..."
+                    className="flex-1 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
+                  />
                 </div>
-                <div className="px-4 py-4 space-y-4">
-                  <div className="space-y-1.5">
-                    <label className="text-sm font-semibold text-foreground">Postcode</label>
-                    <input
-                      autoFocus
-                      type="text"
-                      value={recipientPostcode}
-                      onChange={(e) => setRecipientPostcode(e.target.value)}
-                      className="w-full border rounded-md px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
-                  <div className="space-y-1.5">
-                    <label className="text-sm font-semibold text-foreground">Recipient</label>
-                    <input
-                      type="text"
-                      value={recipientName}
-                      onChange={(e) => setRecipientName(e.target.value)}
-                      className="w-full border rounded-md px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-blue-500"
-                    />
-                  </div>
-                  <div className="space-y-1.5">
-                    <label className="text-sm font-semibold text-foreground">Company</label>
-                    <input
-                      type="text"
-                      value={recipientCompany}
-                      onChange={(e) => setRecipientCompany(e.target.value)}
-                      className="w-full border rounded-md px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-blue-500"
-                    />
-                  </div>
-                  <div className="space-y-1.5">
-                    <label className="text-sm font-semibold text-foreground">Town / City</label>
-                    <input
-                      type="text"
-                      value={recipientTown}
-                      onChange={(e) => setRecipientTown(e.target.value)}
-                      className="w-full border rounded-md px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-blue-500"
-                    />
-                  </div>
-                  <div className="space-y-1.5">
-                    <label className="text-sm font-semibold text-foreground">County</label>
-                    <input
-                      type="text"
-                      value={recipientCounty}
-                      onChange={(e) => setRecipientCounty(e.target.value)}
-                      className="w-full border rounded-md px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-blue-500"
-                    />
-                  </div>
-                  <div className="space-y-1.5">
-                    <label className="text-sm font-semibold text-foreground">Country</label>
-                    <div className="relative">
-                      <select
-                        value={recipientCountry}
-                        onChange={(e) => setRecipientCountry(e.target.value)}
-                        className="w-full border rounded-md px-3 py-2 text-sm text-foreground appearance-none focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white pr-8"
-                      >
-                        <option>Any country</option>
-                        <option>United Kingdom</option>
-                        <option>United States</option>
-                        <option>Germany</option>
-                        <option>France</option>
-                        <option>Netherlands</option>
-                        <option>Ireland</option>
-                        <option>Australia</option>
-                        <option>Canada</option>
-                      </select>
-                      <Check className="absolute right-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* OTHER */}
-          <div ref={otherRef} className="relative">
-            <Button
-              variant="outline"
-              size="sm"
-              className="flex items-center gap-1.5 text-xs font-semibold text-foreground border rounded-sm px-3 py-1.5 h-auto"
-              onClick={() => setOtherOpen((o) => !o)}
-            >
-              <SlidersHorizontal className="h-3.5 w-3.5 text-muted-foreground" />
-              OTHER
-            </Button>
-            {otherOpen && (
-              <div className="absolute left-0 top-full mt-1 z-50 bg-white border rounded-md shadow-lg w-72">
-                <div className="px-4 py-3 border-b">
-                  <span className="text-xs font-bold text-foreground tracking-wide">OTHER</span>
-                </div>
-                <div className="px-4 py-4 space-y-4">
-                  <div className="border-t" />
-                  <div className="space-y-3">
-                    {[
-                      { id: "hasComments", label: "Include Deleted Shipments", checked: hasComments, set: setHasComments, info: false },
-                      { id: "deletedOnly", label: "Deleted shipments only", checked: deletedOnly, set: setDeletedOnly, info: false },
-                      { id: "exceptionStatus", label: "Exceptions Only", checked: exceptionStatus, set: setExceptionStatus, info: false },
-                    ].map(({ id, label, checked, set, info }) => (
-                      <label key={id} className="flex items-center gap-2.5 cursor-pointer">
-                        <Checkbox
-                          id={id}
-                          checked={checked}
-                          onCheckedChange={(v) => set(!!v)}
-                          className="data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
-                        />
-                        <span className="text-sm text-foreground flex items-center gap-1.5">
-                          {label}
-                          {info && (
-                            <span className="inline-flex items-center justify-center h-4 w-4 rounded-full border border-blue-500 text-blue-500 text-[10px] font-bold cursor-help" title="Includes shipments with associated claims">i</span>
-                          )}
-                        </span>
-                      </label>
-                    ))}
-                  </div>
+                <div className="max-h-64 overflow-y-auto py-1">
+                  {(() => {
+                    const agents = [
+                      "Jacquie Cadger",
+                      "James Smith",
+                      "Laura Jones",
+                      "Mark Taylor",
+                      "Sarah Williams",
+                    ]
+                    const filtered = agents.filter((a) =>
+                      a.toLowerCase().includes(agentSearch.toLowerCase())
+                    )
+                    const allSelected = filtered.length > 0 && filtered.every((a) => selectedAgents.includes(a))
+                    return (
+                      <>
+                        <label className="flex items-center gap-2.5 px-3 py-2 hover:bg-muted cursor-pointer">
+                          <Checkbox
+                            checked={allSelected}
+                            onCheckedChange={(v) => {
+                              if (v) setSelectedAgents((prev) => Array.from(new Set([...prev, ...filtered])))
+                              else setSelectedAgents((prev) => prev.filter((a) => !filtered.includes(a)))
+                            }}
+                            className="data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
+                          />
+                          <span className="text-sm text-foreground">(Select All)</span>
+                        </label>
+                        {filtered.map((agent) => (
+                          <label key={agent} className="flex items-center gap-2.5 px-3 py-2 hover:bg-muted cursor-pointer">
+                            <Checkbox
+                              checked={selectedAgents.includes(agent)}
+                              onCheckedChange={(v) => {
+                                setSelectedAgents((prev) =>
+                                  v ? [...prev, agent] : prev.filter((a) => a !== agent)
+                                )
+                              }}
+                              className="data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
+                            />
+                            <span className="text-sm text-foreground">{agent}</span>
+                          </label>
+                        ))}
+                      </>
+                    )
+                  })()}
                 </div>
               </div>
             )}
@@ -586,15 +518,7 @@ export function TicketQueueView() {
               setActivePeriod("Yesterday")
               setSelectedCarrier([])
               setSelectedStatuses([])
-              setRecipientPostcode("")
-              setRecipientName("")
-              setRecipientCompany("")
-              setRecipientTown("")
-              setRecipientCounty("")
-              setRecipientCountry("Any country")
-              setHasComments(false)
-              setDeletedOnly(false)
-              setExceptionStatus(false)
+              setSelectedAgents([])
             }}
             className="text-xs text-foreground hover:text-muted-foreground ml-1"
           >
