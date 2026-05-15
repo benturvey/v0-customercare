@@ -123,6 +123,19 @@ export function NonShipmentTicketView() {
               <td className="px-4 py-3 text-foreground">Collections</td>
               <td className="px-4 py-3 text-foreground">Cancelled as change of address required - Alex Lucy</td>
             </tr>
+            <tr className="border-b hover:bg-muted/20">
+              <td className="px-4 py-3 text-foreground font-medium">4785455</td>
+              <td className="px-4 py-3 text-foreground">13/05/2026 10:33</td>
+              <td className="px-4 py-3 text-foreground">Alex Lucy</td>
+              <td className="px-4 py-3">
+                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
+                  Defer
+                </span>
+              </td>
+              <td className="px-4 py-3 text-foreground">General</td>
+              <td className="px-4 py-3 text-foreground">Collections</td>
+              <td className="px-4 py-3 text-foreground">1ZH9R8139533951209 - Alex Lucy</td>
+            </tr>
           </tbody>
         </table>
       </div>
