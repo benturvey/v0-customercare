@@ -11,7 +11,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet"
-import { X, Pencil, Search } from "lucide-react"
+import { X, Pencil, Search, MoreVertical } from "lucide-react"
 import {
   Select,
   SelectContent,
@@ -177,7 +177,7 @@ export function CustomersView() {
               <th className="text-center py-3 px-4 font-medium text-muted-foreground text-sm">Receive Emails</th>
               <th className="text-center py-3 px-4 font-medium text-muted-foreground text-sm">Tickets</th>
               <th className="text-center py-3 px-4 font-medium text-muted-foreground text-sm">Skill Level</th>
-              <th className="text-center py-3 px-4 font-medium text-muted-foreground text-sm">Actions</th>
+              <th className="text-center py-3 px-4 font-medium text-muted-foreground text-sm w-10"></th>
             </tr>
           </thead>
           <tbody>
@@ -259,25 +259,13 @@ export function CustomersView() {
                   )}
                 </td>
                 <td className="py-4 px-4 text-center">
-                  <div className="flex items-center justify-center gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="text-xs"
-                      onClick={() => handleEditSkillLevel(customer.id)}
-                    >
-                      Change Skill Level
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="text-xs"
-                      onClick={() => handleEditCustomer(customer)}
-                    >
-                      <Pencil className="h-3 w-3 mr-1" />
-                      Edit
-                    </Button>
-                  </div>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8 text-muted-foreground hover:text-foreground"
+                  >
+                    <MoreVertical className="h-4 w-4" />
+                  </Button>
                 </td>
               </tr>
             ))}
