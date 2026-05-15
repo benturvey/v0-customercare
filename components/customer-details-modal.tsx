@@ -180,7 +180,183 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
             </div>
           )}
 
-          {activeTab !== "Overview" && (
+          {activeTab === "Addresses & Contacts" && (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Invoice Address */}
+              <div className="border rounded-lg p-6">
+                <div className="flex items-center gap-2 mb-6">
+                  <MapPin className="h-5 w-5 text-muted-foreground" />
+                  <h3 className="text-lg font-semibold text-foreground">Invoice Address</h3>
+                </div>
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-1">Address</p>
+                    <p className="text-sm font-medium text-foreground">12 Bond Street</p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-x-8">
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">City</p>
+                      <p className="text-sm font-medium text-foreground">Bath</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">Postcode</p>
+                      <p className="text-sm font-medium text-foreground">BA1 1BP</p>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-x-8">
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">County</p>
+                      <p className="text-sm font-medium text-foreground">Somerset</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">Country</p>
+                      <p className="text-sm font-medium text-foreground">United Kingdom</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Notice Address */}
+              <div className="border rounded-lg p-6">
+                <div className="flex items-center gap-2 mb-6">
+                  <MapPin className="h-5 w-5 text-muted-foreground" />
+                  <h3 className="text-lg font-semibold text-foreground">Notice Address</h3>
+                </div>
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-1">Address</p>
+                    <p className="text-sm font-medium text-foreground">12 Bond Street</p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-x-8">
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">City</p>
+                      <p className="text-sm font-medium text-foreground">Bath</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">Postcode</p>
+                      <p className="text-sm font-medium text-foreground">BA1 1BP</p>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-x-8">
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">County</p>
+                      <p className="text-sm font-medium text-foreground">Somerset</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">Country</p>
+                      <p className="text-sm font-medium text-foreground">United Kingdom</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Collection Address */}
+              <div className="border rounded-lg p-6">
+                <div className="flex items-center gap-2 mb-6">
+                  <MapPin className="h-5 w-5 text-muted-foreground" />
+                  <h3 className="text-lg font-semibold text-foreground">Collection Address</h3>
+                </div>
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-1">Address</p>
+                    <p className="text-sm font-medium text-foreground">Unit BG180, Lilliput Road, Brackmills</p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-x-8">
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">City</p>
+                      <p className="text-sm font-medium text-foreground">Northampton</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">Postcode</p>
+                      <p className="text-sm font-medium text-foreground">NN4 7AS</p>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-x-8">
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">County</p>
+                      <p className="text-sm font-medium text-foreground">Northamptonshire</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">Country</p>
+                      <p className="text-sm font-medium text-foreground">United Kingdom</p>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-1">Vendor</p>
+                    <p className="text-sm font-medium text-foreground">International Logistics Group</p>
+                  </div>
+                  {/* Locations table */}
+                  <div className="pt-2">
+                    <p className="text-sm font-semibold text-foreground mb-3">Locations</p>
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b">
+                          <th className="text-left text-xs text-muted-foreground font-medium pb-2">Site ID</th>
+                          <th className="text-left text-xs text-muted-foreground font-medium pb-2">Integration</th>
+                          <th className="text-left text-xs text-muted-foreground font-medium pb-2">Location</th>
+                          <th className="text-left text-xs text-muted-foreground font-medium pb-2">Version</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="border-b">
+                          <td className="py-2 text-foreground">2906</td>
+                          <td className="py-2 text-foreground">Enterprise</td>
+                          <td className="py-2 text-foreground">Google Cloud</td>
+                          <td className="py-2 text-foreground">4.50.3.0</td>
+                        </tr>
+                        <tr>
+                          <td className="py-2 text-foreground">3029</td>
+                          <td className="py-2 text-foreground">Enterprise</td>
+                          <td className="py-2 text-foreground">Google Cloud</td>
+                          <td className="py-2 text-foreground">4.50.4.2</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              {/* Returns Address */}
+              <div className="border rounded-lg p-6">
+                <div className="flex items-center gap-2 mb-6">
+                  <MapPin className="h-5 w-5 text-muted-foreground" />
+                  <h3 className="text-lg font-semibold text-foreground">Returns Address</h3>
+                </div>
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-1">Address</p>
+                    <p className="text-sm font-medium text-foreground">Unit BG180, Lilliput Road, Brackmills</p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-x-8">
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">City</p>
+                      <p className="text-sm font-medium text-foreground">Northampton</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">Postcode</p>
+                      <p className="text-sm font-medium text-foreground">NN4 7AS</p>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-x-8">
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">County</p>
+                      <p className="text-sm font-medium text-foreground">Northamptonshire</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">Country</p>
+                      <p className="text-sm font-medium text-foreground">United Kingdom</p>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-1">Vendor</p>
+                    <p className="text-sm font-medium text-foreground">International Logistics Group</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab !== "Overview" && activeTab !== "Addresses & Contacts" && (
             <div className="flex items-center justify-center h-64 text-muted-foreground">
               {activeTab} content coming soon
             </div>
