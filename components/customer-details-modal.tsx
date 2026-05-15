@@ -404,9 +404,124 @@ export function CustomerDetailsModal({ open, onClose, customer }: CustomerDetail
             </>
           )}
 
-          {activeTab !== "Overview" && activeTab !== "Addresses & Contacts" && (
+          {activeTab !== "Overview" && activeTab !== "Addresses & Contacts" && activeTab !== "Contracts (0)" && (
             <div className="flex items-center justify-center h-64 text-muted-foreground">
               {activeTab} content coming soon
+            </div>
+          )}
+
+          {activeTab === "Contracts (0)" && (
+            <div className="border rounded-lg overflow-hidden">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b bg-muted/30">
+                    <th className="text-left text-xs text-muted-foreground font-medium px-6 py-3 w-48">Carrier</th>
+                    <th className="text-left text-xs text-muted-foreground font-medium px-6 py-3 w-40">Contract</th>
+                    <th className="text-left text-xs text-muted-foreground font-medium px-6 py-3">Service Suite</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    {
+                      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/contracts-YEJsO6t6kcm34HXfCJ7lwxhqFSSvDR.png",
+                      logoComponent: (
+                        <div className="flex items-center gap-1">
+                          <span className="inline-block bg-red-600 text-white rounded p-1">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2L4 7v10l8 5 8-5V7z"/></svg>
+                          </span>
+                          <span className="font-bold text-gray-800 text-lg tracking-tight">dpd</span>
+                        </div>
+                      ),
+                      contract: "3300",
+                      suite: "Domestic Standard, European Standard, Domestic Expresspaks < 5kg",
+                    },
+                    {
+                      logoComponent: (
+                        <div className="flex items-center gap-1">
+                          <span className="inline-block bg-red-600 text-white rounded p-1">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2L4 7v10l8 5 8-5V7z"/></svg>
+                          </span>
+                          <span className="font-bold text-gray-800 text-lg tracking-tight">dpd</span>
+                        </div>
+                      ),
+                      contract: "3518",
+                      suite: "Domestic Standard, European Standard, Domestic Expresspaks < 5kg",
+                    },
+                    {
+                      logoComponent: (
+                        <div className="flex items-center gap-1">
+                          <span className="inline-block bg-blue-500 text-white rounded p-1">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2L4 7v10l8 5 8-5V7z"/></svg>
+                          </span>
+                          <span className="font-bold text-gray-800 text-base tracking-tight">dpd<span className="text-xs align-sub ml-0.5">local</span></span>
+                        </div>
+                      ),
+                      contract: "3024907",
+                      suite: "Domestic Standard, Domestic Expresspaks < 5kg",
+                    },
+                    {
+                      logoComponent: (
+                        <span className="font-extrabold text-2xl tracking-tight" style={{ color: "#00AEEF", fontStyle: "italic" }}>EVRi</span>
+                      ),
+                      contract: "1RY011",
+                      suite: "1 Hr ETA - New Business Service Suite POD",
+                    },
+                    {
+                      logoComponent: (
+                        <span className="font-extrabold text-2xl tracking-tight" style={{ color: "#00AEEF", fontStyle: "italic" }}>EVRi</span>
+                      ),
+                      contract: "7RY071",
+                      suite: "1 Hr ETA - New Business Service Suite IOD",
+                    },
+                    {
+                      logoComponent: (
+                        <div className="border rounded px-2 py-1 text-center" style={{ minWidth: 80 }}>
+                          <span className="font-bold text-sm" style={{ color: "#00AEEF", fontStyle: "italic" }}>EVRi</span>
+                          <div className="text-[9px] text-gray-500 leading-none">ParcelShop</div>
+                        </div>
+                      ),
+                      contract: "3RY031",
+                      suite: "International NON IOSS Service Suite",
+                    },
+                    {
+                      logoComponent: (
+                        <div className="flex items-center gap-1.5">
+                          <div className="border rounded px-1.5 py-0.5 flex items-center gap-1">
+                            <span className="font-bold text-sm text-green-600">GFS</span>
+                          </div>
+                          <span className="text-xs text-red-600 font-semibold uppercase tracking-wide">International</span>
+                        </div>
+                      ),
+                      contract: "GFS900277",
+                      suite: "International",
+                    },
+                    {
+                      logoComponent: (
+                        <div className="h-9 w-9 rounded-full flex items-center justify-center" style={{ backgroundColor: "#351C15" }}>
+                          <span className="font-bold text-xs" style={{ color: "#FFB500" }}>UPS</span>
+                        </div>
+                      ),
+                      contract: "CW7297",
+                      suite: "Standard, Express",
+                    },
+                    {
+                      logoComponent: (
+                        <div className="h-9 w-9 rounded-full flex items-center justify-center" style={{ backgroundColor: "#351C15" }}>
+                          <span className="font-bold text-xs" style={{ color: "#FFB500" }}>UPS</span>
+                        </div>
+                      ),
+                      contract: "E7714J",
+                      suite: "Standard, Express",
+                    },
+                  ].map((row, i) => (
+                    <tr key={i} className="border-b last:border-0 hover:bg-muted/20">
+                      <td className="px-6 py-4">{row.logoComponent}</td>
+                      <td className="px-6 py-4 text-foreground">{row.contract}</td>
+                      <td className="px-6 py-4 text-muted-foreground">{row.suite}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           )}
         </div>
