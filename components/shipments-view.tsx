@@ -239,7 +239,6 @@ export function ShipmentsView() {
   const [otherOpen, setOtherOpen] = useState(false)
   const [hasComments, setHasComments] = useState(false)
   const [deletedOnly, setDeletedOnly] = useState(false)
-  const [withClaims, setWithClaims] = useState(false)
   const [exceptionStatus, setExceptionStatus] = useState(false)
   const [customFrom, setCustomFrom] = useState("2026-05-14")
   const [customTo, setCustomTo] = useState("2026-05-14")
@@ -673,7 +672,6 @@ export function ShipmentsView() {
                     {[
                       { id: "hasComments", label: "Include Deleted Shipments", checked: hasComments, set: setHasComments, info: false },
                       { id: "deletedOnly", label: "Deleted shipments only", checked: deletedOnly, set: setDeletedOnly, info: false },
-                      { id: "withClaims", label: "Shipments with claims", checked: withClaims, set: setWithClaims, info: true },
                       { id: "exceptionStatus", label: "Exception Status (Red & Amber)", checked: exceptionStatus, set: setExceptionStatus, info: false },
                     ].map(({ id, label, checked, set, info }) => (
                       <label key={id} className="flex items-center gap-2.5 cursor-pointer">
