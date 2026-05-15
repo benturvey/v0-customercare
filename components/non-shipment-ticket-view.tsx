@@ -86,7 +86,14 @@ export function NonShipmentTicketView() {
       { date: "13/05/2026 11:17", updatedBy: "Alex Lucy", state: "Opening", comment: "1089610 - Book this Omlet one in for 15/05" },
     ],
     "4786110": [{ date: "13/05/2026 13:15", updatedBy: "Alex Lucy", state: "Defer", comment: "Book in" }],
-    "4786662": [{ date: "13/05/2026 15:25", updatedBy: "Annette Davidson", state: "Defer", comment: "1089726 Monitor this collection for OKA" }],
+    "4786662": [
+      { date: "15/05/2026 14:48", updatedBy: "Alex Lucy", state: "Deferring", comment: "Chased Sally as failed again" },
+      { date: "15/05/2026 10:37", updatedBy: "Alex Lucy", state: "Deferring", comment: "Rebooked in for today and chased Sally - 0043 093 126" },
+      { date: "14/05/2026 12:26", updatedBy: "Alex Lucy", state: "Deferring", comment: "17:15 - 18:15" },
+      { date: "14/05/2026 10:46", updatedBy: "Alex Lucy", state: "Deferring", comment: "0043 092 331, no ETC yet" },
+      { date: "13/05/2026 15:26", updatedBy: "Annette Davidson", state: "Deferring", comment: "Monitor" },
+      { date: "13/05/2026 15:25", updatedBy: "Annette Davidson", state: "Opening", comment: "1089726 Monitor this collection for OKA" },
+    ],
   }
 
   const handleViewComments = (ticketId: string) => {
