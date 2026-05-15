@@ -15,7 +15,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
-  Eye,
+  MoreVertical,
   Users,
   CalendarDays,
   Truck,
@@ -571,7 +571,7 @@ export function CollectionsView() {
                   <TableHead className="whitespace-nowrap text-muted-foreground">Customer Ref</TableHead>
                   <TableHead className="whitespace-nowrap text-right text-muted-foreground">No. Parcels</TableHead>
                   <TableHead className="whitespace-nowrap text-muted-foreground">Contract No</TableHead>
-                  <TableHead className="whitespace-nowrap text-muted-foreground">Actions</TableHead>
+                  <TableHead className="whitespace-nowrap text-muted-foreground w-10"></TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -597,12 +597,11 @@ export function CollectionsView() {
                       <TableCell>
                         <Button
                           variant="ghost"
-                          size="sm"
-                          className="flex items-center gap-1 text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                          size="icon"
+                          className="h-8 w-8 text-muted-foreground hover:text-foreground"
                           onClick={() => handleViewDetails(collection)}
                         >
-                          <Eye className="h-4 w-4 text-blue-600" />
-                          Details
+                          <MoreVertical className="h-4 w-4" />
                         </Button>
                       </TableCell>
                     </TableRow>
