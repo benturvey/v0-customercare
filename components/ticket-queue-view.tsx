@@ -70,8 +70,8 @@ const PERIOD_OPTIONS = [
 ]
 
 const ticketData = [
-  { id: "#4772374", level: "L4", category: "WHERE_IS_MY_PARCEL", consignmentNo: "T06XUA0000734531", packs: 1, customer: "LISA ELDRIDGE", carrier: "EVRI", agent: "", status: "Unassigned" },
-  { id: "#4709717", level: "L3", category: "DELIVERY_DISPUTED", consignmentNo: "02770302900031291", packs: 1, customer: "ABBOTT LYON LTD", carrier: "GFS INTERNATIONAL", agent: "", status: "Unassigned" },
+  { id: "#4772374", level: "L4", category: "WHERE_IS_MY_PARCEL", consignmentNo: "T06XUA0000734531", packs: 1, customer: "LISA ELDRIDGE", carrier: "EVRI", agent: "", status: "Open" },
+  { id: "#4709717", level: "L3", category: "DELIVERY_DISPUTED", consignmentNo: "02770302900031291", packs: 1, customer: "ABBOTT LYON LTD", carrier: "GFS INTERNATIONAL", agent: "", status: "Open" },
   { id: "#4709709", level: "L3", category: "DELIVERY_DISPUTED", consignmentNo: "02770302900031750", packs: 1, customer: "ABBOTT LYON LTD", carrier: "GFS INTERNATIONAL", agent: "Tracey Johnson", status: "In Progress" },
   { id: "#4709708", level: "L1", category: "RETURN_TO_SENDER", consignmentNo: "T04DDA5012749184", packs: 1, customer: "ABBOTT LYON LTD", carrier: "EVRI", agent: "Aaron Doherty", status: "In Progress" },
   { id: "#4709707", level: "L1", category: "WHERE_IS_MY_PARCEL", consignmentNo: "T009LA0070811886", packs: 1, customer: "MILNER OFF ROAD", carrier: "EVRI", agent: "Andrei Costea", status: "In Progress" },
@@ -88,7 +88,7 @@ const ticketData = [
 ]
 
 const filters = [
-  { label: "All Statuses", options: ["All Statuses", "In Progress", "Unassigned", "Deferred", "Resolved"] },
+  { label: "All Statuses", options: ["All Statuses", "In Progress", "Open", "Deferred", "Resolved"] },
   { label: "All Carriers", options: ["All Carriers", "DHL ECOMMERCE UK", "EVRI", "DPD", "GFS INTERNATIONAL", "DX FREIGHT", "UPS"] },
   { label: "All Customers", options: ["All Customers", "BRINDISA LIMITED", "ABBOTT LYON LTD", "MAMAS & PAPAS", "PROCOOK UK LTD"] },
   { label: "All Agents", options: ["All Agents", "Aaron Doherty", "Alex Lucy", "Andrei Costea"] },

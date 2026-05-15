@@ -200,15 +200,15 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   }
 
   const mockMatchedTickets = [
-    { ticketNo: "#4712301", raisedDate: "04/05/2026 09:15", raisedBy: "CS Team",   status: "Unassigned", category: "WHERE_IS_MY_PARCEL" },
+    { ticketNo: "#4712301", raisedDate: "04/05/2026 09:15", raisedBy: "CS Team",   status: "Open", category: "WHERE_IS_MY_PARCEL" },
     { ticketNo: "#4718844", raisedDate: "04/05/2026 11:42", raisedBy: "CS Team",   status: "Reviewing",  category: "WHERE_IS_MY_PARCEL" },
     { ticketNo: "#4721009", raisedDate: "05/05/2026 08:30", raisedBy: "Jane Doe",  status: "Deferred",   category: "WHERE_IS_MY_PARCEL" },
-    { ticketNo: "#4724115", raisedDate: "05/05/2026 10:05", raisedBy: "CS Team",   status: "Unassigned", category: "WHERE_IS_MY_PARCEL" },
+    { ticketNo: "#4724115", raisedDate: "05/05/2026 10:05", raisedBy: "CS Team",   status: "Open", category: "WHERE_IS_MY_PARCEL" },
     { ticketNo: "#4726830", raisedDate: "05/05/2026 11:17", raisedBy: "Mark Smith",status: "Reviewing",  category: "WHERE_IS_MY_PARCEL" },
     { ticketNo: "#4729442", raisedDate: "05/05/2026 13:50", raisedBy: "CS Team",   status: "Deferred",   category: "WHERE_IS_MY_PARCEL" },
-    { ticketNo: "#4731067", raisedDate: "06/05/2026 08:22", raisedBy: "Jane Doe",  status: "Unassigned", category: "WHERE_IS_MY_PARCEL" },
+    { ticketNo: "#4731067", raisedDate: "06/05/2026 08:22", raisedBy: "Jane Doe",  status: "Open", category: "WHERE_IS_MY_PARCEL" },
     { ticketNo: "#4733298", raisedDate: "06/05/2026 09:44", raisedBy: "CS Team",   status: "Reviewing",  category: "WHERE_IS_MY_PARCEL" },
-    { ticketNo: "#4735814", raisedDate: "06/05/2026 11:30", raisedBy: "Mark Smith",status: "Unassigned", category: "WHERE_IS_MY_PARCEL" },
+    { ticketNo: "#4735814", raisedDate: "06/05/2026 11:30", raisedBy: "Mark Smith",status: "Open", category: "WHERE_IS_MY_PARCEL" },
     { ticketNo: "#4738521", raisedDate: "06/05/2026 14:12", raisedBy: "CS Team",   status: "Deferred",   category: "WHERE_IS_MY_PARCEL" },
   ]
 
@@ -1446,7 +1446,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                         <td className="px-3 py-2.5 text-foreground">{t.raisedBy}</td>
                         <td className="px-3 py-2.5">
                           <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${
-                            t.status === "Unassigned" ? "bg-gray-100 text-gray-700" :
+                            t.status === "Open" ? "bg-gray-100 text-gray-700" :
                             t.status === "Reviewing"  ? "bg-blue-50 text-blue-700" :
                             "bg-yellow-50 text-yellow-700"
                           }`}>
