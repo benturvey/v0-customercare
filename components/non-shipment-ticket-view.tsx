@@ -127,6 +127,8 @@ export function NonShipmentTicketView() {
               <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Ticket ID</th>
               <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Raised</th>
               <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Raised By</th>
+              <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Updated</th>
+              <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Updated By</th>
               <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">State</th>
               <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Category</th>
               <th className="text-left text-xs text-muted-foreground font-medium px-4 py-3">Delegated To</th>
@@ -138,6 +140,8 @@ export function NonShipmentTicketView() {
             <tr className="border-b hover:bg-muted/20">
               <td className="px-4 py-3 text-foreground font-medium">4785452</td>
               <td className="px-4 py-3 text-foreground">13/05/2026 10:31</td>
+              <td className="px-4 py-3 text-foreground">Alex Lucy</td>
+              <td className="px-4 py-3 text-foreground">13/05/2026 10:36</td>
               <td className="px-4 py-3 text-foreground">Alex Lucy</td>
               <td className="px-4 py-3">
                 <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-200 text-gray-800">
@@ -161,6 +165,8 @@ export function NonShipmentTicketView() {
               <td className="px-4 py-3 text-foreground font-medium">4785455</td>
               <td className="px-4 py-3 text-foreground">13/05/2026 10:33</td>
               <td className="px-4 py-3 text-foreground">Alex Lucy</td>
+              <td className="px-4 py-3 text-foreground">13/05/2026 10:35</td>
+              <td className="px-4 py-3 text-foreground">Alex Lucy</td>
               <td className="px-4 py-3">
                 <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-200 text-gray-800">
                   Closed
@@ -182,6 +188,8 @@ export function NonShipmentTicketView() {
             <tr className="border-b hover:bg-muted/20">
               <td className="px-4 py-3 text-foreground font-medium">4785564</td>
               <td className="px-4 py-3 text-foreground">13/05/2026 11:00</td>
+              <td className="px-4 py-3 text-foreground">Alex Lucy</td>
+              <td className="px-4 py-3 text-foreground">13/05/2026 11:05</td>
               <td className="px-4 py-3 text-foreground">Alex Lucy</td>
               <td className="px-4 py-3">
                 <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-200 text-gray-800">
@@ -205,6 +213,8 @@ export function NonShipmentTicketView() {
               <td className="px-4 py-3 text-foreground font-medium">4785607</td>
               <td className="px-4 py-3 text-foreground">13/05/2026 11:17</td>
               <td className="px-4 py-3 text-foreground">Alex Lucy</td>
+              <td className="px-4 py-3 text-foreground">13/05/2026 11:20</td>
+              <td className="px-4 py-3 text-foreground">Alex Lucy</td>
               <td className="px-4 py-3">
                 <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
                   Defer
@@ -227,6 +237,8 @@ export function NonShipmentTicketView() {
               <td className="px-4 py-3 text-foreground font-medium">4786110</td>
               <td className="px-4 py-3 text-foreground">13/05/2026 13:15</td>
               <td className="px-4 py-3 text-foreground">Alex Lucy</td>
+              <td className="px-4 py-3 text-foreground">13/05/2026 13:18</td>
+              <td className="px-4 py-3 text-foreground">Alex Lucy</td>
               <td className="px-4 py-3">
                 <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
                   Defer
@@ -248,6 +260,8 @@ export function NonShipmentTicketView() {
             <tr className="border-b hover:bg-muted/20">
               <td className="px-4 py-3 text-foreground font-medium">4786662</td>
               <td className="px-4 py-3 text-foreground">13/05/2026 15:25</td>
+              <td className="px-4 py-3 text-foreground">Annette Davidson</td>
+              <td className="px-4 py-3 text-foreground">13/05/2026 15:28</td>
               <td className="px-4 py-3 text-foreground">Annette Davidson</td>
               <td className="px-4 py-3">
                 <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
