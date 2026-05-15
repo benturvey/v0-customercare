@@ -172,6 +172,13 @@ export function ShipmentsView() {
   const [activeRecipient, setActiveRecipient] = useState("ANY RECIPIENT")
   const [periodOpen, setPeriodOpen] = useState(false)
   const [carrierOpen, setCarrierOpen] = useState(false)
+  const [recipientOpen, setRecipientOpen] = useState(false)
+  const [recipientPostcode, setRecipientPostcode] = useState("")
+  const [recipientName, setRecipientName] = useState("")
+  const [recipientCompany, setRecipientCompany] = useState("")
+  const [recipientTown, setRecipientTown] = useState("")
+  const [recipientCounty, setRecipientCounty] = useState("")
+  const [recipientCountry, setRecipientCountry] = useState("Any country")
   const [selectedCarrier, setSelectedCarrier] = useState("All carriers")
   const [selectedContract, setSelectedContract] = useState("All contracts")
   const [selectedService, setSelectedService] = useState("All services")
@@ -179,6 +186,7 @@ export function ShipmentsView() {
   const [customTo, setCustomTo] = useState("2026-05-14")
   const periodRef = useRef<HTMLDivElement>(null)
   const carrierRef = useRef<HTMLDivElement>(null)
+  const recipientRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -187,6 +195,9 @@ export function ShipmentsView() {
       }
       if (carrierRef.current && !carrierRef.current.contains(e.target as Node)) {
         setCarrierOpen(false)
+      }
+      if (recipientRef.current && !recipientRef.current.contains(e.target as Node)) {
+        setRecipientOpen(false)
       }
     }
     document.addEventListener("mousedown", handleClickOutside)
@@ -361,14 +372,93 @@ export function ShipmentsView() {
               </div>
             )}
           </div>
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex items-center gap-1.5 text-xs font-semibold text-foreground border rounded-sm px-3 py-1.5 h-auto"
-          >
-            <User className="h-3.5 w-3.5 text-muted-foreground" />
-            {activeRecipient}
-          </Button>
+          <div ref={recipientRef} className="relative">
+            <Button
+              variant="outline"
+              size="sm"
+              className="flex items-center gap-1.5 text-xs font-semibold text-foreground border rounded-sm px-3 py-1.5 h-auto"
+              onClick={() => setRecipientOpen((o) => !o)}
+            >
+              <User className="h-3.5 w-3.5 text-muted-foreground" />
+              ANY RECIPIENT
+            </Button>
+            {recipientOpen && (
+              <div className="absolute left-0 top-full mt-1 z-50 bg-white border rounded-md shadow-lg w-72">
+                <div className="px-4 py-3 border-b">
+                  <span className="text-xs font-bold text-foreground tracking-wide">RECIPIENT FILTERS</span>
+                </div>
+                <div className="px-4 py-4 space-y-4">
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-semibold text-foreground">Postcode</label>
+                    <input
+                      autoFocus
+                      type="text"
+                      value={recipientPostcode}
+                      onChange={(e) => setRecipientPostcode(e.target.value)}
+                      className="w-full border rounded-md px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-semibold text-foreground">Recipient</label>
+                    <input
+                      type="text"
+                      value={recipientName}
+                      onChange={(e) => setRecipientName(e.target.value)}
+                      className="w-full border rounded-md px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-semibold text-foreground">Company</label>
+                    <input
+                      type="text"
+                      value={recipientCompany}
+                      onChange={(e) => setRecipientCompany(e.target.value)}
+                      className="w-full border rounded-md px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-semibold text-foreground">Town / City</label>
+                    <input
+                      type="text"
+                      value={recipientTown}
+                      onChange={(e) => setRecipientTown(e.target.value)}
+                      className="w-full border rounded-md px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-semibold text-foreground">County</label>
+                    <input
+                      type="text"
+                      value={recipientCounty}
+                      onChange={(e) => setRecipientCounty(e.target.value)}
+                      className="w-full border rounded-md px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-semibold text-foreground">Country</label>
+                    <div className="relative">
+                      <select
+                        value={recipientCountry}
+                        onChange={(e) => setRecipientCountry(e.target.value)}
+                        className="w-full border rounded-md px-3 py-2 text-sm text-foreground appearance-none focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white pr-8"
+                      >
+                        <option>Any country</option>
+                        <option>United Kingdom</option>
+                        <option>United States</option>
+                        <option>Germany</option>
+                        <option>France</option>
+                        <option>Netherlands</option>
+                        <option>Ireland</option>
+                        <option>Australia</option>
+                        <option>Canada</option>
+                      </select>
+                      <Check className="absolute right-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
           <Button
             variant="outline"
             size="sm"
