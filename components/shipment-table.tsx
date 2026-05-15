@@ -12,7 +12,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Eye } from "lucide-react"
+import { MoreVertical } from "lucide-react"
 import { ShipmentDetailsModal } from "@/components/shipment-details-modal"
 import type { Shipment, ShipmentDetails } from "@/types/shipment"
 
@@ -244,7 +244,7 @@ export function ShipmentTable({ shipments }: ShipmentTableProps) {
                   <TableHead className="whitespace-nowrap text-muted-foreground">Scan Text</TableHead>
                   <TableHead className="whitespace-nowrap text-right text-muted-foreground">No. Parcels</TableHead>
                   <TableHead className="whitespace-nowrap text-muted-foreground">Country</TableHead>
-                  <TableHead className="whitespace-nowrap text-muted-foreground">Actions</TableHead>
+                  <TableHead className="whitespace-nowrap text-muted-foreground w-10"></TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -283,12 +283,11 @@ export function ShipmentTable({ shipments }: ShipmentTableProps) {
                       <TableCell>
                         <Button
                           variant="ghost"
-                          size="sm"
-                          className="flex items-center gap-1 text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                          size="icon"
+                          className="h-8 w-8 text-muted-foreground hover:text-foreground"
                           onClick={() => handleViewDetails(shipment.consignmentNo)}
                         >
-                          <Eye className="h-4 w-4 text-blue-600" />
-                          Details
+                          <MoreVertical className="h-4 w-4" />
                         </Button>
                       </TableCell>
                     </TableRow>
