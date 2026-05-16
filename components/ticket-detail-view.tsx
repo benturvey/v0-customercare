@@ -47,6 +47,7 @@ import {
   CalendarClock,
   Weight,
   Warehouse,
+  Hash,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -513,6 +514,11 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               <DetailRow icon={Globe}        label="Origin"             value="UK" />
               <DetailRow icon={Warehouse}    label="Origin Depot"       value="DEPOT=AIR=84" />
               <DetailRow icon={MapPin}       label="Destination Depot"  value="VAN=86=86" />
+            </div>
+            <div className="grid grid-cols-3 gap-2.5">
+              <DetailRow icon={Hash}         label="Account No"         value="303" />
+              <DetailRow icon={FileText}     label="Contract No"        value="1RY010" />
+              <DetailRow icon={MessageSquare} label="Contract Comment"  value="Hermes POD" />
             </div>
           </div>
         </div>
