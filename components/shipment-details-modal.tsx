@@ -156,7 +156,7 @@ export function ShipmentDetailsModal({
         {/* Info strip — matches ticket detail page style */}
         <div className="grid grid-cols-7 gap-0 rounded-lg border border-border bg-muted/30 mb-4">
           {[
-            { icon: Truck,        label: "Carrier",        value: "DPD" },
+            { logo: "dpd", label: "Carrier", value: "DPD" },
             { icon: Zap,          label: "Service",        value: "NEXT DAY" },
             { icon: Hash,         label: "Ship Ref",       value: "67020805" },
             { icon: CalendarDays, label: "Despatch Date",  value: "14/03/2026" },
@@ -170,7 +170,11 @@ export function ShipmentDetailsModal({
                 key={item.label}
                 className={`flex items-center gap-2 py-3 pl-4 ${idx < 6 ? "border-r border-border pr-4" : "pr-4"}`}
               >
-                <Icon className="h-4 w-4 flex-shrink-0 text-[#009eff]" />
+                {item.logo ? (
+                  <img src={`/${item.logo}-logo.png`} alt={item.label} className="h-4 w-8 shrink-0 object-contain" />
+                ) : (
+                  <Icon className="h-4 w-4 flex-shrink-0 text-[#009eff]" />
+                )}
                 <div className="flex flex-col leading-tight">
                   <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">{item.label}</span>
                   <span className={`text-sm font-semibold ${item.isHighlight ? "text-amber-600" : "text-[#1e3a5f]"}`}>{item.value}</span>
