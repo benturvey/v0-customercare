@@ -60,7 +60,7 @@ export function OverviewView() {
     <div className="container mx-auto px-4 py-6 space-y-6">
       {/* Stats Card */}
       <div className="border border-border rounded-lg bg-card p-6">
-        <div className="flex gap-8 justify-between items-end">
+        <div className="flex gap-8 justify-between items-center">
           {stats.map((stat) => (
             <div key={stat.label} className="text-left flex-1">
               <p className={`text-3xl font-bold ${stat.green ? "text-green-600" : stat.amber ? "text-amber-500" : "text-[#1e3a5f]"}`}>{stat.value}</p>
