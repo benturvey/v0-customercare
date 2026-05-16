@@ -49,6 +49,7 @@ import {
   Warehouse,
   Hash,
   Zap,
+  ExternalLink,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -601,6 +602,17 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               Tracking
             </button>
           </div>
+          {trackingView === "timeline" && (
+            <a
+              href="https://www.evri.com/track-a-parcel"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-2 flex items-center gap-1.5 text-sm font-medium text-[#009eff] hover:text-blue-700 transition-colors"
+            >
+              <ExternalLink className="h-3.5 w-3.5" />
+              View on Carrier Site
+            </a>
+          )}
         </div>
 
         {trackingView === "list" && (
