@@ -71,27 +71,27 @@ export function ShipmentDetailsModal({
 
   const detailRows = [
     [
-      { label: "Insert Date", value: details.insertDate },
-      { label: "Weight", value: details.weight.toString() },
-      { label: "Content", value: details.content },
+      { label: "Insert Date",       value: details.insertDate,                  icon: CalendarDays },
+      { label: "Weight",            value: details.weight.toString(),            icon: Package },
+      { label: "Content",           value: details.content,                      icon: ClipboardList },
     ],
     [
-      { label: "Account No", value: details.accountNo },
-      { label: "Contract No", value: details.contractNo },
-      { label: "Contract Comment", value: details.contractComment },
+      { label: "Account No",        value: details.accountNo,                    icon: Hash },
+      { label: "Contract No",       value: details.contractNo,                   icon: FileText },
+      { label: "Contract Comment",  value: details.contractComment,              icon: PenLine },
     ],
     [
-      { label: "Sender", value: details.sender },
-      { label: "Instructions", value: details.instructions || "-" },
+      { label: "Sender",            value: details.sender,                       icon: User },
+      { label: "Instructions",      value: details.instructions || "-",          icon: ClipboardList },
     ],
     [
-      { label: "Consignment Ref", value: details.consignmentRef || "-" },
-      { label: "Origin Depot", value: details.originDepot },
-      { label: "Destination Depot", value: details.destinationDepot },
+      { label: "Consignment Ref",   value: details.consignmentRef || "-",        icon: Hash },
+      { label: "Origin Depot",      value: details.originDepot,                  icon: Home },
+      { label: "Destination Depot", value: details.destinationDepot,             icon: MapPin },
     ],
     [
-      { label: "Collection ID", value: details.collectionId || "-" },
-      { label: "Tracking No(s)", value: details.trackingNo || "-" },
+      { label: "Collection ID",     value: details.collectionId || "-",          icon: Package },
+      { label: "Tracking No(s)",    value: details.trackingNo || "-",            icon: Activity },
     ],
   ]
 
@@ -199,7 +199,8 @@ export function ShipmentDetailsModal({
                                     <div key={rowIndex} className="grid grid-cols-3 gap-4">
                                       {row.map((item) => (
                                         <div key={item.label} className="flex flex-col gap-1">
-                                          <span className="text-sm font-medium text-muted-foreground">
+                                          <span className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground">
+                                            {item.icon && <item.icon className="h-3.5 w-3.5 shrink-0 text-[#009eff]" />}
                                             {item.label}
                                           </span>
                                           {item.label === "Customer" ? (
