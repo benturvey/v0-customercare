@@ -169,6 +169,30 @@ const sampleCollections: Collection[] = [
     packs: 1,
     contractNo: "0637",
   },
+  {
+    collectionId: "1090088",
+    carrier: "DPD",
+    customer: "AGTC LIMITED",
+    serviceCode: "12",
+    serviceDescr: "NEXT DAY",
+    collectionDate: "15/05/2026",
+    consignmentNo: "",
+    customerRef: "SO741944/IF782241",
+    packs: 2,
+    contractNo: "",
+  },
+  {
+    collectionId: "1090091",
+    carrier: "DPD",
+    customer: "AGTC LIMITED",
+    serviceCode: "12",
+    serviceDescr: "NEXT DAY",
+    collectionDate: "15/05/2026",
+    consignmentNo: "",
+    customerRef: "IF770948",
+    packs: 1,
+    contractNo: "",
+  },
 ]
 
 export function CollectionsView() {
