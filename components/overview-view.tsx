@@ -25,7 +25,7 @@ export function OverviewView() {
     { value: "80 mins", label: "OLDEST WAITING", amber: true, target: "Target < 60 mins" },
     { value: "15/30", label: "ACTIVE AGENTS" },
     { value: "9", label: "SLA RISK", green: true, target: peakMode ? "Target < 35" : "Target < 10" },
-    { value: "48%", label: "AUTOMATION RATE", green: true, target: peakMode ? "Target: 55%" : "Target: 48%" },
+    { value: "48%", label: "AUTOMATION RATE", green: !peakMode, red: peakMode, target: peakMode ? "Target: 55%" : "Target: 48%" },
   ]
 
   const agents = [
