@@ -567,25 +567,13 @@ export function TicketQueueView() {
               </th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                 <div className="flex items-center gap-1">
-                  Category
-                  <ArrowUpDown className="h-3 w-3" />
-                </div>
-              </th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                <div className="flex items-center gap-1">
-                  Consignment No
-                  <ArrowUpDown className="h-3 w-3" />
-                </div>
-              </th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider cursor-pointer select-none" onClick={() => handleSort("packs")}>
-                <div className="flex items-center gap-1">
-                  No. Parcels
-                  <ArrowUpDown className={`h-3 w-3 ${sortField === "packs" ? "text-blue-600" : ""}`} />
-                </div>
-              </th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                <div className="flex items-center gap-1">
                   Customer
+                  <ArrowUpDown className="h-3 w-3" />
+                </div>
+              </th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                <div className="flex items-center gap-1">
+                  Category
                   <ArrowUpDown className="h-3 w-3" />
                 </div>
               </th>
@@ -624,6 +612,9 @@ export function TicketQueueView() {
                   {ticket.level}
                 </td>
                 <td className="px-4 py-3 text-sm text-[#1e3a5f]">
+                  {ticket.customer}
+                </td>
+                <td className="px-4 py-3 text-sm text-[#1e3a5f]">
                   {ticket.category}
                 </td>
                 <td className="px-4 py-3 text-sm text-[#1e3a5f]">
@@ -631,9 +622,6 @@ export function TicketQueueView() {
                 </td>
                 <td className="px-4 py-3 text-sm text-[#1e3a5f]">
                   {ticket.packs}
-                </td>
-                <td className="px-4 py-3 text-sm text-[#1e3a5f]">
-                  {ticket.customer}
                 </td>
                 <td className="px-4 py-3 text-sm text-muted-foreground">
                   {ticket.carrier}
