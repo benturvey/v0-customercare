@@ -90,7 +90,7 @@ export function ShipmentDetailsModal({
     ],
     [
       { label: "Collection ID",     value: details.collectionId || "-",          icon: Package },
-      { label: "Tracking No(s)",    value: details.trackingNo || "-",            icon: Activity },
+      { label: "Alternate Tracking No's", value: details.trackingNo || "-",            icon: Activity },
       { label: "Instructions",      value: details.instructions || "-",          icon: ClipboardList },
     ],
   ]
