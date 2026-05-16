@@ -455,8 +455,8 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
       <div className="grid grid-cols-2 gap-4 mb-6">
         {/* Customer Conversation */}
         <div>
-          <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Customer Conversation</h2>
           <div className="rounded-lg border border-blue-200 p-4" style={{ backgroundColor: "#98d9ff" }}>
+            <h2 className="text-base font-semibold text-[#1e3a5f] mb-4">Customer Conversation</h2>
             <div className="rounded-lg border border-blue-100 bg-white p-3 mb-3">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-[#1e3a5f]">CS Team</span>
