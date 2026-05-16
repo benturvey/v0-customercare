@@ -50,6 +50,9 @@ import {
   Hash,
   Zap,
   ExternalLink,
+  Info,
+  BookOpen,
+  AlertTriangle,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -111,6 +114,7 @@ const metaItems = [
 
 export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [trackingView, setTrackingView] = useState<"list" | "timeline">("list")
+  const [infoMenuOpen, setInfoMenuOpen] = useState(false)
   const [attachDialogOpen, setAttachDialogOpen] = useState(false)
   const [attachments, setAttachments] = useState<{ name: string; url: string }[]>([])
   const [attachmentsSheetOpen, setAttachmentsSheetOpen] = useState(false)
@@ -256,11 +260,92 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
       </Button>
 
       <header className="mb-4">
-        <div className="flex items-center gap-3">
-          <h1 className="text-2xl font-bold text-[#1e3a5f]">Ticket {ticket.id}</h1>
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
-            Open
-          </span>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl font-bold text-[#1e3a5f]">Ticket {ticket.id}</h1>
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
+              Open
+            </span>
+          </div>
+
+          {/* Info icon with dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setInfoMenuOpen((prev) => !prev)}
+              className="flex items-center justify-center h-8 w-8 rounded-full border border-border bg-background hover:bg-muted transition-colors"
+              aria-label="Resources"
+            >
+              <Info className="h-4 w-4 text-[#009eff]" />
+            </button>
+
+            {infoMenuOpen && (
+              <>
+                <div className="fixed inset-0 z-40" onClick={() => setInfoMenuOpen(false)} />
+                <div className="absolute right-0 top-10 z-50 w-72 rounded-lg border border-border bg-white shadow-lg overflow-hidden">
+                  {/* Knowledge Articles */}
+                  <div className="px-4 py-3 border-b border-border">
+                    <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground mb-2">Knowledge Articles</p>
+                    <ul className="space-y-1.5">
+                      <li>
+                        <a href="#" className="flex items-center gap-2 text-sm text-[#009eff] hover:text-blue-700 transition-colors">
+                          <BookOpen className="h-3.5 w-3.5 shrink-0" />
+                          How to handle missing parcels
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" className="flex items-center gap-2 text-sm text-[#009eff] hover:text-blue-700 transition-colors">
+                          <BookOpen className="h-3.5 w-3.5 shrink-0" />
+                          Evri delivery delay process
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" className="flex items-center gap-2 text-sm text-[#009eff] hover:text-blue-700 transition-colors">
+                          <BookOpen className="h-3.5 w-3.5 shrink-0" />
+                          Customer refund &amp; resolution policy
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Carrier Contact Details */}
+                  <div className="px-4 py-3 border-b border-border">
+                    <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground mb-2">Carrier Contact Details</p>
+                    <div className="space-y-1.5">
+                      <div className="flex items-center gap-2 text-sm text-foreground">
+                        <Phone className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+                        <span>Evri Business: <span className="font-medium">0330 808 5456</span></span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-foreground">
+                        <Mail className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+                        <span>business@evri.com</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <ExternalLink className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+                        <a href="https://www.evri.com" target="_blank" rel="noopener noreferrer" className="text-[#009eff] hover:text-blue-700 transition-colors">
+                          evri.com
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Service Alerts */}
+                  <div className="px-4 py-3">
+                    <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground mb-2">Service Alerts</p>
+                    <div className="space-y-2">
+                      <div className="flex items-start gap-2 rounded-md bg-amber-50 border border-amber-200 px-2.5 py-2">
+                        <AlertTriangle className="h-3.5 w-3.5 shrink-0 mt-0.5 text-amber-600" />
+                        <p className="text-xs text-amber-800">Evri are experiencing delays in the North West region. Expected resolution 17/05/2026.</p>
+                      </div>
+                      <div className="flex items-start gap-2 rounded-md bg-blue-50 border border-blue-200 px-2.5 py-2">
+                        <Info className="h-3.5 w-3.5 shrink-0 mt-0.5 text-blue-600" />
+                        <p className="text-xs text-blue-800">Bank Holiday impact: reduced collections on 26/05/2026.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </header>
 
