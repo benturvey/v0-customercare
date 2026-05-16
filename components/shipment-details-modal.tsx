@@ -52,6 +52,7 @@ export function ShipmentDetailsModal({
   const [customerContactModalOpen, setCustomerContactModalOpen] = useState(false)
   const [parcelsView, setParcelsView] = useState<"parcels" | "tracking">("parcels")
   const [selectedParcelNo, setSelectedParcelNo] = useState<string | null>(null)
+  const [deliveryAddressModalOpen, setDeliveryAddressModalOpen] = useState(false)
 
   useEffect(() => {
     setSelectedParcelNo(
@@ -86,7 +87,7 @@ export function ShipmentDetailsModal({
       { label: "Origin Depot",            value: details.originDepot,                  icon: Warehouse },
       { label: "Destination Depot",       value: details.destinationDepot,             icon: MapPin },
       { label: "Sender",                  value: details.sender,                       icon: User },
-      { label: "Destination",             value: details.deliveryAddress?.town || "-", icon: Navigation },
+      { label: "Destination",       value: details.deliveryAddress ? `${details.deliveryAddress.town}, ${details.deliveryAddress.postcode}` : "-", icon: Navigation },
     ],
     [
       { label: "Collection ID",           value: details.collectionId || "-",          icon: Package },
@@ -218,6 +219,21 @@ export function ShipmentDetailsModal({
                                                   >
                                                     <User className="h-4 w-4 text-[#009eff]" />
                                                   </button>
+                                                </div>
+                                              ) : item.label === "Destination" ? (
+                                                <div className="flex items-center gap-1.5">
+                                                  <span className="text-sm whitespace-nowrap">
+                                                    {item.value}
+                                                  </span>
+                                                  {details.deliveryAddress && (
+                                                    <button
+                                                      onClick={() => setDeliveryAddressModalOpen(true)}
+                                                      className="p-1 rounded hover:bg-muted transition-colors"
+                                                      title="View Delivery Address"
+                                                    >
+                                                      <Eye className="h-3.5 w-3.5 text-[#009eff]" />
+                                                    </button>
+                                                  )}
                                                 </div>
                                               ) : (
                                                 <span className="text-sm whitespace-nowrap">
@@ -397,6 +413,32 @@ export function ShipmentDetailsModal({
           </Card>
         )}
       </DialogContent>
+
+      {/* Delivery Address Modal */}
+      <Dialog open={deliveryAddressModalOpen} onOpenChange={setDeliveryAddressModalOpen}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <MapPin className="h-5 w-5 text-[#009eff]" />
+              Delivery Address
+            </DialogTitle>
+          </DialogHeader>
+          {details.deliveryAddress && (
+            <div className="flex flex-col gap-6 mt-2">
+              {deliveryAddressRows.map((row, rowIndex) => (
+                <div key={rowIndex} className="grid grid-cols-3 gap-4">
+                  {row.map((item) => (
+                    <div key={item.label} className="flex flex-col gap-1">
+                      <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">{item.label}</span>
+                      <span className="text-sm font-medium text-foreground">{item.value}</span>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
 
       <Sheet open={collectionAddressSheetOpen} onOpenChange={setCollectionAddressSheetOpen}>
         <SheetContent className="w-[600px] sm:w-[700px] sm:max-w-[700px] px-8">
