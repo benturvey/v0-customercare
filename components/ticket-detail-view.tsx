@@ -48,6 +48,7 @@ import {
   Weight,
   Warehouse,
   Hash,
+  Zap,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -283,8 +284,14 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         })}
       </div>
 
-      {/* Customer Query */}
-      <div className="flex items-center justify-between mb-3">
+      {/* Two-column layout: main content + right sidebar */}
+      <div className="flex gap-6 items-start">
+
+        {/* Main content column */}
+        <div className="flex-1 min-w-0">
+
+        {/* Customer Query */}
+        <div className="flex items-center justify-between mb-3">
         <h2 className="text-base font-semibold text-[#1e3a5f]">Customer Query</h2>
         {attachments.length > 0 && (
           <button
@@ -352,7 +359,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-2 gap-4 mb-6">
         {/* Customer Conversation */}
         <div>
           <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Customer Conversation</h2>
@@ -446,6 +453,14 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           </div>
         </div>
 
+        </div>
+      </div>
+
+      </div>{/* end main content column */}
+
+      {/* Right sidebar */}
+      <div className="w-64 flex-shrink-0 flex flex-col gap-4">
+
         {/* Actions */}
         <div>
           <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Actions</h2>
@@ -486,9 +501,55 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Shipment Details Summary */}
+        {/* Next Best Action */}
+        <div>
+          <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Next Best Action</h2>
+          <div className="rounded-lg border border-blue-200 bg-blue-50 p-4">
+            <div className="flex items-start gap-2 mb-2">
+              <Zap className="h-4 w-4 text-blue-600 shrink-0 mt-0.5" />
+              <p className="text-sm font-medium text-blue-800">Chase carrier for update</p>
+            </div>
+            <p className="text-xs text-blue-700 leading-relaxed">
+              Consignment has been delayed beyond SLA. Contact Evri for a status update and relay to the customer within 2 hours.
+            </p>
+          </div>
+        </div>
+
+        {/* Quick Information */}
+        <div>
+          <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Quick Information</h2>
+          <div className="rounded-lg border border-border bg-card p-4 space-y-3">
+            <div className="space-y-0.5">
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Ticket Age</p>
+              <p className="text-sm font-semibold text-amber-600">42m</p>
+            </div>
+            <div className="space-y-0.5">
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">SLA Due</p>
+              <p className="text-sm font-semibold text-[#1e3a5f]">11:32 in 2h 15m</p>
+            </div>
+            <div className="space-y-0.5">
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Priority</p>
+              <p className="text-sm font-semibold text-[#1e3a5f]">Normal</p>
+            </div>
+            <div className="space-y-0.5">
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Level</p>
+              <p className="text-sm font-semibold text-green-600">L1 - Basic</p>
+            </div>
+            <div className="space-y-0.5">
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Defer / Review Count</p>
+              <p className="text-sm font-semibold text-[#1e3a5f]">1</p>
+            </div>
+            <div className="space-y-0.5">
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Customer Tier</p>
+              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-purple-100 text-purple-700">Focus Customer</span>
+            </div>
+          </div>
+        </div>
+
+      </div>{/* end right sidebar */}
+
+      </div>{/* end two-column layout */}
       <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Shipment Details Summary</h2>
       <div className="flex flex-col gap-4 mb-6">
 
