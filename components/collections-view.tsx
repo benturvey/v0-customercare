@@ -3,7 +3,9 @@
 import { useState, useRef, useEffect } from "react"
 import { CollectionDetailsModal } from "@/components/collection-details-modal"
 import { CollectionDetailPage } from "@/components/collection-detail-page"
-import type { ShipmentFilters as ShipmentFiltersType } from "@/types/shipment"
+import { ShipmentDetailsModal } from "@/components/shipment-details-modal"
+import { shipmentDetailsData } from "@/components/shipment-table"
+import type { ShipmentDetails, ShipmentFilters as ShipmentFiltersType } from "@/types/shipment"
 import {
   Table,
   TableBody,
@@ -200,6 +202,8 @@ export function CollectionsView() {
   const [selectedCollection, setSelectedCollection] = useState<Collection | null>(null)
   const [detailsModalOpen, setDetailsModalOpen] = useState(false)
   const [detailPageOpen, setDetailPageOpen] = useState(false)
+  const [shipmentDetails, setShipmentDetails] = useState<ShipmentDetails | null>(null)
+  const [shipmentModalOpen, setShipmentModalOpen] = useState(false)
 
   // Customer dropdown
   const [customerOpen, setCustomerOpen] = useState(false)
@@ -285,7 +289,36 @@ export function CollectionsView() {
     if (!collection.consignmentNo) {
       setDetailPageOpen(true)
     } else {
-      setDetailsModalOpen(true)
+      const details = shipmentDetailsData[collection.consignmentNo]
+      if (details) {
+        setShipmentDetails(details)
+        setShipmentModalOpen(true)
+      } else {
+        const fallback: ShipmentDetails = {
+          consignmentNo: collection.consignmentNo,
+          insertDate: collection.collectionDate,
+          despatchDate: collection.collectionDate,
+          customer: collection.customer,
+          carrier: collection.carrier,
+          status: "Consignment Created",
+          service: collection.serviceDescr,
+          weight: 0,
+          content: "",
+          accountNo: "",
+          contractNo: collection.contractNo || "",
+          contractComment: "",
+          sender: collection.customer,
+          instructions: "",
+          shipmentRef: collection.customerRef || "",
+          consignmentRef: collection.customerRef || "",
+          trackingNo: collection.consignmentNo,
+          collectionId: collection.collectionId,
+          originDepot: "",
+          destinationDepot: "",
+        }
+        setShipmentDetails(fallback)
+        setShipmentModalOpen(true)
+      }
     }
   }
 
@@ -654,6 +687,11 @@ export function CollectionsView() {
         collection={selectedCollection}
         open={detailsModalOpen}
         onClose={() => setDetailsModalOpen(false)}
+      />
+      <ShipmentDetailsModal
+        open={shipmentModalOpen}
+        onOpenChange={setShipmentModalOpen}
+        details={shipmentDetails}
       />
     </div>
       )}

@@ -21,7 +21,7 @@ interface ShipmentTableProps {
 }
 
 // Sample shipment details data - in a real app this would come from an API
-const shipmentDetailsData: Record<string, ShipmentDetails> = {
+export const shipmentDetailsData: Record<string, ShipmentDetails> = {
   "15500306013410": {
     consignmentNo: "15500306013410",
     insertDate: "16/03/2026 15:56:00",
