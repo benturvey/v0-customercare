@@ -184,8 +184,8 @@ export function ShipmentDetailsModal({
           })}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
-          <div className="flex flex-col gap-4">
+        <div className="flex gap-4 mt-4">
+          <div className="flex flex-col gap-4 flex-1 min-w-0">
             <Card>
               <CardHeader className="pb-1">
                 <CardTitle className="text-lg font-medium flex items-center gap-2">
@@ -335,41 +335,41 @@ export function ShipmentDetailsModal({
             </div>
           </div>
 
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-wrap gap-2">
+          <div className="flex flex-col gap-2 w-44 shrink-0">
               <Button 
                 size="sm" 
-                className="text-sm bg-[#98d9ff] hover:bg-[#7cc9f0] text-foreground flex items-center gap-1.5"
+                className="w-full text-sm bg-[#98d9ff] hover:bg-[#7cc9f0] text-foreground flex items-center gap-1.5 justify-start"
                 onClick={() => setCollectionAddressSheetOpen(true)}
               >
-                <Home className="h-3.5 w-3.5" />
+                <Home className="h-3.5 w-3.5 shrink-0" />
                 View Collection Address
               </Button>
               <Button 
                 size="sm" 
-                className="text-sm bg-[#98d9ff] hover:bg-[#7cc9f0] text-foreground flex items-center gap-1.5"
+                className="w-full text-sm bg-[#98d9ff] hover:bg-[#7cc9f0] text-foreground flex items-center gap-1.5 justify-start"
                 onClick={() => setCustomsDetailsSheetOpen(true)}
               >
-                <Zap className="h-3.5 w-3.5" />
+                <Zap className="h-3.5 w-3.5 shrink-0" />
                 View Customs Details
               </Button>
               <Button 
                 size="sm" 
-                className="text-sm bg-[#98d9ff] hover:bg-[#7cc9f0] text-foreground flex items-center gap-1.5"
+                className="w-full text-sm bg-[#98d9ff] hover:bg-[#7cc9f0] text-foreground flex items-center gap-1.5 justify-start"
                 onClick={() => setRelatedDocumentsSheetOpen(true)}
               >
-                <FileText className="h-3.5 w-3.5" />
+                <FileText className="h-3.5 w-3.5 shrink-0" />
                 View Related Documents
               </Button>
               <Button 
                 size="sm" 
-                className="text-sm bg-[#98d9ff] hover:bg-[#7cc9f0] text-foreground flex items-center gap-1.5"
+                className="w-full text-sm bg-[#98d9ff] hover:bg-[#7cc9f0] text-foreground flex items-center gap-1.5 justify-start"
                 onClick={() => setQueriesSheetOpen(true)}
               >
-                <Ticket className="h-3.5 w-3.5" />
+                <Ticket className="h-3.5 w-3.5 shrink-0" />
                 View Tickets
               </Button>
-            </div>
+          </div>
+        </div>
 
             {details.pieceHistory && details.pieceHistory.length > 0 ? (
               <Card>
