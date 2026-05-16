@@ -16,6 +16,8 @@ const stats = [
   { value: "13", label: "IN PROGRESS" },
   { value: "10", label: "DEFERRED" },
   { value: "14", label: "REVIEWED" },
+  { value: "791", label: "COMPLETED TODAY" },
+  { value: "80 mins", label: "OLDEST WAITING", amber: true },
   { value: "13/30", label: "ACTIVE AGENTS" },
 ]
 
@@ -60,7 +62,7 @@ export function OverviewView() {
         <div className="flex gap-8 justify-between items-end">
           {stats.map((stat) => (
             <div key={stat.label} className="text-left flex-1">
-              <p className="text-3xl font-bold text-[#1e3a5f]">{stat.value}</p>
+              <p className={`text-3xl font-bold ${stat.amber ? "text-amber-500" : "text-[#1e3a5f]"}`}>{stat.value}</p>
               <p className="text-xs text-muted-foreground tracking-wide mt-1">
                 {stat.label}
               </p>
