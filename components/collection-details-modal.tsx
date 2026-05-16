@@ -127,7 +127,7 @@ export function CollectionDetailsModal({ collection, open, onClose }: Collection
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-[98vw] sm:max-w-[98vw] w-[98vw] max-h-[90vh] overflow-y-auto p-0">
         <DialogHeader className="p-6 pb-0">
-          <DialogTitle className="text-xl font-semibold">View Collection Details</DialogTitle>
+          <DialogTitle className="text-xl font-semibold">View Collection Shipment Details</DialogTitle>
         </DialogHeader>
 
         <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
