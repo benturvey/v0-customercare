@@ -624,10 +624,9 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               <DetailRow icon={Tag}          label="Consignment No"  value="T06XUA0000734531" />
               <DetailRow icon={FileText}    label="Shipment Ref"   value="BM21437818" />
             </div>
-            <div className="grid grid-cols-5 gap-2.5">
+            <div className="grid grid-cols-4 gap-2.5">
               <DetailRow icon={Package}      label="Total Parcels"      value="1" />
               <DetailRow icon={Weight}       label="Weight"             value="0.17" />
-              <DetailRow icon={Globe}        label="Origin"             value="UK" />
               <DetailRow icon={Warehouse}    label="Origin Depot"       value="DEPOT=AIR=84" />
               <DetailRow icon={MapPin}       label="Destination Depot"  value="VAN=86=86" />
             </div>
