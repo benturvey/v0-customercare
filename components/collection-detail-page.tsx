@@ -4,8 +4,6 @@ import {
   Zap,
   Hash,
   CalendarDays,
-  Activity,
-  Clock,
   ArrowLeft,
   Package,
   MapPin,
@@ -64,12 +62,13 @@ export function CollectionDetailPage({ collection, onBack }: CollectionDetailPag
   ]
 
   const stripItems = [
-    { logo: "dpd",        label: "CARRIER",          value: collection.carrier,        isHighlight: false },
-    { icon: Zap,          label: "SERVICE",           value: collection.serviceDescr,   isHighlight: false },
-    { icon: Hash,         label: "CUSTOMER REF",      value: collection.customerRef || "—", isHighlight: false },
-    { icon: CalendarDays, label: "COLLECTION DATE",   value: collection.collectionDate, isHighlight: false },
-    { icon: Activity,     label: "STATUS",            value: "PENDING",                 isHighlight: true  },
-    { icon: Clock,        label: "ETA",               value: "—",                       isHighlight: false },
+    { logo: "dpd",        label: "CARRIER",          value: collection.carrier,                                    isHighlight: false },
+    { icon: Zap,          label: "SERVICE",           value: collection.serviceDescr,                               isHighlight: false },
+    { icon: Hash,         label: "CUSTOMER REF",      value: collection.customerRef || "—",                         isHighlight: false },
+    { icon: CalendarDays, label: "COLLECTION DATE",   value: collection.collectionDate,                             isHighlight: false },
+    { icon: Tag,          label: "CARRIER REF",       value: `${collection.collectionId}:${collection.customerRef}`, isHighlight: false },
+    { icon: Package,      label: "PACKS",             value: String(collection.packs),                              isHighlight: false },
+    { icon: Weight,       label: "WEIGHT",            value: "34 KG",                                               isHighlight: false },
   ]
 
   return (
@@ -90,7 +89,7 @@ export function CollectionDetailPage({ collection, onBack }: CollectionDetailPag
       </div>
 
       {/* Info strip */}
-      <div className="grid grid-cols-6 gap-0 rounded-lg border border-border bg-muted/30">
+      <div className="grid grid-cols-7 gap-0 rounded-lg border border-border bg-muted/30">
         {stripItems.map((item, idx, arr) => {
           const Icon = (item as any).icon
           return (
