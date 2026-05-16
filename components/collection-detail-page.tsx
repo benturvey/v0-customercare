@@ -4,6 +4,7 @@ import {
   Zap,
   Hash,
   CalendarDays,
+  Activity,
   ArrowLeft,
   Package,
   MapPin,
@@ -69,6 +70,7 @@ export function CollectionDetailPage({ collection, onBack }: CollectionDetailPag
     { icon: Tag,          label: "CARRIER REF",       value: `${collection.collectionId}:${collection.customerRef}`, isHighlight: false },
     { icon: Package,      label: "PACKS",             value: String(collection.packs),                              isHighlight: false },
     { icon: Weight,       label: "WEIGHT",            value: "34 KG",                                               isHighlight: false },
+    { icon: Activity,     label: "STATUS",            value: "Consignment Created",                                  isHighlight: true  },
   ]
 
   return (
@@ -89,7 +91,7 @@ export function CollectionDetailPage({ collection, onBack }: CollectionDetailPag
       </div>
 
       {/* Info strip */}
-      <div className="grid grid-cols-7 gap-0 rounded-lg border border-border bg-muted/30">
+      <div className="grid grid-cols-8 gap-0 rounded-lg border border-border bg-muted/30">
         {stripItems.map((item, idx, arr) => {
           const Icon = (item as any).icon
           return (
