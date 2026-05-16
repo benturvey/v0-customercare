@@ -28,6 +28,17 @@ export function OverviewView() {
     { value: "48%", label: "AUTOMATION RATE", green: true, target: peakMode ? "Target: 55%" : "Target: 48%" },
   ]
 
+  const agents = [
+    { name: "Ben Lund", level: "L4", currentTicket: "TKT-1042", ticketLevel: "L3", status: "In Progress" },
+    { name: "Tracey Crooke", level: "L3", currentTicket: "TKT-1039", ticketLevel: "L2", status: "In Progress" },
+    { name: "Francine Payne", level: "L2", currentTicket: "TKT-1037", ticketLevel: "L2", status: "In Progress" },
+    { name: "Kimberley McCormick", level: "L2", currentTicket: null, ticketLevel: null, status: "Idle" },
+    { name: "Michael Chen", level: "L1", currentTicket: "TKT-1041", ticketLevel: "L1", status: "In Progress" },
+    { name: "Sarah Johnson", level: "L1", currentTicket: null, ticketLevel: null, status: "Out of Office" },
+    { name: "James Wilson", level: "L3", currentTicket: null, ticketLevel: null, status: "ADM" },
+    { name: "Vicky Lomax", level: "L4", currentTicket: null, ticketLevel: null, status: "MGM" },
+  ]
+
   return (
     <div className="container mx-auto px-4 py-6 space-y-6">
       {/* Stats Card */}
