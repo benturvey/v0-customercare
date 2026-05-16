@@ -21,7 +21,7 @@ const stats = [
   { value: "80 mins", label: "OLDEST WAITING", amber: true, target: "Target < 60 mins" },
   { value: "15/30", label: "ACTIVE AGENTS" },
   { value: "1", label: "SLA RISK", green: true, target: "Target < 10" },
-  { value: "68%", label: "AUTOMATION RATE", green: true, target: "Target > 70%" },
+  { value: "48%", label: "AUTOMATION RATE", amber: true, target: "48%" },
 ]
 
 const agents = [
