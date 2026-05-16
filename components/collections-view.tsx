@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import { CollectionDetailsModal } from "@/components/collection-details-modal"
+import { CollectionDetailPage } from "@/components/collection-detail-page"
 import type { ShipmentFilters as ShipmentFiltersType } from "@/types/shipment"
 import {
   Table,
@@ -198,6 +199,7 @@ const sampleCollections: Collection[] = [
 export function CollectionsView() {
   const [selectedCollection, setSelectedCollection] = useState<Collection | null>(null)
   const [detailsModalOpen, setDetailsModalOpen] = useState(false)
+  const [detailPageOpen, setDetailPageOpen] = useState(false)
 
   // Customer dropdown
   const [customerOpen, setCustomerOpen] = useState(false)
@@ -280,10 +282,21 @@ export function CollectionsView() {
 
   const handleViewDetails = (collection: Collection) => {
     setSelectedCollection(collection)
-    setDetailsModalOpen(true)
+    if (!collection.consignmentNo) {
+      setDetailPageOpen(true)
+    } else {
+      setDetailsModalOpen(true)
+    }
   }
 
   return (
+    <>
+      {detailPageOpen && selectedCollection ? (
+        <CollectionDetailPage
+          collection={selectedCollection}
+          onBack={() => { setDetailPageOpen(false); setSelectedCollection(null) }}
+        />
+      ) : (
     <div className="w-full px-4 py-6">
       {/* Filter pill bar */}
       <div className="flex items-center justify-between mb-6 border-b pb-3">
@@ -643,5 +656,7 @@ export function CollectionsView() {
         onClose={() => setDetailsModalOpen(false)}
       />
     </div>
+      )}
+    </>
   )
 }
