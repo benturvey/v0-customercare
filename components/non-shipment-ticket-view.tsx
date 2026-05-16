@@ -133,12 +133,7 @@ export function NonShipmentTicketView() {
     <div className="w-full px-4 py-6">
       <header className="mb-6 flex items-start justify-between">
         <div>
-          <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-semibold text-[#1e3a5f]">Non-Shipment Tickets</h1>
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
-              Open
-            </span>
-          </div>
+          <h1 className="text-2xl font-semibold text-[#1e3a5f]">Non-Shipment Tickets</h1>
           <p className="text-sm text-muted-foreground mt-1">
             Raise a ticket not related to a specific shipment
           </p>
