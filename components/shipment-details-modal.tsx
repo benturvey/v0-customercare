@@ -282,31 +282,6 @@ export function ShipmentDetailsModal({
           </div>
 
           <div className="flex flex-col gap-4">
-            {details.deliveryAddress && (
-              <Card>
-                <CardHeader className="pb-1">
-                  <CardTitle className="text-lg font-medium flex items-center gap-2">
-                    <MapPin className="h-4 w-4 text-blue-600" />
-                    Delivery Address
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-col gap-6">
-                    {deliveryAddressRows.map((row, rowIndex) => (
-                      <div key={rowIndex} className="grid grid-cols-3 gap-4">
-                        {row.map((item) => (
-                          <div key={item.label} className="flex flex-col gap-1">
-                            <span className="text-sm font-medium text-muted-foreground">{item.label}</span>
-                            <span className="text-sm whitespace-nowrap">{item.value}</span>
-                          </div>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-
             <div className="flex flex-wrap gap-2">
               <Button 
                 size="sm" 
@@ -390,6 +365,32 @@ export function ShipmentDetailsModal({
 
           </div>
         </div>
+
+        {/* Delivery Address Card */}
+        {details.deliveryAddress && (
+          <Card className="mt-6">
+            <CardHeader className="pb-1">
+              <CardTitle className="text-lg font-medium flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-blue-600" />
+                Delivery Address
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-col gap-6">
+                {deliveryAddressRows.map((row, rowIndex) => (
+                  <div key={rowIndex} className="grid grid-cols-3 gap-4">
+                    {row.map((item) => (
+                      <div key={item.label} className="flex flex-col gap-1">
+                        <span className="text-sm font-medium text-muted-foreground">{item.label}</span>
+                        <span className="text-sm whitespace-nowrap">{item.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
       </DialogContent>
 
       <Sheet open={collectionAddressSheetOpen} onOpenChange={setCollectionAddressSheetOpen}>
