@@ -203,7 +203,7 @@ export function ShipmentDetailsModal({
                                         return (
                                           <div key={item.label} className="flex gap-1.5">
                                             {(item as any).flagIcon ? (
-                                              <span className="shrink-0 mt-0.5 text-base leading-none" title="UK">🇬🇧</span>
+                                              <img src="https://flagcdn.com/w20/gb.png" alt="UK flag" className="h-3.5 w-5 shrink-0 mt-0.5 rounded-sm object-cover" />
                                             ) : (
                                               IconComponent && <IconComponent className="h-3.5 w-3.5 shrink-0 mt-0.5 text-[#009eff]" />
                                             )}
