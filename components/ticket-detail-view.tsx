@@ -553,8 +553,8 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
 
         {/* Actions */}
         <div>
-          <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Actions</h2>
           <div className="rounded-lg border border-border bg-card p-4">
+            <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Actions</h2>
             <div className="flex flex-col gap-2">
               <Button variant="outline" size="sm" className="justify-start gap-2 text-left" onClick={() => setAttachDialogOpen(true)}>
                 <Paperclip className="h-4 w-4" style={{ color: "#009eff" }} />
@@ -594,8 +594,8 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
 
         {/* Next Best Action */}
         <div>
-          <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Next Best Action</h2>
           <div className="rounded-lg border border-blue-200 bg-blue-50 p-4">
+            <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Next Best Action</h2>
             <div className="flex items-start gap-2 mb-2">
               <Zap className="h-4 w-4 text-blue-600 shrink-0 mt-0.5" />
               <p className="text-sm font-medium text-blue-800">Chase carrier for update</p>
