@@ -91,14 +91,13 @@ export function CollectionDetailPage({ collection, onBack }: CollectionDetailPag
       </div>
 
       {/* Info strip */}
-      <div className="grid grid-cols-8 gap-1 rounded-lg border border-border bg-muted/30 overflow-x-auto">
+      <div className="flex gap-0 rounded-lg border border-border bg-muted/30 overflow-x-auto">
         {stripItems.map((item, idx, arr) => {
           const IconComp = (item as any).icon
-          console.log("[v0] Strip item:", item.label, "Icon:", IconComp?.displayName || IconComp?.name)
           return (
             <div
               key={item.label}
-              className={`flex flex-row items-start gap-2 py-3 px-3 min-w-max ${idx < arr.length - 1 ? "border-r border-border" : ""}`}
+              className={`flex flex-row items-start gap-2 py-3 px-4 flex-shrink-0 ${idx < arr.length - 1 ? "border-r border-border" : ""}`}
             >
               <div className="flex items-center gap-1 shrink-0 pt-0.5">
                 {(item as any).logo ? (
