@@ -487,8 +487,8 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
 
         {/* Team Conversation & Exceptions */}
         <div>
-          <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Team Conversation & Exceptions</h2>
           <div className="rounded-lg border border-yellow-200 p-4" style={{ backgroundColor: "#ffbdad" }}>
+            <h2 className="text-base font-semibold text-[#1e3a5f] mb-4">Team Conversation & Exceptions</h2>
             {escalationEntries.map((entry, index) => (
               <div key={`escalation-${index}`} className="rounded-lg border border-gray-200 bg-gray-100 p-3 mb-3">
                 <div className="flex items-center justify-between mb-2">
