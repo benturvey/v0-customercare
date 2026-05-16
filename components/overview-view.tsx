@@ -1,7 +1,8 @@
 "use client"
 
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Loader2, Clock, PlaneTakeoff, ShieldCheck, Crown } from "lucide-react"
+import { Loader2, Clock, PlaneTakeoff, ShieldCheck, Crown, Zap } from "lucide-react"
 import {
   Table,
   TableBody,
@@ -58,6 +59,8 @@ const agents = [
 ]
 
 export function OverviewView() {
+  const [peakMode, setPeakMode] = useState(false)
+
   return (
     <div className="container mx-auto px-4 py-6 space-y-6">
       {/* Stats Card */}
@@ -72,6 +75,23 @@ export function OverviewView() {
               )}
             </div>
           ))}
+          {/* Peak Mode Toggle */}
+          <div className="flex flex-col items-center gap-1.5 shrink-0 pl-4 border-l border-border">
+            <button
+              onClick={() => setPeakMode((prev) => !prev)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-colors ${
+                peakMode
+                  ? "bg-amber-500 text-white"
+                  : "bg-muted text-muted-foreground hover:bg-muted/80"
+              }`}
+            >
+              <Zap className={`h-3.5 w-3.5 ${peakMode ? "fill-white" : ""}`} />
+              PEAK MODE
+            </button>
+            <span className="text-[10px] text-muted-foreground/70">
+              {peakMode ? "On" : "Off"}
+            </span>
+          </div>
         </div>
       </div>
 
