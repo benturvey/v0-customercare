@@ -515,13 +515,11 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               <DetailRow icon={Warehouse}    label="Origin Depot"       value="DEPOT=AIR=84" />
               <DetailRow icon={MapPin}       label="Destination Depot"  value="VAN=86=86" />
             </div>
-            <div className="grid grid-cols-4 gap-2.5">
+            <div className="grid grid-cols-5 gap-2.5">
               <DetailRow icon={Hash}         label="Account No"         value="303" />
               <DetailRow icon={FileText}     label="Contract No"        value="1RY010" />
               <DetailRow icon={MessageSquare} label="Contract Comment"   value="Hermes POD" />
               <DetailRow icon={Package}      label="Content"            value="Cosmetics" />
-            </div>
-            <div className="grid grid-cols-1 gap-2.5">
               <div className="flex items-start gap-2">
                 <img src="https://flagcdn.com/w20/gb.png" alt="UK flag" className="h-3.5 w-5 shrink-0 mt-0.5 rounded-sm object-cover" />
                 <div className="flex flex-col leading-tight min-w-0">
