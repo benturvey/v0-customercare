@@ -514,37 +514,6 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           </div>
         </div>
 
-        {/* Quick Information */}
-        <div>
-          <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Quick Information</h2>
-          <div className="rounded-lg border border-border bg-card p-4 space-y-3">
-            <div className="space-y-0.5">
-              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Ticket Age</p>
-              <p className="text-sm font-semibold text-amber-600">42m</p>
-            </div>
-            <div className="space-y-0.5">
-              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">SLA Due</p>
-              <p className="text-sm font-semibold text-[#1e3a5f]">11:32 in 2h 15m</p>
-            </div>
-            <div className="space-y-0.5">
-              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Priority</p>
-              <p className="text-sm font-semibold text-[#1e3a5f]">Normal</p>
-            </div>
-            <div className="space-y-0.5">
-              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Level</p>
-              <p className="text-sm font-semibold text-green-600">L1 - Basic</p>
-            </div>
-            <div className="space-y-0.5">
-              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Defer / Review Count</p>
-              <p className="text-sm font-semibold text-[#1e3a5f]">1</p>
-            </div>
-            <div className="space-y-0.5">
-              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Customer Tier</p>
-              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-purple-100 text-purple-700">Focus Customer</span>
-            </div>
-          </div>
-        </div>
-
       </div>
 
       </div>
