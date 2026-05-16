@@ -726,7 +726,6 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                   <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider whitespace-nowrap">Status</th>
                   <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider whitespace-nowrap">Latest Scan</th>
                   <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider whitespace-nowrap">Latest Update</th>
-                  <th className="text-left px-3 py-2.5 text-xs font-semibold text-[#1e3a5f] uppercase tracking-wider whitespace-nowrap">Delivered / EDD</th>
                 </tr>
               </thead>
               <tbody>
@@ -751,11 +750,6 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                     </p>
                   </td>
                   <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">04/04/2026 14:03</td>
-                  <td className="px-3 py-3 whitespace-nowrap">
-                    <span className="text-xs font-medium text-orange-500">EDD</span>
-                    <br />
-                    <span className="text-sm font-semibold text-orange-500">05/04/2026</span>
-                  </td>
                 </tr>
               </tbody>
             </table>
