@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/table"
 
 const stats = [
-  { value: "15", label: "TOTAL WAITING" },
+  { value: "214", label: "TOTAL WAITING", green: true },
   { value: "13", label: "IN PROGRESS" },
   { value: "10", label: "DEFERRED" },
   { value: "14", label: "REVIEWED" },
@@ -62,7 +62,7 @@ export function OverviewView() {
         <div className="flex gap-8 justify-between items-end">
           {stats.map((stat) => (
             <div key={stat.label} className="text-left flex-1">
-              <p className={`text-3xl font-bold ${stat.amber ? "text-amber-500" : "text-[#1e3a5f]"}`}>{stat.value}</p>
+              <p className={`text-3xl font-bold ${stat.green ? "text-green-600" : stat.amber ? "text-amber-500" : "text-[#1e3a5f]"}`}>{stat.value}</p>
               <p className="text-xs text-muted-foreground tracking-wide mt-1">
                 {stat.label}
               </p>
