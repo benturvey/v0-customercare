@@ -310,7 +310,6 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-purple-100 text-purple-700">
                   Focus Account
                 </span>
-                </button>
               </div>
             </div>
             <div className="space-y-0.5">
