@@ -16,6 +16,7 @@ const stats = [
   { value: "13", label: "IN PROGRESS" },
   { value: "10", label: "DEFERRED" },
   { value: "14", label: "REVIEWED" },
+  { value: "862", label: "NEW TODAY" },
   { value: "791", label: "COMPLETED TODAY" },
   { value: "80 mins", label: "OLDEST WAITING", amber: true },
   { value: "13/30", label: "ACTIVE AGENTS" },
