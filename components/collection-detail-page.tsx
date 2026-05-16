@@ -1,5 +1,6 @@
 "use client"
 
+import React from "react"
 import {
   Zap,
   Hash,
@@ -107,7 +108,10 @@ export function CollectionDetailPage({ collection, onBack }: CollectionDetailPag
                     className="h-6 w-12 shrink-0 object-contain"
                   />
                 ) : (
-                  Icon && <Icon className="h-4 w-4 flex-shrink-0 text-[#009eff]" />
+                  (item as any).icon && ((item as any).icon as any) && 
+                    React.createElement((item as any).icon, {
+                      className: "h-4 w-4 flex-shrink-0 text-[#009eff]"
+                    })
                 )}
               </div>
               <div className="flex flex-col leading-tight">
