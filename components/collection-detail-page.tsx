@@ -94,6 +94,7 @@ export function CollectionDetailPage({ collection, onBack }: CollectionDetailPag
       <div className="grid grid-cols-8 gap-1 rounded-lg border border-border bg-muted/30 overflow-x-auto">
         {stripItems.map((item, idx, arr) => {
           const IconComp = (item as any).icon
+          console.log("[v0] Strip item:", item.label, "Icon:", IconComp?.displayName || IconComp?.name)
           return (
             <div
               key={item.label}
