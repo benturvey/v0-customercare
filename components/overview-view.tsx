@@ -19,7 +19,7 @@ const stats = [
   { value: "862", label: "NEW TODAY" },
   { value: "791", label: "COMPLETED TODAY" },
   { value: "80 mins", label: "OLDEST WAITING", amber: true, target: "Target < 60 mins" },
-  { value: "13/30", label: "ACTIVE AGENTS" },
+  { value: "15/30", label: "ACTIVE AGENTS" },
 ]
 
 const agents = [
