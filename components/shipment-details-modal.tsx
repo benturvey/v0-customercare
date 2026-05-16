@@ -163,7 +163,7 @@ export function ShipmentDetailsModal({
             { icon: CalendarDays, label: "Despatch Date",  value: "14/03/2026" },
             { icon: Activity,     label: "Status",         value: "PARCEL LABEL APPLIED", isHighlight: true },
             { icon: Clock,        label: "ETA",            value: "—" },
-            { icon: PenLine,      label: "Sign By",        value: "—" },
+            { icon: PenLine,      label: "EDD",        value: "—" },
           ].map((item, idx) => {
             const Icon = item.icon
             return (
