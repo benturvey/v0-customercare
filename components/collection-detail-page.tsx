@@ -38,29 +38,38 @@ interface CollectionDetailPageProps {
 export function CollectionDetailPage({ collection, onBack }: CollectionDetailPageProps) {
   const detailRows = [
     [
-      { label: "Insert Date",          value: collection.collectionDate,  icon: CalendarDays },
-      { label: "Total Parcels",        value: String(collection.packs),   icon: Package },
-      { label: "Weight",               value: "—",                        icon: Weight },
-      { label: "Content",              value: "—",                        icon: Box },
+      { label: "Insert Date",            value: collection.collectionDate,        icon: CalendarDays, flagIcon: false },
+      { label: "Total Parcels",          value: String(collection.packs),         icon: Package,      flagIcon: false },
+      { label: "Weight",                 value: "—",                              icon: Weight,       flagIcon: false },
+      { label: "Content",                value: "—",                              icon: Box,          flagIcon: false },
     ],
     [
-      { label: "Account No",           value: "—",                        icon: Hash },
-      { label: "Contract No",          value: collection.contractNo || "—", icon: FileText },
-      { label: "Contract Comment",     value: "—",                        icon: AlignLeft },
-      { label: "Consignment Ref",      value: collection.customerRef || "—", icon: Tag },
+      { label: "Account No",             value: "—",                              icon: Hash,         flagIcon: false },
+      { label: "Contract No",            value: collection.contractNo || "—",     icon: FileText,     flagIcon: false },
+      { label: "Contract Comment",       value: "—",                              icon: AlignLeft,    flagIcon: false },
+      { label: "Consignment Ref",        value: collection.customerRef || "—",    icon: Tag,          flagIcon: false },
     ],
     [
-      { label: "Origin Depot",         value: "—",                        icon: Building2 },
-      { label: "Destination Depot",    value: "—",                        icon: MapPin },
-      { label: "Sender",               value: collection.customer,        icon: Building2 },
-      { label: "Destination",          value: "—",                        icon: MapPin, flagIcon: true },
+      { label: "Origin Depot",           value: "—",                              icon: Building2,    flagIcon: false },
+      { label: "Destination Depot",      value: "—",                              icon: MapPin,       flagIcon: false },
+      { label: "Sender",                 value: collection.customer,              icon: Building2,    flagIcon: false },
+      { label: "Destination",            value: "—",                              icon: MapPin,       flagIcon: true },
     ],
     [
-      { label: "Collection ID",        value: collection.collectionId,    icon: Hash },
-      { label: "Alternate Tracking Nos", value: "—",                      icon: Hash },
-      { label: "Instructions",         value: "—",                        icon: AlignLeft },
-      { label: "",                     value: "",                         icon: null },
+      { label: "Collection ID",          value: collection.collectionId,          icon: Hash,         flagIcon: false },
+      { label: "Alternate Tracking Nos", value: "—",                              icon: Hash,         flagIcon: false },
+      { label: "Instructions",           value: "—",                              icon: AlignLeft,    flagIcon: false },
+      { label: "",                       value: "",                               icon: null,         flagIcon: false },
     ],
+  ]
+
+  const stripItems = [
+    { logo: "dpd",        label: "CARRIER",          value: collection.carrier,        isHighlight: false },
+    { icon: Zap,          label: "SERVICE",           value: collection.serviceDescr,   isHighlight: false },
+    { icon: Hash,         label: "SHIP REF",          value: collection.customerRef || "—", isHighlight: false },
+    { icon: CalendarDays, label: "COLLECTION DATE",   value: collection.collectionDate, isHighlight: false },
+    { icon: Activity,     label: "STATUS",            value: "PENDING",                 isHighlight: true  },
+    { icon: Clock,        label: "ETA",               value: "—",                       isHighlight: false },
   ]
 
   return (
@@ -82,14 +91,7 @@ export function CollectionDetailPage({ collection, onBack }: CollectionDetailPag
 
       {/* Info strip */}
       <div className="grid grid-cols-6 gap-0 rounded-lg border border-border bg-muted/30">
-        {[
-          { logo: "dpd",        label: "Carrier",        value: collection.carrier },
-          { icon: Zap,          label: "Service",        value: collection.serviceDescr },
-          { icon: Hash,         label: "Ship Ref",       value: collection.customerRef || "—" },
-          { icon: CalendarDays, label: "Collection Date", value: collection.collectionDate },
-          { icon: Activity,     label: "Status",         value: "PENDING", isHighlight: true },
-          { icon: Clock,        label: "ETA",            value: "—" },
-        ].map((item, idx, arr) => {
+        {stripItems.map((item, idx, arr) => {
           const Icon = (item as any).icon
           return (
             <div
@@ -97,9 +99,13 @@ export function CollectionDetailPage({ collection, onBack }: CollectionDetailPag
               className={`flex items-center gap-2 py-3 pl-4 ${idx < arr.length - 1 ? "border-r border-border pr-4" : "pr-4"}`}
             >
               {(item as any).logo ? (
-                <img src={`/${(item as any).logo}-logo.png`} alt={item.label} className="h-6 w-12 shrink-0 object-contain" />
+                <img
+                  src={`/${(item as any).logo}-logo.png`}
+                  alt={item.label}
+                  className="h-6 w-12 shrink-0 object-contain"
+                />
               ) : (
-                <Icon className="h-4 w-4 flex-shrink-0 text-[#009eff]" />
+                Icon && <Icon className="h-4 w-4 flex-shrink-0 text-[#009eff]" />
               )}
               <div className="flex flex-col leading-tight">
                 <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">{item.label}</span>
@@ -125,7 +131,7 @@ export function CollectionDetailPage({ collection, onBack }: CollectionDetailPag
                   <div key={item.label} className="flex flex-col gap-1">
                     {item.label && (
                       <div className="flex items-center gap-1.5">
-                        {(item as any).flagIcon ? (
+                        {item.flagIcon ? (
                           <img
                             src="https://flagcdn.com/w20/gb.png"
                             alt="UK flag"
