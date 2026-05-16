@@ -251,7 +251,12 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
       </Button>
 
       <header className="mb-4">
-        <h1 className="text-2xl font-bold text-[#1e3a5f]">Ticket {ticket.id}</h1>
+        <div className="flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-[#1e3a5f]">Ticket {ticket.id}</h1>
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
+            Open
+          </span>
+        </div>
       </header>
 
       {/* Metadata strip */}
