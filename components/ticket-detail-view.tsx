@@ -53,6 +53,7 @@ import {
   Info,
   BookOpen,
   AlertTriangle,
+  ClipboardList,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -340,9 +341,12 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                         <Info className="h-3.5 w-3.5 shrink-0 mt-0.5 text-blue-600" />
                         <p className="text-xs text-blue-800">Bank Holiday impact: reduced collections on 26/05/2026.</p>
                       </div>
-                    </div>
-                  </div>
-                </div>
+            </div>
+            <div className="grid grid-cols-1 gap-2.5">
+              <DetailRow icon={ClipboardList} label="Instructions" value="Leave in porch if no answer. Do not leave with neighbour." />
+            </div>
+          </div>
+        </div>
               </>
             )}
           </div>
