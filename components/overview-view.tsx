@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/table"
 
 const stats = [
-  { value: "15", label: "UNASSIGNED" },
+  { value: "15", label: "TOTAL WAITING" },
   { value: "13", label: "IN PROGRESS" },
   { value: "10", label: "DEFERRED" },
   { value: "14", label: "REVIEWED" },
