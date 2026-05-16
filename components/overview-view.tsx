@@ -20,6 +20,8 @@ const stats = [
   { value: "791", label: "COMPLETED TODAY" },
   { value: "80 mins", label: "OLDEST WAITING", amber: true, target: "Target < 60 mins" },
   { value: "15/30", label: "ACTIVE AGENTS" },
+  { value: "12%", label: "SLA RISK", red: true, target: "Target < 5%" },
+  { value: "68%", label: "AUTOMATION RATE", green: true, target: "Target > 70%" },
 ]
 
 const agents = [
@@ -63,7 +65,7 @@ export function OverviewView() {
         <div className="flex gap-8 justify-between items-center">
           {stats.map((stat) => (
             <div key={stat.label} className="text-left flex-1">
-              <p className={`text-3xl font-bold ${stat.green ? "text-green-600" : stat.amber ? "text-amber-500" : "text-[#1e3a5f]"}`}>{stat.value}</p>
+              <p className={`text-3xl font-bold ${stat.green ? "text-green-600" : stat.amber ? "text-amber-500" : stat.red ? "text-red-600" : "text-[#1e3a5f]"}`}>{stat.value}</p>
               <p className="text-xs text-muted-foreground tracking-wide mt-1">{stat.label}</p>
               {stat.target && (
                 <p className="text-[10px] text-muted-foreground/70 mt-0.5">{stat.target}</p>
