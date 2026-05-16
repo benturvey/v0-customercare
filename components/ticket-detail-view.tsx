@@ -111,6 +111,7 @@ const metaItems = [
 
 export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [trackingView, setTrackingView] = useState<"list" | "timeline">("list")
+  const [carrierSiteModalOpen, setCarrierSiteModalOpen] = useState(false)
   const [attachDialogOpen, setAttachDialogOpen] = useState(false)
   const [attachments, setAttachments] = useState<{ name: string; url: string }[]>([])
   const [attachmentsSheetOpen, setAttachmentsSheetOpen] = useState(false)
@@ -603,15 +604,13 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
             </button>
           </div>
           {trackingView === "timeline" && (
-            <a
-              href="https://www.evri.com/track-a-parcel"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => setCarrierSiteModalOpen(true)}
               className="ml-2 flex items-center gap-1.5 text-sm font-medium text-[#009eff] hover:text-blue-700 transition-colors"
             >
               <ExternalLink className="h-3.5 w-3.5" />
               View on Carrier Site
-            </a>
+            </button>
           )}
         </div>
 
@@ -1326,6 +1325,44 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Carrier Site Modal */}
+      {carrierSiteModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/50" onClick={() => setCarrierSiteModalOpen(false)} />
+          <div className="relative bg-white rounded-lg shadow-xl w-full max-w-5xl mx-4 flex flex-col" style={{ height: "80vh" }}>
+            <div className="flex items-center justify-between p-4 border-b shrink-0">
+              <div className="flex items-center gap-2">
+                <img src="/evri-logo.png" alt="Evri" className="h-5 w-10 object-contain" />
+                <h2 className="text-base font-semibold text-[#1e3a5f]">View on Carrier Site</h2>
+              </div>
+              <div className="flex items-center gap-2">
+                <a
+                  href="https://www.evri.com/track-a-parcel"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 text-sm text-[#009eff] hover:text-blue-700 transition-colors"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  Open in new tab
+                </a>
+                <button
+                  onClick={() => setCarrierSiteModalOpen(false)}
+                  className="p-1 rounded-full hover:bg-muted transition-colors ml-2"
+                >
+                  <X className="h-5 w-5 text-muted-foreground" />
+                </button>
+              </div>
+            </div>
+            <iframe
+              src="https://www.evri.com/track-a-parcel"
+              title="Evri Carrier Tracking"
+              className="flex-1 w-full rounded-b-lg"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+            />
+          </div>
+        </div>
+      )}
 
       {/* Delivery Address Modal */}
       {deliveryAddressModalOpen && (
