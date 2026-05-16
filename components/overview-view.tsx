@@ -104,7 +104,7 @@ export function OverviewView() {
               <TableCell>22</TableCell>
               <TableCell>34</TableCell>
               <TableCell><span className="text-amber-500 font-medium">▲</span></TableCell>
-              <TableCell><span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-700">Medium</span></TableCell>
+              <TableCell>3</TableCell>
               <TableCell>8</TableCell>
               <TableCell>
                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-700">
@@ -119,7 +119,7 @@ export function OverviewView() {
               <TableCell>35</TableCell>
               <TableCell>18</TableCell>
               <TableCell><span className="text-green-600 font-medium">▼</span></TableCell>
-              <TableCell><span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-700">Low</span></TableCell>
+              <TableCell>1</TableCell>
               <TableCell>4</TableCell>
               <TableCell>
                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
@@ -134,7 +134,7 @@ export function OverviewView() {
               <TableCell>52</TableCell>
               <TableCell>11</TableCell>
               <TableCell><span className="text-muted-foreground font-medium">—</span></TableCell>
-              <TableCell><span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-700">Low</span></TableCell>
+              <TableCell>0</TableCell>
               <TableCell>2</TableCell>
               <TableCell>
                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
@@ -149,7 +149,7 @@ export function OverviewView() {
               <TableCell>80</TableCell>
               <TableCell>7</TableCell>
               <TableCell><span className="text-red-600 font-medium">▲</span></TableCell>
-              <TableCell><span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-700">High</span></TableCell>
+              <TableCell>5</TableCell>
               <TableCell>1</TableCell>
               <TableCell>
                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700">
