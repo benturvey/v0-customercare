@@ -8,12 +8,12 @@ import {
   ArrowLeft,
   Package,
   MapPin,
-  FileText,
   Weight,
-  Box,
-  AlignLeft,
-  Building2,
   Tag,
+  User,
+  Phone,
+  Building2,
+  Globe,
 } from "lucide-react"
 
 interface Collection {
@@ -35,33 +35,6 @@ interface CollectionDetailPageProps {
 }
 
 export function CollectionDetailPage({ collection, onBack }: CollectionDetailPageProps) {
-  const detailRows = [
-    [
-      { label: "Insert Date",            value: collection.collectionDate,        icon: CalendarDays, flagIcon: false },
-      { label: "Total Parcels",          value: String(collection.packs),         icon: Package,      flagIcon: false },
-      { label: "Weight",                 value: "—",                              icon: Weight,       flagIcon: false },
-      { label: "Content",                value: "—",                              icon: Box,          flagIcon: false },
-    ],
-    [
-      { label: "Account No",             value: "—",                              icon: Hash,         flagIcon: false },
-      { label: "Contract No",            value: collection.contractNo || "—",     icon: FileText,     flagIcon: false },
-      { label: "Contract Comment",       value: "—",                              icon: AlignLeft,    flagIcon: false },
-      { label: "Consignment Ref",        value: collection.customerRef || "—",    icon: Tag,          flagIcon: false },
-    ],
-    [
-      { label: "Origin Depot",           value: "—",                              icon: Building2,    flagIcon: false },
-      { label: "Destination Depot",      value: "—",                              icon: MapPin,       flagIcon: false },
-      { label: "Sender",                 value: collection.customer,              icon: Building2,    flagIcon: false },
-      { label: "Destination",            value: "—",                              icon: MapPin,       flagIcon: true },
-    ],
-    [
-      { label: "Collection ID",          value: collection.collectionId,          icon: Hash,         flagIcon: false },
-      { label: "Alternate Tracking Nos", value: "—",                              icon: Hash,         flagIcon: false },
-      { label: "Instructions",           value: "—",                              icon: AlignLeft,    flagIcon: false },
-      { label: "",                       value: "",                               icon: null,         flagIcon: false },
-    ],
-  ]
-
   const stripItems = [
     { logo: "dpd",        label: "CARRIER",          value: collection.carrier,                                    isHighlight: false },
     { icon: Zap,          label: "SERVICE",           value: collection.serviceDescr,                               isHighlight: false },
@@ -119,40 +92,109 @@ export function CollectionDetailPage({ collection, onBack }: CollectionDetailPag
         })}
       </div>
 
-      {/* Shipment Details card */}
-      <div className="border border-border rounded-lg bg-card p-6">
-        <div className="flex items-center gap-2 mb-6">
-          <Package className="h-5 w-5 text-[#009eff]" />
-          <h2 className="text-base font-semibold text-foreground">Shipment Details</h2>
-        </div>
-        <div className="flex flex-col gap-6">
-          {detailRows.map((row, rowIndex) => (
-            <div key={rowIndex} className="grid grid-cols-4 gap-6">
-              {row.map((item) => {
-                const IconComponent = item.icon
-                return (
-                  <div key={item.label} className="flex flex-col gap-1">
-                    {item.label && (
-                      <div className="flex items-center gap-1.5">
-                        {item.flagIcon ? (
-                          <img
-                            src="https://flagcdn.com/w20/gb.png"
-                            alt="UK flag"
-                            className="h-3.5 w-5 shrink-0 mt-0.5 rounded-sm object-cover"
-                          />
-                        ) : (
-                          IconComponent && <IconComponent className="h-3.5 w-3.5 shrink-0 mt-0.5 text-[#009eff]" />
-                        )}
-                        <span className="text-xs font-medium text-muted-foreground">{item.label}</span>
-                      </div>
-                    )}
-                    <span className="text-sm text-foreground pl-5">{item.value}</span>
-                  </div>
-                )
-              })}
+      {/* Address cards side by side */}
+      <div className="grid grid-cols-2 gap-6">
+
+        {/* Collection Address */}
+        <div className="border border-border rounded-lg bg-card p-6 space-y-5">
+          <div className="flex items-center gap-2">
+            <MapPin className="h-5 w-5 text-[#009eff]" />
+            <h2 className="text-base font-semibold text-foreground">Collection Address</h2>
+          </div>
+          <div className="grid grid-cols-3 gap-4">
+            <div className="flex flex-col gap-0.5">
+              <div className="flex items-center gap-1.5"><Building2 className="h-3.5 w-3.5 text-[#009eff]" /><span className="text-xs text-muted-foreground">Company</span></div>
+              <span className="text-sm text-foreground pl-5">N/A</span>
             </div>
-          ))}
+            <div className="flex flex-col gap-0.5">
+              <div className="flex items-center gap-1.5"><User className="h-3.5 w-3.5 text-[#009eff]" /><span className="text-xs text-muted-foreground">Contact</span></div>
+              <span className="text-sm text-foreground pl-5">tavi-v@hotmail.co.uk</span>
+            </div>
+            <div className="flex flex-col gap-0.5">
+              <div className="flex items-center gap-1.5"><Phone className="h-3.5 w-3.5 text-[#009eff]" /><span className="text-xs text-muted-foreground">Phone</span></div>
+              <span className="text-sm text-foreground pl-5">+44 7368 978335</span>
+            </div>
+          </div>
+          <div className="grid grid-cols-3 gap-4">
+            <div className="flex flex-col gap-0.5">
+              <div className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5 text-[#009eff]" /><span className="text-xs text-muted-foreground">Street</span></div>
+              <span className="text-sm text-foreground pl-5">55 Blenheim Road</span>
+            </div>
+            <div className="flex flex-col gap-0.5">
+              <div className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5 text-[#009eff]" /><span className="text-xs text-muted-foreground">District</span></div>
+              <span className="text-sm text-foreground pl-5">—</span>
+            </div>
+            <div className="flex flex-col gap-0.5">
+              <div className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5 text-[#009eff]" /><span className="text-xs text-muted-foreground">Town</span></div>
+              <span className="text-sm text-foreground pl-5">Leighton Buzzard</span>
+            </div>
+          </div>
+          <div className="grid grid-cols-3 gap-4">
+            <div className="flex flex-col gap-0.5">
+              <div className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5 text-[#009eff]" /><span className="text-xs text-muted-foreground">County</span></div>
+              <span className="text-sm text-foreground pl-5">Bedfordshire</span>
+            </div>
+            <div className="flex flex-col gap-0.5">
+              <div className="flex items-center gap-1.5"><Globe className="h-3.5 w-3.5 text-[#009eff]" /><span className="text-xs text-muted-foreground">Country</span></div>
+              <span className="text-sm text-foreground pl-5">GB</span>
+            </div>
+            <div className="flex flex-col gap-0.5">
+              <div className="flex items-center gap-1.5"><Hash className="h-3.5 w-3.5 text-[#009eff]" /><span className="text-xs text-muted-foreground">Postcode</span></div>
+              <span className="text-sm text-foreground pl-5">LU7 3DZ</span>
+            </div>
+          </div>
         </div>
+
+        {/* Delivery Address */}
+        <div className="border border-border rounded-lg bg-card p-6 space-y-5">
+          <div className="flex items-center gap-2">
+            <MapPin className="h-5 w-5 text-[#009eff]" />
+            <h2 className="text-base font-semibold text-foreground">Delivery Address</h2>
+          </div>
+          <div className="grid grid-cols-3 gap-4">
+            <div className="flex flex-col gap-0.5">
+              <div className="flex items-center gap-1.5"><Building2 className="h-3.5 w-3.5 text-[#009eff]" /><span className="text-xs text-muted-foreground">Company</span></div>
+              <span className="text-sm text-foreground pl-5">AGTC LIMITED</span>
+            </div>
+            <div className="flex flex-col gap-0.5">
+              <div className="flex items-center gap-1.5"><User className="h-3.5 w-3.5 text-[#009eff]" /><span className="text-xs text-muted-foreground">Recipient</span></div>
+              <span className="text-sm text-foreground pl-5">GOODS IN</span>
+            </div>
+            <div className="flex flex-col gap-0.5">
+              <div className="flex items-center gap-1.5"><Phone className="h-3.5 w-3.5 text-[#009eff]" /><span className="text-xs text-muted-foreground">Phone</span></div>
+              <span className="text-sm text-foreground pl-5">01865 692 334</span>
+            </div>
+          </div>
+          <div className="grid grid-cols-3 gap-4">
+            <div className="flex flex-col gap-0.5">
+              <div className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5 text-[#009eff]" /><span className="text-xs text-muted-foreground">Street</span></div>
+              <span className="text-sm text-foreground pl-5">UNIT 2 NETHER LANE</span>
+            </div>
+            <div className="flex flex-col gap-0.5">
+              <div className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5 text-[#009eff]" /><span className="text-xs text-muted-foreground">District</span></div>
+              <span className="text-sm text-foreground pl-5">PROVINCAL PARK</span>
+            </div>
+            <div className="flex flex-col gap-0.5">
+              <div className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5 text-[#009eff]" /><span className="text-xs text-muted-foreground">Town</span></div>
+              <span className="text-sm text-foreground pl-5">SHEFFIELD</span>
+            </div>
+          </div>
+          <div className="grid grid-cols-3 gap-4">
+            <div className="flex flex-col gap-0.5">
+              <div className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5 text-[#009eff]" /><span className="text-xs text-muted-foreground">County</span></div>
+              <span className="text-sm text-foreground pl-5">ECCLESFIELD</span>
+            </div>
+            <div className="flex flex-col gap-0.5">
+              <div className="flex items-center gap-1.5"><Globe className="h-3.5 w-3.5 text-[#009eff]" /><span className="text-xs text-muted-foreground">Country</span></div>
+              <span className="text-sm text-foreground pl-5">GB</span>
+            </div>
+            <div className="flex flex-col gap-0.5">
+              <div className="flex items-center gap-1.5"><Hash className="h-3.5 w-3.5 text-[#009eff]" /><span className="text-xs text-muted-foreground">Postcode</span></div>
+              <span className="text-sm text-foreground pl-5">S35 9ZX</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   )
