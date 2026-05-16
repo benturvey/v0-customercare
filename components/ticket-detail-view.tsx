@@ -541,31 +541,6 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           </div>
         </div>
 
-        {/* Card 2 — Delivery Address */}
-        <div className="rounded-lg border border-border bg-card p-4">
-          <h3 className="text-sm font-semibold text-[#1e3a5f] mb-3">Delivery Address</h3>
-          <div className="grid gap-2.5">
-            <div className="grid grid-cols-3 gap-2.5">
-              <DetailRow icon={Building2} label="Company"       value="CAROLINE BRILLANT" />
-              <DetailRow icon={User}      label="Contact"       value="CAROLINE BRILLANT" />
-              <DetailRow icon={Phone}     label="Contact Phone" value="07927140269" />
-            </div>
-            <div className="grid grid-cols-1 gap-2.5">
-              <DetailRow icon={Mail}      label="Contact Email" value="SISTERBRILLANT@YAHOO.CO.UK" />
-            </div>
-            <div className="grid grid-cols-3 gap-2.5">
-              <DetailRow icon={Home}      label="Address Line 1" value="0/1 (GROUND LEFT)" />
-              <DetailRow icon={Home}      label="Address Line 2" value="9 ROWANTREE AVENUE" />
-              <DetailRow icon={MapPin}    label="Town/City"      value="RUTHERGLEN" />
-            </div>
-            <div className="grid grid-cols-3 gap-2.5">
-              <DetailRow icon={MapPin}    label="County"        value="SCT" />
-              <DetailRow icon={Globe}     label="Country"       value="UNITED KINGDOM" />
-              <DetailRow icon={MapPin}    label="Postcode"      value="G73 4LZ" />
-            </div>
-          </div>
-        </div>
-
       </div>
       {/* Tracking Visibility */}
       <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Tracking Visibility</h2>
