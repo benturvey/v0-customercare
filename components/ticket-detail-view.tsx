@@ -325,9 +325,12 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                         <a href="https://www.evri.com" target="_blank" rel="noopener noreferrer" className="text-[#009eff] hover:text-blue-700 transition-colors">
                           evri.com
                         </a>
-                      </div>
-                    </div>
-                  </div>
+            </div>
+            <div className="grid grid-cols-1 gap-2.5">
+              <DetailRow icon={ClipboardList} label="Instructions" value="Leave in porch if no answer. Do not leave with neighbour." />
+            </div>
+          </div>
+        </div>
 
                   {/* Service Alerts */}
                   <div className="px-4 py-3">
