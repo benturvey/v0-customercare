@@ -383,20 +383,19 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         {/* Main content column */}
         <div className="flex-1 min-w-0">
 
-        {/* Customer Query */}
-        <div className="flex items-center justify-between mb-3">
-        <h2 className="text-base font-semibold text-[#1e3a5f]">Customer Query</h2>
-        {attachments.length > 0 && (
-          <button
-            onClick={() => setAttachmentsSheetOpen(true)}
-            className="flex items-center gap-1.5 text-sm font-medium text-[#009eff] hover:text-blue-700 transition-colors"
-          >
-            <Paperclip className="h-4 w-4" />
-            View Attachments ({attachments.length})
-          </button>
-        )}
-      </div>
       <div className="rounded-lg border border-border bg-card p-4 mb-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-base font-semibold text-[#1e3a5f]">Customer Query</h2>
+          {attachments.length > 0 && (
+            <button
+              onClick={() => setAttachmentsSheetOpen(true)}
+              className="flex items-center gap-1.5 text-sm font-medium text-[#009eff] hover:text-blue-700 transition-colors"
+            >
+              <Paperclip className="h-4 w-4" />
+              View Attachments ({attachments.length})
+            </button>
+          )}
+        </div>
         <div className="flex gap-4">
           {/* Summary card */}
           <div className="rounded-lg border border-border bg-muted/40 p-3 flex-shrink-0 w-64 space-y-2.5">
