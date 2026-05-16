@@ -66,7 +66,7 @@ export function CollectionDetailPage({ collection, onBack }: CollectionDetailPag
   const stripItems = [
     { logo: "dpd",        label: "CARRIER",          value: collection.carrier,        isHighlight: false },
     { icon: Zap,          label: "SERVICE",           value: collection.serviceDescr,   isHighlight: false },
-    { icon: Hash,         label: "SHIP REF",          value: collection.customerRef || "—", isHighlight: false },
+    { icon: Hash,         label: "CUSTOMER REF",      value: collection.customerRef || "—", isHighlight: false },
     { icon: CalendarDays, label: "COLLECTION DATE",   value: collection.collectionDate, isHighlight: false },
     { icon: Activity,     label: "STATUS",            value: "PENDING",                 isHighlight: true  },
     { icon: Clock,        label: "ETA",               value: "—",                       isHighlight: false },
