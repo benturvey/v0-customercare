@@ -45,6 +45,7 @@ import {
   ToggleLeft,
   Workflow,
   CalendarClock,
+  Weight,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
