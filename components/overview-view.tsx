@@ -230,6 +230,84 @@ export function OverviewView() {
         </Table>
       </div>
 
+      {/* Staff Coverage vs Requirement Card */}
+      <div className="border border-border rounded-lg bg-card">
+        <div className="px-6 py-4 border-b border-border">
+          <h2 className="text-sm font-medium text-muted-foreground tracking-wide">
+            STAFF COVERAGE VS REQUIREMENT
+          </h2>
+        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="font-semibold text-muted-foreground">Skill</TableHead>
+              <TableHead className="font-semibold text-muted-foreground">Required</TableHead>
+              <TableHead className="font-semibold text-muted-foreground">Online</TableHead>
+              <TableHead className="font-semibold text-muted-foreground">Gap</TableHead>
+              <TableHead className="font-semibold text-muted-foreground">Utilisation</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell className="font-medium">L1 — General Enquiries</TableCell>
+              <TableCell>10</TableCell>
+              <TableCell>8</TableCell>
+              <TableCell><span className="text-amber-500 font-medium">-2</span></TableCell>
+              <TableCell>
+                <div className="flex items-center gap-2">
+                  <div className="flex-1 bg-muted rounded-full h-2 max-w-24">
+                    <div className="bg-amber-500 h-2 rounded-full" style={{ width: "80%" }} />
+                  </div>
+                  <span className="text-sm text-foreground">80%</span>
+                </div>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-medium">L2 — Shipment Issues</TableCell>
+              <TableCell>6</TableCell>
+              <TableCell>4</TableCell>
+              <TableCell><span className="text-red-600 font-medium">-2</span></TableCell>
+              <TableCell>
+                <div className="flex items-center gap-2">
+                  <div className="flex-1 bg-muted rounded-full h-2 max-w-24">
+                    <div className="bg-red-500 h-2 rounded-full" style={{ width: "67%" }} />
+                  </div>
+                  <span className="text-sm text-foreground">67%</span>
+                </div>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-medium">L3 — Escalations</TableCell>
+              <TableCell>4</TableCell>
+              <TableCell>4</TableCell>
+              <TableCell><span className="text-green-600 font-medium">0</span></TableCell>
+              <TableCell>
+                <div className="flex items-center gap-2">
+                  <div className="flex-1 bg-muted rounded-full h-2 max-w-24">
+                    <div className="bg-green-600 h-2 rounded-full" style={{ width: "100%" }} />
+                  </div>
+                  <span className="text-sm text-foreground">100%</span>
+                </div>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-medium">L4 — Management</TableCell>
+              <TableCell>2</TableCell>
+              <TableCell>1</TableCell>
+              <TableCell><span className="text-red-600 font-medium">-1</span></TableCell>
+              <TableCell>
+                <div className="flex items-center gap-2">
+                  <div className="flex-1 bg-muted rounded-full h-2 max-w-24">
+                    <div className="bg-red-500 h-2 rounded-full" style={{ width: "50%" }} />
+                  </div>
+                  <span className="text-sm text-foreground">50%</span>
+                </div>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </div>
+
       {/* Agent Status Card */}
       <div className="border border-border rounded-lg bg-card">
         <div className="px-6 py-4 border-b border-border">
