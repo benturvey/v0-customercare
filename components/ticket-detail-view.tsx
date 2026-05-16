@@ -547,9 +547,12 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           </div>
         </div>
 
-      </div>{/* end right sidebar */}
+      </div>
+      {/* end right sidebar */}
 
-      </div>{/* end two-column layout */}
+      </div>
+      {/* end two-column layout */}
+
       <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Shipment Details Summary</h2>
       <div className="flex flex-col gap-4 mb-6">
 
