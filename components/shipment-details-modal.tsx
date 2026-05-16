@@ -28,7 +28,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-import { ChevronDown, User, Truck, Zap, Hash, CalendarDays, Activity, Clock, PenLine, List, GitCommitHorizontal, Package, MapPin, Home, FileText, Ticket, Eye, PlusCircle, CheckCircle, ClipboardList, UserCheck, Layers, Navigation, Tag } from "lucide-react"
+import { ChevronDown, User, Truck, Zap, Hash, CalendarDays, Activity, Clock, PenLine, List, GitCommitHorizontal, Package, MapPin, Warehouse, FileText, Ticket, Eye, PlusCircle, CheckCircle, ClipboardList, UserCheck, Navigation, Tag, Weight, MessageSquare } from "lucide-react"
 import { useState, useEffect } from "react"
 import type { ShipmentDetails } from "@/types/shipment"
 
@@ -71,27 +71,27 @@ export function ShipmentDetailsModal({
 
   const detailRows = [
     [
-      { label: "Insert Date",       value: details.insertDate,                   icon: CalendarDays },
-      { label: "Total Parcels",     value: "2",                                  icon: Layers },
-      { label: "Weight",            value: details.weight.toString(),            icon: Package },
-      { label: "Content",           value: details.content,                      icon: ClipboardList },
+      { label: "Insert Date",             value: details.insertDate,                   icon: CalendarDays },
+      { label: "Total Parcels",           value: "2",                                  icon: Package },
+      { label: "Weight",                  value: details.weight.toString(),            icon: Weight },
+      { label: "Content",                 value: details.content,                      icon: Package },
     ],
     [
-      { label: "Account No",        value: details.accountNo,                    icon: Hash },
-      { label: "Contract No",       value: details.contractNo,                   icon: FileText },
-      { label: "Contract Comment",  value: details.contractComment,              icon: PenLine },
-      { label: "Consignment Ref",   value: details.consignmentRef || "-",        icon: Tag },
+      { label: "Account No",              value: details.accountNo,                    icon: Hash },
+      { label: "Contract No",             value: details.contractNo,                   icon: FileText },
+      { label: "Contract Comment",        value: details.contractComment,              icon: MessageSquare },
+      { label: "Consignment Ref",         value: details.consignmentRef || "-",        icon: Tag },
     ],
     [
-      { label: "Origin Depot",      value: details.originDepot,                  icon: Home },
-      { label: "Destination Depot", value: details.destinationDepot,             icon: MapPin },
-      { label: "Sender",            value: details.sender,                       icon: User },
-      { label: "Destination",       value: details.deliveryAddress?.town || "-", icon: Navigation },
+      { label: "Origin Depot",            value: details.originDepot,                  icon: Warehouse },
+      { label: "Destination Depot",       value: details.destinationDepot,             icon: MapPin },
+      { label: "Sender",                  value: details.sender,                       icon: User },
+      { label: "Destination",             value: details.deliveryAddress?.town || "-", icon: Navigation },
     ],
     [
-      { label: "Collection ID",     value: details.collectionId || "-",          icon: Package },
-      { label: "Alternate Tracking No's", value: details.trackingNo || "-",            icon: Activity },
-      { label: "Instructions",      value: details.instructions || "-",          icon: ClipboardList },
+      { label: "Collection ID",           value: details.collectionId || "-",          icon: Package },
+      { label: "Alternate Tracking No's", value: details.trackingNo || "-",            icon: Hash },
+      { label: "Instructions",            value: details.instructions || "-",          icon: ClipboardList },
     ],
   ]
 
