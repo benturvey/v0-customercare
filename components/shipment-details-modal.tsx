@@ -87,7 +87,7 @@ export function ShipmentDetailsModal({
       { label: "Origin Depot",            value: details.originDepot,                  icon: Warehouse },
       { label: "Destination Depot",       value: details.destinationDepot,             icon: MapPin },
       { label: "Sender",                  value: details.sender,                       icon: User },
-      { label: "Destination",       value: details.deliveryAddress ? `${details.deliveryAddress.town}, ${details.deliveryAddress.postcode}` : "-", icon: Navigation },
+      { label: "Destination",       value: details.deliveryAddress ? `${details.deliveryAddress.town}, ${details.deliveryAddress.postcode}` : "-", icon: MapPin },
     ],
     [
       { label: "Collection ID",           value: details.collectionId || "-",          icon: Package },
