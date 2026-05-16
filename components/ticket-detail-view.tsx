@@ -1326,17 +1326,20 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         </DialogContent>
       </Dialog>
 
-      {/* Carrier Site Modal */}
+      {/* Carrier Site Slider */}
       {carrierSiteModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div className="absolute inset-0 bg-black/50" onClick={() => setCarrierSiteModalOpen(false)} />
-          <div className="relative bg-white rounded-lg shadow-xl w-full max-w-5xl mx-4 flex flex-col" style={{ height: "80vh" }}>
-            <div className="flex items-center justify-between p-4 border-b shrink-0">
+        <div className="fixed inset-0 z-50 flex">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setCarrierSiteModalOpen(false)} />
+          <div
+            className="relative ml-auto flex flex-col bg-white shadow-2xl"
+            style={{ width: "50vw", height: "100vh" }}
+          >
+            <div className="flex items-center justify-between px-4 py-3 border-b shrink-0">
               <div className="flex items-center gap-2">
                 <img src="/evri-logo.png" alt="Evri" className="h-5 w-10 object-contain" />
                 <h2 className="text-base font-semibold text-[#1e3a5f]">View on Carrier Site</h2>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 <a
                   href="https://www.evri.com/track-a-parcel"
                   target="_blank"
@@ -1348,7 +1351,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 </a>
                 <button
                   onClick={() => setCarrierSiteModalOpen(false)}
-                  className="p-1 rounded-full hover:bg-muted transition-colors ml-2"
+                  className="p-1 rounded-full hover:bg-muted transition-colors"
                 >
                   <X className="h-5 w-5 text-muted-foreground" />
                 </button>
@@ -1357,7 +1360,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
             <iframe
               src="https://www.evri.com/track-a-parcel"
               title="Evri Carrier Tracking"
-              className="flex-1 w-full rounded-b-lg"
+              className="flex-1 w-full"
               sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
             />
           </div>
