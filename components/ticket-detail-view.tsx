@@ -46,6 +46,7 @@ import {
   Workflow,
   CalendarClock,
   Weight,
+  Warehouse,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -506,10 +507,12 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               <DetailRow icon={Tag}          label="Consignment No"  value="T06XUA0000734531" />
               <DetailRow icon={FileText}    label="Shipment Ref"   value="BM21437818" />
             </div>
-            <div className="grid grid-cols-3 gap-2.5">
-              <DetailRow icon={Package}      label="Total Parcels"   value="1" />
-              <DetailRow icon={Weight}       label="Weight"          value="0.17" />
-              <DetailRow icon={Globe}        label="Origin"          value="UK" />
+            <div className="grid grid-cols-5 gap-2.5">
+              <DetailRow icon={Package}      label="Total Parcels"      value="1" />
+              <DetailRow icon={Weight}       label="Weight"             value="0.17" />
+              <DetailRow icon={Globe}        label="Origin"             value="UK" />
+              <DetailRow icon={Warehouse}    label="Origin Depot"       value="DEPOT=AIR=84" />
+              <DetailRow icon={MapPin}       label="Destination Depot"  value="VAN=86=86" />
             </div>
           </div>
         </div>
@@ -696,7 +699,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                     <div>THIS PARCEL WILL BE DELIVERED TO THE PARCELSHOP OR LOCKER TODAY</div>
                     <div className="text-blue-600 font-medium mt-1">DELIVERY TO PARCEL SHOP/LOCKER SCHEDULED.</div>
                   </td>
-                  <td className="px-3 py-3 text-sm text-muted-foreground">—</td>
+                  <td className="px-3 py-3 text-sm text-muted-foreground">���</td>
                   <td className="px-3 py-3 text-sm text-foreground whitespace-nowrap">02/05/2026 09:55</td>
                 </tr>
                 <tr className="border-b border-border last:border-b-0 hover:bg-muted/20 transition-colors">
