@@ -521,6 +521,15 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               <DetailRow icon={MessageSquare} label="Contract Comment"   value="Hermes POD" />
               <DetailRow icon={Package}      label="Content"            value="Cosmetics" />
             </div>
+            <div className="grid grid-cols-1 gap-2.5">
+              <div className="flex items-start gap-2">
+                <img src="https://flagcdn.com/w20/gb.png" alt="UK flag" className="h-3.5 w-5 shrink-0 mt-0.5 rounded-sm object-cover" />
+                <div className="flex flex-col leading-tight min-w-0">
+                  <span className="text-xs text-muted-foreground">Destination</span>
+                  <span className="text-sm font-medium text-foreground">RUTHERGLEN, G73 4LZ</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
