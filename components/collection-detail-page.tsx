@@ -91,27 +91,27 @@ export function CollectionDetailPage({ collection, onBack }: CollectionDetailPag
       </div>
 
       {/* Info strip */}
-      <div className="grid grid-cols-8 gap-0 rounded-lg border border-border bg-muted/30">
+      <div className="grid grid-cols-8 gap-1 rounded-lg border border-border bg-muted/30 overflow-x-auto">
         {stripItems.map((item, idx, arr) => {
           const Icon = (item as any).icon
           return (
             <div
               key={item.label}
-              className={`flex items-center gap-2 py-3 pl-4 ${idx < arr.length - 1 ? "border-r border-border pr-4" : "pr-4"}`}
+              className={`flex flex-col gap-1 py-3 px-3 min-w-max ${idx < arr.length - 1 ? "border-r border-border" : ""}`}
             >
-              {(item as any).logo ? (
-                <img
-                  src={`/${(item as any).logo}-logo.png`}
-                  alt={item.label}
-                  className="h-6 w-12 shrink-0 object-contain"
-                />
-              ) : (
-                Icon && <Icon className="h-4 w-4 flex-shrink-0 text-[#009eff]" />
-              )}
-              <div className="flex flex-col leading-tight">
-                <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">{item.label}</span>
-                <span className={`text-sm font-semibold ${item.isHighlight ? "text-amber-600" : "text-[#1e3a5f]"}`}>{item.value}</span>
+              <div className="flex items-center gap-1.5">
+                {(item as any).logo ? (
+                  <img
+                    src={`/${(item as any).logo}-logo.png`}
+                    alt={item.label}
+                    className="h-6 w-12 shrink-0 object-contain"
+                  />
+                ) : (
+                  Icon && <Icon className="h-4 w-4 flex-shrink-0 text-[#009eff]" />
+                )}
               </div>
+              <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide whitespace-nowrap">{item.label}</span>
+              <span className={`text-sm font-semibold whitespace-nowrap ${item.isHighlight ? "text-amber-600" : "text-[#1e3a5f]"}`}>{item.value}</span>
             </div>
           )
         })}
