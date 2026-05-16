@@ -663,7 +663,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               <DetailRow icon={Hash}     label="Alternate Tracking No's" value="N/A" />
               <DetailRow icon={FileText} label="Consignment Ref"         value="BM21437818" />
               <DetailRow icon={User}     label="Sender"                  value="LISAUK" />
-              <DetailRow icon={CalendarDays} label="EDD"                 value="15/05/2026" />
+              <DetailRow icon={CalendarDays} label="EDD" value={<span className="font-bold text-amber-500">02/05/2026</span>} />
             </div>
             <div className="grid grid-cols-1 gap-2.5">
               <DetailRow icon={ClipboardList} label="Instructions" value="Leave in porch if no answer. Do not leave with neighbour." />
