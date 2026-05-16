@@ -155,6 +155,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [mergeDialogOpen, setMergeDialogOpen] = useState(false)
   const [mergeCriteria, setMergeCriteria] = useState<string[]>([])
   const [customerContactDialogOpen, setCustomerContactDialogOpen] = useState(false)
+  const [deliveryAddressModalOpen, setDeliveryAddressModalOpen] = useState(false)
   const [escalateDialogOpen, setEscalateDialogOpen] = useState(false)
   const [escalateLevel, setEscalateLevel] = useState("")
   const [escalatePerson, setEscalatePerson] = useState("")
@@ -524,7 +525,16 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 <img src="https://flagcdn.com/w20/gb.png" alt="UK flag" className="h-3.5 w-5 shrink-0 mt-0.5 rounded-sm object-cover" />
                 <div className="flex flex-col leading-tight min-w-0">
                   <span className="text-xs text-muted-foreground">Destination</span>
-                  <span className="text-sm font-medium text-foreground">RUTHERGLEN, G73 4LZ</span>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-sm font-medium text-foreground">RUTHERGLEN, G73 4LZ</span>
+                    <button
+                      onClick={() => setDeliveryAddressModalOpen(true)}
+                      className="text-[#009eff] hover:text-blue-700 transition-colors"
+                      aria-label="View delivery address details"
+                    >
+                      <MapPin className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1300,6 +1310,75 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Delivery Address Modal */}
+      {deliveryAddressModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/50" onClick={() => setDeliveryAddressModalOpen(false)} />
+          <div className="relative bg-white rounded-lg shadow-xl w-full max-w-md mx-4">
+            <div className="flex items-center justify-between p-4 border-b">
+              <h2 className="text-base font-semibold text-[#1e3a5f]">Delivery Address</h2>
+              <button
+                onClick={() => setDeliveryAddressModalOpen(false)}
+                className="p-1 rounded-full hover:bg-muted transition-colors"
+              >
+                <X className="h-5 w-5 text-muted-foreground" />
+              </button>
+            </div>
+            <div className="p-4 space-y-3">
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Company</p>
+                  <p className="text-sm font-medium text-[#1e3a5f]">CAROLINE BRILLANT</p>
+                </div>
+                <div>
+                  <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Contact</p>
+                  <p className="text-sm font-medium text-[#1e3a5f]">CAROLINE BRILLANT</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Contact Phone</p>
+                  <p className="text-sm font-medium text-[#1e3a5f]">07927140269</p>
+                </div>
+                <div>
+                  <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Contact Email</p>
+                  <p className="text-sm font-medium text-[#1e3a5f]">SISTERBRILLANT@YAHOO.CO.UK</p>
+                </div>
+              </div>
+              <div>
+                <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Address Line 1</p>
+                <p className="text-sm font-medium text-[#1e3a5f]">0/1 (GROUND LEFT)</p>
+              </div>
+              <div>
+                <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Address Line 2</p>
+                <p className="text-sm font-medium text-[#1e3a5f]">9 ROWANTREE AVENUE</p>
+              </div>
+              <div className="grid grid-cols-3 gap-3">
+                <div>
+                  <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Town/City</p>
+                  <p className="text-sm font-medium text-[#1e3a5f]">RUTHERGLEN</p>
+                </div>
+                <div>
+                  <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">County</p>
+                  <p className="text-sm font-medium text-[#1e3a5f]">SCT</p>
+                </div>
+                <div>
+                  <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Postcode</p>
+                  <p className="text-sm font-medium text-[#1e3a5f]">G73 4LZ</p>
+                </div>
+              </div>
+              <div>
+                <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Country</p>
+                <p className="text-sm font-medium text-[#1e3a5f]">UNITED KINGDOM</p>
+              </div>
+            </div>
+            <div className="flex justify-end p-4 border-t">
+              <Button variant="outline" onClick={() => setDeliveryAddressModalOpen(false)}>Close</Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Customer Contact Dialog */}
       <Dialog open={customerContactDialogOpen} onOpenChange={setCustomerContactDialogOpen}>
