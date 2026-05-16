@@ -73,6 +73,77 @@ export function OverviewView() {
         </div>
       </div>
 
+      {/* Waiting by Skill Card */}
+      <div className="border border-border rounded-lg bg-card mb-6">
+        <div className="px-6 py-4 border-b border-border">
+          <h2 className="text-sm font-medium text-muted-foreground tracking-wide">
+            WAITING BY SKILL
+          </h2>
+        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="font-semibold text-muted-foreground">Skill Level</TableHead>
+              <TableHead className="font-semibold text-muted-foreground">Typical Query Types</TableHead>
+              <TableHead className="font-semibold text-muted-foreground">No. Waiting</TableHead>
+              <TableHead className="font-semibold text-muted-foreground">Oldest (mins)</TableHead>
+              <TableHead className="font-semibold text-muted-foreground">Agents Online</TableHead>
+              <TableHead className="font-semibold text-muted-foreground">Status</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell className="font-medium">L1</TableCell>
+              <TableCell className="text-sm text-muted-foreground">WISMO, basic tracking, simple delays, POD/simple updates</TableCell>
+              <TableCell>118</TableCell>
+              <TableCell>22</TableCell>
+              <TableCell>8</TableCell>
+              <TableCell>
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-700">
+                  Watch
+                </span>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-medium">L2</TableCell>
+              <TableCell className="text-sm text-muted-foreground">Change address, RTS, redelivery, collections, repeat contacts</TableCell>
+              <TableCell>54</TableCell>
+              <TableCell>35</TableCell>
+              <TableCell>4</TableCell>
+              <TableCell>
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                  Good
+                </span>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-medium">L3</TableCell>
+              <TableCell className="text-sm text-muted-foreground">International, investigations, multipart, customer focus accounts</TableCell>
+              <TableCell>29</TableCell>
+              <TableCell>52</TableCell>
+              <TableCell>2</TableCell>
+              <TableCell>
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                  Good
+                </span>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-medium">L4</TableCell>
+              <TableCell className="text-sm text-muted-foreground">Complaints, credits, senior escalations, sensitive cases</TableCell>
+              <TableCell>13</TableCell>
+              <TableCell>80</TableCell>
+              <TableCell>1</TableCell>
+              <TableCell>
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700">
+                  Action
+                </span>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </div>
+
       {/* Agent Status Card */}
       <div className="border border-border rounded-lg bg-card">
         <div className="px-6 py-4 border-b border-border">
