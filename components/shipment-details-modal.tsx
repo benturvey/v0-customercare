@@ -335,7 +335,7 @@ export function ShipmentDetailsModal({
             </div>
           </div>
 
-          <div className="flex flex-col gap-2 w-44 shrink-0">
+          <div className="flex flex-col gap-2 w-56 shrink-0">
               <Button 
                 size="sm" 
                 className="w-full text-sm bg-[#98d9ff] hover:bg-[#7cc9f0] text-foreground flex items-center gap-1.5 justify-start"
