@@ -660,7 +660,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-2.5">
+            <div className="grid grid-cols-5 gap-2.5">
               <DetailRow icon={User} label="Sender" value="LISAUK" />
               <DetailRow icon={ClipboardList} label="Instructions" value="Leave in porch if no answer. Do not leave with neighbour." />
             </div>
