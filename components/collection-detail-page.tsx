@@ -1,6 +1,5 @@
 "use client"
 
-import React from "react"
 import {
   Zap,
   Hash,
@@ -94,7 +93,7 @@ export function CollectionDetailPage({ collection, onBack }: CollectionDetailPag
       {/* Info strip */}
       <div className="grid grid-cols-8 gap-1 rounded-lg border border-border bg-muted/30 overflow-x-auto">
         {stripItems.map((item, idx, arr) => {
-          const Icon = (item as any).icon
+          const IconComp = (item as any).icon
           return (
             <div
               key={item.label}
@@ -107,12 +106,9 @@ export function CollectionDetailPage({ collection, onBack }: CollectionDetailPag
                     alt={item.label}
                     className="h-6 w-12 shrink-0 object-contain"
                   />
-                ) : (
-                  (item as any).icon && ((item as any).icon as any) && 
-                    React.createElement((item as any).icon, {
-                      className: "h-4 w-4 flex-shrink-0 text-[#009eff]"
-                    })
-                )}
+                ) : IconComp ? (
+                  <IconComp className="h-4 w-4 flex-shrink-0 text-[#009eff]" />
+                ) : null}
               </div>
               <div className="flex flex-col leading-tight">
                 <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide whitespace-nowrap">{item.label}</span>
