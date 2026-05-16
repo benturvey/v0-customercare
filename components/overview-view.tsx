@@ -12,13 +12,13 @@ import {
 } from "@/components/ui/table"
 
 const stats = [
-  { value: "214", label: "TOTAL WAITING", green: true },
+  { value: "214", label: "TOTAL WAITING", green: true, target: "Target < 250" },
   { value: "13", label: "IN PROGRESS" },
   { value: "10", label: "DEFERRED" },
   { value: "14", label: "REVIEWED" },
   { value: "862", label: "NEW TODAY" },
   { value: "791", label: "COMPLETED TODAY" },
-  { value: "80 mins", label: "OLDEST WAITING", amber: true },
+  { value: "80 mins", label: "OLDEST WAITING", amber: true, target: "Target < 60 mins" },
   { value: "13/30", label: "ACTIVE AGENTS" },
 ]
 
@@ -64,9 +64,10 @@ export function OverviewView() {
           {stats.map((stat) => (
             <div key={stat.label} className="text-left flex-1">
               <p className={`text-3xl font-bold ${stat.green ? "text-green-600" : stat.amber ? "text-amber-500" : "text-[#1e3a5f]"}`}>{stat.value}</p>
-              <p className="text-xs text-muted-foreground tracking-wide mt-1">
-                {stat.label}
-              </p>
+              <p className="text-xs text-muted-foreground tracking-wide mt-1">{stat.label}</p>
+              {stat.target && (
+                <p className="text-[10px] text-muted-foreground/70 mt-0.5">{stat.target}</p>
+              )}
             </div>
           ))}
         </div>
