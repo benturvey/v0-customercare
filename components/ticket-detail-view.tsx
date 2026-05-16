@@ -668,9 +668,9 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         </div>
 
       </div>
-      {/* Tracking Visibility */}
-      <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Tracking Visibility</h2>
+      {/* Tracking */}
       <div className="rounded-lg border border-border bg-card p-4 mb-6">
+        <h2 className="text-base font-semibold text-[#1e3a5f] mb-3">Tracking</h2>
         {/* View toggle */}
         <div className="flex items-center gap-2 mb-4">
           <span className="text-sm text-muted-foreground font-medium">View as:</span>
