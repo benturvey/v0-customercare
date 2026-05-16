@@ -298,7 +298,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           <div className="rounded-lg border border-border bg-muted/40 p-3 flex-shrink-0 w-64 space-y-2.5">
             <div className="space-y-0.5">
               <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Customer</p>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
                 <p className="text-sm font-semibold text-[#1e3a5f]">LISA ELDRIDGE</p>
                 <button
                   onClick={() => setCustomerContactDialogOpen(true)}
@@ -306,6 +306,10 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                   aria-label="View customer contact details"
                 >
                   <UserCircle className="h-4 w-4" />
+                </button>
+                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-purple-100 text-purple-700">
+                  Focus Account
+                </span>
                 </button>
               </div>
             </div>
