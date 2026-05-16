@@ -161,6 +161,75 @@ export function OverviewView() {
         </Table>
       </div>
 
+      {/* Top Demand Drivers Card */}
+      <div className="border border-border rounded-lg bg-card">
+        <div className="px-6 py-4 border-b border-border">
+          <h2 className="text-sm font-medium text-muted-foreground tracking-wide">
+            TOP DEMAND DRIVERS
+          </h2>
+        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="font-semibold text-muted-foreground">Driver</TableHead>
+              <TableHead className="font-semibold text-muted-foreground">Tickets Today</TableHead>
+              <TableHead className="font-semibold text-muted-foreground">% of Total</TableHead>
+              <TableHead className="font-semibold text-muted-foreground">Change vs Yesterday</TableHead>
+              <TableHead className="font-semibold text-muted-foreground">Linked Skill</TableHead>
+              <TableHead className="font-semibold text-muted-foreground">Manager Action</TableHead>
+              <TableHead className="font-semibold text-muted-foreground">Owner</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell className="font-medium">WISMO — Evri delayed</TableCell>
+              <TableCell>214</TableCell>
+              <TableCell>24.8%</TableCell>
+              <TableCell><span className="text-red-600 font-medium">▲ +32</span></TableCell>
+              <TableCell><span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-muted text-muted-foreground">L1</span></TableCell>
+              <TableCell>Monitor Evri SLA</TableCell>
+              <TableCell>Ben Lund</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-medium">Failed delivery — no access</TableCell>
+              <TableCell>143</TableCell>
+              <TableCell>16.6%</TableCell>
+              <TableCell><span className="text-amber-500 font-medium">▲ +11</span></TableCell>
+              <TableCell><span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-muted text-muted-foreground">L2</span></TableCell>
+              <TableCell>Review redelivery workflow</TableCell>
+              <TableCell>Francine Payne</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-medium">Address change request</TableCell>
+              <TableCell>98</TableCell>
+              <TableCell>11.4%</TableCell>
+              <TableCell><span className="text-green-600 font-medium">▼ -8</span></TableCell>
+              <TableCell><span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-muted text-muted-foreground">L2</span></TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Kimberley McCormick</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-medium">International customs hold</TableCell>
+              <TableCell>74</TableCell>
+              <TableCell>8.6%</TableCell>
+              <TableCell><span className="text-red-600 font-medium">▲ +19</span></TableCell>
+              <TableCell><span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-muted text-muted-foreground">L3</span></TableCell>
+              <TableCell>Escalate to carrier ops</TableCell>
+              <TableCell>Tracey Crooke</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-medium">POD request</TableCell>
+              <TableCell>61</TableCell>
+              <TableCell>7.1%</TableCell>
+              <TableCell><span className="text-muted-foreground font-medium">— 0</span></TableCell>
+              <TableCell><span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-muted text-muted-foreground">L1</span></TableCell>
+              <TableCell>—</TableCell>
+              <TableCell>Vicky Lomax</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </div>
+
       {/* Agent Status Card */}
       <div className="border border-border rounded-lg bg-card">
         <div className="px-6 py-4 border-b border-border">
