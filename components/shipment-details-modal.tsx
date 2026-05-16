@@ -87,7 +87,7 @@ export function ShipmentDetailsModal({
       { label: "Origin Depot",            value: details.originDepot,                  icon: Warehouse },
       { label: "Destination Depot",       value: details.destinationDepot,             icon: MapPin },
       { label: "Sender",                  value: details.sender,                       icon: User },
-      { label: "Destination",       value: details.deliveryAddress ? `${details.deliveryAddress.town}, ${details.deliveryAddress.postcode}` : "-", icon: MapPin },
+      { label: "Destination",       value: details.deliveryAddress ? `${details.deliveryAddress.town}, ${details.deliveryAddress.postcode}` : "-", icon: null, flagIcon: true },
     ],
     [
       { label: "Collection ID",           value: details.collectionId || "-",          icon: Package },
@@ -202,7 +202,11 @@ export function ShipmentDetailsModal({
                                         const IconComponent = item.icon
                                         return (
                                           <div key={item.label} className="flex gap-1.5">
-                                            {IconComponent && <IconComponent className="h-3.5 w-3.5 shrink-0 mt-0.5 text-[#009eff]" />}
+                                            {(item as any).flagIcon ? (
+                                              <span className="shrink-0 mt-0.5 text-base leading-none" title="UK">🇬🇧</span>
+                                            ) : (
+                                              IconComponent && <IconComponent className="h-3.5 w-3.5 shrink-0 mt-0.5 text-[#009eff]" />
+                                            )}
                                             <div className="flex flex-col gap-1 min-w-0">
                                               <span className="text-sm font-medium text-muted-foreground">
                                                 {item.label}
@@ -231,7 +235,7 @@ export function ShipmentDetailsModal({
                                                       className="p-1 rounded hover:bg-muted transition-colors"
                                                       title="View Delivery Address"
                                                     >
-                                                      <Eye className="h-3.5 w-3.5 text-[#009eff]" />
+                                                      <MapPin className="h-3.5 w-3.5 text-[#009eff]" />
                                                     </button>
                                                   )}
                                                 </div>
