@@ -28,7 +28,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-import { ChevronDown, User, Truck, Zap, Hash, CalendarDays, Activity, Clock, PenLine, List, GitCommitHorizontal, Package, MapPin, Home, FileText, Ticket, Eye, PlusCircle, CheckCircle, ClipboardList, UserCheck } from "lucide-react"
+import { ChevronDown, User, Truck, Zap, Hash, CalendarDays, Activity, Clock, PenLine, List, GitCommitHorizontal, Package, MapPin, Home, FileText, Ticket, Eye, PlusCircle, CheckCircle, ClipboardList, UserCheck, Layers, Navigation, Tag } from "lucide-react"
 import { useState, useEffect } from "react"
 import type { ShipmentDetails } from "@/types/shipment"
 
@@ -71,7 +71,8 @@ export function ShipmentDetailsModal({
 
   const detailRows = [
     [
-      { label: "Insert Date",       value: details.insertDate,                  icon: CalendarDays },
+      { label: "Insert Date",       value: details.insertDate,                   icon: CalendarDays },
+      { label: "Total Parcels",     value: "2",                                  icon: Layers },
       { label: "Weight",            value: details.weight.toString(),            icon: Package },
       { label: "Content",           value: details.content,                      icon: ClipboardList },
     ],
@@ -79,19 +80,18 @@ export function ShipmentDetailsModal({
       { label: "Account No",        value: details.accountNo,                    icon: Hash },
       { label: "Contract No",       value: details.contractNo,                   icon: FileText },
       { label: "Contract Comment",  value: details.contractComment,              icon: PenLine },
+      { label: "Consignment Ref",   value: details.consignmentRef || "-",        icon: Tag },
     ],
     [
-      { label: "Sender",            value: details.sender,                       icon: User },
-      { label: "Instructions",      value: details.instructions || "-",          icon: ClipboardList },
-    ],
-    [
-      { label: "Consignment Ref",   value: details.consignmentRef || "-",        icon: Hash },
       { label: "Origin Depot",      value: details.originDepot,                  icon: Home },
       { label: "Destination Depot", value: details.destinationDepot,             icon: MapPin },
+      { label: "Sender",            value: details.sender,                       icon: User },
+      { label: "Destination",       value: details.deliveryAddress?.town || "-", icon: Navigation },
     ],
     [
       { label: "Collection ID",     value: details.collectionId || "-",          icon: Package },
       { label: "Tracking No(s)",    value: details.trackingNo || "-",            icon: Activity },
+      { label: "Instructions",      value: details.instructions || "-",          icon: ClipboardList },
     ],
   ]
 
@@ -196,7 +196,7 @@ export function ShipmentDetailsModal({
               <CardContent>
                 <div className="flex flex-col gap-4">
 {detailRows.map((row, rowIndex) => (
-                                    <div key={rowIndex} className="grid grid-cols-3 gap-4">
+                                    <div key={rowIndex} className="grid grid-cols-4 gap-4">
                                       {row.map((item) => (
                                         <div key={item.label} className="flex flex-col gap-1">
                                           <span className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground">
