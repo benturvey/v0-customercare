@@ -171,7 +171,7 @@ export function ShipmentDetailsModal({
                 className={`flex items-center gap-2 py-3 pl-4 ${idx < 6 ? "border-r border-border pr-4" : "pr-4"}`}
               >
                 {item.logo ? (
-                  <img src={`/${item.logo}-logo.png`} alt={item.label} className="h-4 w-8 shrink-0 object-contain" />
+                  <img src={`/${item.logo}-logo.png`} alt={item.label} className="h-6 w-12 shrink-0 object-contain" />
                 ) : (
                   <Icon className="h-4 w-4 flex-shrink-0 text-[#009eff]" />
                 )}
