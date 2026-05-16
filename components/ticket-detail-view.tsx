@@ -297,14 +297,6 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           {/* Summary card */}
           <div className="rounded-lg border border-border bg-muted/40 p-3 flex-shrink-0 w-64 space-y-2.5">
             <div className="space-y-0.5">
-              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Category</p>
-              <p className="text-sm font-semibold text-[#1e3a5f]">WHERE_IS_MY_PARCEL</p>
-            </div>
-            <div className="space-y-0.5">
-              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Raised by</p>
-              <p className="text-sm font-semibold text-[#1e3a5f]">CS Team (support@lisaeldridge.com)</p>
-            </div>
-            <div className="space-y-0.5">
               <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Customer</p>
               <div className="flex items-center gap-2">
                 <p className="text-sm font-semibold text-[#1e3a5f]">LISA ELDRIDGE</p>
@@ -316,6 +308,14 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                   <UserCircle className="h-4 w-4" />
                 </button>
               </div>
+            </div>
+            <div className="space-y-0.5">
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Category</p>
+              <p className="text-sm font-semibold text-[#1e3a5f]">WHERE_IS_MY_PARCEL</p>
+            </div>
+            <div className="space-y-0.5">
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Raised by</p>
+              <p className="text-sm font-semibold text-[#1e3a5f]">CS Team (support@lisaeldridge.com)</p>
             </div>
           </div>
 
