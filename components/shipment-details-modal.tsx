@@ -198,29 +198,31 @@ export function ShipmentDetailsModal({
 {detailRows.map((row, rowIndex) => (
                                     <div key={rowIndex} className="grid grid-cols-4 gap-4">
                                       {row.map((item) => (
-                                        <div key={item.label} className="flex flex-col gap-1">
-                                          <span className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground">
-                                            {item.icon && <item.icon className="h-3.5 w-3.5 shrink-0 text-[#009eff]" />}
-                                            {item.label}
-                                          </span>
-                                          {item.label === "Customer" ? (
-                                            <div className="flex items-center gap-2">
+                                        <div key={item.label} className="flex gap-1.5">
+                                          {item.icon && <item.icon className="h-3.5 w-3.5 shrink-0 mt-0.5 text-[#009eff]" />}
+                                          <div className="flex flex-col gap-1 min-w-0">
+                                            <span className="text-sm font-medium text-muted-foreground">
+                                              {item.label}
+                                            </span>
+                                            {item.label === "Customer" ? (
+                                              <div className="flex items-center gap-2">
+                                                <span className="text-sm whitespace-nowrap">
+                                                  {item.value}
+                                                </span>
+                                                <button
+                                                  onClick={() => setCustomerContactModalOpen(true)}
+                                                  className="p-1 rounded hover:bg-muted transition-colors"
+                                                  title="View Customer Contact Details"
+                                                >
+                                                  <User className="h-4 w-4 text-[#009eff]" />
+                                                </button>
+                                              </div>
+                                            ) : (
                                               <span className="text-sm whitespace-nowrap">
                                                 {item.value}
                                               </span>
-                                              <button
-                                                onClick={() => setCustomerContactModalOpen(true)}
-                                                className="p-1 rounded hover:bg-muted transition-colors"
-                                                title="View Customer Contact Details"
-                                              >
-                                                <User className="h-4 w-4 text-[#009eff]" />
-                                              </button>
-                                            </div>
-                                          ) : (
-                                            <span className="text-sm whitespace-nowrap">
-                                              {item.value}
-                                            </span>
-                                          )}
+                                            )}
+                                          </div>
                                         </div>
                                       ))}
                                     </div>
@@ -340,7 +342,7 @@ export function ShipmentDetailsModal({
                           <div className="flex items-center gap-2 text-sm text-muted-foreground">
                             <span>{history.carrierScanDate}</span>
                             {history.scanDepot && <span>· {history.scanDepot}</span>}
-                            {history.scanDeptName && <span>· {history.scanDeptName}</span>}
+                            {history.scanDeptName && <span>�� {history.scanDeptName}</span>}
                           </div>
                           <div className="font-medium text-sm mt-1">{history.carrierScanText}</div>
                           <div className="text-sm text-blue-600 mt-0.5">{history.gfsScanText}</div>
