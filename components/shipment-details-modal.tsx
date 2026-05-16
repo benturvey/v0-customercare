@@ -202,7 +202,7 @@ export function ShipmentDetailsModal({
                                         const IconComponent = item.icon
                                         return (
                                           <div key={item.label} className="flex gap-1.5">
-                                            {IconComponent && <IconComponent className="h-3.5 w-3.5 shrink-0 mt-0.5 text-[#009eff]" />}
+                                            {IconComponent && <IconComponent className="h-4 w-4 shrink-0 mt-0.5 text-[#009eff]" />}
                                             <div className="flex flex-col gap-1 min-w-0">
                                               <span className="text-sm font-medium text-muted-foreground">
                                                 {item.label}
