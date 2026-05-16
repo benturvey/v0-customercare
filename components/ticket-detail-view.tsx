@@ -493,7 +493,13 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           <h3 className="text-sm font-semibold text-[#1e3a5f] mb-3">Shipment Summary</h3>
           <div className="grid gap-2.5">
             <div className="grid grid-cols-3 gap-2.5">
-              <DetailRow icon={Truck}        label="Carrier"       value="EVRI" />
+              <div className="flex items-start gap-2">
+                <img src="/evri-logo.png" alt="Evri" className="h-4 w-8 shrink-0 mt-0.5" />
+                <div className="flex flex-col leading-tight min-w-0">
+                  <span className="text-xs text-muted-foreground">Carrier</span>
+                  <span className="text-sm font-medium text-foreground break-words">EVRI</span>
+                </div>
+              </div>
               <DetailRow icon={Layers}       label="Service"       value="2 DAY SERVICE" />
               <DetailRow icon={CalendarDays} label="Despatched"    value="30/04/2026" />
             </div>
