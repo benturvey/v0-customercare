@@ -616,7 +616,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
 
         {/* Card 1 — Shipment Summary */}
         <div className="rounded-lg border border-border bg-card p-4">
-          <h3 className="text-sm font-semibold text-[#1e3a5f] mb-3">Shipment Summary</h3>
+          <h3 className="text-sm font-semibold text-[#1e3a5f] mb-3">Shipment Details</h3>
           <div className="grid gap-2.5">
             <div className="grid grid-cols-5 gap-2.5">
               <div className="flex items-start gap-2">
