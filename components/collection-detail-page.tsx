@@ -97,9 +97,9 @@ export function CollectionDetailPage({ collection, onBack }: CollectionDetailPag
           return (
             <div
               key={item.label}
-              className={`flex flex-col gap-1 py-3 px-3 min-w-max ${idx < arr.length - 1 ? "border-r border-border" : ""}`}
+              className={`flex flex-row items-start gap-2 py-3 px-3 min-w-max ${idx < arr.length - 1 ? "border-r border-border" : ""}`}
             >
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1 shrink-0 pt-0.5">
                 {(item as any).logo ? (
                   <img
                     src={`/${(item as any).logo}-logo.png`}
@@ -110,8 +110,10 @@ export function CollectionDetailPage({ collection, onBack }: CollectionDetailPag
                   Icon && <Icon className="h-4 w-4 flex-shrink-0 text-[#009eff]" />
                 )}
               </div>
-              <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide whitespace-nowrap">{item.label}</span>
-              <span className={`text-sm font-semibold whitespace-nowrap ${item.isHighlight ? "text-amber-600" : "text-[#1e3a5f]"}`}>{item.value}</span>
+              <div className="flex flex-col leading-tight">
+                <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide whitespace-nowrap">{item.label}</span>
+                <span className={`text-sm font-semibold whitespace-nowrap ${item.isHighlight ? "text-amber-600" : "text-[#1e3a5f]"}`}>{item.value}</span>
+              </div>
             </div>
           )
         })}
