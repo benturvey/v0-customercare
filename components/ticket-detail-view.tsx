@@ -658,16 +658,14 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-3 gap-2.5">
+            <div className="grid grid-cols-4 gap-2.5">
               <DetailRow icon={Package}  label="Collection Id"           value="12345678" />
               <DetailRow icon={Hash}     label="Alternate Tracking No's" value="N/A" />
               <DetailRow icon={FileText} label="Consignment Ref"         value="BM21437818" />
+              <DetailRow icon={User}     label="Sender"                  value="LISAUK" />
             </div>
-            <div className="grid grid-cols-5 gap-2.5">
-              <DetailRow icon={User} label="Sender" value="LISAUK" />
-              <div className="col-span-4">
-                <DetailRow icon={ClipboardList} label="Instructions" value="Leave in porch if no answer. Do not leave with neighbour." />
-              </div>
+            <div className="grid grid-cols-1 gap-2.5">
+              <DetailRow icon={ClipboardList} label="Instructions" value="Leave in porch if no answer. Do not leave with neighbour." />
             </div>
           </div>
         </div>
