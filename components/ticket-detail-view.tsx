@@ -492,7 +492,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         <div className="rounded-lg border border-border bg-card p-4">
           <h3 className="text-sm font-semibold text-[#1e3a5f] mb-3">Shipment Summary</h3>
           <div className="grid gap-2.5">
-            <div className="grid grid-cols-3 gap-2.5">
+            <div className="grid grid-cols-4 gap-2.5">
               <div className="flex items-start gap-2">
                 <img src="/evri-logo.png" alt="Evri" className="h-4 w-8 shrink-0 mt-0.5" />
                 <div className="flex flex-col leading-tight min-w-0">
@@ -502,11 +502,11 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               </div>
               <DetailRow icon={Layers}       label="Service"       value="2 DAY SERVICE" />
               <DetailRow icon={CalendarDays} label="Despatched"    value="30/04/2026" />
+              <DetailRow icon={Tag}          label="Consignment No"  value="T06XUA0000734531" />
             </div>
-            <div className="grid grid-cols-3 gap-2.5">
+            <div className="grid grid-cols-2 gap-2.5">
               <DetailRow icon={Package}      label="Total Parcels"   value="1" />
               <DetailRow icon={Globe}        label="Origin"          value="UK" />
-              <DetailRow icon={Tag}          label="Consignment No"  value="T06XUA0000734531" />
             </div>
           </div>
         </div>
