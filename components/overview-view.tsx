@@ -164,7 +164,7 @@ export function OverviewView() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="font-semibold text-muted-foreground">Skill</TableHead>
+              <TableHead className="font-semibold text-muted-foreground">Skill Level</TableHead>
               <TableHead className="font-semibold text-muted-foreground">Required</TableHead>
               <TableHead className="font-semibold text-muted-foreground">Online</TableHead>
               <TableHead className="font-semibold text-muted-foreground">Gap</TableHead>
