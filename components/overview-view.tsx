@@ -34,6 +34,7 @@ export function OverviewView() {
     { name: "Apryl Watson", level: "L3", currentTicket: "TKT-1037", ticketLevel: "L2", status: "In Progress" },
     { name: "George Lilliston", level: "L2", currentTicket: null, ticketLevel: null, status: "Idle" },
     { name: "Ibrahim Anidi", level: "L1", currentTicket: "TKT-1041", ticketLevel: "L1", status: "In Progress" },
+    { name: "Lisa Yates", level: "L4", currentTicket: null, ticketLevel: null, status: "Offline" },
     { name: "Lynn Forrest", level: "L1", currentTicket: null, ticketLevel: null, status: "Out of Office" },
     { name: "Sue Foster", level: "ADM", currentTicket: null, ticketLevel: null, status: "ADM" },
     { name: "Vicky Lomax", level: "MGM", currentTicket: null, ticketLevel: null, status: "MGM" },
