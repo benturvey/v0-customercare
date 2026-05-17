@@ -37,6 +37,7 @@ export function UserDropdownMenu({
   userInitials,
 }: UserDropdownMenuProps) {
   const [darkMode, setDarkMode] = useState(false)
+  const [selectedReason, setSelectedReason] = useState<string | null>(null)
 
   return (
     <DropdownMenu>
@@ -86,9 +87,14 @@ export function UserDropdownMenu({
         {logOffReasons.map(({ label, icon: Icon }) => (
           <button
             key={label}
-            className="w-full flex items-center gap-3 px-4 py-2 text-sm hover:bg-muted transition-colors"
+            onClick={() => setSelectedReason(label === selectedReason ? null : label)}
+            className={`w-full flex items-center gap-3 px-4 py-2 text-sm transition-colors ${
+              selectedReason === label
+                ? "bg-blue-50 text-blue-700"
+                : "hover:bg-muted"
+            }`}
           >
-            <Icon className="h-4 w-4 text-muted-foreground" />
+            <Icon className={`h-4 w-4 ${selectedReason === label ? "text-blue-600" : "text-muted-foreground"}`} />
             <span>{label}</span>
           </button>
         ))}
