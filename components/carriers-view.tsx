@@ -372,13 +372,33 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
   }
 
   const handleEditDetail = (detailId: string) => {
-    // Handle edit logic here
     console.log("[v0] Edit detail:", detailId)
   }
 
   const handleDeleteDetail = (detailId: string) => {
-    // Handle delete logic here
     console.log("[v0] Delete detail:", detailId)
+  }
+
+  const renderLink = (value: string, className = "") => {
+    if (!value) return null
+    const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())
+    const isUrl = /^(https?:\/\/|www\.|[a-zA-Z0-9-]+\.[a-zA-Z]{2,})/.test(value.trim()) && !isEmail
+    if (isEmail) {
+      return (
+        <a href={`mailto:${value.trim()}`} className={`hover:underline text-foreground ${className}`} onClick={(e) => e.stopPropagation()}>
+          {value}
+        </a>
+      )
+    }
+    if (isUrl) {
+      const href = value.trim().startsWith("http") ? value.trim() : `https://${value.trim()}`
+      return (
+        <a href={href} target="_blank" rel="noopener noreferrer" className={`hover:underline text-foreground ${className}`} onClick={(e) => e.stopPropagation()}>
+          {value}
+        </a>
+      )
+    }
+    return <span className={className}>{value}</span>
   }
 
   const filteredCarriers = tableCarriers.filter((c) =>
@@ -423,13 +443,13 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
                 {carrier.email && (
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <Mail className="h-3 w-3 shrink-0 text-foreground/60" />
-                    <span className="truncate">{carrier.email}</span>
+                    {renderLink(carrier.email, "truncate")}
                   </div>
                 )}
                 {carrier.web && (
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <Globe className="h-3 w-3 shrink-0 text-foreground/60" />
-                    <span className="truncate">{carrier.web}</span>
+                    {renderLink(carrier.web, "truncate")}
                   </div>
                 )}
                 {carrier.pin && (
@@ -456,7 +476,7 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
                     {account.email && (
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
                         <Mail className="h-3 w-3 shrink-0 text-foreground/60" />
-                        <span className="truncate">{account.email}</span>
+                        {renderLink(account.email, "truncate")}
                         {account.emailAsterisk && (
                           <span className="text-red-500 font-semibold shrink-0">*</span>
                         )}
@@ -465,7 +485,7 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
                     {account.web && (
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
                         <Globe className="h-3 w-3 shrink-0 text-foreground/60" />
-                        <span className="truncate">{account.web}</span>
+                        {renderLink(account.web, "truncate")}
                       </div>
                     )}
                     {account.pin && (
@@ -564,7 +584,9 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
                     {rows.map((detail) => (
                       <TableRow key={detail.id}>
                         {columns.map((col) => (
-                          <TableCell key={col.key} className="whitespace-nowrap px-4">{detail[col.key] ?? ""}</TableCell>
+                          <TableCell key={col.key} className="whitespace-nowrap px-4">
+                            {renderLink(detail[col.key] ?? "") ?? (detail[col.key] ?? "")}
+                          </TableCell>
                         ))}
                         <TableCell className="text-right">
                           <div className="flex items-center justify-end gap-1">
