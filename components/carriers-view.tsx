@@ -124,6 +124,20 @@ const carriers: Carrier[] = [
     phone: "+44 121 275 0500",
     email: "customer.services@dpd.co.uk",
     web: "www.dpd.co.uk",
+    accounts: [
+      {
+        label: "DPD Domestic",
+        phone: "01213 364802",
+        email: "elite@dpd.co.uk",
+        web: "www.dpd.co.uk/umslogon/public/logon.do",
+      },
+      {
+        label: "DPD International",
+        phone: "01213 364691 / 0121 6 983783",
+        email: "dpd.exports@dpd.co.uk",
+        web: "www.dpd.co.uk/umslogon/public/logoff.do",
+      },
+    ],
   },
   {
     id: "dpd-local",
