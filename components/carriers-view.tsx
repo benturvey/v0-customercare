@@ -68,8 +68,16 @@ const gfsInternationalColumns: CarrierColumnConfig[] = [
   { key: "username", label: "Username" },
 ]
 
+const internationalWebsitesColumns: CarrierColumnConfig[] = [
+  { key: "carrier", label: "Carrier" },
+  { key: "country", label: "Country" },
+  { key: "website", label: "Website" },
+  { key: "notes", label: "Notes" },
+]
+
 const carrierColumns: Record<string, CarrierColumnConfig[]> = {
   "gfs-international": gfsInternationalColumns,
+  "international-websites": internationalWebsitesColumns,
 }
 
 // Sample carrier details data
@@ -116,6 +124,44 @@ const carrierDetails: Record<string, CarrierDetail[]> = {
   "ups": [
     { id: "1", customer: "GFS UK", depot: "Coventry", username: "gfs_ups_uk" },
     { id: "2", customer: "Omlet Germany", depot: "Cologne", username: "omlet_ups_de" },
+  ],
+  "international-websites": [
+    { id: "1",  carrier: "Evri", country: "All", website: "https://clients.hermescloud.co.uk/", notes: "" },
+    { id: "2",  carrier: "Evri", country: "All", website: "https://www.hermesworld.com/Search/", notes: "" },
+    { id: "3",  carrier: "Evri", country: "All", website: "https://www.hermes-europe.co.uk/webtracking/parceldetails.html", notes: "" },
+    { id: "4",  carrier: "Evri", country: "All", website: "https://www.trackyourparcel.eu/", notes: "" },
+    { id: "5",  carrier: "Evri", country: "All", website: "https://www.evri.com/track/parcel/", notes: "" },
+    { id: "6",  carrier: "Evri", country: "Ireland", website: "https://www.fastway.ie/", notes: "" },
+    { id: "7",  carrier: "Evri", country: "Spain", website: "https://www.zeleris.com/busqueda-envio.aspx", notes: "" },
+    { id: "8",  carrier: "Evri", country: "Spain", website: "https://www.correos.es/", notes: "" },
+    { id: "9",  carrier: "Evri", country: "France", website: "https://www.colisprive.fr/en/", notes: "" },
+    { id: "10", carrier: "Evri", country: "Germany", website: "https://www.myhermes/de/", notes: "" },
+    { id: "11", carrier: "Evri", country: "Netherlands", website: "https://my.dhlparcel.nl/", notes: "" },
+    { id: "12", carrier: "Evri", country: "Scandinavia", website: "https://www.postnord.dk/en", notes: "" },
+    { id: "13", carrier: "Evri", country: "Numbers beg. with 00", website: "https://cn.etowertech.com/home?trackNos", notes: "" },
+    { id: "14", carrier: "Evri", country: "Italy nos beg. with 6", website: "https://gls-group.com/IT/en/online-services/track-trace.html", notes: "" },
+    { id: "15", carrier: "Evri", country: "Finland nos beg. with 8", website: "https://www.posti.fi/en/tracking", notes: "" },
+    { id: "16", carrier: "Evri", country: "Portugal", website: "https://www.ctt.pt/feapl_2/app/open/objectSearch/objectSearch.jspx?request_locale=en", notes: "" },
+    { id: "17", carrier: "Evri", country: "Austria/Czech R 33", website: "https://gls-group.eu/GROUP/en/parcel-tracking", notes: "" },
+    { id: "18", carrier: "DPD", country: "France", website: "https://www.chronopost.fr/en/private/track-your-parcel", notes: "" },
+    { id: "19", carrier: "DPD", country: "All", website: "https://tracking.dpd.de/status/en_US/", notes: "" },
+    { id: "20", carrier: "DPD", country: "Spain", website: "https://www.seur.com/livetracking/pages/seguimiento-online-", notes: "" },
+    { id: "21", carrier: "DPD", country: "Other", website: "https://www.parcelmonitor.com/track-it-online/", notes: "" },
+    { id: "22", carrier: "Spring", country: "All", website: "https://www.spring-gds.com/", notes: "" },
+    { id: "23", carrier: "Spring", country: "All", website: "https://www.sending.es/en/find-your-shipment/", notes: "Tracking numbers starting with 7" },
+    { id: "24", carrier: "Spring", country: "All", website: "https://www.myhermes.de/", notes: "Tracking numbers starting with 2" },
+    { id: "25", carrier: "Spring", country: "Poland", website: "https://mailingtechnology.com/tracking/?tn", notes: "Tracking numbers starting with z" },
+    { id: "26", carrier: "Other", country: "All", website: "https://www.17track.net/en", notes: "Can be used for both Spring and Deutsche Post parcels" },
+    { id: "27", carrier: "Other", country: "All", website: "https://parcelsapp.com/en/tracking/", notes: "" },
+    { id: "28", carrier: "Other", country: "All/Belgium", website: "https://track.bpost.cloud/btr/web/#/home?lang=en", notes: "Usually used for Landmark tickets (login to Mercury to get the tracking number)" },
+    { id: "29", carrier: "Other", country: "Ireland", website: "https://www.anpost.com/", notes: "" },
+    { id: "30", carrier: "Other", country: "France", website: "https://www.laposte.fr/", notes: "" },
+    { id: "31", carrier: "Other", country: "Italy", website: "https://www.poste.it/", notes: "" },
+    { id: "32", carrier: "Other", country: "Spain", website: "https://www.correos.es/", notes: "" },
+    { id: "33", carrier: "Other", country: "Norway", website: "https://sporing.posten.no/sporing/L", notes: "" },
+    { id: "34", carrier: "Other", country: "USA/USPS", website: "https://tools.usps.com/", notes: "Exelot FM numbers beginning with 9" },
+    { id: "35", carrier: "UPS", country: "All", website: "https://www.ups.com/track?loc=en_GB&requester=ST/trackdetails", notes: "" },
+    { id: "36", carrier: "Coll8", country: "All", website: "https://coll8.drop2shop.ie/tracking", notes: "customerservices@coll-8.com" },
   ],
 }
 
@@ -357,6 +403,17 @@ const carriers: Carrier[] = [
       },
     ],
   },
+  {
+    id: "international-websites",
+    name: "International Websites",
+    logo: "",
+    logoAlt: "International Websites",
+    logoClass: "",
+    cardBg: "bg-transparent",
+    phone: "",
+    email: "",
+    web: "",
+  },
 ]
 
 const tableCarriers = [
@@ -436,11 +493,18 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
           >
             {/* Logo area */}
             <div className="flex items-center justify-center px-6 py-4 h-24">
-              <img
-                src={carrier.logo}
-                alt={carrier.logoAlt}
-                className={carrier.logoClass}
-              />
+              {carrier.logo ? (
+                <img
+                  src={carrier.logo}
+                  alt={carrier.logoAlt}
+                  className={carrier.logoClass}
+                />
+              ) : (
+                <div className="flex flex-col items-center gap-1">
+                  <Globe className="h-10 w-10 text-muted-foreground" />
+                  <span className="text-sm font-semibold text-foreground text-center leading-tight">{carrier.name}</span>
+                </div>
+              )}
             </div>
             {/* Contact details */}
             {(carrier.phone || carrier.email || carrier.web) && (
