@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 import {
@@ -14,8 +15,10 @@ import {
   ShieldCheck,
   ArrowUpDown,
   Clock,
+  LogOut,
   type LucideIcon,
 } from "lucide-react"
+import { LogOffModal } from "@/components/log-off-modal"
 
 type NavItem = {
   id: string
@@ -67,7 +70,10 @@ interface TopNavigationProps {
 }
 
 export function TopNavigation({ activeItem, onItemSelect }: TopNavigationProps) {
+  const [logOffOpen, setLogOffOpen] = useState(false)
+
   return (
+    <>
     <nav className="w-56 shrink-0 min-h-screen border-r border-border bg-gray-100 flex flex-col">
       <div className="flex items-center justify-center p-4 border-b border-border">
         <Image
@@ -78,7 +84,7 @@ export function TopNavigation({ activeItem, onItemSelect }: TopNavigationProps) 
           className="object-contain"
         />
       </div>
-      <div className="flex flex-col gap-1 p-3 pt-6">
+      <div className="flex flex-col gap-1 p-3 pt-6 flex-1">
         <p className="px-3 pb-2 text-sm font-semibold text-muted-foreground">Dashboard</p>
         {navItems.filter(item => item.section === "dashboard").map((item) => (
           <NavButton key={item.id} item={item} active={activeItem === item.id} onSelect={onItemSelect} />
@@ -98,6 +104,19 @@ export function TopNavigation({ activeItem, onItemSelect }: TopNavigationProps) 
           <NavButton key={item.id} item={item} active={activeItem === item.id} onSelect={onItemSelect} />
         ))}
       </div>
+
+      {/* Sign Out at bottom */}
+      <div className="p-3 border-t border-border">
+        <button
+          onClick={() => setLogOffOpen(true)}
+          className="w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm font-medium transition-colors text-foreground hover:bg-muted"
+        >
+          <LogOut className="h-4 w-4 shrink-0 text-red-500" />
+          <span className="truncate">Sign Out</span>
+        </button>
+      </div>
     </nav>
+    <LogOffModal open={logOffOpen} onOpenChange={setLogOffOpen} />
+    </>
   )
 }
