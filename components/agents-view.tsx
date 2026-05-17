@@ -341,7 +341,7 @@ const initialAgents: Agent[] = [
     name: "Deborah Hoolihan",
     email: "deborah.hoolihan@gfsdeliver.com",
     role: "trainer",
-    skillLevel: "L4",
+    skillLevel: "TRN",
     status: "active",
     currentTickets: 0,
     expanded: false,
