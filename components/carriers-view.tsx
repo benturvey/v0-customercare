@@ -88,6 +88,9 @@ const carrierDetails: Record<string, CarrierDetail[]> = {
     { id: "2", carrier: "Deutschepost", fmNumberStart: "LY or RS", phone: "02087 503340", email: "mail.uk@deutschepost.com", website: "mail.uk@deutschepost.com", username: "cscarrier@gfsdeliver.com" },
     { id: "3", carrier: "Deutschepost", fmNumberStart: "", phone: "", email: "", website: "Alternate: www.deutschepost.de/sendung/simpleQueryResult.html", username: "" },
     { id: "4", carrier: "Deutschepost", fmNumberStart: "", phone: "", email: "", website: "Alternate: www.dhl.com/us-en/home/tracking/tracking-ecommerce.html", username: "" },
+    { id: "5", carrier: "DPD Core DE", fmNumberStart: "0150", phone: "", email: "info@depot150.dpd.de", website: "tracking.dpd.de/status/en_US/parcel/", username: "gfsdpdmax1" },
+    { id: "6", carrier: "DPD Core DE", fmNumberStart: "", phone: "", email: "", website: "Alternate: portal.dpd.de/home", username: "Global031" },
+    { id: "7", carrier: "DPD Core DE", fmNumberStart: "", phone: "", email: "", website: "Alternate: business.dpd.de/home.aspx", username: "Global001" },
   ],
   "dhl-express": [
     { id: "1", customer: "GFS UK", depot: "Birmingham", username: "gfs_dhl_uk" },
