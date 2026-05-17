@@ -84,7 +84,6 @@ export function OverviewView() {
           <TableHeader>
             <TableRow>
               <TableHead className="font-semibold text-muted-foreground">Skill Level</TableHead>
-              <TableHead className="font-semibold text-muted-foreground">Typical Query Types</TableHead>
               <TableHead className="font-semibold text-muted-foreground">No. Waiting</TableHead>
               <TableHead className="font-semibold text-muted-foreground">Oldest (mins)</TableHead>
               <TableHead className="font-semibold text-muted-foreground">New Last Hour</TableHead>
@@ -97,7 +96,6 @@ export function OverviewView() {
           <TableBody>
             <TableRow>
               <TableCell className="font-medium">L1</TableCell>
-              <TableCell className="text-sm text-muted-foreground">WISMO, basic tracking, simple delays, POD/simple updates</TableCell>
               <TableCell>118</TableCell>
               <TableCell>22</TableCell>
               <TableCell>34</TableCell>
@@ -112,8 +110,7 @@ export function OverviewView() {
             </TableRow>
             <TableRow>
               <TableCell className="font-medium">L2</TableCell>
-              <TableCell className="text-sm text-muted-foreground">Change address, RTS, redelivery, collections, repeat contacts</TableCell>
-              <TableCell>54</TableCell>
+              <TableCell>74</TableCell>
               <TableCell>35</TableCell>
               <TableCell>18</TableCell>
               <TableCell><span className="text-green-600 font-medium">▼</span></TableCell>
@@ -121,14 +118,13 @@ export function OverviewView() {
               <TableCell>4</TableCell>
               <TableCell>
                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
-                  Good
+                  OK
                 </span>
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell className="font-medium">L3</TableCell>
-              <TableCell className="text-sm text-muted-foreground">International, investigations, multipart, customer focus accounts</TableCell>
-              <TableCell>29</TableCell>
+              <TableCell>26</TableCell>
               <TableCell>52</TableCell>
               <TableCell>11</TableCell>
               <TableCell><span className="text-muted-foreground font-medium">—</span></TableCell>
@@ -136,14 +132,13 @@ export function OverviewView() {
               <TableCell>2</TableCell>
               <TableCell>
                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
-                  Good
+                  OK
                 </span>
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell className="font-medium">L4</TableCell>
-              <TableCell className="text-sm text-muted-foreground">Complaints, credits, senior escalations, sensitive cases</TableCell>
-              <TableCell>13</TableCell>
+              <TableCell>6</TableCell>
               <TableCell>80</TableCell>
               <TableCell>7</TableCell>
               <TableCell><span className="text-red-600 font-medium">▲</span></TableCell>
@@ -151,7 +146,7 @@ export function OverviewView() {
               <TableCell>1</TableCell>
               <TableCell>
                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700">
-                  Action
+                  Alert
                 </span>
               </TableCell>
             </TableRow>
