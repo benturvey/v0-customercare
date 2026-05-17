@@ -54,6 +54,12 @@ type CarrierDetail = {
 const carrierDetails: Record<string, CarrierDetail[]> = {
   "amazon": [
     { id: "1", customer: "All", depot: "", username: "cscarrier@gfsdeliver.com" },
+    { id: "2", customer: "Abbott Lyon", depot: "", username: "cscarrier+abbott@gfsdeliver.com" },
+    { id: "3", customer: "IForce - Gain The Edge", depot: "", username: "cscarrier+gain@gfsdeliver.com" },
+    { id: "4", customer: "IForce - Tailored Athlete", depot: "", username: "cscarrier+tailored@gfsdeliver.com" },
+    { id: "5", customer: "IForce - Post Office", depot: "", username: "customercare+gfspostoffice@gfsdeliver.com" },
+    { id: "6", customer: "Amazon DG", depot: "", username: "cscarrier+dg@gfsdeliver.com" },
+    { id: "7", customer: "Amazon OTP (One Time Passcode)", depot: "", username: "cscarrier+gfsotp@gfsdeliver.com" },
   ],
   "dhl-express": [
     { id: "1", customer: "GFS UK", depot: "Birmingham", username: "gfs_dhl_uk" },
