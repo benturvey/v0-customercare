@@ -226,7 +226,7 @@ const carriers: Carrier[] = [
     name: "OCS",
     logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ocs-kzJO8EB02p68Lp93oVYBNJviuE4clK.png",
     logoAlt: "OCS",
-    logoClass: "w-1/2 object-contain",
+    logoClass: "w-5/12 object-contain",
     cardBg: "bg-transparent",
     phone: "+44 1932 837 000",
     email: "enquiries@ocs.com",
