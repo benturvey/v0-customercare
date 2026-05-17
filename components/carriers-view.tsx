@@ -83,6 +83,14 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
             className="w-full object-contain"
           />
         </div>
+        {/* Coll-8 Logistics Card */}
+        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-white px-6 py-4 shadow-sm">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Coll-8-ImRjjcFHWxE9CQeEzOYdezOnSVxUUB.jpeg"
+            alt="Coll-8 Logistics"
+            className="w-full object-contain"
+          />
+        </div>
       </div>
 
       {/* Search Bar */}
