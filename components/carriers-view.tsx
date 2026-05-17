@@ -41,8 +41,8 @@ const carriers: Carrier[] = [
     logoAlt: "Amazon Shipping",
     logoClass: "w-full object-contain",
     cardBg: "bg-transparent",
-    phone: "+44 800 496 1081",
-    email: "amazon-shipping@amazon.co.uk",
+    phone: "",
+    email: "",
     web: "ship.amazon.co.uk",
   },
   {
