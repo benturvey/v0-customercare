@@ -239,9 +239,26 @@ const carriers: Carrier[] = [
     logoAlt: "UPS",
     logoClass: "h-16 object-contain",
     cardBg: "bg-transparent",
-    phone: "+44 345 787 7877",
-    email: "customer.service@ups.com",
-    web: "www.ups.com/gb",
+    phone: "08451 610015",
+    email: "preferredde@ups.com",
+    web: "preferredgb@ups.com",
+    pin: "6314",
+    accounts: [
+      {
+        label: "UPS Omlet Germany",
+        phone: "+49 (0)6966 308031",
+        email: "preferredde@ups.com",
+        web: "www.ups.com/track?loc=en_GB&requester=ST/trackdetails",
+        pin: "3104",
+      },
+      {
+        label: "UPS Claims Only",
+        phone: "03457 877877",
+        email: "",
+        web: "",
+        pin: "",
+      },
+    ],
   },
 ]
 
@@ -307,6 +324,12 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
                     <span className="truncate">{carrier.web}</span>
                   </div>
                 )}
+                {carrier.pin && (
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <span className="font-semibold text-foreground">PIN:</span>
+                    <span className="truncate">{carrier.pin}</span>
+                  </div>
+                )}
               </div>
             )}
             {carrier.accounts && carrier.accounts.length > 0 && (
@@ -332,6 +355,12 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
                         <Globe className="h-3 w-3 shrink-0 text-foreground/60" />
                         <span className="truncate">{account.web}</span>
+                      </div>
+                    )}
+                    {account.pin && (
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <span className="font-semibold text-foreground">PIN:</span>
+                        <span className="truncate">{account.pin}</span>
                       </div>
                     )}
                   </div>
