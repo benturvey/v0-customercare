@@ -63,9 +63,9 @@ const carriers: Carrier[] = [
     logoAlt: "Collect+",
     logoClass: "w-full object-contain",
     cardBg: "bg-white",
-    phone: "+44 1923 605 100",
-    email: "support@collectplus.co.uk",
-    web: "www.collectplus.co.uk",
+    phone: "Use ERIN",
+    email: "Use ERIN",
+    web: "www.collectplus.co.uk/",
   },
   {
     id: "coll8",
