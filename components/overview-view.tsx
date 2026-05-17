@@ -33,6 +33,7 @@ export function OverviewView({ onLogOut }: { onLogOut?: () => void }) {
     { name: "Andrei Costea", level: "L2", currentTicket: "TKT-1042", ticketLevel: "L2", status: "In Progress" },
     { name: "Arlene Griffin", level: "L1", currentTicket: "TKT-1039", ticketLevel: "L1", status: "In Progress" },
     { name: "Apryl Watson", level: "L3", currentTicket: "TKT-1037", ticketLevel: "L2", status: "In Progress" },
+    { name: "Deborah Hoolihan", level: "TRN", currentTicket: null, ticketLevel: null, status: "TRN" },
     { name: "George Lilliston", level: "L2", currentTicket: null, ticketLevel: null, status: "Idle" },
     { name: "Ibrahim Anidi", level: "L1", currentTicket: "TKT-1041", ticketLevel: "L1", status: "In Progress" },
     { name: "Lisa Yates", level: "L4", currentTicket: null, ticketLevel: null, status: "Offline" },
