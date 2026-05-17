@@ -13,6 +13,13 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
+type CarrierAccount = {
+  label?: string
+  phone: string
+  email: string
+  web: string
+}
+
 type Carrier = {
   id: string
   name: string
@@ -23,6 +30,7 @@ type Carrier = {
   phone: string
   email: string
   web: string
+  accounts?: CarrierAccount[]
 }
 
 const carriers: Carrier[] = [
@@ -91,6 +99,14 @@ const carriers: Carrier[] = [
     phone: "+44 345 774 0074",
     email: "express.uk@dhl.com",
     web: "www.dhl.com/express",
+    accounts: [
+      {
+        label: "NL Redwood",
+        phone: "Use Email",
+        email: "ams.backline@dhl.com",
+        web: "https://www.dhl.com/nl",
+      },
+    ],
   },
   {
     id: "dpd",
@@ -248,6 +264,25 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
                 <Globe className="h-3 w-3 shrink-0 text-foreground/60" />
                 <span className="truncate">{carrier.web}</span>
               </div>
+              {carrier.accounts?.map((account, i) => (
+                <div key={i} className="pt-2 mt-1 border-t space-y-1.5">
+                  {account.label && (
+                    <p className="text-xs font-semibold text-foreground">{account.label}</p>
+                  )}
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <Phone className="h-3 w-3 shrink-0 text-foreground/60" />
+                    <span className="truncate">{account.phone}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <Mail className="h-3 w-3 shrink-0 text-foreground/60" />
+                    <span className="truncate">{account.email}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <Globe className="h-3 w-3 shrink-0 text-foreground/60" />
+                    <span className="truncate">{account.web}</span>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         ))}
