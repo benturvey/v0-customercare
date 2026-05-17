@@ -215,7 +215,7 @@ const carriers: Carrier[] = [
     name: "Royal Mail",
     logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/royal%20mail-Nl4Se5TtrV5bRUfLX9cBGEkypx91lE.png",
     logoAlt: "Royal Mail",
-    logoClass: "w-4/5 object-contain",
+    logoClass: "w-3/5 object-contain",
     cardBg: "bg-transparent",
     phone: "08457 950950",
     email: "",
