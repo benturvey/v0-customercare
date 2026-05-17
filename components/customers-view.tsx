@@ -171,9 +171,6 @@ export function CustomersView() {
           </div>
         </div>
       </div>
-      <header className="mb-6">
-        <h1 className="text-2xl font-semibold text-[#1e3a5f]">Customers</h1>
-      </header>
 
       {/* Search Bar */}
       <div className="mb-4">
