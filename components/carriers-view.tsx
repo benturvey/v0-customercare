@@ -241,7 +241,7 @@ const carriers: Carrier[] = [
     cardBg: "bg-transparent",
     phone: "08451 610015",
     email: "preferredde@ups.com",
-    web: "preferredgb@ups.com",
+    web: "www.ups.com/track?loc=en_GB&requester=ST/trackdetails",
     pin: "6314",
     accounts: [
       {
