@@ -76,7 +76,7 @@ const carriers: Carrier[] = [
     cardBg: "bg-white",
     phone: "",
     email: "customerservices@coll-8.com",
-    web: "/coll8.drop2shop.ie/tracking",
+    web: "coll8.drop2shop.ie/tracking",
   },
   {
     id: "dhl-ecommerce",
