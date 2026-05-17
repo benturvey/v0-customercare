@@ -182,9 +182,9 @@ const carriers: Carrier[] = [
     logoAlt: "FedEx",
     logoClass: "w-full object-contain",
     cardBg: "bg-transparent",
-    phone: "+44 345 600 0068",
-    email: "customer.support@fedex.com",
-    web: "www.fedex.com/en-gb",
+    phone: "",
+    email: "",
+    web: "",
   },
   {
     id: "gfs-international",
