@@ -619,7 +619,8 @@ export function CollectionsView() {
             JA
           </div>
           <div className="text-right">
-            <p className="text-xs font-semibold text-foreground leading-tight">jacquie.cadger@gfsdeliver.com</p>
+            <p className="text-xs font-semibold text-foreground leading-tight">Jacquie Cadger</p>
+            <p className="text-xs text-muted-foreground leading-tight">admin</p>
           </div>
         </div>
       </div>
