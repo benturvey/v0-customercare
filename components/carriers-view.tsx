@@ -65,6 +65,18 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
         <UserDropdownMenu userName="Jacquie Cadger" userRole="admin" userInitials="JA" onLogOut={onLogOut} />
       </div>
 
+      {/* Carrier Cards */}
+      <div className="flex flex-wrap gap-4">
+        {/* Amazon Shipping Card */}
+        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-black px-6 py-4 shadow-sm">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/amazon-shipping-zyCMlDZbwMIeTHBZca2OQasxwLqn1y.png"
+            alt="Amazon Shipping"
+            className="w-full object-contain"
+          />
+        </div>
+      </div>
+
       {/* Search Bar */}
       <div className="flex items-center gap-2">
         <div className="relative flex-1">
