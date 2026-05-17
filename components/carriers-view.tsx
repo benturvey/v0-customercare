@@ -59,6 +59,13 @@ const defaultColumns: CarrierColumnConfig[] = [
   { key: "username", label: "Username" },
 ]
 
+const amazonColumns: CarrierColumnConfig[] = [
+  { key: "customer", label: "Customer" },
+  { key: "depot", label: "Depot" },
+  { key: "username", label: "Username" },
+  { key: "password", label: "Password" },
+]
+
 const gfsInternationalColumns: CarrierColumnConfig[] = [
   { key: "carrier", label: "Carrier" },
   { key: "fmNumberStart", label: "FM Number Start" },
@@ -85,6 +92,7 @@ const dxColumns: CarrierColumnConfig[] = [
 ]
 
 const carrierColumns: Record<string, CarrierColumnConfig[]> = {
+  "amazon": amazonColumns,
   "gfs-international": gfsInternationalColumns,
   "international-websites": internationalWebsitesColumns,
   "dx": dxColumns,
@@ -94,13 +102,13 @@ const carrierColumns: Record<string, CarrierColumnConfig[]> = {
 // Sample carrier details data
 const carrierDetails: Record<string, CarrierDetail[]> = {
   "amazon": [
-    { id: "1", customer: "All", depot: "", username: "cscarrier@gfsdeliver.com" },
-    { id: "2", customer: "Abbott Lyon", depot: "", username: "cscarrier+abbott@gfsdeliver.com" },
-    { id: "3", customer: "IForce - Gain The Edge", depot: "", username: "cscarrier+gain@gfsdeliver.com" },
-    { id: "4", customer: "IForce - Tailored Athlete", depot: "", username: "cscarrier+tailored@gfsdeliver.com" },
-    { id: "5", customer: "IForce - Post Office", depot: "", username: "customercare+gfspostoffice@gfsdeliver.com" },
-    { id: "6", customer: "Amazon DG", depot: "", username: "cscarrier+dg@gfsdeliver.com" },
-    { id: "7", customer: "Amazon OTP (One Time Passcode)", depot: "", username: "cscarrier+gfsotp@gfsdeliver.com" },
+    { id: "1", customer: "All", depot: "", username: "cscarrier@gfsdeliver.com", password: "Amazon123!" },
+    { id: "2", customer: "Abbott Lyon", depot: "", username: "cscarrier+abbott@gfsdeliver.com", password: "Amazon123!" },
+    { id: "3", customer: "IForce - Gain The Edge", depot: "", username: "cscarrier+gain@gfsdeliver.com", password: "Amazon123!" },
+    { id: "4", customer: "IForce - Tailored Athlete", depot: "", username: "cscarrier+tailored@gfsdeliver.com", password: "Amazon123!" },
+    { id: "5", customer: "IForce - Post Office", depot: "", username: "customercare+gfspostoffice@gfsdeliver.com", password: "Amazon123!" },
+    { id: "6", customer: "Amazon DG", depot: "", username: "cscarrier+dg@gfsdeliver.com", password: "Amazon123!" },
+    { id: "7", customer: "Amazon OTP (One Time Passcode)", depot: "", username: "cscarrier+gfsotp@gfsdeliver.com", password: "Amazon123!" },
   ],
   "gfs-international": [
     { id: "1", carrier: "APG", fmNumberStart: "", phone: "02039 620242", email: "generalsupport@apgecommerce.com", website: "www.apgecommerce.com", username: "" },
