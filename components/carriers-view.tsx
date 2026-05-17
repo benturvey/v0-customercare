@@ -96,9 +96,9 @@ const carriers: Carrier[] = [
     logoAlt: "DHL Express",
     logoClass: "w-full object-contain",
     cardBg: "bg-white",
-    phone: "+44 345 774 0074",
-    email: "express.uk@dhl.com",
-    web: "www.dhl.com/express",
+    phone: "08442 480888",
+    email: "premiercustomerservice@dhl.com",
+    web: "www.dhl.co.uk/en/express/tracking.html",
     accounts: [
       {
         label: "NL Redwood",
