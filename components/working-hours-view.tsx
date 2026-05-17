@@ -143,9 +143,6 @@ export function WorkingHoursView() {
           </div>
         </div>
       </div>
-      <header className="mb-6">
-        <h1 className="text-2xl font-semibold text-foreground">Working Hours</h1>
-      </header>
 
       <div className="grid gap-6 md:grid-cols-2">
         {/* Standard Working Hours Card */}
