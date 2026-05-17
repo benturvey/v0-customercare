@@ -740,7 +740,6 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
               const columns = selectedCarrier ? (carrierColumns[selectedCarrier.id] ?? defaultColumns) : defaultColumns
               const rows = selectedCarrier ? (carrierDetails[selectedCarrier.id] ?? []) : []
               const isEvri = selectedCarrier?.id === "evri"
-              const isDX = selectedCarrier?.id === "dx"
               const sectionLabels: Record<string, string> = {
                 domestic: "Evri Domestic",
                 international: "Evri International",
@@ -756,13 +755,6 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {isDX && rows.length > 0 && (
-                      <TableRow className="bg-muted/50 hover:bg-muted/50">
-                        <TableCell colSpan={columns.length + 1} className="px-4 py-2 font-semibold text-sm">
-                          DX Depot Contact
-                        </TableCell>
-                      </TableRow>
-                    )}
                     {rows.reduce<React.ReactNode[]>((acc, detail, index) => {
                       if (isEvri) {
                         const prevSection = index > 0 ? rows[index - 1].section : null
