@@ -147,6 +147,14 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
             className="w-full object-contain"
           />
         </div>
+        {/* Panther Logistics Card */}
+        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-transparent px-6 py-4 shadow-sm">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/panther%20logo-xaesEBBowMJPKzTDSqtCNLxhVxbN2Y.jpg"
+            alt="Panther Logistics Experts"
+            className="w-full object-contain"
+          />
+        </div>
       </div>
 
       {/* Search Bar */}
