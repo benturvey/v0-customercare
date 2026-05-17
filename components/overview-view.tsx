@@ -30,7 +30,7 @@ export function OverviewView() {
 
   const agents = [
     { name: "Andrei Costea", level: "L2", currentTicket: "TKT-1042", ticketLevel: "L2", status: "In Progress" },
-    { name: "Tracey Crooke", level: "L3", currentTicket: "TKT-1039", ticketLevel: "L2", status: "In Progress" },
+    { name: "Arlene Griffin", level: "L1", currentTicket: "TKT-1039", ticketLevel: "L1", status: "In Progress" },
     { name: "Francine Payne", level: "L2", currentTicket: "TKT-1037", ticketLevel: "L2", status: "In Progress" },
     { name: "Kimberley McCormick", level: "L2", currentTicket: null, ticketLevel: null, status: "Idle" },
     { name: "Michael Chen", level: "L1", currentTicket: "TKT-1041", ticketLevel: "L1", status: "In Progress" },
