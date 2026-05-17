@@ -88,7 +88,7 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
           <img
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Coll-8-ImRjjcFHWxE9CQeEzOYdezOnSVxUUB.jpeg"
             alt="Coll-8 Logistics"
-            className="w-3/4 object-contain"
+            className="w-2/3 object-contain"
           />
         </div>
       </div>
