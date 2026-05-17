@@ -149,12 +149,7 @@ export function NonShipmentTicketView() {
       </div>
       
       <header className="mb-6 flex items-start justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold text-[#1e3a5f]">Non-Shipment Tickets</h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Raise a ticket not related to a specific shipment
-          </p>
-        </div>
+        <div />
         <Button 
           className="bg-blue-600 hover:bg-blue-700 text-white"
           onClick={() => setRaiseTicketModalOpen(true)}
