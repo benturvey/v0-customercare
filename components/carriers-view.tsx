@@ -53,8 +53,7 @@ type CarrierDetail = {
 // Sample carrier details data
 const carrierDetails: Record<string, CarrierDetail[]> = {
   "amazon": [
-    { id: "1", customer: "GFS UK", depot: "London", username: "gfs_amazon_uk" },
-    { id: "2", customer: "GFS EU", depot: "Paris", username: "gfs_amazon_eu" },
+    { id: "1", customer: "All", depot: "", username: "cscarrier@gfsdeliver.com" },
   ],
   "dhl-express": [
     { id: "1", customer: "GFS UK", depot: "Birmingham", username: "gfs_dhl_uk" },
