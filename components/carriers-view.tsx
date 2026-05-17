@@ -176,11 +176,12 @@ const carrierDetails: Record<string, CarrierDetail[]> = {
     { id: "1", customer: "All", depot: "", username: "gfshypercom", password: "Glo0gfs-22" },
   ],
   "evri": [
-    { id: "1", customer: "All", depot: "", username: "gfs1", password: "Re1JJ1wL4GnGvP6g4uCj" },
-    { id: "2", customer: "Alternate log in", depot: "", username: "gfs2", password: "9VbPeXpBvuNAauGBTfqG" },
-    { id: "3", customer: "Alternate log in", depot: "", username: "gfs3", password: "73YCmXJeYoAJnVHCKZ59" },
-    { id: "4", customer: "Alternate log in", depot: "", username: "gfs4", password: "4aYcJ59mnwGHRb49JhWq" },
-    { id: "5", customer: "Alternate log in", depot: "", username: "gfs5", password: "jMPYg7RWKwCmZK6QPgwA" },
+    { id: "1", section: "domestic", customer: "All", depot: "", username: "gfs1", password: "Re1JJ1wL4GnGvP6g4uCj" },
+    { id: "2", section: "domestic", customer: "Alternate log in", depot: "", username: "gfs2", password: "9VbPeXpBvuNAauGBTfqG" },
+    { id: "3", section: "domestic", customer: "Alternate log in", depot: "", username: "gfs3", password: "73YCmXJeYoAJnVHCKZ59" },
+    { id: "4", section: "domestic", customer: "Alternate log in", depot: "", username: "gfs4", password: "4aYcJ59mnwGHRb49JhWq" },
+    { id: "5", section: "domestic", customer: "Alternate log in", depot: "", username: "gfs5", password: "jMPYg7RWKwCmZK6QPgwA" },
+    { id: "6", section: "international", customer: "All", depot: "", username: "glo001s", password: "glo001s" },
   ],
   "ups": [
     { id: "1", customer: "GFS UK", depot: "Coventry", username: "gfs_ups_uk" },
@@ -738,52 +739,66 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
             {(() => {
               const columns = selectedCarrier ? (carrierColumns[selectedCarrier.id] ?? defaultColumns) : defaultColumns
               const rows = selectedCarrier ? (carrierDetails[selectedCarrier.id] ?? []) : []
+              const isEvri = selectedCarrier?.id === "evri"
+              const sectionLabels: Record<string, string> = {
+                domestic: "Evri Domestic",
+                international: "Evri International",
+              }
               return (
-                <div>
-                  {selectedCarrier?.id === "evri" && (
-                    <div className="px-4 py-3 border-b bg-muted/50">
-                      <h3 className="font-semibold text-sm">Evri Domestic</h3>
-                    </div>
-                  )}
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        {columns.map((col) => (
-                          <TableHead key={col.key} className="whitespace-nowrap px-4">{col.label}</TableHead>
-                        ))}
-                        <TableHead className="whitespace-nowrap text-right px-4">Actions</TableHead>
-                      </TableRow>
-                    </TableHeader>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      {columns.map((col) => (
+                        <TableHead key={col.key} className="whitespace-nowrap px-4">{col.label}</TableHead>
+                      ))}
+                      <TableHead className="whitespace-nowrap text-right px-4">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
                   <TableBody>
-                    {rows.map((detail) => (
-                      <TableRow key={detail.id}>
-                        {columns.map((col) => (
-                          <TableCell key={col.key} className="whitespace-nowrap px-4">
-                            {renderLink(detail[col.key] ?? "") ?? (detail[col.key] ?? "")}
+                    {rows.reduce<React.ReactNode[]>((acc, detail, index) => {
+                      if (isEvri) {
+                        const prevSection = index > 0 ? rows[index - 1].section : null
+                        if (detail.section !== prevSection) {
+                          acc.push(
+                            <TableRow key={`section-${detail.section}`} className="bg-muted/50 hover:bg-muted/50">
+                              <TableCell colSpan={columns.length + 1} className="px-4 py-2 font-semibold text-sm">
+                                {sectionLabels[detail.section] ?? detail.section}
+                              </TableCell>
+                            </TableRow>
+                          )
+                        }
+                      }
+                      acc.push(
+                        <TableRow key={detail.id}>
+                          {columns.map((col) => (
+                            <TableCell key={col.key} className="whitespace-nowrap px-4">
+                              {renderLink(detail[col.key] ?? "") ?? (detail[col.key] ?? "")}
+                            </TableCell>
+                          ))}
+                          <TableCell className="text-right">
+                            <div className="flex items-center justify-end gap-1">
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-8 w-8"
+                                onClick={() => handleEditDetail(detail.id)}
+                              >
+                                <Pencil className="h-4 w-4 text-muted-foreground" />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-8 w-8"
+                                onClick={() => handleDeleteDetail(detail.id)}
+                              >
+                                <Trash2 className="h-4 w-4 text-destructive" />
+                              </Button>
+                            </div>
                           </TableCell>
-                        ))}
-                        <TableCell className="text-right">
-                          <div className="flex items-center justify-end gap-1">
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="h-8 w-8"
-                              onClick={() => handleEditDetail(detail.id)}
-                            >
-                              <Pencil className="h-4 w-4 text-muted-foreground" />
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="h-8 w-8"
-                              onClick={() => handleDeleteDetail(detail.id)}
-                            >
-                              <Trash2 className="h-4 w-4 text-destructive" />
-                            </Button>
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                        </TableRow>
+                      )
+                      return acc
+                    }, [])}
                     {rows.length === 0 && (
                       <TableRow>
                         <TableCell colSpan={columns.length + 1} className="text-center text-muted-foreground py-8">
@@ -793,7 +808,6 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
                     )}
                   </TableBody>
                 </Table>
-                </div>
               )
             })()}
           </div>
