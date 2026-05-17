@@ -106,6 +106,12 @@ const carriers: Carrier[] = [
         email: "ams.backline@dhl.com",
         web: "https://www.dhl.com/nl",
       },
+      {
+        label: "Collections",
+        phone: "08442 480844",
+        email: "",
+        web: "",
+      },
     ],
   },
   {
@@ -269,18 +275,24 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
                   {account.label && (
                     <p className="text-xs font-semibold text-foreground">{account.label}</p>
                   )}
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <Phone className="h-3 w-3 shrink-0 text-foreground/60" />
-                    <span className="truncate">{account.phone}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <Mail className="h-3 w-3 shrink-0 text-foreground/60" />
-                    <span className="truncate">{account.email}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <Globe className="h-3 w-3 shrink-0 text-foreground/60" />
-                    <span className="truncate">{account.web}</span>
-                  </div>
+                  {account.phone && (
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <Phone className="h-3 w-3 shrink-0 text-foreground/60" />
+                      <span className="truncate">{account.phone}</span>
+                    </div>
+                  )}
+                  {account.email && (
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <Mail className="h-3 w-3 shrink-0 text-foreground/60" />
+                      <span className="truncate">{account.email}</span>
+                    </div>
+                  )}
+                  {account.web && (
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <Globe className="h-3 w-3 shrink-0 text-foreground/60" />
+                      <span className="truncate">{account.web}</span>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
