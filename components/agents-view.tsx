@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronDown, Pencil, Users } from "lucide-react"
+import { ChevronDown, Pencil, Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -449,7 +449,7 @@ export function AgentsView() {
       {/* Page header bar */}
       <div className="flex items-center justify-between border-b pb-3 mb-6">
         <div className="flex items-center gap-3">
-          <Users className="h-5 w-5 text-foreground shrink-0" />
+          <Menu className="h-5 w-5 text-foreground shrink-0" />
           <span className="text-sm font-bold text-foreground whitespace-nowrap">Agents</span>
         </div>
         <div className="flex items-center gap-3 shrink-0">

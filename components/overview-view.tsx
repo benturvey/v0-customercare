@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Loader2, Clock, PlaneTakeoff, ShieldCheck, Crown, Zap, WifiOff, LayoutDashboard } from "lucide-react"
+import { Loader2, Clock, PlaneTakeoff, ShieldCheck, Crown, Zap, WifiOff, Menu } from "lucide-react"
 import {
   Table,
   TableBody,
@@ -45,7 +45,7 @@ export function OverviewView() {
       {/* Page header bar */}
       <div className="flex items-center justify-between border-b pb-3">
         <div className="flex items-center gap-3">
-          <LayoutDashboard className="h-5 w-5 text-foreground shrink-0" />
+          <Menu className="h-5 w-5 text-foreground shrink-0" />
           <span className="text-sm font-bold text-foreground whitespace-nowrap">Overview</span>
         </div>
         <div className="flex items-center gap-3 shrink-0">

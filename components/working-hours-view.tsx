@@ -11,7 +11,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import { ChevronDown, Clock } from "lucide-react"
+import { ChevronDown, Clock, Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 // Generate time options in 15-minute increments (24-hour format)
@@ -132,7 +132,7 @@ export function WorkingHoursView() {
       {/* Page header bar */}
       <div className="flex items-center justify-between border-b pb-3 mb-6">
         <div className="flex items-center gap-3">
-          <Clock className="h-5 w-5 text-foreground shrink-0" />
+          <Menu className="h-5 w-5 text-foreground shrink-0" />
           <span className="text-sm font-bold text-foreground whitespace-nowrap">Working Hours</span>
         </div>
         <div className="flex items-center gap-3 shrink-0">

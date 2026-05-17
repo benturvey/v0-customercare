@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { HelpCircle, Plus, Pencil, Trash2, ChevronDown, ShieldCheck } from "lucide-react"
+import { HelpCircle, Plus, Pencil, Trash2, ChevronDown, Menu } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
   Popover,
@@ -707,7 +707,7 @@ export function AdvancedRulesView() {
       {/* Page header bar */}
       <div className="flex items-center justify-between border-b pb-3 mb-6">
         <div className="flex items-center gap-3">
-          <ShieldCheck className="h-5 w-5 text-foreground shrink-0" />
+          <Menu className="h-5 w-5 text-foreground shrink-0" />
           <span className="text-sm font-bold text-foreground whitespace-nowrap">Advanced Rules</span>
         </div>
         <div className="flex items-center gap-3 shrink-0">

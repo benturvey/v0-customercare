@@ -11,7 +11,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet"
-import { X, Pencil, Search, MoreVertical, Building2 } from "lucide-react"
+import { X, Pencil, Search, MoreVertical, Menu } from "lucide-react"
 import {
   Select,
   SelectContent,
@@ -160,7 +160,7 @@ export function CustomersView() {
       {/* Page header bar */}
       <div className="flex items-center justify-between border-b pb-3 mb-6">
         <div className="flex items-center gap-3">
-          <Building2 className="h-5 w-5 text-foreground shrink-0" />
+          <Menu className="h-5 w-5 text-foreground shrink-0" />
           <span className="text-sm font-bold text-foreground whitespace-nowrap">Customers</span>
         </div>
         <div className="flex items-center gap-3 shrink-0">

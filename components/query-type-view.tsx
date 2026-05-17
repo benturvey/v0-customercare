@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
-import { ArrowUpDown, ArrowUp, ArrowDown, Pencil, Trash2, BookOpen } from "lucide-react"
+import { ArrowUpDown, ArrowUp, ArrowDown, Pencil, Trash2, Menu } from "lucide-react"
 import {
   Select,
   SelectContent,
@@ -227,7 +227,7 @@ export function QueryTypeView() {
       {/* Page header bar */}
       <div className="flex items-center justify-between border-b pb-3 mb-6">
         <div className="flex items-center gap-3">
-          <BookOpen className="h-5 w-5 text-foreground shrink-0" />
+          <Menu className="h-5 w-5 text-foreground shrink-0" />
           <span className="text-sm font-bold text-foreground whitespace-nowrap">Basic Rules</span>
         </div>
         <div className="flex items-center gap-3 shrink-0">
