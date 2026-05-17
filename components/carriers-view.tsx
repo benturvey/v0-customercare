@@ -83,7 +83,10 @@ const carrierDetails: Record<string, CarrierDetail[]> = {
     { id: "6", customer: "Amazon DG", depot: "", username: "cscarrier+dg@gfsdeliver.com" },
     { id: "7", customer: "Amazon OTP (One Time Passcode)", depot: "", username: "cscarrier+gfsotp@gfsdeliver.com" },
   ],
-  "gfs-international": [],
+  "gfs-international": [
+    { id: "1", carrier: "APG", fmNumberStart: "", phone: "02039 620242", email: "generalsupport@apgecommerce.com", website: "www.apgecommerce.com", username: "" },
+    { id: "2", carrier: "Deutschepost", fmNumberStart: "LY or RS", phone: "02087 503340", email: "mail.uk@deutschepost.com", website: "www.packet.deutschepost.com/web/portal/login OR www.deutschepost.de/sendung/simpleQueryResult.html or www.dhl.com/us-en/home/tracking/tracking-ecommerce.html", username: "cscarrier@gfsdeliver.com" },
+  ],
   "dhl-express": [
     { id: "1", customer: "GFS UK", depot: "Birmingham", username: "gfs_dhl_uk" },
     { id: "2", customer: "NL Redwood", depot: "Amsterdam", username: "nl_redwood" },
