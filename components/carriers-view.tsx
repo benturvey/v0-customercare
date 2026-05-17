@@ -88,6 +88,7 @@ const carrierColumns: Record<string, CarrierColumnConfig[]> = {
   "gfs-international": gfsInternationalColumns,
   "international-websites": internationalWebsitesColumns,
   "dx": dxColumns,
+  "bjs": defaultColumns,
 }
 
 // Sample carrier details data
@@ -156,6 +157,9 @@ const carrierDetails: Record<string, CarrierDetail[]> = {
     { id: "18", depot: "DX Edinburgh",             depotNo: "16", contactNumber: "01636 815186", email: "depot16@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
     { id: "19", depot: "DX Coventry",              depotNo: "65", contactNumber: "03332 415109", email: "depot65@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
     { id: "20", depot: "1 Man network (Saturday Support)", depotNo: "", contactNumber: "", email: "keyaccounts@thedx.co.uk", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
+  ],
+  "bjs": [
+    { id: "1", customer: "All", depot: "", username: "CSCarrier@GFS" },
   ],
   "international-websites": [
     { id: "1",  carrier: "Evri", country: "All", website: "https://clients.hermescloud.co.uk/", notes: "" },
