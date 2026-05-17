@@ -25,7 +25,7 @@ import {
   User,
   Hash,
   SlidersHorizontal,
-  LayoutDashboard,
+  Menu,
   Check,
   Search,
 } from "lucide-react"
@@ -334,7 +334,7 @@ export function CollectionsView() {
       {/* Filter pill bar */}
       <div className="flex items-center justify-between mb-6 border-b pb-3">
         <div className="flex items-center flex-wrap gap-3">
-          <LayoutDashboard className="h-5 w-5 text-foreground shrink-0" />
+          <Menu className="h-5 w-5 text-foreground shrink-0" />
           <span className="text-sm font-bold text-foreground whitespace-nowrap">Search Collections</span>
 
           {/* ANY CUSTOMER */}

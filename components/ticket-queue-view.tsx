@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { ChevronDown, Search, ArrowUpDown, LayoutDashboard, Users, CalendarDays, Truck, User, Hash, Check, CircleDot } from "lucide-react"
+import { ChevronDown, Search, ArrowUpDown, Menu, Users, CalendarDays, Truck, User, Hash, Check, CircleDot } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -176,7 +176,7 @@ export function TicketQueueView() {
       {/* Filter pill bar */}
       <div className="flex items-center justify-between mb-6 border-b pb-3">
         <div className="flex items-center flex-wrap gap-3">
-          <LayoutDashboard className="h-5 w-5 text-foreground shrink-0" />
+            <Menu className="h-5 w-5 text-foreground shrink-0" />
           <span className="text-sm font-bold text-foreground whitespace-nowrap">Search Tickets</span>
 
           {/* ANY STATUS */}

@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import { ShipmentFilters } from "@/components/shipment-filters"
 import { ShipmentTable } from "@/components/shipment-table"
 import type { ShipmentFilters as ShipmentFiltersType, Shipment } from "@/types/shipment"
-import { Users, CalendarDays, Truck, User, Hash, SlidersHorizontal, LayoutDashboard, Check, Search } from "lucide-react"
+import { Users, CalendarDays, Truck, User, Hash, SlidersHorizontal, Menu, Check, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 
@@ -267,7 +267,7 @@ export function ShipmentsView() {
       {/* Filter pill bar */}
       <div className="flex items-center justify-between mb-6 border-b pb-3">
         <div className="flex items-center flex-wrap gap-3">
-          <LayoutDashboard className="h-5 w-5 text-foreground shrink-0" />
+          <Menu className="h-5 w-5 text-foreground shrink-0" />
           <span className="text-sm font-bold text-foreground whitespace-nowrap">Search Shipments</span>
           <div ref={customerRef} className="relative">
             <Button
