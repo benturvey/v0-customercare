@@ -75,9 +75,19 @@ const internationalWebsitesColumns: CarrierColumnConfig[] = [
   { key: "notes", label: "Notes" },
 ]
 
+const dxColumns: CarrierColumnConfig[] = [
+  { key: "depot", label: "Depot" },
+  { key: "depotNo", label: "Depot No" },
+  { key: "contactNumber", label: "Contact Number" },
+  { key: "email", label: "Email" },
+  { key: "trackingSite", label: "Tracking Site" },
+  { key: "escalationContact", label: "Escalation Contact" },
+]
+
 const carrierColumns: Record<string, CarrierColumnConfig[]> = {
   "gfs-international": gfsInternationalColumns,
   "international-websites": internationalWebsitesColumns,
+  "dx": dxColumns,
 }
 
 // Sample carrier details data
@@ -124,6 +134,28 @@ const carrierDetails: Record<string, CarrierDetail[]> = {
   "ups": [
     { id: "1", customer: "GFS UK", depot: "Coventry", username: "gfs_ups_uk" },
     { id: "2", customer: "Omlet Germany", depot: "Cologne", username: "omlet_ups_de" },
+  ],
+  "dx": [
+    { id: "1",  depot: "DX Nottingham",           depotNo: "26", contactNumber: "03332 415026", email: "Depot26@dxfreight.co.uk",          trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Julie.winfield@thedx.co.uk" },
+    { id: "2",  depot: "DX Northampton",           depotNo: "10", contactNumber: "03332 415010", email: "Northampton@dxfreight.co.uk",      trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Tamison.bramhall@thedx.co.uk" },
+    { id: "3",  depot: "DX Cannock",               depotNo: "35", contactNumber: "03332 415035", email: "depot35@dxfreight.co.uk",          trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Matt.hearsey@thedx.co.uk" },
+    { id: "4",  depot: "DX Leeds",                 depotNo: "37", contactNumber: "03332 415037", email: "depot37@dxfreight.co.uk",          trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Gemma.Dolphin@thedx.co.uk" },
+    { id: "5",  depot: "DX Burnley",               depotNo: "",   contactNumber: "03332 415092", email: "depot42@thedx.co.uk",             trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Nikki.ward@thedx.co.uk" },
+    { id: "6",  depot: "DX Glasgow",               depotNo: "69", contactNumber: "03332 415065", email: "Glasgow@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Charris.Johnstone@dxdelivery.com CS Manager" },
+    { id: "7",  depot: "DX Sheffield",             depotNo: "47", contactNumber: "03332 415047", email: "Depot47@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Amanda.robinson@dxdelivery.com" },
+    { id: "8",  depot: "DX Exeter",                depotNo: "82", contactNumber: "03332 415092", email: "depot82@dxfreight.co.uk",          trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Ashley.Taylor@thedx.co.uk" },
+    { id: "9",  depot: "DX Exeter (2 Man)",         depotNo: "82", contactNumber: "03332 415082", email: "2-man-info@thedx.co.uk",          trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Jane.worrall@thedx.co.uk" },
+    { id: "10", depot: "DX 2 Man (NEW NUMBER)",     depotNo: "G",  contactNumber: "03332 411168", email: "",                               trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
+    { id: "11", depot: "DX Crewe",                 depotNo: "34", contactNumber: "03332 415034", email: "depot34@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
+    { id: "12", depot: "DX Manchester",            depotNo: "44", contactNumber: "03332 415044", email: "depot44@thedx.co.uk",             trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
+    { id: "13", depot: "DX Bristol",               depotNo: "32", contactNumber: "03332 415132", email: "Bristol@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
+    { id: "14", depot: "DX West Bromwich",         depotNo: "55", contactNumber: "03332 415155", email: "depot55@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
+    { id: "15", depot: "DX Sheffield",             depotNo: "47", contactNumber: "03332 415026", email: "Depot47@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
+    { id: "16", depot: "DX Ipswich",               depotNo: "88", contactNumber: "03342 415088", email: "depot88@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
+    { id: "17", depot: "DX Basildon",              depotNo: "12", contactNumber: "03332 415012", email: "Basildon@dxdelivery.com",          trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
+    { id: "18", depot: "DX Edinburgh",             depotNo: "16", contactNumber: "01636 815186", email: "depot16@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
+    { id: "19", depot: "DX Coventry",              depotNo: "65", contactNumber: "03332 415109", email: "depot65@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
+    { id: "20", depot: "1 Man network (Saturday Support)", depotNo: "", contactNumber: "", email: "keyaccounts@thedx.co.uk", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
   ],
   "international-websites": [
     { id: "1",  carrier: "Evri", country: "All", website: "https://clients.hermescloud.co.uk/", notes: "" },
