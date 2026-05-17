@@ -11,6 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { UserDropdownMenu } from "@/components/user-dropdown-menu"
 
 export function OverviewView() {
   const [peakMode, setPeakMode] = useState(false)
@@ -48,15 +49,7 @@ export function OverviewView() {
           <Menu className="h-5 w-5 text-foreground shrink-0" />
           <span className="text-sm font-bold text-foreground whitespace-nowrap">Overview</span>
         </div>
-        <div className="flex items-center gap-3 shrink-0">
-          <div className="h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
-            JA
-          </div>
-          <div className="text-right">
-            <p className="text-xs font-semibold text-foreground leading-tight">Jacquie Cadger</p>
-            <p className="text-xs text-muted-foreground leading-tight">admin</p>
-          </div>
-        </div>
+        <UserDropdownMenu userName="Jacquie Cadger" userRole="admin" userInitials="JA" />
       </div>
       {/* Stats Card */}
       <div className="border border-border rounded-lg bg-card p-6">
