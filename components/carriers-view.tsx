@@ -120,7 +120,6 @@ const dpdLocalColumns: CarrierColumnConfig[] = [
 ]
 
 const evriColumns: CarrierColumnConfig[] = [
-  { key: "section", label: "Section" },
   { key: "customer", label: "Customer" },
   { key: "depot", label: "Depot" },
   { key: "username", label: "Username" },
@@ -177,11 +176,11 @@ const carrierDetails: Record<string, CarrierDetail[]> = {
     { id: "1", customer: "All", depot: "", username: "gfshypercom", password: "Glo0gfs-22" },
   ],
   "evri": [
-    { id: "1", section: "Evri Domestic", customer: "All", depot: "", username: "gfs1", password: "Re1JJ1wL4GnGvP6g4uCj" },
-    { id: "2", section: "Evri Domestic", customer: "Alternate log in", depot: "", username: "gfs2", password: "9VbPeXpBvuNAauGBTfqG" },
-    { id: "3", section: "Evri Domestic", customer: "Alternate log in", depot: "", username: "gfs3", password: "73YCmXJeYoAJnVHCKZ59" },
-    { id: "4", section: "Evri Domestic", customer: "Alternate log in", depot: "", username: "gfs4", password: "4aYcJ59mnwGHRb49JhWq" },
-    { id: "5", section: "Evri Domestic", customer: "Alternate log in", depot: "", username: "gfs5", password: "jMPYg7RWKwCmZK6QPgwA" },
+    { id: "1", customer: "All", depot: "", username: "gfs1", password: "Re1JJ1wL4GnGvP6g4uCj" },
+    { id: "2", customer: "Alternate log in", depot: "", username: "gfs2", password: "9VbPeXpBvuNAauGBTfqG" },
+    { id: "3", customer: "Alternate log in", depot: "", username: "gfs3", password: "73YCmXJeYoAJnVHCKZ59" },
+    { id: "4", customer: "Alternate log in", depot: "", username: "gfs4", password: "4aYcJ59mnwGHRb49JhWq" },
+    { id: "5", customer: "Alternate log in", depot: "", username: "gfs5", password: "jMPYg7RWKwCmZK6QPgwA" },
   ],
   "ups": [
     { id: "1", customer: "GFS UK", depot: "Coventry", username: "gfs_ups_uk" },
@@ -740,15 +739,21 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
               const columns = selectedCarrier ? (carrierColumns[selectedCarrier.id] ?? defaultColumns) : defaultColumns
               const rows = selectedCarrier ? (carrierDetails[selectedCarrier.id] ?? []) : []
               return (
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      {columns.map((col) => (
-                        <TableHead key={col.key} className="whitespace-nowrap px-4">{col.label}</TableHead>
-                      ))}
-                      <TableHead className="whitespace-nowrap text-right px-4">Actions</TableHead>
-                    </TableRow>
-                  </TableHeader>
+                <div>
+                  {selectedCarrier?.id === "evri" && (
+                    <div className="px-4 py-3 border-b bg-muted/50">
+                      <h3 className="font-semibold text-sm">Evri Domestic</h3>
+                    </div>
+                  )}
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        {columns.map((col) => (
+                          <TableHead key={col.key} className="whitespace-nowrap px-4">{col.label}</TableHead>
+                        ))}
+                        <TableHead className="whitespace-nowrap text-right px-4">Actions</TableHead>
+                      </TableRow>
+                    </TableHeader>
                   <TableBody>
                     {rows.map((detail) => (
                       <TableRow key={detail.id}>
@@ -788,6 +793,7 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
                     )}
                   </TableBody>
                 </Table>
+                </div>
               )
             })()}
           </div>
