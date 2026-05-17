@@ -90,7 +90,6 @@ export function RoutingRulesView() {
           </div>
         </div>
       </div>
-      <h1 className="text-2xl font-semibold text-[#1e3a5f] mb-6">Routing Rules</h1>
 
       {/* Rules Table */}
       <div className="border border-border rounded-lg bg-card mb-6">
