@@ -83,12 +83,14 @@ const internationalWebsitesColumns: CarrierColumnConfig[] = [
 ]
 
 const dxColumns: CarrierColumnConfig[] = [
-  { key: "depot", label: "Depot" },
+  { key: "depot", label: "Customer / Depot" },
   { key: "depotNo", label: "Depot No" },
   { key: "contactNumber", label: "Contact Number" },
   { key: "email", label: "Email" },
   { key: "trackingSite", label: "Tracking Site" },
   { key: "escalationContact", label: "Escalation Contact" },
+  { key: "username", label: "Username" },
+  { key: "password", label: "Password" },
 ]
 
 const bjsColumns: CarrierColumnConfig[] = [
@@ -188,26 +190,63 @@ const carrierDetails: Record<string, CarrierDetail[]> = {
     { id: "2", customer: "Omlet Germany", depot: "Cologne", username: "omlet_ups_de" },
   ],
   "dx": [
-    { id: "1",  depot: "DX Nottingham",           depotNo: "26", contactNumber: "03332 415026", email: "Depot26@dxfreight.co.uk",          trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Julie.winfield@thedx.co.uk" },
-    { id: "2",  depot: "DX Northampton",           depotNo: "10", contactNumber: "03332 415010", email: "Northampton@dxfreight.co.uk",      trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Tamison.bramhall@thedx.co.uk" },
-    { id: "3",  depot: "DX Cannock",               depotNo: "35", contactNumber: "03332 415035", email: "depot35@dxfreight.co.uk",          trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Matt.hearsey@thedx.co.uk" },
-    { id: "4",  depot: "DX Leeds",                 depotNo: "37", contactNumber: "03332 415037", email: "depot37@dxfreight.co.uk",          trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Gemma.Dolphin@thedx.co.uk" },
-    { id: "5",  depot: "DX Burnley",               depotNo: "",   contactNumber: "03332 415092", email: "depot42@thedx.co.uk",             trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Nikki.ward@thedx.co.uk" },
-    { id: "6",  depot: "DX Glasgow",               depotNo: "69", contactNumber: "03332 415065", email: "Glasgow@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Charris.Johnstone@dxdelivery.com CS Manager" },
-    { id: "7",  depot: "DX Sheffield",             depotNo: "47", contactNumber: "03332 415047", email: "Depot47@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Amanda.robinson@dxdelivery.com" },
-    { id: "8",  depot: "DX Exeter",                depotNo: "82", contactNumber: "03332 415092", email: "depot82@dxfreight.co.uk",          trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Ashley.Taylor@thedx.co.uk" },
-    { id: "9",  depot: "DX Exeter (2 Man)",         depotNo: "82", contactNumber: "03332 415082", email: "2-man-info@thedx.co.uk",          trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Jane.worrall@thedx.co.uk" },
-    { id: "10", depot: "DX 2 Man (NEW NUMBER)",     depotNo: "G",  contactNumber: "03332 411168", email: "",                               trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
-    { id: "11", depot: "DX Crewe",                 depotNo: "34", contactNumber: "03332 415034", email: "depot34@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
-    { id: "12", depot: "DX Manchester",            depotNo: "44", contactNumber: "03332 415044", email: "depot44@thedx.co.uk",             trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
-    { id: "13", depot: "DX Bristol",               depotNo: "32", contactNumber: "03332 415132", email: "Bristol@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
-    { id: "14", depot: "DX West Bromwich",         depotNo: "55", contactNumber: "03332 415155", email: "depot55@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
-    { id: "15", depot: "DX Sheffield",             depotNo: "47", contactNumber: "03332 415026", email: "Depot47@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
-    { id: "16", depot: "DX Ipswich",               depotNo: "88", contactNumber: "03342 415088", email: "depot88@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
-    { id: "17", depot: "DX Basildon",              depotNo: "12", contactNumber: "03332 415012", email: "Basildon@dxdelivery.com",          trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
-    { id: "18", depot: "DX Edinburgh",             depotNo: "16", contactNumber: "01636 815186", email: "depot16@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
-    { id: "19", depot: "DX Coventry",              depotNo: "65", contactNumber: "03332 415109", email: "depot65@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
-    { id: "20", depot: "1 Man network (Saturday Support)", depotNo: "", contactNumber: "", email: "keyaccounts@thedx.co.uk", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
+    { id: "p1",  section: "portal", depot: "Andertons Music Company",           depotNo: "FB", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "F7989500", password: "8is8s1" },
+    { id: "p2",  section: "portal", depot: "Andertons Music Company",           depotNo: "FB", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "F7989400", password: "teiimn" },
+    { id: "p3",  section: "portal", depot: "Andertons Music Company",           depotNo: "FB", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "F7989600", password: "1xi939" },
+    { id: "p4",  section: "portal", depot: "Ark FW",                            depotNo: "42", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "93025360", password: "u34cwt" },
+    { id: "p5",  section: "portal", depot: "Axminster Tool Centre",             depotNo: "82", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "93012734", password: "maummp" },
+    { id: "p6",  section: "portal", depot: "Axminster Tool Centre 2 Man",       depotNo: "FB", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "F8205000", password: "tvpone" },
+    { id: "p7",  section: "portal", depot: "Babyland (Shenu)",                  depotNo: "16", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "17801900", password: "7rfh0b" },
+    { id: "p8",  section: "portal", depot: "Camptech Products",                 depotNo: "44", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "93021258", password: "gzwcb3" },
+    { id: "p9",  section: "portal", depot: "Click Spares",                      depotNo: "32", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "93018192", password: "ggo4ee" },
+    { id: "p10", section: "portal", depot: "Dynamic Office Seating",            depotNo: "10", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "93024222", password: "flt3fy" },
+    { id: "p11", section: "portal", depot: "Fenwick",                           depotNo: "FB", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "F1720200, F1720400, F1720500 & F1720700", password: "use log in for F1265600" },
+    { id: "p12", section: "portal", depot: "Fenwick",                           depotNo: "FB", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "F1720300", password: "r4gymj" },
+    { id: "p13", section: "portal", depot: "Fenwick",                           depotNo: "FB", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "F1720600", password: "vl1swa" },
+    { id: "p14", section: "portal", depot: "Fenwick (2MAN)",                    depotNo: "FB", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "F1265600", password: "yhoxy4" },
+    { id: "p15", section: "portal", depot: "Fenwick (2MAN)",                    depotNo: "FB", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "F1752800", password: "yrjgej" },
+    { id: "p16", section: "portal", depot: "Fenwick CLAIMS ONLY",               depotNo: "",   contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "F1720700", password: "b8fcaz" },
+    { id: "p17", section: "portal", depot: "Finning Diperk",                    depotNo: "35", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "93018061", password: "x1pyav" },
+    { id: "p18", section: "portal", depot: "Finning Glasgow",                   depotNo: "69", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "93019216", password: "qwoly3" },
+    { id: "p19", section: "portal", depot: "Finning UK Ltd",                    depotNo: "35", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "93017586", password: "gN275C" },
+    { id: "p20", section: "portal", depot: "Galleon Supplies",                  depotNo: "65", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "93024109", password: "6vkheq" },
+    { id: "p21", section: "portal", depot: "Hranipex",                          depotNo: "55", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "93018895", password: "6o66n3" },
+    { id: "p22", section: "portal", depot: "LDL Components",                    depotNo: "44", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "93015674", password: "mdfp2i" },
+    { id: "p23", section: "portal", depot: "Madison (2 man)",                   depotNo: "FB", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "F1056200", password: "kou6yg" },
+    { id: "p24", section: "portal", depot: "Mamas & Papas",                     depotNo: "FB", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "F4292000", password: "5gep64" },
+    { id: "p25", section: "portal", depot: "Mamas & Papas 1.5 Man Doorstep",    depotNo: "FB", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "F3575200", password: "wwf8ec" },
+    { id: "p26", section: "portal", depot: "Mamas & Papas 2 Man Doorstep",      depotNo: "FB", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "F3575100", password: "4hgc9d" },
+    { id: "p27", section: "portal", depot: "Mamas & Papas 2 Man ROC",           depotNo: "FB", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "F3575300", password: "4vnmbg" },
+    { id: "p28", section: "portal", depot: "Mamas & Papas Plum Products",       depotNo: "FB", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "F2685700", password: "17vryt" },
+    { id: "p29", section: "portal", depot: "Milner Off Road",                   depotNo: "26", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "93019563", password: "rcg05q" },
+    { id: "p30", section: "portal", depot: "Milner Off Road",                   depotNo: "26", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "93012014", password: "s7otif" },
+    { id: "p31", section: "portal", depot: "Milner Off Road (NI)",              depotNo: "47", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "", password: "k666lq" },
+    { id: "p32", section: "portal", depot: "Simarco",                           depotNo: "12", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "93018750", password: "9hmmu1" },
+    { id: "p33", section: "portal", depot: "Simarco",                           depotNo: "34", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "93024106", password: "6uj0xr" },
+    { id: "p34", section: "portal", depot: "Sitech Technology Systems",         depotNo: "35", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "93021749", password: "1rxxsg" },
+    { id: "p35", section: "portal", depot: "Trade Counter Direct Ltd",          depotNo: "28", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "93020367", password: "sa160f" },
+    { id: "p36", section: "portal", depot: "WOODLAND - DONCASTER2025",          depotNo: "47", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "93024560", password: "g39jnp" },
+    { id: "p37", section: "portal", depot: "Woodland Group",                    depotNo: "FB", contactNumber: "", email: "", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "F1712345", password: "hvf8kc" },
+    { id: "1",  section: "depot", depot: "DX Nottingham",           depotNo: "26", contactNumber: "03332 415026", email: "Depot26@dxfreight.co.uk",          trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Julie.winfield@thedx.co.uk", username: "", password: "" },
+    { id: "2",  section: "depot", depot: "DX Northampton",           depotNo: "10", contactNumber: "03332 415010", email: "Northampton@dxfreight.co.uk",      trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Tamison.bramhall@thedx.co.uk", username: "", password: "" },
+    { id: "3",  section: "depot", depot: "DX Cannock",               depotNo: "35", contactNumber: "03332 415035", email: "depot35@dxfreight.co.uk",          trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Matt.hearsey@thedx.co.uk", username: "", password: "" },
+    { id: "4",  section: "depot", depot: "DX Leeds",                 depotNo: "37", contactNumber: "03332 415037", email: "depot37@dxfreight.co.uk",          trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Gemma.Dolphin@thedx.co.uk", username: "", password: "" },
+    { id: "5",  section: "depot", depot: "DX Burnley",               depotNo: "",   contactNumber: "03332 415092", email: "depot42@thedx.co.uk",             trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Nikki.ward@thedx.co.uk", username: "", password: "" },
+    { id: "6",  section: "depot", depot: "DX Glasgow",               depotNo: "69", contactNumber: "03332 415065", email: "Glasgow@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Charris.Johnstone@dxdelivery.com CS Manager", username: "", password: "" },
+    { id: "7",  section: "depot", depot: "DX Sheffield",             depotNo: "47", contactNumber: "03332 415047", email: "Depot47@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Amanda.robinson@dxdelivery.com", username: "", password: "" },
+    { id: "8",  section: "depot", depot: "DX Exeter",                depotNo: "82", contactNumber: "03332 415092", email: "depot82@dxfreight.co.uk",          trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Ashley.Taylor@thedx.co.uk", username: "", password: "" },
+    { id: "9",  section: "depot", depot: "DX Exeter (2 Man)",         depotNo: "82", contactNumber: "03332 415082", email: "2-man-info@thedx.co.uk",          trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "Jane.worrall@thedx.co.uk", username: "", password: "" },
+    { id: "10", section: "depot", depot: "DX 2 Man (NEW NUMBER)",     depotNo: "G",  contactNumber: "03332 411168", email: "",                               trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "", password: "" },
+    { id: "11", section: "depot", depot: "DX Crewe",                 depotNo: "34", contactNumber: "03332 415034", email: "depot34@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "", password: "" },
+    { id: "12", section: "depot", depot: "DX Manchester",            depotNo: "44", contactNumber: "03332 415044", email: "depot44@thedx.co.uk",             trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "", password: "" },
+    { id: "13", section: "depot", depot: "DX Bristol",               depotNo: "32", contactNumber: "03332 415132", email: "Bristol@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "", password: "" },
+    { id: "14", section: "depot", depot: "DX West Bromwich",         depotNo: "55", contactNumber: "03332 415155", email: "depot55@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "", password: "" },
+    { id: "15", section: "depot", depot: "DX Sheffield",             depotNo: "47", contactNumber: "03332 415026", email: "Depot47@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "", password: "" },
+    { id: "16", section: "depot", depot: "DX Ipswich",               depotNo: "88", contactNumber: "03342 415088", email: "depot88@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "", password: "" },
+    { id: "17", section: "depot", depot: "DX Basildon",              depotNo: "12", contactNumber: "03332 415012", email: "Basildon@dxdelivery.com",          trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "", password: "" },
+    { id: "18", section: "depot", depot: "DX Edinburgh",             depotNo: "16", contactNumber: "01636 815186", email: "depot16@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "", password: "" },
+    { id: "19", section: "depot", depot: "DX Coventry",              depotNo: "65", contactNumber: "03332 415109", email: "depot65@dxdelivery.com",           trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "", password: "" },
+    { id: "20", section: "depot", depot: "1 Man network (Saturday Support)", depotNo: "", contactNumber: "", email: "keyaccounts@thedx.co.uk", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "", username: "", password: "" },
   ],
   "bjs": [
     { id: "1", customer: "All", depot: "", username: "CSCarrier@GFS", password: "Gfspass1234!" },
@@ -744,17 +783,12 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
               const sectionLabels: Record<string, string> = {
                 domestic: "Evri Domestic",
                 international: "Evri International",
+                portal: "DX Portal",
+                depot: "DX Depot Contact",
               }
               return (
                 <Table>
                   <TableHeader>
-                    {isDX && rows.length > 0 && (
-                      <TableRow className="bg-muted/50 hover:bg-muted/50">
-                        <TableHead colSpan={columns.length + 1} className="px-4 py-2 font-semibold text-sm text-foreground">
-                          DX Depot Contact
-                        </TableHead>
-                      </TableRow>
-                    )}
                     <TableRow>
                       {columns.map((col) => (
                         <TableHead key={col.key} className="whitespace-nowrap px-4">{col.label}</TableHead>
@@ -764,11 +798,11 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
                   </TableHeader>
                   <TableBody>
                     {rows.reduce<React.ReactNode[]>((acc, detail, index) => {
-                      if (isEvri) {
+                      if (isEvri || isDX) {
                         const prevSection = index > 0 ? rows[index - 1].section : null
                         if (detail.section !== prevSection) {
                           acc.push(
-                            <TableRow key={`section-${detail.section}`} className="bg-muted/50 hover:bg-muted/50">
+                            <TableRow key={`section-${detail.section}-${index}`} className="bg-muted/50 hover:bg-muted/50">
                               <TableCell colSpan={columns.length + 1} className="px-4 py-2 font-semibold text-sm">
                                 {sectionLabels[detail.section] ?? detail.section}
                               </TableCell>
