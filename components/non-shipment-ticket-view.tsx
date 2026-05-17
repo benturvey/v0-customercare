@@ -50,7 +50,7 @@ const GROUPS = [
   { value: "saturday-deliveries", label: "Saturday Deliveries" },
 ]
 
-export function NonShipmentTicketView() {
+export function NonShipmentTicketView({ onLogOut }: { onLogOut?: () => void }) {
   const [formData, setFormData] = useState({
     contactName: "",
     contactNo: "",
@@ -138,7 +138,7 @@ export function NonShipmentTicketView() {
           <Menu className="h-5 w-5 text-foreground shrink-0" />
           <span className="text-sm font-bold text-foreground whitespace-nowrap">Non-Shipment Tickets</span>
         </div>
-        <UserDropdownMenu userName="Jacquie Cadger" userRole="admin" userInitials="JA" />
+        <UserDropdownMenu userName="Jacquie Cadger" userRole="admin" userInitials="JA" onLogOut={onLogOut} />
       </div>
       
       <header className="mb-6 flex items-start justify-between">

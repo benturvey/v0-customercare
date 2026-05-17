@@ -51,7 +51,7 @@ const initialCustomers: Customer[] = [
   { id: "12", company: "THE CAMBIUM GROUP UK HOLDINGS LIMITED",     accountManager: "Natasha Mullee",      contact: "Lauren Pound", telephone: "01225615141", emails: ["lauren@thecambiumgroup.co.uk"], receiveEmails: false, tickets: 10, customTags: [""] },
 ]
 
-export function CustomersView() {
+export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
   const [customers, setCustomers] = useState<Customer[]>(initialCustomers)
   const [searchQuery, setSearchQuery] = useState("")
   const [editingId, setEditingId] = useState<string | null>(null)
@@ -164,7 +164,7 @@ export function CustomersView() {
           <Menu className="h-5 w-5 text-foreground shrink-0" />
           <span className="text-sm font-bold text-foreground whitespace-nowrap">Customers</span>
         </div>
-        <UserDropdownMenu userName="Jacquie Cadger" userRole="admin" userInitials="JA" />
+        <UserDropdownMenu userName="Jacquie Cadger" userRole="admin" userInitials="JA" onLogOut={onLogOut} />
       </div>
 
       {/* Search Bar */}

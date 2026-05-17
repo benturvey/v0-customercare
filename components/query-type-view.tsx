@@ -101,7 +101,7 @@ const STORAGE_KEY = "queryTypeCarrierSkillLevels"
 type SortField = "queryType" | "carrier" | null
 type SortDirection = "asc" | "desc"
 
-export function QueryTypeView() {
+export function QueryTypeView({ onLogOut }: { onLogOut?: () => void }) {
   const [queryTypes, setQueryTypes] = useState<QueryTypeItem[]>(initialQueryTypes)
   const [newEntry, setNewEntry] = useState({
     queryType: "",
@@ -231,7 +231,7 @@ export function QueryTypeView() {
           <Menu className="h-5 w-5 text-foreground shrink-0" />
           <span className="text-sm font-bold text-foreground whitespace-nowrap">Basic Rules</span>
         </div>
-        <UserDropdownMenu userName="Jacquie Cadger" userRole="admin" userInitials="JA" />
+        <UserDropdownMenu userName="Jacquie Cadger" userRole="admin" userInitials="JA" onLogOut={onLogOut} />
       </div>
 
       {/* Add New Entry Section */}

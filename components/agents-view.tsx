@@ -357,7 +357,7 @@ const initialRoutingRules: RoutingRule[] = [
 
 const availableTags = ["CONTACT", "first"]
 
-export function AgentsView() {
+export function AgentsView({ onLogOut }: { onLogOut?: () => void }) {
   const [agents, setAgents] = useState<Agent[]>([...initialAgents].sort((a, b) => a.name.localeCompare(b.name)))
   const [routingRules, setRoutingRules] = useState<RoutingRule[]>(initialRoutingRules)
   const [newAgent, setNewAgent] = useState({
@@ -453,7 +453,7 @@ export function AgentsView() {
           <Menu className="h-5 w-5 text-foreground shrink-0" />
           <span className="text-sm font-bold text-foreground whitespace-nowrap">Agent Management</span>
         </div>
-        <UserDropdownMenu userName="Jacquie Cadger" userRole="admin" userInitials="JA" />
+        <UserDropdownMenu userName="Jacquie Cadger" userRole="admin" userInitials="JA" onLogOut={onLogOut} />
       </div>
       
       {/* Agents Table */}

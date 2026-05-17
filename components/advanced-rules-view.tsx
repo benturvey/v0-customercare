@@ -140,7 +140,7 @@ const initialElapsedDaysRules: ElapsedDaysRule[] = [
   { id: "1", ruleDescription: "Elapsed Days No Scan", elapsedDays: "6", skillLevel: "L4" },
 ]
 
-export function AdvancedRulesView() {
+export function AdvancedRulesView({ onLogOut }: { onLogOut?: () => void }) {
   const [rules, setRules] = useState<AdvancedRule[]>(initialRules)
   const [queryStateRules, setQueryStateRules] = useState<QueryStateRule[]>(initialQueryStateRules)
   const [parcelCountRules, setParcelCountRules] = useState<ParcelCountRule[]>(initialParcelCountRules)
@@ -711,7 +711,7 @@ export function AdvancedRulesView() {
           <Menu className="h-5 w-5 text-foreground shrink-0" />
           <span className="text-sm font-bold text-foreground whitespace-nowrap">Advanced Rules</span>
         </div>
-        <UserDropdownMenu userName="Jacquie Cadger" userRole="admin" userInitials="JA" />
+        <UserDropdownMenu userName="Jacquie Cadger" userRole="admin" userInitials="JA" onLogOut={onLogOut} />
       </div>
 
       {/* General Advanced Rules */}

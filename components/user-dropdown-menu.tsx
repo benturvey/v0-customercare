@@ -13,6 +13,7 @@ interface UserDropdownMenuProps {
   userName: string
   userRole: string
   userInitials: string
+  onLogOut?: () => void
 }
 
 interface LogOffReason {
@@ -35,6 +36,7 @@ export function UserDropdownMenu({
   userName,
   userRole,
   userInitials,
+  onLogOut,
 }: UserDropdownMenuProps) {
   const [darkMode, setDarkMode] = useState(false)
   const [selectedReason, setSelectedReason] = useState<string | null>(null)
@@ -103,7 +105,10 @@ export function UserDropdownMenu({
         <div className="mt-1 border-t" />
 
         {/* Log Out */}
-        <button className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors">
+        <button
+          onClick={onLogOut}
+          className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
+        >
           <LogOut className="h-4 w-4" />
           <span>Log out</span>
         </button>

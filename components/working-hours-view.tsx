@@ -117,7 +117,7 @@ function TimeInput({ value, onChange, label, isActive }: TimeInputProps) {
   )
 }
 
-export function WorkingHoursView() {
+export function WorkingHoursView({ onLogOut }: { onLogOut?: () => void }) {
   const [activeHoursType, setActiveHoursType] = useState<"standard" | "extended">("standard")
   const [standardStartTime, setStandardStartTime] = useState("08:00")
   const [standardEndTime, setStandardEndTime] = useState("18:45")
@@ -136,7 +136,7 @@ export function WorkingHoursView() {
           <Menu className="h-5 w-5 text-foreground shrink-0" />
           <span className="text-sm font-bold text-foreground whitespace-nowrap">Working Hours</span>
         </div>
-        <UserDropdownMenu userName="Jacquie Cadger" userRole="admin" userInitials="JA" />
+        <UserDropdownMenu userName="Jacquie Cadger" userRole="admin" userInitials="JA" onLogOut={onLogOut} />
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">

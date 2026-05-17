@@ -44,7 +44,7 @@ const availableTags = [
 
 const agents = ["Aaron Doherty", "Alex Lucy", "Andrei Costea", "Annette Davidson", "Apryl Watson"]
 
-export function RoutingRulesView() {
+export function RoutingRulesView({ onLogOut }: { onLogOut?: () => void }) {
   const [rules, setRules] = useState<RoutingRule[]>(initialRules)
   const [selectedAgent, setSelectedAgent] = useState("Sarah Chen")
   const [selectedTags, setSelectedTags] = useState<string[]>([])
@@ -83,7 +83,7 @@ export function RoutingRulesView() {
           <Menu className="h-5 w-5 text-foreground shrink-0" />
           <span className="text-sm font-bold text-foreground whitespace-nowrap">Basic Rules</span>
         </div>
-        <UserDropdownMenu userName="Jacquie Cadger" userRole="admin" userInitials="JA" />
+        <UserDropdownMenu userName="Jacquie Cadger" userRole="admin" userInitials="JA" onLogOut={onLogOut} />
       </div>
       <h1 className="text-2xl font-semibold text-[#1e3a5f] mb-6">Routing Rules</h1>
 

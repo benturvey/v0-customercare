@@ -15,6 +15,7 @@ import { QueryTypeView } from "@/components/query-type-view"
 import { AdvancedRulesView } from "@/components/advanced-rules-view"
 import { RulePriorityView } from "@/components/rule-priority-view"
 import { WorkingHoursView } from "@/components/working-hours-view"
+import { LoginModal } from "@/components/login-modal"
 
 function PlaceholderView({ title }: { title: string }) {
   return (
@@ -44,52 +45,60 @@ const viewTitles: Record<string, string> = {
 
 export default function MainPage() {
   const [activeView, setActiveView] = useState("overview")
+  const [loggedIn, setLoggedIn] = useState(true)
+
+  const handleLogOut = () => setLoggedIn(false)
+  const handleSignIn = () => {
+    setLoggedIn(true)
+    setActiveView("overview")
+  }
 
   const renderView = () => {
     if (activeView === "overview") {
-      return <OverviewView />
+      return <OverviewView onLogOut={handleLogOut} />
     }
     if (activeView === "ticket-queue") {
-      return <TicketQueueView />
+      return <TicketQueueView onLogOut={handleLogOut} />
     }
     if (activeView === "shipment-search") {
-      return <ShipmentsView />
+      return <ShipmentsView onLogOut={handleLogOut} />
     }
     if (activeView === "collection-search") {
-      return <CollectionsView />
+      return <CollectionsView onLogOut={handleLogOut} />
     }
     if (activeView === "raise-non-shipment-ticket") {
-      return <NonShipmentTicketView />
+      return <NonShipmentTicketView onLogOut={handleLogOut} />
     }
     if (activeView === "routing-rules") {
-      return <RoutingRulesView />
+      return <RoutingRulesView onLogOut={handleLogOut} />
     }
     if (activeView === "agents") {
-      return <AgentsView />
+      return <AgentsView onLogOut={handleLogOut} />
     }
     if (activeView === "tagging-rules") {
       return <TaggingRulesView />
     }
     if (activeView === "customers") {
-      return <CustomersView />
+      return <CustomersView onLogOut={handleLogOut} />
     }
     if (activeView === "query-type") {
-      return <QueryTypeView />
+      return <QueryTypeView onLogOut={handleLogOut} />
     }
     if (activeView === "advanced-rules") {
-      return <AdvancedRulesView />
+      return <AdvancedRulesView onLogOut={handleLogOut} />
     }
     if (activeView === "rule-priority") {
-      return <RulePriorityView />
+      return <RulePriorityView onLogOut={handleLogOut} />
     }
     if (activeView === "working-hours") {
-      return <WorkingHoursView />
+      return <WorkingHoursView onLogOut={handleLogOut} />
     }
     return <PlaceholderView title={viewTitles[activeView] || "Unknown"} />
   }
 
   return (
     <div className="min-h-screen bg-background flex">
+      {!loggedIn && <LoginModal onSignIn={handleSignIn} />}
       <TopNavigation activeItem={activeView} onItemSelect={setActiveView} />
       <main className="flex-1 overflow-auto">
         {renderView()}

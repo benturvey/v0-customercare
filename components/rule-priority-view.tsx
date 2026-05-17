@@ -29,7 +29,7 @@ const initialRulePriorities: RulePriority[] = [
   { id: "14", priority: 14, ruleDescription: "Basic Rules" },
 ]
 
-export function RulePriorityView() {
+export function RulePriorityView({ onLogOut }: { onLogOut?: () => void }) {
   const [rulePriorities, setRulePriorities] = useState<RulePriority[]>(initialRulePriorities)
 
   const moveUp = (index: number) => {
@@ -68,7 +68,7 @@ export function RulePriorityView() {
           <Menu className="h-5 w-5 text-foreground shrink-0" />
           <span className="text-sm font-bold text-foreground whitespace-nowrap">Rule Priority</span>
         </div>
-        <UserDropdownMenu userName="Jacquie Cadger" userRole="admin" userInitials="JA" />
+        <UserDropdownMenu userName="Jacquie Cadger" userRole="admin" userInitials="JA" onLogOut={onLogOut} />
       </div>
 
       <Card>

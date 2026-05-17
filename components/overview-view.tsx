@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/table"
 import { UserDropdownMenu } from "@/components/user-dropdown-menu"
 
-export function OverviewView() {
+export function OverviewView({ onLogOut }: { onLogOut?: () => void }) {
   const [peakMode, setPeakMode] = useState(false)
 
   const stats = [
@@ -49,7 +49,7 @@ export function OverviewView() {
           <Menu className="h-5 w-5 text-foreground shrink-0" />
           <span className="text-sm font-bold text-foreground whitespace-nowrap">Overview</span>
         </div>
-        <UserDropdownMenu userName="Jacquie Cadger" userRole="admin" userInitials="JA" />
+        <UserDropdownMenu userName="Jacquie Cadger" userRole="admin" userInitials="JA" onLogOut={onLogOut} />
       </div>
       {/* Stats Card */}
       <div className="border border-border rounded-lg bg-card p-6">
