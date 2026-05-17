@@ -121,9 +121,9 @@ const carriers: Carrier[] = [
     logoAlt: "DPD",
     logoClass: "w-full object-contain",
     cardBg: "bg-transparent",
-    phone: "+44 121 275 0500",
-    email: "customer.services@dpd.co.uk",
-    web: "www.dpd.co.uk",
+    phone: "",
+    email: "",
+    web: "",
     accounts: [
       {
         label: "DPD Domestic",
