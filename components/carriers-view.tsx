@@ -502,18 +502,18 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
 
       {/* Carrier Details Modal */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="max-w-6xl w-full">
+        <DialogContent className="w-screen max-w-[90vw] h-auto">
           <DialogHeader>
             <DialogTitle>{selectedCarrier?.name} Details</DialogTitle>
           </DialogHeader>
-          <div className="border rounded-lg mt-4">
+          <div className="border rounded-lg mt-4 w-full">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-40">Customer</TableHead>
-                  <TableHead className="w-20">Depot</TableHead>
-                  <TableHead className="w-72">Username</TableHead>
-                  <TableHead className="w-24 text-right">Actions</TableHead>
+                  <TableHead className="min-w-48">Customer</TableHead>
+                  <TableHead className="min-w-20">Depot</TableHead>
+                  <TableHead className="min-w-96">Username</TableHead>
+                  <TableHead className="min-w-24 text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
