@@ -157,9 +157,23 @@ const carriers: Carrier[] = [
     logoAlt: "Evri",
     logoClass: "w-full object-contain",
     cardBg: "bg-transparent",
-    phone: "+44 330 808 5456",
-    email: "business@evri.com",
-    web: "www.evri.com",
+    phone: "",
+    email: "",
+    web: "",
+    accounts: [
+      {
+        label: "Evri Domestic",
+        phone: "03444 113019",
+        email: "csclientsupport@hermes-europe.co.uk",
+        web: "www.hermes-europe.co.uk/webtracking/login.html",
+      },
+      {
+        label: "Evri International",
+        phone: "03446 443555",
+        email: "IntCSSupport@hermes-europe.co.uk",
+        web: "www.hermes-europe.co.uk/webtracking/login.html",
+      },
+    ],
   },
   {
     id: "fedex",
