@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Loader2, Clock, PlaneTakeoff, ShieldCheck, Crown, Zap } from "lucide-react"
+import { Loader2, Clock, PlaneTakeoff, ShieldCheck, Crown, Zap, LogOff } from "lucide-react"
 import {
   Table,
   TableBody,
@@ -327,6 +327,9 @@ export function OverviewView() {
                     )}
                     {agent.status === "MGM" && (
                       <Crown className="h-3.5 w-3.5 text-blue-600" />
+                    )}
+                    {agent.status === "Offline" && (
+                      <LogOff className="h-3.5 w-3.5 text-gray-500" />
                     )}
                   </span>
                 </TableCell>
