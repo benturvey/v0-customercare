@@ -75,9 +75,6 @@ export function RulePriorityView() {
           </div>
         </div>
       </div>
-      <header className="mb-6">
-        <h1 className="text-2xl font-semibold text-[#1e3a5f]">Rule Priorities</h1>
-      </header>
 
       <Card>
         <CardContent className="p-0">
