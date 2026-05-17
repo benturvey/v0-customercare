@@ -293,32 +293,35 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
                 )}
               </div>
             )}
-              {carrier.accounts?.map((account, i) => (
-                <div key={i} className="pt-2 mt-1 border-t space-y-1.5">
-                  {account.label && (
-                    <p className="text-xs font-semibold text-foreground">{account.label}</p>
-                  )}
-                  {account.phone && (
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <Phone className="h-3 w-3 shrink-0 text-foreground/60" />
-                      <span className="truncate">{account.phone}</span>
-                    </div>
-                  )}
-                  {account.email && (
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <Mail className="h-3 w-3 shrink-0 text-foreground/60" />
-                      <span className="truncate">{account.email}</span>
-                    </div>
-                  )}
-                  {account.web && (
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <Globe className="h-3 w-3 shrink-0 text-foreground/60" />
-                      <span className="truncate">{account.web}</span>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
+            {carrier.accounts && carrier.accounts.length > 0 && (
+              <div className="border-t px-4 py-3 space-y-1.5 bg-card">
+                {carrier.accounts.map((account, i) => (
+                  <div key={i} className={i > 0 ? "pt-2 mt-1 border-t space-y-1.5" : "space-y-1.5"}>
+                    {account.label && (
+                      <p className="text-xs font-semibold text-foreground">{account.label}</p>
+                    )}
+                    {account.phone && (
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <Phone className="h-3 w-3 shrink-0 text-foreground/60" />
+                        <span className="truncate">{account.phone}</span>
+                      </div>
+                    )}
+                    {account.email && (
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <Mail className="h-3 w-3 shrink-0 text-foreground/60" />
+                        <span className="truncate">{account.email}</span>
+                      </div>
+                    )}
+                    {account.web && (
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <Globe className="h-3 w-3 shrink-0 text-foreground/60" />
+                        <span className="truncate">{account.web}</span>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>
