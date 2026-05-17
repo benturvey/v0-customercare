@@ -146,9 +146,9 @@ const carriers: Carrier[] = [
     logoAlt: "DPD Local",
     logoClass: "w-full object-contain",
     cardBg: "bg-transparent",
-    phone: "+44 121 336 9000",
-    email: "customer.services@dpdlocal.co.uk",
-    web: "www.dpdlocal.co.uk",
+    phone: "01213 364802",
+    email: "elite@dpd.co.uk",
+    web: "www.dpdlocal.co.uk/umslogon/public/logon.do",
   },
   {
     id: "evri",
