@@ -502,26 +502,26 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
 
       {/* Carrier Details Modal */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="max-w-[95vw] w-full">
+        <DialogContent className="sm:max-w-[95vw] max-w-[95vw] w-fit">
           <DialogHeader>
             <DialogTitle>{selectedCarrier?.name} Details</DialogTitle>
           </DialogHeader>
-          <div className="border rounded-lg mt-4 w-full">
-            <Table className="w-full">
+          <div className="border rounded-lg mt-4">
+            <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="whitespace-nowrap">Customer</TableHead>
-                  <TableHead className="whitespace-nowrap">Depot</TableHead>
-                  <TableHead className="whitespace-nowrap">Username</TableHead>
-                  <TableHead className="whitespace-nowrap text-right">Actions</TableHead>
+                  <TableHead className="whitespace-nowrap px-4">Customer</TableHead>
+                  <TableHead className="whitespace-nowrap px-4">Depot</TableHead>
+                  <TableHead className="whitespace-nowrap px-4">Username</TableHead>
+                  <TableHead className="whitespace-nowrap text-right px-4">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {selectedCarrier && carrierDetails[selectedCarrier.id]?.map((detail) => (
                   <TableRow key={detail.id}>
-                    <TableCell className="font-medium whitespace-nowrap">{detail.customer}</TableCell>
-                    <TableCell className="whitespace-nowrap">{detail.depot}</TableCell>
-                    <TableCell className="whitespace-nowrap">{detail.username}</TableCell>
+                    <TableCell className="font-medium whitespace-nowrap px-4">{detail.customer}</TableCell>
+                    <TableCell className="whitespace-nowrap px-4">{detail.depot}</TableCell>
+                    <TableCell className="whitespace-nowrap px-4">{detail.username}</TableCell>
                     <TableCell className="text-right">
                       <div className="flex items-center justify-end gap-1">
                         <Button
