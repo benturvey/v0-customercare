@@ -281,9 +281,9 @@ const carriers: Carrier[] = [
     logoAlt: "GFS International",
     logoClass: "w-full object-contain",
     cardBg: "bg-transparent",
-    phone: "+44 1527 518 000",
-    email: "info@gfsdeliver.com",
-    web: "www.gfsdeliver.com",
+    phone: "",
+    email: "",
+    web: "",
   },
   {
     id: "panther",
