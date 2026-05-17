@@ -96,6 +96,8 @@ const carrierDetails: Record<string, CarrierDetail[]> = {
     { id: "10", carrier: "Landmark Global", fmNumberStart: "LTN", phone: "02070 421300", email: "clientservicesuk@landmarkglobal-group.com", website: "track.landmarkglobal.com/", username: "GFS_CS" },
     { id: "11", carrier: "RPX/Linex", fmNumberStart: "", phone: "", email: "cs@linexsolutions.co.uk", website: "www.linexsolutions.com", username: "" },
     { id: "12", carrier: "Skynet", fmNumberStart: "53", phone: "", email: "manchester@deltec-international.com", website: "www.skynetworldwide.com/services/track-and-trace", username: "" },
+    { id: "13", carrier: "Spring", fmNumberStart: "", phone: "02085 741414", email: "custserv.glm@spring-gds.com", website: "www.spring-gds.com/", username: "" },
+    { id: "14", carrier: "Spring", fmNumberStart: "", phone: "", email: "", website: "Alternate: springtracking.com/", username: "" },
   ],
   "dhl-express": [
     { id: "1", customer: "GFS UK", depot: "Birmingham", username: "gfs_dhl_uk" },
