@@ -22,7 +22,7 @@ export function OverviewView() {
     { value: "14", label: "REVIEWED" },
     { value: "862", label: "NEW TODAY" },
     { value: "791", label: "COMPLETED TODAY" },
-    { value: "80 mins", label: "OLDEST WAITING", amber: true, target: "Target < 60 mins" },
+    { value: "80", label: "OLDEST WAITING", amber: true, target: "Target < 60 mins" },
     { value: "15/30", label: "ACTIVE AGENTS" },
     { value: "9", label: "SLA RISK", green: true, target: peakMode ? "Target < 35" : "Target < 10" },
     { value: "48%", label: "AUTOMATION RATE", green: !peakMode, red: peakMode, target: peakMode ? "Target: 55%" : "Target: 48%" },
