@@ -68,9 +68,9 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
       {/* Carrier Cards */}
       <div className="flex flex-wrap gap-4">
         {/* Amazon Shipping Card */}
-        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-black px-6 py-4 shadow-sm">
+        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-white px-6 py-4 shadow-sm">
           <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/amazon-shipping-zyCMlDZbwMIeTHBZca2OQasxwLqn1y.png"
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/amazon%20shipping%20logo-41shCDtdBCOK8N78ASgLAEqmC3GFgg.png"
             alt="Amazon Shipping"
             className="w-full object-contain"
           />
