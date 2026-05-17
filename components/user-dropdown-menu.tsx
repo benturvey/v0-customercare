@@ -1,12 +1,13 @@
 "use client"
 
 import { useState } from "react"
-import { Moon, LogOut, ArrowUpRight } from "lucide-react"
+import { Moon, LogOut, Coffee, UtensilsCrossed, Users, ClipboardList, Briefcase, BarChart2, GraduationCap, AlertTriangle, Home } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import type { LucideIcon } from "lucide-react"
 
 interface UserDropdownMenuProps {
   userName: string
@@ -14,20 +15,28 @@ interface UserDropdownMenuProps {
   userInitials: string
 }
 
+interface LogOffReason {
+  label: string
+  icon: LucideIcon
+}
+
+const logOffReasons: LogOffReason[] = [
+  { label: "Comfort break",   icon: Coffee },
+  { label: "Official break",  icon: UtensilsCrossed },
+  { label: "Meeting",         icon: Users },
+  { label: "Admin work",      icon: ClipboardList },
+  { label: "Coaching / 1:1",  icon: BarChart2 },
+  { label: "Training",        icon: GraduationCap },
+  { label: "System issues",   icon: AlertTriangle },
+  { label: "End of shift",    icon: Home },
+]
+
 export function UserDropdownMenu({
   userName,
   userRole,
   userInitials,
 }: UserDropdownMenuProps) {
   const [darkMode, setDarkMode] = useState(false)
-
-  const logOffReasons = [
-    "Toilet break",
-    "Lunch",
-    "Going home",
-    "Meeting",
-    "Other",
-  ]
 
   return (
     <DropdownMenu>
@@ -46,10 +55,10 @@ export function UserDropdownMenu({
           </div>
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-48">
+      <DropdownMenuContent align="end" className="w-56">
         {/* User Info */}
         <div className="flex items-center gap-3 px-4 py-3 border-b">
-          <div className="h-10 w-10 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-bold">
+          <div className="h-10 w-10 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-bold shrink-0">
             {userInitials}
           </div>
           <div>
@@ -67,29 +76,25 @@ export function UserDropdownMenu({
           <span>Dark mode</span>
         </button>
 
-        {/* Divider */}
-        <div className="my-2 border-t" />
-
-        {/* Log Off Reason Label */}
-        <div className="px-4 py-2">
-          <p className="text-xs font-semibold text-muted-foreground">
-            Log off reason
-          </p>
+        {/* Divider + Log Off Reason Label */}
+        <div className="mt-1 border-t" />
+        <div className="px-4 pt-2 pb-1">
+          <p className="text-xs font-semibold text-muted-foreground">Log off reason</p>
         </div>
 
         {/* Log Off Reasons */}
-        {logOffReasons.map((reason) => (
+        {logOffReasons.map(({ label, icon: Icon }) => (
           <button
-            key={reason}
+            key={label}
             className="w-full flex items-center gap-3 px-4 py-2 text-sm hover:bg-muted transition-colors"
           >
-            <ArrowUpRight className="h-4 w-4" />
-            <span>{reason}</span>
+            <Icon className="h-4 w-4 text-muted-foreground" />
+            <span>{label}</span>
           </button>
         ))}
 
         {/* Divider */}
-        <div className="my-2 border-t" />
+        <div className="mt-1 border-t" />
 
         {/* Log Out */}
         <button className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors">
