@@ -83,6 +83,14 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
             className="w-full object-contain"
           />
         </div>
+        {/* Collect+ Card */}
+        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-white px-6 py-4 shadow-sm">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/collect%2B%20logo-TRE19iBHK7EnHIBPY4hJsdHDl08eP5.jpg"
+            alt="Collect+"
+            className="w-full object-contain"
+          />
+        </div>
         {/* Coll-8 Logistics Card */}
         <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-white px-6 py-4 shadow-sm">
           <img
