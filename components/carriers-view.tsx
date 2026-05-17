@@ -163,6 +163,14 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
             className="w-full object-contain"
           />
         </div>
+        {/* OCS Card */}
+        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-transparent px-6 py-4 shadow-sm">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ocs-kzJO8EB02p68Lp93oVYBNJviuE4clK.png"
+            alt="OCS"
+            className="w-full object-contain"
+          />
+        </div>
       </div>
 
       {/* Search Bar */}
