@@ -115,6 +115,14 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
             className="w-full object-contain"
           />
         </div>
+        {/* DPD Card */}
+        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-black px-6 py-4 shadow-sm">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DPD-logo-F0gESei27acRca3pcOK4S2s8Vnyahz.png"
+            alt="DPD"
+            className="w-full object-contain"
+          />
+        </div>
       </div>
 
       {/* Search Bar */}
