@@ -98,6 +98,7 @@ const carrierDetails: Record<string, CarrierDetail[]> = {
     { id: "12", carrier: "Skynet", fmNumberStart: "53", phone: "", email: "manchester@deltec-international.com", website: "www.skynetworldwide.com/services/track-and-trace", username: "" },
     { id: "13", carrier: "Spring", fmNumberStart: "", phone: "02085 741414", email: "custserv.glm@spring-gds.com", website: "www.spring-gds.com/", username: "" },
     { id: "14", carrier: "Spring", fmNumberStart: "", phone: "", email: "", website: "Alternate: springtracking.com/", username: "" },
+    { id: "15", carrier: "Exelot", fmNumberStart: "", phone: "", email: "ukhelp@exelot.com", website: "public.exelot.com/tracking", username: "" },
   ],
   "dhl-express": [
     { id: "1", customer: "GFS UK", depot: "Birmingham", username: "gfs_dhl_uk" },
