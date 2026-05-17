@@ -19,6 +19,7 @@ type CarrierAccount = {
   email: string
   web: string
   pin?: string
+  emailAsterisk?: boolean
 }
 
 type Carrier = {
@@ -168,12 +169,14 @@ const carriers: Carrier[] = [
         phone: "03444 113019",
         email: "csclientsupport@hermes-europe.co.uk",
         web: "www.hermes-europe.co.uk/webtracking/login.html",
+        emailAsterisk: true,
       },
       {
         label: "Evri International",
         phone: "03446 443555",
         email: "IntCSSupport@hermes-europe.co.uk",
         web: "www.hermes-europe.co.uk/webtracking/login.html",
+        emailAsterisk: true,
       },
     ],
   },
@@ -349,6 +352,9 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
                         <Mail className="h-3 w-3 shrink-0 text-foreground/60" />
                         <span className="truncate">{account.email}</span>
+                        {account.emailAsterisk && (
+                          <span className="text-red-500 font-semibold shrink-0">*</span>
+                        )}
                       </div>
                     )}
                     {account.web && (
@@ -365,6 +371,11 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
                     )}
                   </div>
                 ))}
+              </div>
+            )}
+            {carrier.accounts?.some((acc) => acc.emailAsterisk) && (
+              <div className="px-4 py-2 text-xs text-muted-foreground bg-card border-t">
+                <span className="text-red-500 font-semibold">*</span> Use email only when Webform is not available
               </div>
             )}
           </div>
