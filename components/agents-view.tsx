@@ -462,11 +462,7 @@ export function AgentsView() {
           </div>
         </div>
       </div>
-
-      <header className="mb-6">
-        <h1 className="text-2xl font-semibold text-[#1e3a5f]">Agent Management</h1>
-      </header>
-
+      
       {/* Agents Table */}
       <div className="border border-border rounded-lg bg-card mb-6">
         {/* Table Header */}
