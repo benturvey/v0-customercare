@@ -105,6 +105,13 @@ const dhlEcommerceColumns: CarrierColumnConfig[] = [
   { key: "password", label: "Password" },
 ]
 
+const dpdColumns: CarrierColumnConfig[] = [
+  { key: "customer", label: "Customer" },
+  { key: "depot", label: "Depot" },
+  { key: "username", label: "Username" },
+  { key: "password", label: "Password" },
+]
+
 const carrierColumns: Record<string, CarrierColumnConfig[]> = {
   "amazon": amazonColumns,
   "gfs-international": gfsInternationalColumns,
@@ -112,6 +119,7 @@ const carrierColumns: Record<string, CarrierColumnConfig[]> = {
   "dx": dxColumns,
   "bjs": bjsColumns,
   "dhl-ecommerce": dhlEcommerceColumns,
+  "dpd": dpdColumns,
 }
 
 // Sample carrier details data
@@ -149,8 +157,7 @@ const carrierDetails: Record<string, CarrierDetail[]> = {
     { id: "3", customer: "GFS DE", depot: "Frankfurt", username: "gfs_dhl_de" },
   ],
   "dpd": [
-    { id: "1", customer: "GFS Domestic", depot: "Manchester", username: "gfs_dpd_dom" },
-    { id: "2", customer: "GFS International", depot: "London", username: "gfs_dpd_int" },
+    { id: "1", customer: "All", depot: "", username: "gfshypercom", password: "Glo0gfs-22" },
   ],
   "evri": [
     { id: "1", customer: "GFS UK", depot: "Leeds", username: "gfs_evri_uk" },
