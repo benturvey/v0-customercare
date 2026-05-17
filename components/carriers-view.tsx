@@ -158,7 +158,7 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
         {/* Royal Mail Card */}
         <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-transparent px-6 py-4 shadow-sm">
           <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/royal%20mail-6Y6D6vBBSFLMbnF0AyJhpL1tVdgQdj.png"
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/royal%20mail-Nl4Se5TtrV5bRUfLX9cBGEkypx91lE.png"
             alt="Royal Mail"
             className="w-full object-contain"
           />
