@@ -241,7 +241,7 @@ const carriers: Carrier[] = [
     name: "DX",
     logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DX-i5l4ARsQnXGswoEraJ3WrqOAeTkHSt.jpg",
     logoAlt: "DX",
-    logoClass: "w-full object-contain",
+    logoClass: "w-4/5 object-contain",
     cardBg: "bg-transparent",
     phone: "",
     email: "",
