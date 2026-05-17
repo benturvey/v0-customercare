@@ -718,9 +718,6 @@ export function AdvancedRulesView() {
           </div>
         </div>
       </div>
-      <header className="mb-6">
-        <h1 className="text-2xl font-semibold text-[#1e3a5f]">Advanced Skill Level Rules</h1>
-      </header>
 
       {/* General Advanced Rules */}
       <Card>
