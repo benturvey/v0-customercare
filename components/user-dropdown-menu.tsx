@@ -40,9 +40,15 @@ export function UserDropdownMenu({
 }: UserDropdownMenuProps) {
   const [darkMode, setDarkMode] = useState(false)
   const [selectedReason, setSelectedReason] = useState<string | null>(null)
+  const [open, setOpen] = useState(false)
+
+  const handleLogOut = () => {
+    setOpen(false)
+    setTimeout(() => onLogOut?.(), 150)
+  }
 
   return (
-    <DropdownMenu>
+    <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
         <button className="flex items-center gap-3 shrink-0 cursor-pointer hover:opacity-80 transition-opacity">
           <div className="h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
@@ -106,7 +112,7 @@ export function UserDropdownMenu({
 
         {/* Log Out */}
         <button
-          onClick={onLogOut}
+          onClick={handleLogOut}
           className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
         >
           <LogOut className="h-4 w-4" />
