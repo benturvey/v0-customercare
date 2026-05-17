@@ -637,11 +637,11 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
 
       {/* Carrier Details Modal */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="sm:max-w-[95vw] max-w-[95vw] w-fit">
+        <DialogContent className="sm:max-w-[95vw] max-w-[95vw] w-fit max-h-[90vh] flex flex-col">
           <DialogHeader>
             <DialogTitle>{selectedCarrier?.name} Details</DialogTitle>
           </DialogHeader>
-          <div className="border rounded-lg mt-4">
+          <div className="border rounded-lg mt-4 overflow-y-auto flex-1">
             {(() => {
               const columns = selectedCarrier ? (carrierColumns[selectedCarrier.id] ?? defaultColumns) : defaultColumns
               const rows = selectedCarrier ? (carrierDetails[selectedCarrier.id] ?? []) : []
