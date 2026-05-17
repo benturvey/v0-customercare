@@ -121,7 +121,7 @@ const carriers: Carrier[] = [
     name: "DPD",
     logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DPD-logo%20%281%29-79fXEz5ywPAPYB8FPb6zBxOUEg62na.png",
     logoAlt: "DPD",
-    logoClass: "w-full object-contain",
+    logoClass: "w-11/12 object-contain",
     cardBg: "bg-transparent",
     phone: "",
     email: "",
