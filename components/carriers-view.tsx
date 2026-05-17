@@ -61,7 +61,7 @@ const carriers: Carrier[] = [
   {
     id: "collect-plus",
     name: "Collect+",
-    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/collect%2B%20logo-TRE19iBHK7EnHIBPY4hJsdHDl08eP5.jpg",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/collect%2B-bl59G3G7qmRyh7KRchGukRABY6XryL.png",
     logoAlt: "Collect+",
     logoClass: "w-11/12 object-contain",
     cardBg: "bg-white",
