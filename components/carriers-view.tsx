@@ -1,10 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { UserDropdownMenu } from "@/components/user-dropdown-menu"
-import { Menu, X, Pencil, Search } from "lucide-react"
+import { Menu, Pencil, Search, Phone, Mail, Globe } from "lucide-react"
 import {
   Table,
   TableBody,
@@ -14,44 +13,199 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-const initialCarriers = [
+type Carrier = {
+  id: string
+  name: string
+  logo: string
+  logoAlt: string
+  logoClass: string
+  cardBg: string
+  phone: string
+  email: string
+  web: string
+}
+
+const carriers: Carrier[] = [
   {
-    id: "1",
-    name: "DPD UK",
-    email: "info@dpdgroup.com",
-    phone: "+44 1902 123456",
-    location: "Wolverhampton, UK",
+    id: "amazon",
+    name: "Amazon Shipping",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/amazon-shipping-XlLKPcZ5buPu8bMsmeeTlLc8bg1lG5.png",
+    logoAlt: "Amazon Shipping",
+    logoClass: "w-full object-contain",
+    cardBg: "bg-transparent",
+    phone: "+44 800 496 1081",
+    email: "amazon-shipping@amazon.co.uk",
+    web: "ship.amazon.co.uk",
   },
   {
-    id: "2",
-    name: "Yodel",
-    email: "business@yodel.co.uk",
-    phone: "+44 1902 654321",
-    location: "Birmingham, UK",
+    id: "bjs",
+    name: "BJS Two-Man Home Delivery",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bjs-afsgnHhHzQfiKyJhtcibSSjp8jlkgn.jpg",
+    logoAlt: "BJS Two-Man Home Delivery",
+    logoClass: "w-full object-contain",
+    cardBg: "bg-white",
+    phone: "+44 1234 567890",
+    email: "info@bjshomedelivery.com",
+    web: "www.bjshomedelivery.com",
   },
   {
-    id: "3",
-    name: "Hermes",
-    email: "business@hermesworld.com",
-    phone: "+44 121 333 6666",
-    location: "Solihull, UK",
+    id: "collectplus",
+    name: "Collect+",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/collect%2B%20logo-TRE19iBHK7EnHIBPY4hJsdHDl08eP5.jpg",
+    logoAlt: "Collect+",
+    logoClass: "w-full object-contain",
+    cardBg: "bg-white",
+    phone: "+44 1923 605 100",
+    email: "support@collectplus.co.uk",
+    web: "www.collectplus.co.uk",
   },
   {
-    id: "4",
-    name: "Parcelforce",
-    email: "business@parcelforce.com",
-    phone: "+44 344 800 4466",
-    location: "Various, UK",
+    id: "coll8",
+    name: "Coll-8 Logistics",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Coll-8-ImRjjcFHWxE9CQeEzOYdezOnSVxUUB.jpeg",
+    logoAlt: "Coll-8 Logistics",
+    logoClass: "w-2/3 object-contain",
+    cardBg: "bg-white",
+    phone: "+44 333 006 8888",
+    email: "info@coll-8.co.uk",
+    web: "www.coll-8.co.uk",
+  },
+  {
+    id: "dhl-ecommerce",
+    name: "DHL eCommerce",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DHL-eCommerce-CQbgFp7GXy6ZHfRMZATr7Y9RODuhQp.png",
+    logoAlt: "DHL eCommerce",
+    logoClass: "w-full object-contain",
+    cardBg: "bg-white",
+    phone: "+44 345 774 0074",
+    email: "ecommerce.uk@dhl.com",
+    web: "www.dhl.com/ecommerce",
+  },
+  {
+    id: "dhl-express",
+    name: "DHL Express",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dhl%20express%20logo-HLXuu7EPHNEwK5wE4OranxixhxFH58.jpg",
+    logoAlt: "DHL Express",
+    logoClass: "w-full object-contain",
+    cardBg: "bg-white",
+    phone: "+44 345 774 0074",
+    email: "express.uk@dhl.com",
+    web: "www.dhl.com/express",
+  },
+  {
+    id: "dpd",
+    name: "DPD",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DPD-logo%20%281%29-79fXEz5ywPAPYB8FPb6zBxOUEg62na.png",
+    logoAlt: "DPD",
+    logoClass: "w-full object-contain",
+    cardBg: "bg-transparent",
+    phone: "+44 121 275 0500",
+    email: "customer.services@dpd.co.uk",
+    web: "www.dpd.co.uk",
+  },
+  {
+    id: "dpd-local",
+    name: "DPD Local",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DPD-Local-iA4J3IQjAi782SuGgcUthVN44efiet.png",
+    logoAlt: "DPD Local",
+    logoClass: "w-full object-contain",
+    cardBg: "bg-transparent",
+    phone: "+44 121 336 9000",
+    email: "customer.services@dpdlocal.co.uk",
+    web: "www.dpdlocal.co.uk",
+  },
+  {
+    id: "evri",
+    name: "Evri",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Evri%20%281%29-QUyYLdTFBy8PWmD5TsdIHo5nm6mFGo.png",
+    logoAlt: "Evri",
+    logoClass: "w-full object-contain",
+    cardBg: "bg-transparent",
+    phone: "+44 330 808 5456",
+    email: "business@evri.com",
+    web: "www.evri.com",
+  },
+  {
+    id: "fedex",
+    name: "FedEx",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fedex-3kITNZnIiD8X5ZzVTQychTytgEmaSg.png",
+    logoAlt: "FedEx",
+    logoClass: "w-full object-contain",
+    cardBg: "bg-transparent",
+    phone: "+44 345 600 0068",
+    email: "customer.support@fedex.com",
+    web: "www.fedex.com/en-gb",
+  },
+  {
+    id: "gfs-international",
+    name: "GFS International",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/GFS-International-MyPuR96FE8DB2c1BI7Nun0GkICs1JC.png",
+    logoAlt: "GFS International",
+    logoClass: "w-full object-contain",
+    cardBg: "bg-transparent",
+    phone: "+44 1527 518 000",
+    email: "info@gfsdeliver.com",
+    web: "www.gfsdeliver.com",
+  },
+  {
+    id: "panther",
+    name: "Panther Logistics",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/panther%20logo-xaesEBBowMJPKzTDSqtCNLxhVxbN2Y.jpg",
+    logoAlt: "Panther Logistics Experts",
+    logoClass: "w-full object-contain",
+    cardBg: "bg-transparent",
+    phone: "+44 1 582 516 400",
+    email: "enquiries@pantherlogistics.co.uk",
+    web: "www.pantherlogistics.co.uk",
+  },
+  {
+    id: "royal-mail",
+    name: "Royal Mail",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/royal%20mail-Nl4Se5TtrV5bRUfLX9cBGEkypx91lE.png",
+    logoAlt: "Royal Mail",
+    logoClass: "w-full object-contain",
+    cardBg: "bg-transparent",
+    phone: "+44 345 774 0740",
+    email: "business@royalmail.com",
+    web: "www.royalmail.com",
+  },
+  {
+    id: "ocs",
+    name: "OCS",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ocs-kzJO8EB02p68Lp93oVYBNJviuE4clK.png",
+    logoAlt: "OCS",
+    logoClass: "w-full object-contain",
+    cardBg: "bg-transparent",
+    phone: "+44 1932 837 000",
+    email: "enquiries@ocs.com",
+    web: "www.ocs.com",
+  },
+  {
+    id: "ups",
+    name: "UPS",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/UPS-rBYRW409MXRpDyJN3rPMhS1EoWTR7D.png",
+    logoAlt: "UPS",
+    logoClass: "h-16 object-contain",
+    cardBg: "bg-transparent",
+    phone: "+44 345 787 7877",
+    email: "customer.service@ups.com",
+    web: "www.ups.com/gb",
   },
 ]
 
+const tableCarriers = [
+  { id: "1", name: "DPD UK", email: "info@dpdgroup.com", phone: "+44 1902 123456", location: "Wolverhampton, UK" },
+  { id: "2", name: "Yodel", email: "business@yodel.co.uk", phone: "+44 1902 654321", location: "Birmingham, UK" },
+  { id: "3", name: "Hermes", email: "business@hermesworld.com", phone: "+44 121 333 6666", location: "Solihull, UK" },
+  { id: "4", name: "Parcelforce", email: "business@parcelforce.com", phone: "+44 344 800 4466", location: "Various, UK" },
+]
+
 export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
-  const [carriers, setCarriers] = useState(initialCarriers)
   const [searchTerm, setSearchTerm] = useState("")
   const [editingId, setEditingId] = useState<string | null>(null)
 
-  const filteredCarriers = carriers.filter((carrier) =>
-    carrier.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredCarriers = tableCarriers.filter((c) =>
+    c.name.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
   return (
@@ -67,126 +221,36 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
 
       {/* Carrier Cards */}
       <div className="flex flex-wrap gap-4">
-        {/* Amazon Shipping Card */}
-        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-transparent px-6 py-4 shadow-sm">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/amazon-shipping-XlLKPcZ5buPu8bMsmeeTlLc8bg1lG5.png"
-            alt="Amazon Shipping"
-            className="w-full object-contain"
-          />
-        </div>
-        {/* BJS Card */}
-        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-white px-6 py-4 shadow-sm">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bjs-afsgnHhHzQfiKyJhtcibSSjp8jlkgn.jpg"
-            alt="BJS Two-Man Home Delivery"
-            className="w-full object-contain"
-          />
-        </div>
-        {/* Collect+ Card */}
-        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-white px-6 py-4 shadow-sm">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/collect%2B%20logo-TRE19iBHK7EnHIBPY4hJsdHDl08eP5.jpg"
-            alt="Collect+"
-            className="w-full object-contain"
-          />
-        </div>
-        {/* Coll-8 Logistics Card */}
-        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-white px-6 py-4 shadow-sm">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Coll-8-ImRjjcFHWxE9CQeEzOYdezOnSVxUUB.jpeg"
-            alt="Coll-8 Logistics"
-            className="w-2/3 object-contain"
-          />
-        </div>
-        {/* DHL eCommerce Card */}
-        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-white px-6 py-4 shadow-sm">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DHL-eCommerce-CQbgFp7GXy6ZHfRMZATr7Y9RODuhQp.png"
-            alt="DHL eCommerce"
-            className="w-full object-contain"
-          />
-        </div>
-        {/* DHL Express Card */}
-        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-white px-6 py-4 shadow-sm">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dhl%20express%20logo-HLXuu7EPHNEwK5wE4OranxixhxFH58.jpg"
-            alt="DHL Express"
-            className="w-full object-contain"
-          />
-        </div>
-        {/* DPD Card */}
-        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-transparent px-6 py-4 shadow-sm">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DPD-logo%20%281%29-79fXEz5ywPAPYB8FPb6zBxOUEg62na.png"
-            alt="DPD"
-            className="w-full object-contain"
-          />
-        </div>
-        {/* DPD Local Card */}
-        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-transparent px-6 py-4 shadow-sm">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DPD-Local-iA4J3IQjAi782SuGgcUthVN44efiet.png"
-            alt="DPD Local"
-            className="w-full object-contain"
-          />
-        </div>
-        {/* Evri Card */}
-        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-transparent px-6 py-4 shadow-sm">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Evri%20%281%29-QUyYLdTFBy8PWmD5TsdIHo5nm6mFGo.png"
-            alt="Evri"
-            className="w-full object-contain"
-          />
-        </div>
-        {/* FedEx Card */}
-        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-transparent px-6 py-4 shadow-sm">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fedex-3kITNZnIiD8X5ZzVTQychTytgEmaSg.png"
-            alt="FedEx"
-            className="w-full object-contain"
-          />
-        </div>
-        {/* GFS International Card */}
-        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-transparent px-6 py-4 shadow-sm">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/GFS-International-MyPuR96FE8DB2c1BI7Nun0GkICs1JC.png"
-            alt="GFS International"
-            className="w-full object-contain"
-          />
-        </div>
-        {/* Panther Logistics Card */}
-        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-transparent px-6 py-4 shadow-sm">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/panther%20logo-xaesEBBowMJPKzTDSqtCNLxhVxbN2Y.jpg"
-            alt="Panther Logistics Experts"
-            className="w-full object-contain"
-          />
-        </div>
-        {/* Royal Mail Card */}
-        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-transparent px-6 py-4 shadow-sm">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/royal%20mail-Nl4Se5TtrV5bRUfLX9cBGEkypx91lE.png"
-            alt="Royal Mail"
-            className="w-full object-contain"
-          />
-        </div>
-        {/* OCS Card */}
-        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-transparent px-6 py-4 shadow-sm">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ocs-kzJO8EB02p68Lp93oVYBNJviuE4clK.png"
-            alt="OCS"
-            className="w-full object-contain"
-          />
-        </div>
-        {/* UPS Card */}
-        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-transparent px-6 py-4 shadow-sm">
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/UPS-rBYRW409MXRpDyJN3rPMhS1EoWTR7D.png"
-            alt="UPS"
-            className="h-full object-contain"
-          />
-        </div>
+        {carriers.map((carrier) => (
+          <div
+            key={carrier.id}
+            className={`flex flex-col rounded-lg border shadow-sm overflow-hidden w-56 ${carrier.cardBg}`}
+          >
+            {/* Logo area */}
+            <div className="flex items-center justify-center px-6 py-4 h-24">
+              <img
+                src={carrier.logo}
+                alt={carrier.logoAlt}
+                className={carrier.logoClass}
+              />
+            </div>
+            {/* Contact details */}
+            <div className="border-t px-4 py-3 space-y-1.5 bg-card">
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <Phone className="h-3 w-3 shrink-0 text-foreground/60" />
+                <span className="truncate">{carrier.phone}</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <Mail className="h-3 w-3 shrink-0 text-foreground/60" />
+                <span className="truncate">{carrier.email}</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <Globe className="h-3 w-3 shrink-0 text-foreground/60" />
+                <span className="truncate">{carrier.web}</span>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Search Bar */}
