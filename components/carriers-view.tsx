@@ -119,6 +119,14 @@ const dpdLocalColumns: CarrierColumnConfig[] = [
   { key: "password", label: "Password" },
 ]
 
+const evriColumns: CarrierColumnConfig[] = [
+  { key: "section", label: "Section" },
+  { key: "customer", label: "Customer" },
+  { key: "depot", label: "Depot" },
+  { key: "username", label: "Username" },
+  { key: "password", label: "Password" },
+]
+
 const carrierColumns: Record<string, CarrierColumnConfig[]> = {
   "amazon": amazonColumns,
   "gfs-international": gfsInternationalColumns,
@@ -128,6 +136,7 @@ const carrierColumns: Record<string, CarrierColumnConfig[]> = {
   "dhl-ecommerce": dhlEcommerceColumns,
   "dpd": dpdColumns,
   "dpd-local": dpdLocalColumns,
+  "evri": evriColumns,
 }
 
 // Sample carrier details data
@@ -168,7 +177,11 @@ const carrierDetails: Record<string, CarrierDetail[]> = {
     { id: "1", customer: "All", depot: "", username: "gfshypercom", password: "Glo0gfs-22" },
   ],
   "evri": [
-    { id: "1", customer: "GFS UK", depot: "Leeds", username: "gfs_evri_uk" },
+    { id: "1", section: "Evri Domestic", customer: "All", depot: "", username: "gfs1", password: "Re1JJ1wL4GnGvP6g4uCj" },
+    { id: "2", section: "Evri Domestic", customer: "Alternate log in", depot: "", username: "gfs2", password: "9VbPeXpBvuNAauGBTfqG" },
+    { id: "3", section: "Evri Domestic", customer: "Alternate log in", depot: "", username: "gfs3", password: "73YCmXJeYoAJnVHCKZ59" },
+    { id: "4", section: "Evri Domestic", customer: "Alternate log in", depot: "", username: "gfs4", password: "4aYcJ59mnwGHRb49JhWq" },
+    { id: "5", section: "Evri Domestic", customer: "Alternate log in", depot: "", username: "gfs5", password: "jMPYg7RWKwCmZK6QPgwA" },
   ],
   "ups": [
     { id: "1", customer: "GFS UK", depot: "Coventry", username: "gfs_ups_uk" },
