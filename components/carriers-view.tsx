@@ -237,6 +237,17 @@ const carriers: Carrier[] = [
     web: "www.dpdlocal.co.uk/umslogon/public/logon.do",
   },
   {
+    id: "dx",
+    name: "DX",
+    logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DX-i5l4ARsQnXGswoEraJ3WrqOAeTkHSt.jpg",
+    logoAlt: "DX",
+    logoClass: "w-full object-contain",
+    cardBg: "bg-transparent",
+    phone: "",
+    email: "",
+    web: "",
+  },
+  {
     id: "evri",
     name: "Evri",
     logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Evri%20%281%29-QUyYLdTFBy8PWmD5TsdIHo5nm6mFGo.png",
