@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { UserDropdownMenu } from "@/components/user-dropdown-menu"
-import { Menu, Pencil, Search, Phone, Mail, Globe, MoreVertical } from "lucide-react"
+import { Menu, Pencil, Search, Phone, Mail, Globe, MoreVertical, Trash2 } from "lucide-react"
 import {
   Table,
   TableBody,
@@ -12,6 +12,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
 
 type CarrierAccount = {
   label?: string
@@ -34,6 +41,37 @@ type Carrier = {
   web: string
   pin?: string
   accounts?: CarrierAccount[]
+}
+
+type CarrierDetail = {
+  id: string
+  customer: string
+  depot: string
+  username: string
+}
+
+// Sample carrier details data
+const carrierDetails: Record<string, CarrierDetail[]> = {
+  "amazon": [
+    { id: "1", customer: "GFS UK", depot: "London", username: "gfs_amazon_uk" },
+    { id: "2", customer: "GFS EU", depot: "Paris", username: "gfs_amazon_eu" },
+  ],
+  "dhl-express": [
+    { id: "1", customer: "GFS UK", depot: "Birmingham", username: "gfs_dhl_uk" },
+    { id: "2", customer: "NL Redwood", depot: "Amsterdam", username: "nl_redwood" },
+    { id: "3", customer: "GFS DE", depot: "Frankfurt", username: "gfs_dhl_de" },
+  ],
+  "dpd": [
+    { id: "1", customer: "GFS Domestic", depot: "Manchester", username: "gfs_dpd_dom" },
+    { id: "2", customer: "GFS International", depot: "London", username: "gfs_dpd_int" },
+  ],
+  "evri": [
+    { id: "1", customer: "GFS UK", depot: "Leeds", username: "gfs_evri_uk" },
+  ],
+  "ups": [
+    { id: "1", customer: "GFS UK", depot: "Coventry", username: "gfs_ups_uk" },
+    { id: "2", customer: "Omlet Germany", depot: "Cologne", username: "omlet_ups_de" },
+  ],
 }
 
 const carriers: Carrier[] = [
@@ -275,6 +313,28 @@ const tableCarriers = [
 export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
   const [searchTerm, setSearchTerm] = useState("")
   const [editingId, setEditingId] = useState<string | null>(null)
+  const [selectedCarrier, setSelectedCarrier] = useState<Carrier | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleOpenModal = (carrier: Carrier) => {
+    setSelectedCarrier(carrier)
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setSelectedCarrier(null)
+  }
+
+  const handleEditDetail = (detailId: string) => {
+    // Handle edit logic here
+    console.log("[v0] Edit detail:", detailId)
+  }
+
+  const handleDeleteDetail = (detailId: string) => {
+    // Handle delete logic here
+    console.log("[v0] Delete detail:", detailId)
+  }
 
   const filteredCarriers = tableCarriers.filter((c) =>
     c.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -379,7 +439,10 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
               </div>
             )}
             {/* MoreInfo Icon */}
-            <button className="absolute bottom-3 right-3 p-1.5 hover:bg-muted rounded-full transition-colors">
+            <button 
+              className="absolute bottom-3 right-3 p-1.5 hover:bg-muted rounded-full transition-colors"
+              onClick={() => handleOpenModal(carrier)}
+            >
               <MoreVertical className="h-4 w-4 text-muted-foreground hover:text-foreground" />
             </button>
           </div>
@@ -431,6 +494,63 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
           </TableBody>
         </Table>
       </div>
+
+      {/* Carrier Details Modal */}
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>{selectedCarrier?.name} Details</DialogTitle>
+          </DialogHeader>
+          <div className="border rounded-lg mt-4">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Customer</TableHead>
+                  <TableHead>Depot</TableHead>
+                  <TableHead>Username</TableHead>
+                  <TableHead className="w-24 text-right">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {selectedCarrier && carrierDetails[selectedCarrier.id]?.map((detail) => (
+                  <TableRow key={detail.id}>
+                    <TableCell className="font-medium">{detail.customer}</TableCell>
+                    <TableCell>{detail.depot}</TableCell>
+                    <TableCell>{detail.username}</TableCell>
+                    <TableCell className="text-right">
+                      <div className="flex items-center justify-end gap-1">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8"
+                          onClick={() => handleEditDetail(detail.id)}
+                        >
+                          <Pencil className="h-4 w-4 text-muted-foreground" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8"
+                          onClick={() => handleDeleteDetail(detail.id)}
+                        >
+                          <Trash2 className="h-4 w-4 text-destructive" />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+                {selectedCarrier && !carrierDetails[selectedCarrier.id]?.length && (
+                  <TableRow>
+                    <TableCell colSpan={4} className="text-center text-muted-foreground py-8">
+                      No details available for this carrier
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
