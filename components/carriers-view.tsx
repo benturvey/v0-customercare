@@ -740,6 +740,7 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
               const columns = selectedCarrier ? (carrierColumns[selectedCarrier.id] ?? defaultColumns) : defaultColumns
               const rows = selectedCarrier ? (carrierDetails[selectedCarrier.id] ?? []) : []
               const isEvri = selectedCarrier?.id === "evri"
+              const isDX = selectedCarrier?.id === "dx"
               const sectionLabels: Record<string, string> = {
                 domestic: "Evri Domestic",
                 international: "Evri International",
@@ -747,6 +748,13 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
               return (
                 <Table>
                   <TableHeader>
+                    {isDX && rows.length > 0 && (
+                      <TableRow className="bg-muted/50 hover:bg-muted/50">
+                        <TableHead colSpan={columns.length + 1} className="px-4 py-2 font-semibold text-sm text-foreground">
+                          DX Depot Contact
+                        </TableHead>
+                      </TableRow>
+                    )}
                     <TableRow>
                       {columns.map((col) => (
                         <TableHead key={col.key} className="whitespace-nowrap px-4">{col.label}</TableHead>
