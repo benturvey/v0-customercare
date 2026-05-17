@@ -238,9 +238,6 @@ export function QueryTypeView() {
           </div>
         </div>
       </div>
-      <header className="mb-6">
-        <h1 className="text-2xl font-semibold text-[#1e3a5f]">Basic Skill Level Rules</h1>
-      </header>
 
       {/* Add New Entry Section */}
       <Card className="mb-6">
