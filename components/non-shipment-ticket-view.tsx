@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { MessageSquare, X } from "lucide-react"
+import { MessageSquare, X, TicketPlus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -131,6 +131,23 @@ export function NonShipmentTicketView() {
 
   return (
     <div className="w-full px-4 py-6">
+      {/* Page header bar */}
+      <div className="flex items-center justify-between border-b pb-3 mb-6">
+        <div className="flex items-center gap-3">
+          <TicketPlus className="h-5 w-5 text-foreground shrink-0" />
+          <span className="text-sm font-bold text-foreground whitespace-nowrap">Non-Shipment Tickets</span>
+        </div>
+        <div className="flex items-center gap-3 shrink-0">
+          <div className="h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
+            JA
+          </div>
+          <div className="text-right">
+            <p className="text-xs font-semibold text-foreground leading-tight">Jacquie Cadger</p>
+            <p className="text-xs text-muted-foreground leading-tight">admin</p>
+          </div>
+        </div>
+      </div>
+      
       <header className="mb-6 flex items-start justify-between">
         <div>
           <h1 className="text-2xl font-semibold text-[#1e3a5f]">Non-Shipment Tickets</h1>
