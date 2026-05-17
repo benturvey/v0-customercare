@@ -271,19 +271,28 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
               />
             </div>
             {/* Contact details */}
-            <div className="border-t px-4 py-3 space-y-1.5 bg-card">
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <Phone className="h-3 w-3 shrink-0 text-foreground/60" />
-                <span className="truncate">{carrier.phone}</span>
+            {(carrier.phone || carrier.email || carrier.web) && (
+              <div className="border-t px-4 py-3 space-y-1.5 bg-card">
+                {carrier.phone && (
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <Phone className="h-3 w-3 shrink-0 text-foreground/60" />
+                    <span className="truncate">{carrier.phone}</span>
+                  </div>
+                )}
+                {carrier.email && (
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <Mail className="h-3 w-3 shrink-0 text-foreground/60" />
+                    <span className="truncate">{carrier.email}</span>
+                  </div>
+                )}
+                {carrier.web && (
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <Globe className="h-3 w-3 shrink-0 text-foreground/60" />
+                    <span className="truncate">{carrier.web}</span>
+                  </div>
+                )}
               </div>
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <Mail className="h-3 w-3 shrink-0 text-foreground/60" />
-                <span className="truncate">{carrier.email}</span>
-              </div>
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <Globe className="h-3 w-3 shrink-0 text-foreground/60" />
-                <span className="truncate">{carrier.web}</span>
-              </div>
+            )}
               {carrier.accounts?.map((account, i) => (
                 <div key={i} className="pt-2 mt-1 border-t space-y-1.5">
                   {account.label && (
