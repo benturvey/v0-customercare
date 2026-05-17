@@ -88,9 +88,9 @@ const carriers: Carrier[] = [
     logoAlt: "DHL Express",
     logoClass: "w-full object-contain",
     cardBg: "bg-white",
-    phone: "08442 480888",
-    email: "premiercustomerservice@dhl.com",
-    web: "http://www.dhl.co.uk/en/express/tracking.html",
+    phone: "Use Email",
+    email: "ams.backline@dhl.com",
+    web: "https://www.dhl.com/nl",
   },
   {
     id: "dpd",
