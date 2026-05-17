@@ -506,13 +506,13 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
           <DialogHeader>
             <DialogTitle>{selectedCarrier?.name} Details</DialogTitle>
           </DialogHeader>
-          <div className="border rounded-lg mt-4">
+          <div className="border rounded-lg mt-4 overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Customer</TableHead>
-                  <TableHead>Depot</TableHead>
-                  <TableHead>Username</TableHead>
+                  <TableHead className="w-40">Customer</TableHead>
+                  <TableHead className="w-20">Depot</TableHead>
+                  <TableHead className="w-72">Username</TableHead>
                   <TableHead className="w-24 text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
@@ -521,7 +521,7 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
                   <TableRow key={detail.id}>
                     <TableCell className="font-medium">{detail.customer}</TableCell>
                     <TableCell>{detail.depot}</TableCell>
-                    <TableCell>{detail.username}</TableCell>
+                    <TableCell className="break-all">{detail.username}</TableCell>
                     <TableCell className="text-right">
                       <div className="flex items-center justify-end gap-1">
                         <Button
