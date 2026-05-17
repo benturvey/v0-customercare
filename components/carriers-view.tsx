@@ -98,12 +98,20 @@ const bjsColumns: CarrierColumnConfig[] = [
   { key: "password", label: "Password" },
 ]
 
+const dhlEcommerceColumns: CarrierColumnConfig[] = [
+  { key: "customer", label: "Customer" },
+  { key: "depot", label: "Depot" },
+  { key: "username", label: "Username" },
+  { key: "password", label: "Password" },
+]
+
 const carrierColumns: Record<string, CarrierColumnConfig[]> = {
   "amazon": amazonColumns,
   "gfs-international": gfsInternationalColumns,
   "international-websites": internationalWebsitesColumns,
   "dx": dxColumns,
   "bjs": bjsColumns,
+  "dhl-ecommerce": dhlEcommerceColumns,
 }
 
 // Sample carrier details data
@@ -175,6 +183,9 @@ const carrierDetails: Record<string, CarrierDetail[]> = {
   ],
   "bjs": [
     { id: "1", customer: "All", depot: "", username: "CSCarrier@GFS", password: "Gfspass1234!" },
+  ],
+  "dhl-ecommerce": [
+    { id: "1", customer: "All", depot: "", username: "cs.warrington@justshoutgfs.com", password: "GFspass1658" },
   ],
   "international-websites": [
     { id: "1",  carrier: "Evri", country: "All", website: "https://clients.hermescloud.co.uk/", notes: "" },
