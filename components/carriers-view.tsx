@@ -99,6 +99,14 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
             className="w-2/3 object-contain"
           />
         </div>
+        {/* DHL Express Card */}
+        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-white px-6 py-4 shadow-sm">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dhl%20express%20logo-HLXuu7EPHNEwK5wE4OranxixhxFH58.jpg"
+            alt="DHL Express"
+            className="w-full object-contain"
+          />
+        </div>
       </div>
 
       {/* Search Bar */}
