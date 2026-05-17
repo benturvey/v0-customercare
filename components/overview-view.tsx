@@ -173,7 +173,7 @@ export function OverviewView() {
           </TableHeader>
           <TableBody>
             <TableRow>
-              <TableCell className="font-medium">L1 — General Enquiries</TableCell>
+              <TableCell className="font-medium">L1</TableCell>
               <TableCell>10</TableCell>
               <TableCell>8</TableCell>
               <TableCell><span className="text-amber-500 font-medium">-2</span></TableCell>
@@ -187,7 +187,7 @@ export function OverviewView() {
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="font-medium">L2 — Shipment Issues</TableCell>
+              <TableCell className="font-medium">L2</TableCell>
               <TableCell>6</TableCell>
               <TableCell>4</TableCell>
               <TableCell><span className="text-red-600 font-medium">-2</span></TableCell>
@@ -201,7 +201,7 @@ export function OverviewView() {
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="font-medium">L3 — Escalations</TableCell>
+              <TableCell className="font-medium">L3</TableCell>
               <TableCell>4</TableCell>
               <TableCell>4</TableCell>
               <TableCell><span className="text-green-600 font-medium">0</span></TableCell>
@@ -215,7 +215,7 @@ export function OverviewView() {
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="font-medium">L4 — Management</TableCell>
+              <TableCell className="font-medium">L4</TableCell>
               <TableCell>2</TableCell>
               <TableCell>1</TableCell>
               <TableCell><span className="text-red-600 font-medium">-1</span></TableCell>
