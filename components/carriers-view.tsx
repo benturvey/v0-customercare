@@ -204,9 +204,9 @@ const carriers: Carrier[] = [
     logoAlt: "Panther Logistics Experts",
     logoClass: "w-full object-contain",
     cardBg: "bg-transparent",
-    phone: "+44 1 582 516 400",
-    email: "enquiries@pantherlogistics.co.uk",
-    web: "www.pantherlogistics.co.uk",
+    phone: "01604 215002",
+    email: "clientadmin@panthergroup.co.uk",
+    web: "portal.panthergroup.co.uk/account/login",
   },
   {
     id: "royal-mail",
