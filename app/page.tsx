@@ -10,6 +10,7 @@ import { RoutingRulesView } from "@/components/routing-rules-view"
 import { AgentsView } from "@/components/agents-view"
 import { TaggingRulesView } from "@/components/tagging-rules-view"
 import { CustomersView } from "@/components/customers-view"
+import { CarriersView } from "@/components/carriers-view"
 import { NonShipmentTicketView } from "@/components/non-shipment-ticket-view"
 import { QueryTypeView } from "@/components/query-type-view"
 import { AdvancedRulesView } from "@/components/advanced-rules-view"
@@ -80,6 +81,9 @@ export default function MainPage() {
     }
     if (activeView === "customers") {
       return <CustomersView onLogOut={handleLogOut} />
+    }
+    if (activeView === "carriers") {
+      return <CarriersView onLogOut={handleLogOut} />
     }
     if (activeView === "query-type") {
       return <QueryTypeView onLogOut={handleLogOut} />

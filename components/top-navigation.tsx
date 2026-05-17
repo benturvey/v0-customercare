@@ -14,6 +14,7 @@ import {
   ShieldCheck,
   ArrowUpDown,
   Clock,
+  Truck,
   type LucideIcon,
 } from "lucide-react"
 
@@ -32,6 +33,7 @@ const navItems: NavItem[] = [
   { id: "raise-non-shipment-ticket", label: "Raise Non-Shipment Ticket", icon: TicketPlus, section: "operations" },
   { id: "agents", label: "Agents", icon: Users, section: "configuration" },
   { id: "customers", label: "Customers", icon: Building2, section: "configuration" },
+  { id: "carriers", label: "Carriers", icon: Truck, section: "configuration" },
   { id: "query-type", label: "Basic Rules", icon: BookOpen, section: "configuration" },
   { id: "advanced-rules", label: "Advanced Rules", icon: ShieldCheck, section: "configuration" },
   { id: "rule-priority", label: "Rule Priority", icon: ArrowUpDown, section: "configuration" },
