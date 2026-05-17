@@ -45,9 +45,31 @@ type Carrier = {
 
 type CarrierDetail = {
   id: string
-  customer: string
-  depot: string
-  username: string
+  [key: string]: string
+}
+
+type CarrierColumnConfig = {
+  key: string
+  label: string
+}
+
+const defaultColumns: CarrierColumnConfig[] = [
+  { key: "customer", label: "Customer" },
+  { key: "depot", label: "Depot" },
+  { key: "username", label: "Username" },
+]
+
+const gfsInternationalColumns: CarrierColumnConfig[] = [
+  { key: "carrier", label: "Carrier" },
+  { key: "fmNumberStart", label: "FM Number Start" },
+  { key: "phone", label: "Phone No" },
+  { key: "email", label: "Email" },
+  { key: "website", label: "Website" },
+  { key: "username", label: "Username" },
+]
+
+const carrierColumns: Record<string, CarrierColumnConfig[]> = {
+  "gfs-international": gfsInternationalColumns,
 }
 
 // Sample carrier details data
@@ -61,6 +83,7 @@ const carrierDetails: Record<string, CarrierDetail[]> = {
     { id: "6", customer: "Amazon DG", depot: "", username: "cscarrier+dg@gfsdeliver.com" },
     { id: "7", customer: "Amazon OTP (One Time Passcode)", depot: "", username: "cscarrier+gfsotp@gfsdeliver.com" },
   ],
+  "gfs-international": [],
   "dhl-express": [
     { id: "1", customer: "GFS UK", depot: "Birmingham", username: "gfs_dhl_uk" },
     { id: "2", customer: "NL Redwood", depot: "Amsterdam", username: "nl_redwood" },
@@ -507,52 +530,58 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
             <DialogTitle>{selectedCarrier?.name} Details</DialogTitle>
           </DialogHeader>
           <div className="border rounded-lg mt-4">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="whitespace-nowrap px-4">Customer</TableHead>
-                  <TableHead className="whitespace-nowrap px-4">Depot</TableHead>
-                  <TableHead className="whitespace-nowrap px-4">Username</TableHead>
-                  <TableHead className="whitespace-nowrap text-right px-4">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {selectedCarrier && carrierDetails[selectedCarrier.id]?.map((detail) => (
-                  <TableRow key={detail.id}>
-                    <TableCell className="font-medium whitespace-nowrap px-4">{detail.customer}</TableCell>
-                    <TableCell className="whitespace-nowrap px-4">{detail.depot}</TableCell>
-                    <TableCell className="whitespace-nowrap px-4">{detail.username}</TableCell>
-                    <TableCell className="text-right">
-                      <div className="flex items-center justify-end gap-1">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-8 w-8"
-                          onClick={() => handleEditDetail(detail.id)}
-                        >
-                          <Pencil className="h-4 w-4 text-muted-foreground" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-8 w-8"
-                          onClick={() => handleDeleteDetail(detail.id)}
-                        >
-                          <Trash2 className="h-4 w-4 text-destructive" />
-                        </Button>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-                {selectedCarrier && !carrierDetails[selectedCarrier.id]?.length && (
-                  <TableRow>
-                    <TableCell colSpan={4} className="text-center text-muted-foreground py-8">
-                      No details available for this carrier
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
+            {(() => {
+              const columns = selectedCarrier ? (carrierColumns[selectedCarrier.id] ?? defaultColumns) : defaultColumns
+              const rows = selectedCarrier ? (carrierDetails[selectedCarrier.id] ?? []) : []
+              return (
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      {columns.map((col) => (
+                        <TableHead key={col.key} className="whitespace-nowrap px-4">{col.label}</TableHead>
+                      ))}
+                      <TableHead className="whitespace-nowrap text-right px-4">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {rows.map((detail) => (
+                      <TableRow key={detail.id}>
+                        {columns.map((col) => (
+                          <TableCell key={col.key} className="whitespace-nowrap px-4">{detail[col.key] ?? ""}</TableCell>
+                        ))}
+                        <TableCell className="text-right">
+                          <div className="flex items-center justify-end gap-1">
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-8 w-8"
+                              onClick={() => handleEditDetail(detail.id)}
+                            >
+                              <Pencil className="h-4 w-4 text-muted-foreground" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-8 w-8"
+                              onClick={() => handleDeleteDetail(detail.id)}
+                            >
+                              <Trash2 className="h-4 w-4 text-destructive" />
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                    {rows.length === 0 && (
+                      <TableRow>
+                        <TableCell colSpan={columns.length + 1} className="text-center text-muted-foreground py-8">
+                          No details available for this carrier
+                        </TableCell>
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              )
+            })()}
           </div>
         </DialogContent>
       </Dialog>
