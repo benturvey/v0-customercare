@@ -314,9 +314,9 @@ const carriers: Carrier[] = [
     logoAlt: "OCS",
     logoClass: "w-5/12 object-contain",
     cardBg: "bg-transparent",
-    phone: "+44 1932 837 000",
-    email: "enquiries@ocs.com",
-    web: "www.ocs.com",
+    phone: "02076 403900",
+    email: "customer.services@ocsworldwide.co.uk",
+    web: "www.ocsworldwide.co.uk/",
   },
   {
     id: "ups",
