@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { UserDropdownMenu } from "@/components/user-dropdown-menu"
-import { Menu, Pencil, Search, Phone, Mail, Globe } from "lucide-react"
+import { Menu, Pencil, Search, Phone, Mail, Globe, Info } from "lucide-react"
 import {
   Table,
   TableBody,
@@ -296,7 +296,7 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
         {carriers.map((carrier) => (
           <div
             key={carrier.id}
-            className={`flex flex-col rounded-lg border shadow-sm overflow-hidden w-80 ${carrier.cardBg}`}
+            className={`flex flex-col rounded-lg border shadow-sm overflow-hidden w-80 ${carrier.cardBg} relative`}
           >
             {/* Logo area */}
             <div className="flex items-center justify-center px-6 py-4 h-24">
@@ -378,6 +378,10 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
                 <span className="text-red-500 font-semibold">*</span> Use email only when Webform is not available
               </div>
             )}
+            {/* MoreInfo Icon */}
+            <button className="absolute bottom-3 right-3 p-1.5 hover:bg-muted rounded-full transition-colors">
+              <Info className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+            </button>
           </div>
         ))}
       </div>
