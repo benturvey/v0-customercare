@@ -247,8 +247,6 @@ export function OverviewView() {
               <TableHead className="font-semibold text-muted-foreground">% of Total</TableHead>
               <TableHead className="font-semibold text-muted-foreground">Change vs Yesterday</TableHead>
               <TableHead className="font-semibold text-muted-foreground">Linked Skill</TableHead>
-              <TableHead className="font-semibold text-muted-foreground">Manager Action</TableHead>
-              <TableHead className="font-semibold text-muted-foreground">Owner</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -258,8 +256,6 @@ export function OverviewView() {
               <TableCell>24.8%</TableCell>
               <TableCell><span className="text-red-600 font-medium">▲ +32</span></TableCell>
               <TableCell><span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-muted text-muted-foreground">L1</span></TableCell>
-              <TableCell>Monitor Evri SLA</TableCell>
-              <TableCell>Ben Lund</TableCell>
             </TableRow>
             <TableRow>
               <TableCell className="font-medium">Failed delivery — no access</TableCell>
@@ -267,8 +263,6 @@ export function OverviewView() {
               <TableCell>16.6%</TableCell>
               <TableCell><span className="text-amber-500 font-medium">▲ +11</span></TableCell>
               <TableCell><span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-muted text-muted-foreground">L2</span></TableCell>
-              <TableCell>Review redelivery workflow</TableCell>
-              <TableCell>Francine Payne</TableCell>
             </TableRow>
             <TableRow>
               <TableCell className="font-medium">Address change request</TableCell>
@@ -276,8 +270,6 @@ export function OverviewView() {
               <TableCell>11.4%</TableCell>
               <TableCell><span className="text-green-600 font-medium">▼ -8</span></TableCell>
               <TableCell><span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-muted text-muted-foreground">L2</span></TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>Kimberley McCormick</TableCell>
             </TableRow>
             <TableRow>
               <TableCell className="font-medium">International customs hold</TableCell>
@@ -285,8 +277,6 @@ export function OverviewView() {
               <TableCell>8.6%</TableCell>
               <TableCell><span className="text-red-600 font-medium">▲ +19</span></TableCell>
               <TableCell><span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-muted text-muted-foreground">L3</span></TableCell>
-              <TableCell>Escalate to carrier ops</TableCell>
-              <TableCell>Tracey Crooke</TableCell>
             </TableRow>
             <TableRow>
               <TableCell className="font-medium">POD request</TableCell>
@@ -294,8 +284,6 @@ export function OverviewView() {
               <TableCell>7.1%</TableCell>
               <TableCell><span className="text-muted-foreground font-medium">— 0</span></TableCell>
               <TableCell><span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-muted text-muted-foreground">L1</span></TableCell>
-              <TableCell>—</TableCell>
-              <TableCell>Vicky Lomax</TableCell>
             </TableRow>
           </TableBody>
         </Table>
