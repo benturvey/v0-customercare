@@ -293,7 +293,7 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
         {carriers.map((carrier) => (
           <div
             key={carrier.id}
-            className={`flex flex-col rounded-lg border shadow-sm overflow-hidden w-64 ${carrier.cardBg}`}
+            className={`flex flex-col rounded-lg border shadow-sm overflow-hidden w-80 ${carrier.cardBg}`}
           >
             {/* Logo area */}
             <div className="flex items-center justify-center px-6 py-4 h-24">
