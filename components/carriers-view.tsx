@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { UserDropdownMenu } from "@/components/user-dropdown-menu"
-import { Menu, Pencil, Search, Phone, Mail, Globe, Info } from "lucide-react"
+import { Menu, Pencil, Search, Phone, Mail, Globe, MoreVertical } from "lucide-react"
 import {
   Table,
   TableBody,
@@ -380,7 +380,7 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
             )}
             {/* MoreInfo Icon */}
             <button className="absolute bottom-3 right-3 p-1.5 hover:bg-muted rounded-full transition-colors">
-              <Info className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+              <MoreVertical className="h-4 w-4 text-muted-foreground hover:text-foreground" />
             </button>
           </div>
         ))}
