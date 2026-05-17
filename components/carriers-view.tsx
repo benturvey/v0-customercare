@@ -52,9 +52,9 @@ const carriers: Carrier[] = [
     logoAlt: "BJS Two-Man Home Delivery",
     logoClass: "w-full object-contain",
     cardBg: "bg-white",
-    phone: "+44 1234 567890",
-    email: "info@bjshomedelivery.com",
-    web: "www.bjshomedelivery.com",
+    phone: "01922 645650",
+    email: "customerservice@bjshomedelivery.com",
+    web: "system.bjshomedelivery.com/",
   },
   {
     id: "collectplus",
