@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Loader2, Clock, PlaneTakeoff, ShieldCheck, Crown, Zap, WifiOff, Menu } from "lucide-react"
+import { Loader2, Clock, PlaneTakeoff, ShieldCheck, Crown, Zap, WifiOff, Menu, GraduationCap } from "lucide-react"
 import {
   Table,
   TableBody,
@@ -340,6 +340,9 @@ export function OverviewView({ onLogOut }: { onLogOut?: () => void }) {
                     )}
                     {agent.status === "Offline" && (
                       <WifiOff className="h-3.5 w-3.5 text-gray-500" />
+                    )}
+                    {agent.status === "TRN" && (
+                      <GraduationCap className="h-3.5 w-3.5 text-blue-600" />
                     )}
                   </span>
                 </TableCell>
