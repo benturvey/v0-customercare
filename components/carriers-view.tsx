@@ -74,9 +74,9 @@ const carriers: Carrier[] = [
     logoAlt: "Coll-8 Logistics",
     logoClass: "w-2/3 object-contain",
     cardBg: "bg-white",
-    phone: "+44 333 006 8888",
-    email: "info@coll-8.co.uk",
-    web: "www.coll-8.co.uk",
+    phone: "",
+    email: "customerservices@coll-8.com",
+    web: "/coll8.drop2shop.ie/tracking",
   },
   {
     id: "dhl-ecommerce",
