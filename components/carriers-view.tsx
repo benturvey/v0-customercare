@@ -215,9 +215,9 @@ const carriers: Carrier[] = [
     logoAlt: "Royal Mail",
     logoClass: "w-full object-contain",
     cardBg: "bg-transparent",
-    phone: "+44 345 774 0740",
-    email: "business@royalmail.com",
-    web: "www.royalmail.com",
+    phone: "08457 950950",
+    email: "",
+    web: "www.royalmail.com/track-your-item",
   },
   {
     id: "ocs",
