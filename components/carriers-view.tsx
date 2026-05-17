@@ -18,6 +18,7 @@ type CarrierAccount = {
   phone: string
   email: string
   web: string
+  pin?: string
 }
 
 type Carrier = {
@@ -30,6 +31,7 @@ type Carrier = {
   phone: string
   email: string
   web: string
+  pin?: string
   accounts?: CarrierAccount[]
 }
 
