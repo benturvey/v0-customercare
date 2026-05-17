@@ -91,12 +91,19 @@ const dxColumns: CarrierColumnConfig[] = [
   { key: "escalationContact", label: "Escalation Contact" },
 ]
 
+const bjsColumns: CarrierColumnConfig[] = [
+  { key: "customer", label: "Customer" },
+  { key: "depot", label: "Depot" },
+  { key: "username", label: "Username" },
+  { key: "password", label: "Password" },
+]
+
 const carrierColumns: Record<string, CarrierColumnConfig[]> = {
   "amazon": amazonColumns,
   "gfs-international": gfsInternationalColumns,
   "international-websites": internationalWebsitesColumns,
   "dx": dxColumns,
-  "bjs": defaultColumns,
+  "bjs": bjsColumns,
 }
 
 // Sample carrier details data
@@ -167,7 +174,7 @@ const carrierDetails: Record<string, CarrierDetail[]> = {
     { id: "20", depot: "1 Man network (Saturday Support)", depotNo: "", contactNumber: "", email: "keyaccounts@thedx.co.uk", trackingSite: "https://dx-track.com/tracker/search.aspx", escalationContact: "" },
   ],
   "bjs": [
-    { id: "1", customer: "All", depot: "", username: "CSCarrier@GFS" },
+    { id: "1", customer: "All", depot: "", username: "CSCarrier@GFS", password: "Gfspass1234!" },
   ],
   "international-websites": [
     { id: "1",  carrier: "Evri", country: "All", website: "https://clients.hermescloud.co.uk/", notes: "" },
