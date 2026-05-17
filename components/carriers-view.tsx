@@ -502,7 +502,7 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
 
       {/* Carrier Details Modal */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-4xl">
           <DialogHeader>
             <DialogTitle>{selectedCarrier?.name} Details</DialogTitle>
           </DialogHeader>
