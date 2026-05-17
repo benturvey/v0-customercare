@@ -131,6 +131,14 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
             className="w-full object-contain"
           />
         </div>
+        {/* Evri Card */}
+        <div className="flex items-center justify-center w-56 h-28 rounded-lg border bg-transparent px-6 py-4 shadow-sm">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Evri%20%281%29-QUyYLdTFBy8PWmD5TsdIHo5nm6mFGo.png"
+            alt="Evri"
+            className="w-full object-contain"
+          />
+        </div>
       </div>
 
       {/* Search Bar */}
