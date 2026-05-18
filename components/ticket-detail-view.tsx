@@ -347,8 +347,9 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                       </div>
                     </div>
                   </div>
-                </>
-              )}
+                </div>
+              </>
+            )}
             </div>
           </div>
       </header>
