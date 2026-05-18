@@ -314,23 +314,24 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                     <div className="space-y-1.5">
                       <div className="flex items-center gap-2 text-sm text-foreground">
                         <Phone className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-                        <span>Evri Business: <span className="font-medium">0330 808 5456</span></span>
+                        <span className="font-medium">03444 113019</span>
                       </div>
                       <div className="flex items-center gap-2 text-sm text-foreground">
                         <Mail className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-                        <span>business@evri.com</span>
+                        <a href="mailto:csclientsupport@hermes-europe.co.uk" className="hover:underline">csclientsupport@hermes-europe.co.uk</a>
                       </div>
                       <div className="flex items-center gap-2 text-sm">
                         <ExternalLink className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-                        <a href="https://www.evri.com" target="_blank" rel="noopener noreferrer" className="text-[#009eff] hover:text-blue-700 transition-colors">
-                          evri.com
+                        <a href="https://www.hermes-europe.co.uk/webtracking/login.html" target="_blank" rel="noopener noreferrer" className="text-[#009eff] hover:text-blue-700 transition-colors">
+                          hermes-europe.co.uk
                         </a>
-            </div>
-            <div className="grid grid-cols-1 gap-2.5">
-              <DetailRow icon={ClipboardList} label="Instructions" value="Leave in porch if no answer. Do not leave with neighbour." />
-            </div>
-          </div>
-        </div>
+                      </div>
+                      <div className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <ClipboardList className="h-3.5 w-3.5 shrink-0 mt-0.5" />
+                        <span>Use email only when Webform is not available</span>
+                      </div>
+                    </div>
+                  </div>
 
                   {/* Service Alerts */}
                   <div className="px-4 py-3">
