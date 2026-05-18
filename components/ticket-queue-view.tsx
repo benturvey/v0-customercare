@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { ChevronDown, Search, ArrowUpDown, Menu, Users, CalendarDays, Truck, User, Hash, Check, CircleDot } from "lucide-react"
+import { ChevronDown, Search, ArrowUpDown, Menu, Users, CalendarDays, Truck, User, Hash, Check, CircleDot, Layers, X, ChevronRight } from "lucide-react"
 import { UserDropdownMenu } from "@/components/user-dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -96,6 +96,17 @@ const filters = [
   { label: "All Regions", options: ["All Regions", "UK", "EU", "US"] },
 ]
 
+type TicketKey = "id" | "level" | "category" | "consignmentNo" | "packs" | "customer" | "carrier" | "agent" | "status"
+
+const GROUPABLE_COLUMNS: { key: TicketKey; label: string }[] = [
+  { key: "level", label: "Level" },
+  { key: "category", label: "Category" },
+  { key: "customer", label: "Customer" },
+  { key: "carrier", label: "Carrier" },
+  { key: "agent", label: "Agent" },
+  { key: "status", label: "Status" },
+]
+
 type Ticket = typeof ticketData[number]
 
 export function TicketQueueView({ onLogOut }: { onLogOut?: () => void }) {
@@ -131,6 +142,11 @@ export function TicketQueueView({ onLogOut }: { onLogOut?: () => void }) {
   const [hasComments, setHasComments] = useState(false)
   const [deletedOnly, setDeletedOnly] = useState(false)
   const [exceptionStatus, setExceptionStatus] = useState(false)
+  const [groupByOpen, setGroupByOpen] = useState(false)
+  const [groupByColumns, setGroupByColumns] = useState<TicketKey[]>([])
+  const [collapsedGroups, setCollapsedGroups] = useState<Set<string>>(new Set())
+
+  const groupByRef = useRef<HTMLDivElement>(null)
 
   const customerRef = useRef<HTMLDivElement>(null)
   const periodRef = useRef<HTMLDivElement>(null)
@@ -145,6 +161,7 @@ export function TicketQueueView({ onLogOut }: { onLogOut?: () => void }) {
       if (carrierRef.current && !carrierRef.current.contains(e.target as Node)) setCarrierOpen(false)
       if (agentRef.current && !agentRef.current.contains(e.target as Node)) setAgentOpen(false)
       if (refsRef.current && !refsRef.current.contains(e.target as Node)) setRefsOpen(false)
+      if (groupByRef.current && !groupByRef.current.contains(e.target as Node)) setGroupByOpen(false)
     }
     document.addEventListener("mousedown", handleClickOutside)
     return () => document.removeEventListener("mousedown", handleClickOutside)
@@ -167,6 +184,39 @@ export function TicketQueueView({ onLogOut }: { onLogOut?: () => void }) {
     if (aVal > bVal) return sortDir === "asc" ? 1 : -1
     return 0
   })
+
+  // Build grouped rows
+  type GroupedRow = { type: "group"; key: string; label: string; count: number } | { type: "ticket"; ticket: Ticket }
+  const groupedRows: GroupedRow[] = (() => {
+    if (groupByColumns.length === 0) return sortedTickets.map((t) => ({ type: "ticket" as const, ticket: t }))
+    const seen = new Map<string, Ticket[]>()
+    for (const ticket of sortedTickets) {
+      const key = groupByColumns.map((col) => String(ticket[col] ?? "")).join(" | ")
+      if (!seen.has(key)) seen.set(key, [])
+      seen.get(key)!.push(ticket)
+    }
+    const rows: GroupedRow[] = []
+    for (const [key, tickets] of seen) {
+      const label = groupByColumns.map((col) => {
+        const colLabel = GROUPABLE_COLUMNS.find((c) => c.key === col)?.label ?? col
+        return `${colLabel}: ${tickets[0][col] || "(none)"}`
+      }).join("  ·  ")
+      rows.push({ type: "group", key, label, count: tickets.length })
+      if (!collapsedGroups.has(key)) {
+        rows.push(...tickets.map((t) => ({ type: "ticket" as const, ticket: t })))
+      }
+    }
+    return rows
+  })()
+
+  const toggleGroup = (key: string) => {
+    setCollapsedGroups((prev) => {
+      const next = new Set(prev)
+      if (next.has(key)) next.delete(key)
+      else next.add(key)
+      return next
+    })
+  }
 
   if (selectedTicket) {
     return <TicketDetailView ticket={selectedTicket} onBack={() => setSelectedTicket(null)} />
@@ -525,6 +575,73 @@ export function TicketQueueView({ onLogOut }: { onLogOut?: () => void }) {
           >
             Reset
           </button>
+
+          {/* GROUP BY */}
+          <div ref={groupByRef} className="relative ml-auto">
+            <Button
+              variant={groupByColumns.length > 0 ? "default" : "outline"}
+              size="sm"
+              className={`flex items-center gap-1.5 text-xs font-semibold border rounded-sm px-3 py-1.5 h-auto ${groupByColumns.length > 0 ? "bg-blue-600 text-white border-blue-600" : "text-foreground"}`}
+              onClick={() => setGroupByOpen((o) => !o)}
+            >
+              <Layers className="h-3.5 w-3.5" />
+              {groupByColumns.length > 0 ? `GROUPED BY ${groupByColumns.length}` : "GROUP BY"}
+              {groupByColumns.length > 0 && (
+                <span
+                  onClick={(e) => { e.stopPropagation(); setGroupByColumns([]); setCollapsedGroups(new Set()) }}
+                  className="ml-1 hover:text-white/70"
+                >
+                  <X className="h-3 w-3" />
+                </span>
+              )}
+            </Button>
+            {groupByOpen && (
+              <div className="absolute right-0 top-full mt-1 z-50 bg-white border rounded-md shadow-lg w-56">
+                <div className="px-4 py-3 border-b flex items-center justify-between">
+                  <span className="text-xs font-bold text-foreground tracking-wide">GROUP BY</span>
+                  {groupByColumns.length > 0 && (
+                    <button
+                      className="text-xs text-blue-600 hover:underline"
+                      onClick={() => { setGroupByColumns([]); setCollapsedGroups(new Set()) }}
+                    >
+                      Clear
+                    </button>
+                  )}
+                </div>
+                <div className="py-1">
+                  {GROUPABLE_COLUMNS.map((col) => {
+                    const isSelected = groupByColumns.includes(col.key)
+                    const order = groupByColumns.indexOf(col.key)
+                    return (
+                      <label key={col.key} className="flex items-center gap-2.5 px-3 py-2 hover:bg-muted cursor-pointer">
+                        <Checkbox
+                          checked={isSelected}
+                          onCheckedChange={(v) => {
+                            setGroupByColumns((prev) =>
+                              v ? [...prev, col.key] : prev.filter((k) => k !== col.key)
+                            )
+                            setCollapsedGroups(new Set())
+                          }}
+                          className="data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
+                        />
+                        <span className="text-sm text-foreground flex-1">{col.label}</span>
+                        {isSelected && (
+                          <span className="text-xs font-bold text-blue-600 bg-blue-50 rounded-full px-1.5 py-0.5">
+                            {order + 1}
+                          </span>
+                        )}
+                      </label>
+                    )
+                  })}
+                </div>
+                {groupByColumns.length > 1 && (
+                  <div className="px-4 py-2 border-t">
+                    <p className="text-xs text-muted-foreground">Grouping order: {groupByColumns.map((k) => GROUPABLE_COLUMNS.find((c) => c.key === k)?.label).join(" → ")}</p>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* User info */}
@@ -604,44 +721,48 @@ export function TicketQueueView({ onLogOut }: { onLogOut?: () => void }) {
             </tr>
           </thead>
           <tbody>
-            {sortedTickets.map((ticket, index) => (
-              <tr
-                key={ticket.id}
-                onClick={() => setSelectedTicket(ticket)}
-                className={`border-b border-border last:border-b-0 cursor-pointer ${index % 2 === 0 ? "bg-background" : "bg-muted/20"
-                  } hover:bg-muted/40 transition-colors`}
-              >
-                <td className="px-4 py-3 text-sm font-medium text-blue-600">
-                  {ticket.id}
-                </td>
-                <td className="px-4 py-3 text-sm text-[#1e3a5f]">
-                  {ticket.level}
-                </td>
-                <td className="px-4 py-3 text-sm text-[#1e3a5f]">
-                  {ticket.category}
-                </td>
-                <td className="px-4 py-3 text-sm text-[#1e3a5f]">
-                  {ticket.consignmentNo}
-                </td>
-                <td className="px-4 py-3 text-sm text-[#1e3a5f]">
-                  {ticket.packs}
-                </td>
-                <td className="px-4 py-3 text-sm text-[#1e3a5f]">
-                  {ticket.customer}
-                </td>
-                <td className="px-4 py-3 text-sm text-muted-foreground">
-                  {ticket.carrier}
-                </td>
-                <td className="px-4 py-3 text-sm text-[#1e3a5f]">
-                  {ticket.agent}
-                </td>
-                <td className="px-4 py-3">
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-[#e8f4f8] text-[#0d7377]">
-                    {ticket.status}
-                  </span>
-                </td>
-              </tr>
-            ))}
+            {groupedRows.map((row, index) => {
+              if (row.type === "group") {
+                const isCollapsed = collapsedGroups.has(row.key)
+                return (
+                  <tr
+                    key={`group-${row.key}`}
+                    className="bg-muted/40 border-b border-border cursor-pointer select-none hover:bg-muted/60"
+                    onClick={() => toggleGroup(row.key)}
+                  >
+                    <td colSpan={9} className="px-4 py-2.5">
+                      <div className="flex items-center gap-2">
+                        <ChevronRight className={`h-3.5 w-3.5 text-muted-foreground transition-transform ${isCollapsed ? "" : "rotate-90"}`} />
+                        <span className="text-xs font-semibold text-foreground">{row.label}</span>
+                        <span className="ml-2 text-xs text-muted-foreground bg-background border rounded-full px-2 py-0.5">{row.count}</span>
+                      </div>
+                    </td>
+                  </tr>
+                )
+              }
+              const ticket = row.ticket
+              return (
+                <tr
+                  key={ticket.id}
+                  onClick={() => setSelectedTicket(ticket)}
+                  className={`border-b border-border last:border-b-0 cursor-pointer ${index % 2 === 0 ? "bg-background" : "bg-muted/20"} hover:bg-muted/40 transition-colors`}
+                >
+                  <td className="px-4 py-3 text-sm font-medium text-blue-600">{ticket.id}</td>
+                  <td className="px-4 py-3 text-sm text-[#1e3a5f]">{ticket.level}</td>
+                  <td className="px-4 py-3 text-sm text-[#1e3a5f]">{ticket.category}</td>
+                  <td className="px-4 py-3 text-sm text-[#1e3a5f]">{ticket.consignmentNo}</td>
+                  <td className="px-4 py-3 text-sm text-[#1e3a5f]">{ticket.packs}</td>
+                  <td className="px-4 py-3 text-sm text-[#1e3a5f]">{ticket.customer}</td>
+                  <td className="px-4 py-3 text-sm text-muted-foreground">{ticket.carrier}</td>
+                  <td className="px-4 py-3 text-sm text-[#1e3a5f]">{ticket.agent}</td>
+                  <td className="px-4 py-3">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-[#e8f4f8] text-[#0d7377]">
+                      {ticket.status}
+                    </span>
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </div>
