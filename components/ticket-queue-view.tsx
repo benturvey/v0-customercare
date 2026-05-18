@@ -311,7 +311,7 @@ export function TicketQueueView({ onLogOut }: { onLogOut?: () => void }) {
             {periodOpen && (
               <div className="absolute left-0 top-full mt-1 z-50 bg-white border rounded-md shadow-lg w-56">
                 <div className="flex items-center justify-between px-4 py-3 border-b">
-                  <span className="text-xs font-bold text-foreground tracking-wide">SHIPMENT DESPATCHED</span>
+                  <span className="text-xs font-bold text-foreground tracking-wide">TICKETS PRESENTED</span>
                   <button
                     className="text-xs text-blue-600 hover:underline"
                     onClick={() => { setActivePeriod("Yesterday"); setPeriodOpen(false) }}
