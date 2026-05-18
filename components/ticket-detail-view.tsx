@@ -329,12 +329,9 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                       <div className="flex items-start gap-2 text-sm text-muted-foreground">
                         <ClipboardList className="h-3.5 w-3.5 shrink-0 mt-0.5" />
                         <span>Use email only when Webform is not available</span>
+                      </div>
                     </div>
                   </div>
-                </>
-              )}
-            </div>
-          </div>
 
                   {/* Service Alerts */}
                   <div className="px-4 py-3">
@@ -348,16 +345,12 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                         <Info className="h-3.5 w-3.5 shrink-0 mt-0.5 text-blue-600" />
                         <p className="text-xs text-blue-800">Bank Holiday impact: reduced collections on 26/05/2026.</p>
                       </div>
-            </div>
-            <div className="grid grid-cols-1 gap-2.5">
-              <DetailRow icon={ClipboardList} label="Instructions" value="Leave in porch if no answer. Do not leave with neighbour." />
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
-        </div>
-              </>
-            )}
-          </div>
-        </div>
       </header>
 
       {/* Metadata strip */}
