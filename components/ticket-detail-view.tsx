@@ -329,9 +329,12 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                       <div className="flex items-start gap-2 text-sm text-muted-foreground">
                         <ClipboardList className="h-3.5 w-3.5 shrink-0 mt-0.5" />
                         <span>Use email only when Webform is not available</span>
-                      </div>
                     </div>
                   </div>
+                </>
+              )}
+            </div>
+          </div>
 
                   {/* Service Alerts */}
                   <div className="px-4 py-3">
