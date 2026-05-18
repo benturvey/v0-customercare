@@ -557,7 +557,6 @@ const tableCarriers = [
 ]
 
 export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
-  const [searchTerm, setSearchTerm] = useState("")
   const [editingId, setEditingId] = useState<string | null>(null)
   const [selectedCarrier, setSelectedCarrier] = useState<Carrier | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -601,10 +600,6 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
     }
     return <span className={className}>{value}</span>
   }
-
-  const filteredCarriers = tableCarriers.filter((c) =>
-    c.name.toLowerCase().includes(searchTerm.toLowerCase())
-  )
 
   return (
     <div className="p-6 space-y-6">
@@ -720,52 +715,6 @@ export function CarriersView({ onLogOut }: { onLogOut?: () => void }) {
             </button>
           </div>
         ))}
-      </div>
-
-      {/* Search Bar */}
-      <div className="flex items-center gap-2">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder="Search carriers..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10"
-          />
-        </div>
-      </div>
-
-      {/* Carriers Table */}
-      <div className="border rounded-lg">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-1/4">Carrier Name</TableHead>
-              <TableHead className="w-1/4">Email</TableHead>
-              <TableHead className="w-1/4">Phone</TableHead>
-              <TableHead className="w-1/4">Location</TableHead>
-              <TableHead className="w-12">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {filteredCarriers.map((carrier) => (
-              <TableRow key={carrier.id}>
-                <TableCell className="font-medium">{carrier.name}</TableCell>
-                <TableCell>{carrier.email}</TableCell>
-                <TableCell>{carrier.phone}</TableCell>
-                <TableCell>{carrier.location}</TableCell>
-                <TableCell>
-                  <button
-                    onClick={() => setEditingId(editingId === carrier.id ? null : carrier.id)}
-                    className="text-blue-600 hover:text-blue-700"
-                  >
-                    <Pencil className="h-4 w-4" />
-                  </button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
       </div>
 
       {/* Carrier Details Modal */}
