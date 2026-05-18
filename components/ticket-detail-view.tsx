@@ -276,7 +276,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               className="flex items-center justify-center h-8 w-8 rounded-full border border-border bg-background hover:bg-muted transition-colors"
               aria-label="Resources"
             >
-              <Info className="h-4 w-4 text-[#009eff]" />
+              <BookOpen className="h-4 w-4 text-[#009eff]" />
             </button>
 
             {infoMenuOpen && (
