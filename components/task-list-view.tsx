@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Plus, Trash2, CheckCircle2, Circle, ChevronDown, MoreHorizontal, Flag, Calendar, User, Repeat, MessageSquare, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -394,6 +394,27 @@ export function TaskListView({ onLogOut }: { onLogOut?: () => void }) {
   const [tasks, setTasks] = useState<Task[]>([])
   const [showAddForm, setShowAddForm] = useState(false)
   const [filterStatus, setFilterStatus] = useState<Status | "all">("all")
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  // Load tasks from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem("tasks")
+    if (saved) {
+      try {
+        setTasks(JSON.parse(saved))
+      } catch (e) {
+        console.error("Failed to load tasks from localStorage:", e)
+      }
+    }
+    setIsLoaded(true)
+  }, [])
+
+  // Save tasks to localStorage whenever they change
+  useEffect(() => {
+    if (isLoaded) {
+      localStorage.setItem("tasks", JSON.stringify(tasks))
+    }
+  }, [tasks, isLoaded])
 
   const handleAdd = (task: Task) => {
     setTasks((prev) => [task, ...prev])
@@ -453,70 +474,77 @@ export function TaskListView({ onLogOut }: { onLogOut?: () => void }) {
       </header>
 
       <div className="flex-1 overflow-y-auto px-6 py-6">
-        {/* Filter Tabs */}
-        <div className="flex items-center gap-1 mb-6 border-b border-border">
-          {(["all", "todo", "in-progress", "done"] as const).map((s) => (
-            <button
-              key={s}
-              onClick={() => setFilterStatus(s)}
-              className={cn(
-                "px-4 py-2.5 text-sm font-medium border-b-2 -mb-px transition-colors capitalize",
-                filterStatus === s
-                  ? "border-primary text-primary"
-                  : "border-transparent text-muted-foreground hover:text-foreground"
-              )}
-            >
-              {s === "all" ? "All" : STATUS_CONFIG[s].label}
-              <span className={cn(
-                "ml-2 text-xs px-1.5 py-0.5 rounded-full",
-                filterStatus === s ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"
-              )}>
-                {counts[s]}
-              </span>
-            </button>
-          ))}
-        </div>
-
-        {/* Add Form */}
-        {showAddForm && (
-          <div className="mb-4">
-            <AddTaskForm onAdd={handleAdd} onCancel={() => setShowAddForm(false)} />
+        {!isLoaded ? (
+          <div className="flex items-center justify-center py-20">
+            <p className="text-sm text-muted-foreground">Loading tasks...</p>
           </div>
-        )}
-
-        {/* Task List */}
-        <div className="space-y-2">
-          {filteredTasks.length === 0 && !showAddForm && (
-            <div className="flex flex-col items-center justify-center py-20 text-center">
-              <div className="h-12 w-12 rounded-full bg-muted flex items-center justify-center mb-4">
-                <Flag className="h-5 w-5 text-muted-foreground" />
-              </div>
-              <p className="text-sm font-medium text-foreground mb-1">
-                {filterStatus === "all" ? "No tasks yet" : `No ${STATUS_CONFIG[filterStatus as Status]?.label ?? filterStatus} tasks`}
-              </p>
-              <p className="text-xs text-muted-foreground mb-4">
-                {filterStatus === "all" ? "Add your first task to get started." : "Try switching to a different filter."}
-              </p>
-              {filterStatus === "all" && (
-                <Button size="sm" variant="outline" onClick={() => setShowAddForm(true)}>
-                  <Plus className="h-4 w-4 mr-1" />
-                  Add Task
-                </Button>
-              )}
+        ) : (
+          <>
+            {/* Filter Tabs */}
+            <div className="flex items-center gap-1 mb-6 border-b border-border">
+              {(["all", "todo", "in-progress", "done"] as const).map((s) => (
+                <button
+                  key={s}
+                  onClick={() => setFilterStatus(s)}
+                  className={cn(
+                    "px-4 py-2.5 text-sm font-medium border-b-2 -mb-px transition-colors capitalize",
+                    filterStatus === s
+                      ? "border-primary text-primary"
+                      : "border-transparent text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  {s === "all" ? "All" : STATUS_CONFIG[s].label}
+                  <span className={cn(
+                    "ml-2 text-xs px-1.5 py-0.5 rounded-full",
+                    filterStatus === s ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"
+                  )}>
+                    {counts[s]}
+                  </span>
+                </button>
+              ))}
             </div>
-          )}
-          {filteredTasks.map((task) => (
-            <TaskRow
-              key={task.id}
-              task={task}
-              onStatusToggle={handleStatusToggle}
-              onDelete={handleDelete}
-              onUpdate={handleUpdate}
-              onAddComment={handleAddComment}
-            />
-          ))}
-        </div>
-      </div>
+
+            {/* Add Form */}
+            {showAddForm && (
+              <div className="mb-4">
+                <AddTaskForm onAdd={handleAdd} onCancel={() => setShowAddForm(false)} />
+              </div>
+            )}
+
+            {/* Task List */}
+            <div className="space-y-2">
+              {filteredTasks.length === 0 && !showAddForm && (
+                <div className="flex flex-col items-center justify-center py-20 text-center">
+                  <div className="h-12 w-12 rounded-full bg-muted flex items-center justify-center mb-4">
+                    <Flag className="h-5 w-5 text-muted-foreground" />
+                  </div>
+                  <p className="text-sm font-medium text-foreground mb-1">
+                    {filterStatus === "all" ? "No tasks yet" : `No ${STATUS_CONFIG[filterStatus as Status]?.label ?? filterStatus} tasks`}
+                  </p>
+                  <p className="text-xs text-muted-foreground mb-4">
+                    {filterStatus === "all" ? "Add your first task to get started." : "Try switching to a different filter."}
+                  </p>
+                  {filterStatus === "all" && (
+                    <Button size="sm" variant="outline" onClick={() => setShowAddForm(true)}>
+                      <Plus className="h-4 w-4 mr-1" />
+                      Add Task
+                    </Button>
+                  )}
+                </div>
+              )}
+              {filteredTasks.map((task) => (
+                <TaskRow
+                  key={task.id}
+                  task={task}
+                  onStatusToggle={handleStatusToggle}
+                  onDelete={handleDelete}
+                  onUpdate={handleUpdate}
+                  onAddComment={handleAddComment}
+                />
+              ))}
+            </div>
+          </>
+        )}
     </div>
   )
 }
