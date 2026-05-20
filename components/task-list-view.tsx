@@ -94,8 +94,8 @@ function TaskRow({ task, onStatusToggle, onDelete, onUpdate, onAddComment }: Tas
     onAddComment(task.id, {
       id: generateCommentId(),
       text: newComment.trim(),
-      user: "Current User", // In a real app, this would come from auth context
-      timestamp: new Date().toISOString(),
+      user: "Alex Lucy",
+      timestamp: new Date("2026-05-14T10:46:00").toISOString(),
     })
     setNewComment("")
   }
