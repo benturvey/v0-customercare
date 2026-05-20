@@ -15,6 +15,7 @@ import {
   ArrowUpDown,
   Clock,
   Truck,
+  CheckSquare,
   type LucideIcon,
 } from "lucide-react"
 
@@ -31,6 +32,7 @@ const navItems: NavItem[] = [
   { id: "shipment-search", label: "Shipment Search", icon: PackageSearch, section: "operations" },
   { id: "collection-search", label: "Collection Search", icon: Search, section: "operations" },
   { id: "raise-non-shipment-ticket", label: "Raise Non-Shipment Ticket", icon: TicketPlus, section: "operations" },
+  { id: "task-list", label: "Task List", icon: CheckSquare, section: "operations" },
   { id: "agents", label: "Agents", icon: Users, section: "configuration" },
   { id: "customers", label: "Customers", icon: Building2, section: "configuration" },
   { id: "carriers", label: "Carriers", icon: Truck, section: "configuration" },

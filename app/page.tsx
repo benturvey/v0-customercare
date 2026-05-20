@@ -16,6 +16,7 @@ import { QueryTypeView } from "@/components/query-type-view"
 import { AdvancedRulesView } from "@/components/advanced-rules-view"
 import { RulePriorityView } from "@/components/rule-priority-view"
 import { WorkingHoursView } from "@/components/working-hours-view"
+import { TaskListView } from "@/components/task-list-view"
 import { LoginModal } from "@/components/login-modal"
 
 function PlaceholderView({ title }: { title: string }) {
@@ -96,6 +97,9 @@ export default function MainPage() {
     }
     if (activeView === "working-hours") {
       return <WorkingHoursView onLogOut={handleLogOut} />
+    }
+    if (activeView === "task-list") {
+      return <TaskListView onLogOut={handleLogOut} />
     }
     return <PlaceholderView title={viewTitles[activeView] || "Unknown"} />
   }

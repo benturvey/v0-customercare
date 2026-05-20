@@ -1,0 +1,377 @@
+"use client"
+
+import { useState } from "react"
+import { Plus, Trash2, CheckCircle2, Circle, ChevronDown, MoreHorizontal, Flag, Calendar, User } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { UserDropdownMenu } from "@/components/user-dropdown-menu"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { cn } from "@/lib/utils"
+
+type Priority = "low" | "medium" | "high"
+type Status = "todo" | "in-progress" | "done"
+
+interface Task {
+  id: string
+  title: string
+  description: string
+  priority: Priority
+  status: Status
+  assignee: string
+  dueDate: string
+  createdAt: string
+}
+
+const PRIORITY_CONFIG: Record<Priority, { label: string; className: string }> = {
+  low:    { label: "Low",    className: "bg-slate-100 text-slate-600" },
+  medium: { label: "Medium", className: "bg-amber-100 text-amber-700" },
+  high:   { label: "High",   className: "bg-red-100 text-red-700" },
+}
+
+const STATUS_CONFIG: Record<Status, { label: string; className: string }> = {
+  "todo":        { label: "To Do",       className: "bg-slate-100 text-slate-600" },
+  "in-progress": { label: "In Progress", className: "bg-blue-100 text-blue-700" },
+  "done":        { label: "Done",        className: "bg-green-100 text-green-700" },
+}
+
+function generateId() {
+  return `task-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`
+}
+
+interface TaskRowProps {
+  task: Task
+  onStatusToggle: (id: string) => void
+  onDelete: (id: string) => void
+  onUpdate: (id: string, updates: Partial<Task>) => void
+}
+
+function TaskRow({ task, onStatusToggle, onDelete, onUpdate }: TaskRowProps) {
+  const [isExpanded, setIsExpanded] = useState(false)
+  const isDone = task.status === "done"
+
+  return (
+    <div className={cn("border rounded-lg bg-background transition-colors", isDone && "opacity-60")}>
+      <div className="flex items-center gap-3 px-4 py-3">
+        <button onClick={() => onStatusToggle(task.id)} className="shrink-0 text-muted-foreground hover:text-primary transition-colors">
+          {isDone
+            ? <CheckCircle2 className="h-5 w-5 text-green-500" />
+            : <Circle className="h-5 w-5" />
+          }
+        </button>
+
+        <span className={cn("flex-1 text-sm font-medium text-foreground", isDone && "line-through text-muted-foreground")}>
+          {task.title}
+        </span>
+
+        <div className="flex items-center gap-2 shrink-0">
+          <span className={cn("text-xs font-medium px-2 py-0.5 rounded-full", PRIORITY_CONFIG[task.priority].className)}>
+            {PRIORITY_CONFIG[task.priority].label}
+          </span>
+          <span className={cn("text-xs font-medium px-2 py-0.5 rounded-full", STATUS_CONFIG[task.status].className)}>
+            {STATUS_CONFIG[task.status].label}
+          </span>
+          {task.assignee && (
+            <span className="flex items-center gap-1 text-xs text-muted-foreground">
+              <User className="h-3 w-3" />
+              {task.assignee}
+            </span>
+          )}
+          {task.dueDate && (
+            <span className="flex items-center gap-1 text-xs text-muted-foreground">
+              <Calendar className="h-3 w-3" />
+              {task.dueDate}
+            </span>
+          )}
+          <button
+            onClick={() => setIsExpanded((v) => !v)}
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <ChevronDown className={cn("h-4 w-4 transition-transform", isExpanded && "rotate-180")} />
+          </button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="h-7 w-7">
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => onUpdate(task.id, { status: "todo" })}>Mark as To Do</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onUpdate(task.id, { status: "in-progress" })}>Mark as In Progress</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onUpdate(task.id, { status: "done" })}>Mark as Done</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onDelete(task.id)} className="text-destructive focus:text-destructive">
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      </div>
+
+      {isExpanded && (
+        <div className="px-12 pb-4 border-t space-y-3 pt-3">
+          <div className="grid grid-cols-1 gap-2">
+            <Textarea
+              placeholder="Add a description..."
+              value={task.description}
+              onChange={(e) => onUpdate(task.id, { description: e.target.value })}
+              className="text-sm resize-none min-h-[72px]"
+            />
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <div className="flex flex-col gap-1">
+              <label className="text-xs text-muted-foreground font-medium">Priority</label>
+              <select
+                value={task.priority}
+                onChange={(e) => onUpdate(task.id, { priority: e.target.value as Priority })}
+                className="text-xs border rounded px-2 py-1.5 bg-background text-foreground"
+              >
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+            <div className="flex flex-col gap-1">
+              <label className="text-xs text-muted-foreground font-medium">Status</label>
+              <select
+                value={task.status}
+                onChange={(e) => onUpdate(task.id, { status: e.target.value as Status })}
+                className="text-xs border rounded px-2 py-1.5 bg-background text-foreground"
+              >
+                <option value="todo">To Do</option>
+                <option value="in-progress">In Progress</option>
+                <option value="done">Done</option>
+              </select>
+            </div>
+            <div className="flex flex-col gap-1">
+              <label className="text-xs text-muted-foreground font-medium">Assignee</label>
+              <Input
+                value={task.assignee}
+                onChange={(e) => onUpdate(task.id, { assignee: e.target.value })}
+                placeholder="Name"
+                className="text-xs h-7 w-32"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label className="text-xs text-muted-foreground font-medium">Due Date</label>
+              <Input
+                type="date"
+                value={task.dueDate}
+                onChange={(e) => onUpdate(task.id, { dueDate: e.target.value })}
+                className="text-xs h-7 w-36"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+interface AddTaskFormProps {
+  onAdd: (task: Task) => void
+  onCancel: () => void
+}
+
+function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
+  const [priority, setPriority] = useState<Priority>("medium")
+  const [assignee, setAssignee] = useState("")
+  const [dueDate, setDueDate] = useState("")
+
+  const handleSubmit = () => {
+    if (!title.trim()) return
+    onAdd({
+      id: generateId(),
+      title: title.trim(),
+      description,
+      priority,
+      status: "todo",
+      assignee,
+      dueDate,
+      createdAt: new Date().toISOString(),
+    })
+  }
+
+  return (
+    <div className="border rounded-lg bg-background p-4 space-y-3">
+      <Input
+        autoFocus
+        placeholder="Task title..."
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        onKeyDown={(e) => { if (e.key === "Enter") handleSubmit(); if (e.key === "Escape") onCancel() }}
+        className="text-sm font-medium"
+      />
+      <Textarea
+        placeholder="Description (optional)..."
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        className="text-sm resize-none min-h-[64px]"
+      />
+      <div className="flex flex-wrap gap-3">
+        <div className="flex flex-col gap-1">
+          <label className="text-xs text-muted-foreground font-medium">Priority</label>
+          <select
+            value={priority}
+            onChange={(e) => setPriority(e.target.value as Priority)}
+            className="text-xs border rounded px-2 py-1.5 bg-background text-foreground"
+          >
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+        <div className="flex flex-col gap-1">
+          <label className="text-xs text-muted-foreground font-medium">Assignee</label>
+          <Input
+            value={assignee}
+            onChange={(e) => setAssignee(e.target.value)}
+            placeholder="Name"
+            className="text-xs h-7 w-32"
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label className="text-xs text-muted-foreground font-medium">Due Date</label>
+          <Input
+            type="date"
+            value={dueDate}
+            onChange={(e) => setDueDate(e.target.value)}
+            className="text-xs h-7 w-36"
+          />
+        </div>
+      </div>
+      <div className="flex items-center gap-2 pt-1">
+        <Button size="sm" onClick={handleSubmit} disabled={!title.trim()}>Add Task</Button>
+        <Button size="sm" variant="ghost" onClick={onCancel}>Cancel</Button>
+      </div>
+    </div>
+  )
+}
+
+export function TaskListView({ onLogOut }: { onLogOut?: () => void }) {
+  const [tasks, setTasks] = useState<Task[]>([])
+  const [showAddForm, setShowAddForm] = useState(false)
+  const [filterStatus, setFilterStatus] = useState<Status | "all">("all")
+
+  const handleAdd = (task: Task) => {
+    setTasks((prev) => [task, ...prev])
+    setShowAddForm(false)
+  }
+
+  const handleStatusToggle = (id: string) => {
+    setTasks((prev) =>
+      prev.map((t) =>
+        t.id === id ? { ...t, status: t.status === "done" ? "todo" : "done" } : t
+      )
+    )
+  }
+
+  const handleDelete = (id: string) => {
+    setTasks((prev) => prev.filter((t) => t.id !== id))
+  }
+
+  const handleUpdate = (id: string, updates: Partial<Task>) => {
+    setTasks((prev) => prev.map((t) => (t.id === id ? { ...t, ...updates } : t)))
+  }
+
+  const filteredTasks = filterStatus === "all" ? tasks : tasks.filter((t) => t.status === filterStatus)
+
+  const counts = {
+    all: tasks.length,
+    todo: tasks.filter((t) => t.status === "todo").length,
+    "in-progress": tasks.filter((t) => t.status === "in-progress").length,
+    done: tasks.filter((t) => t.status === "done").length,
+  }
+
+  return (
+    <div className="flex flex-col h-screen bg-background">
+      {/* Header */}
+      <header className="flex items-center justify-between px-6 py-4 border-b border-border bg-background shrink-0">
+        <div className="flex items-center gap-3">
+          <h1 className="text-xl font-bold text-foreground">Task List</h1>
+          <span className="text-xs font-medium bg-muted text-muted-foreground px-2 py-0.5 rounded-full">
+            {tasks.length} task{tasks.length !== 1 ? "s" : ""}
+          </span>
+        </div>
+        <div className="flex items-center gap-3">
+          <Button size="sm" onClick={() => setShowAddForm(true)} className="flex items-center gap-1.5">
+            <Plus className="h-4 w-4" />
+            Add Task
+          </Button>
+          <UserDropdownMenu onLogOut={onLogOut} />
+        </div>
+      </header>
+
+      <div className="flex-1 overflow-y-auto px-6 py-6">
+        {/* Filter Tabs */}
+        <div className="flex items-center gap-1 mb-6 border-b border-border">
+          {(["all", "todo", "in-progress", "done"] as const).map((s) => (
+            <button
+              key={s}
+              onClick={() => setFilterStatus(s)}
+              className={cn(
+                "px-4 py-2.5 text-sm font-medium border-b-2 -mb-px transition-colors capitalize",
+                filterStatus === s
+                  ? "border-primary text-primary"
+                  : "border-transparent text-muted-foreground hover:text-foreground"
+              )}
+            >
+              {s === "all" ? "All" : STATUS_CONFIG[s].label}
+              <span className={cn(
+                "ml-2 text-xs px-1.5 py-0.5 rounded-full",
+                filterStatus === s ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"
+              )}>
+                {counts[s]}
+              </span>
+            </button>
+          ))}
+        </div>
+
+        {/* Add Form */}
+        {showAddForm && (
+          <div className="mb-4">
+            <AddTaskForm onAdd={handleAdd} onCancel={() => setShowAddForm(false)} />
+          </div>
+        )}
+
+        {/* Task List */}
+        <div className="space-y-2">
+          {filteredTasks.length === 0 && !showAddForm && (
+            <div className="flex flex-col items-center justify-center py-20 text-center">
+              <div className="h-12 w-12 rounded-full bg-muted flex items-center justify-center mb-4">
+                <Flag className="h-5 w-5 text-muted-foreground" />
+              </div>
+              <p className="text-sm font-medium text-foreground mb-1">
+                {filterStatus === "all" ? "No tasks yet" : `No ${STATUS_CONFIG[filterStatus as Status]?.label ?? filterStatus} tasks`}
+              </p>
+              <p className="text-xs text-muted-foreground mb-4">
+                {filterStatus === "all" ? "Add your first task to get started." : "Try switching to a different filter."}
+              </p>
+              {filterStatus === "all" && (
+                <Button size="sm" variant="outline" onClick={() => setShowAddForm(true)}>
+                  <Plus className="h-4 w-4 mr-1" />
+                  Add Task
+                </Button>
+              )}
+            </div>
+          )}
+          {filteredTasks.map((task) => (
+            <TaskRow
+              key={task.id}
+              task={task}
+              onStatusToggle={handleStatusToggle}
+              onDelete={handleDelete}
+              onUpdate={handleUpdate}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
