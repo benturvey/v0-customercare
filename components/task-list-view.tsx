@@ -545,6 +545,7 @@ export function TaskListView({ onLogOut }: { onLogOut?: () => void }) {
             </div>
           </>
         )}
+      </div>
     </div>
   )
 }
