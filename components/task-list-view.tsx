@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Plus, Trash2, CheckCircle2, Circle, ChevronDown, MoreHorizontal, Flag, Calendar, User, Repeat } from "lucide-react"
+import { Plus, Trash2, CheckCircle2, Circle, ChevronDown, MoreHorizontal, Flag, Calendar, User, Repeat, MessageSquare, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -18,6 +18,13 @@ type Priority = "low" | "medium" | "high"
 type Status = "todo" | "in-progress" | "done"
 type Recurrence = "none" | "daily" | "weekly" | "monthly"
 
+interface Comment {
+  id: string
+  text: string
+  user: string
+  timestamp: string
+}
+
 interface Task {
   id: string
   title: string
@@ -28,6 +35,7 @@ interface Task {
   dueDate: string
   createdAt: string
   recurrence: Recurrence
+  comments: Comment[]
 }
 
 const RECURRENCE_CONFIG: Record<Recurrence, { label: string; className: string }> = {
@@ -53,16 +61,44 @@ function generateId() {
   return `task-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`
 }
 
+function generateCommentId() {
+  return `comment-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`
+}
+
+function formatTimestamp(isoString: string) {
+  const date = new Date(isoString)
+  return date.toLocaleString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  })
+}
+
 interface TaskRowProps {
   task: Task
   onStatusToggle: (id: string) => void
   onDelete: (id: string) => void
   onUpdate: (id: string, updates: Partial<Task>) => void
+  onAddComment: (taskId: string, comment: Comment) => void
 }
 
-function TaskRow({ task, onStatusToggle, onDelete, onUpdate }: TaskRowProps) {
+function TaskRow({ task, onStatusToggle, onDelete, onUpdate, onAddComment }: TaskRowProps) {
   const [isExpanded, setIsExpanded] = useState(false)
+  const [newComment, setNewComment] = useState("")
   const isDone = task.status === "done"
+
+  const handleAddComment = () => {
+    if (!newComment.trim()) return
+    onAddComment(task.id, {
+      id: generateCommentId(),
+      text: newComment.trim(),
+      user: "Current User", // In a real app, this would come from auth context
+      timestamp: new Date().toISOString(),
+    })
+    setNewComment("")
+  }
 
   return (
     <div className={cn("border rounded-lg bg-background transition-colors", isDone && "opacity-60")}>
@@ -101,6 +137,12 @@ function TaskRow({ task, onStatusToggle, onDelete, onUpdate }: TaskRowProps) {
             <span className={cn("flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full", RECURRENCE_CONFIG[task.recurrence].className)}>
               <Repeat className="h-3 w-3" />
               {RECURRENCE_CONFIG[task.recurrence].label}
+            </span>
+          )}
+          {task.comments.length > 0 && (
+            <span className="flex items-center gap-1 text-xs text-muted-foreground">
+              <MessageSquare className="h-3 w-3" />
+              {task.comments.length}
             </span>
           )}
           <button
@@ -194,6 +236,56 @@ function TaskRow({ task, onStatusToggle, onDelete, onUpdate }: TaskRowProps) {
               </select>
             </div>
           </div>
+
+          {/* Comments Section */}
+          <div className="border-t pt-3 mt-3">
+            <div className="flex items-center gap-2 mb-3">
+              <MessageSquare className="h-4 w-4 text-muted-foreground" />
+              <span className="text-xs font-semibold text-foreground">Comments</span>
+              {task.comments.length > 0 && (
+                <span className="text-xs text-muted-foreground">({task.comments.length})</span>
+              )}
+            </div>
+
+            {/* Comments Trail */}
+            {task.comments.length > 0 && (
+              <div className="space-y-2 mb-3 max-h-48 overflow-y-auto">
+                {task.comments.map((comment) => (
+                  <div key={comment.id} className="bg-muted/50 rounded-md px-3 py-2">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-xs font-medium text-foreground">{comment.user}</span>
+                      <span className="text-[10px] text-muted-foreground">{formatTimestamp(comment.timestamp)}</span>
+                    </div>
+                    <p className="text-sm text-foreground">{comment.text}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Add Comment */}
+            <div className="flex gap-2">
+              <Input
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                placeholder="Add a comment..."
+                className="text-sm flex-1"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault()
+                    handleAddComment()
+                  }
+                }}
+              />
+              <Button
+                size="sm"
+                onClick={handleAddComment}
+                disabled={!newComment.trim()}
+                className="shrink-0"
+              >
+                <Send className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
         </div>
       )}
     </div>
@@ -225,6 +317,7 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
       dueDate,
       recurrence,
       createdAt: new Date().toISOString(),
+      comments: [],
     })
   }
 
@@ -323,6 +416,14 @@ export function TaskListView({ onLogOut }: { onLogOut?: () => void }) {
     setTasks((prev) => prev.map((t) => (t.id === id ? { ...t, ...updates } : t)))
   }
 
+  const handleAddComment = (taskId: string, comment: Comment) => {
+    setTasks((prev) =>
+      prev.map((t) =>
+        t.id === taskId ? { ...t, comments: [...t.comments, comment] } : t
+      )
+    )
+  }
+
   const filteredTasks = filterStatus === "all" ? tasks : tasks.filter((t) => t.status === filterStatus)
 
   const counts = {
@@ -411,6 +512,7 @@ export function TaskListView({ onLogOut }: { onLogOut?: () => void }) {
               onStatusToggle={handleStatusToggle}
               onDelete={handleDelete}
               onUpdate={handleUpdate}
+              onAddComment={handleAddComment}
             />
           ))}
         </div>
