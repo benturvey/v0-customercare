@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Plus, Trash2, CheckCircle2, Circle, ChevronDown, MoreHorizontal, Flag, Calendar, User } from "lucide-react"
+import { Plus, Trash2, CheckCircle2, Circle, ChevronDown, MoreHorizontal, Flag, Calendar, User, Repeat } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -16,6 +16,7 @@ import { cn } from "@/lib/utils"
 
 type Priority = "low" | "medium" | "high"
 type Status = "todo" | "in-progress" | "done"
+type Recurrence = "none" | "daily" | "weekly" | "monthly"
 
 interface Task {
   id: string
@@ -26,6 +27,14 @@ interface Task {
   assignee: string
   dueDate: string
   createdAt: string
+  recurrence: Recurrence
+}
+
+const RECURRENCE_CONFIG: Record<Recurrence, { label: string; className: string }> = {
+  none:    { label: "No Repeat",  className: "" },
+  daily:   { label: "Daily",     className: "bg-violet-100 text-violet-700" },
+  weekly:  { label: "Weekly",    className: "bg-cyan-100 text-cyan-700" },
+  monthly: { label: "Monthly",   className: "bg-orange-100 text-orange-700" },
 }
 
 const PRIORITY_CONFIG: Record<Priority, { label: string; className: string }> = {
@@ -86,6 +95,12 @@ function TaskRow({ task, onStatusToggle, onDelete, onUpdate }: TaskRowProps) {
             <span className="flex items-center gap-1 text-xs text-muted-foreground">
               <Calendar className="h-3 w-3" />
               {task.dueDate}
+            </span>
+          )}
+          {task.recurrence !== "none" && (
+            <span className={cn("flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full", RECURRENCE_CONFIG[task.recurrence].className)}>
+              <Repeat className="h-3 w-3" />
+              {RECURRENCE_CONFIG[task.recurrence].label}
             </span>
           )}
           <button
@@ -165,6 +180,19 @@ function TaskRow({ task, onStatusToggle, onDelete, onUpdate }: TaskRowProps) {
                 className="text-xs h-7 w-36"
               />
             </div>
+            <div className="flex flex-col gap-1">
+              <label className="text-xs text-muted-foreground font-medium">Recurrence</label>
+              <select
+                value={task.recurrence}
+                onChange={(e) => onUpdate(task.id, { recurrence: e.target.value as Recurrence })}
+                className="text-xs border rounded px-2 py-1.5 bg-background text-foreground"
+              >
+                <option value="none">No Repeat</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+              </select>
+            </div>
           </div>
         </div>
       )}
@@ -183,6 +211,7 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
   const [priority, setPriority] = useState<Priority>("medium")
   const [assignee, setAssignee] = useState("")
   const [dueDate, setDueDate] = useState("")
+  const [recurrence, setRecurrence] = useState<Recurrence>("none")
 
   const handleSubmit = () => {
     if (!title.trim()) return
@@ -194,6 +223,7 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
       status: "todo",
       assignee,
       dueDate,
+      recurrence,
       createdAt: new Date().toISOString(),
     })
   }
@@ -244,6 +274,19 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
             onChange={(e) => setDueDate(e.target.value)}
             className="text-xs h-7 w-36"
           />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label className="text-xs text-muted-foreground font-medium">Recurrence</label>
+          <select
+            value={recurrence}
+            onChange={(e) => setRecurrence(e.target.value as Recurrence)}
+            className="text-xs border rounded px-2 py-1.5 bg-background text-foreground"
+          >
+            <option value="none">No Repeat</option>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+          </select>
         </div>
       </div>
       <div className="flex items-center gap-2 pt-1">
