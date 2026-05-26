@@ -453,7 +453,19 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         {/* Customer Conversation */}
         <div>
           <div className="rounded-lg border border-border p-4">
-            <h2 className="text-base font-semibold text-[#1e3a5f] mb-4">Customer Conversation</h2>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-base font-semibold text-[#1e3a5f]">Conversation</h2>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                  <span className="px-2 py-0.5 text-xs border border-blue-200 bg-blue-50 rounded text-[#1e3a5f]">Text</span>
+                  <span className="text-xs text-muted-foreground">Customer Conversation</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="px-2 py-0.5 text-xs border border-border bg-white rounded text-[#1e3a5f]">Text</span>
+                  <span className="text-xs text-muted-foreground">Team Conversation &amp; Exceptions</span>
+                </div>
+              </div>
+            </div>
             <div className="rounded-lg border border-blue-100 bg-white p-3 mb-3">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-[#1e3a5f]">Agent - OZ-USER</span>
