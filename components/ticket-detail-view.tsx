@@ -456,6 +456,15 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
             <h2 className="text-base font-semibold text-[#1e3a5f] mb-4">Customer Conversation</h2>
             <div className="rounded-lg border border-blue-100 bg-white p-3 mb-3">
               <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-semibold text-[#1e3a5f]">Agent - OZ-USER</span>
+                <span className="text-xs text-muted-foreground">06/05/2026 09:49</span>
+              </div>
+              <p className="text-sm text-foreground leading-relaxed">
+                Good morning, Evri are still experiencing delays. We apologise for the inconvenience and will continue to monitor. Kind regards -GFS Customer Care
+              </p>
+            </div>
+            <div className="rounded-lg border border-blue-100 bg-white p-3 mb-3">
+              <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-[#1e3a5f]">CS Team</span>
                 <span className="text-xs text-muted-foreground">06/05/2026 09:49</span>
               </div>
