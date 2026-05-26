@@ -389,7 +389,7 @@ function TaskRow({ task, onStatusToggle, onDelete, onUpdate, onAddComment }: Tas
 }
 
 interface AddTaskFormProps {
-  onAdd: (task: Task) => void
+  onAdd: (tasks: Task[]) => void
   onCancel: () => void
 }
 
@@ -458,18 +458,17 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
 
   const handleSubmit = () => {
     if (!title.trim()) return
-    onAdd({
-      id: generateId(),
+
+    const base = {
       title: title.trim(),
       description: "",
       priority,
-      status: "todo",
+      status: "todo" as const,
       assignee: raisedBy,
       raisedDate,
       raisedBy,
       carriers,
       customer,
-      dueDate,
       recurrence,
       recurrenceInterval: recurrence !== "none" ? recurrenceInterval : undefined,
       recurrenceFrequency: recurrence !== "none" ? recurrenceFrequency : undefined,
@@ -478,7 +477,29 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
       createdAt: new Date().toISOString(),
       comments: [],
       subTasks,
-    })
+    }
+
+    // Daily recurrence: expand into one task per day
+    if (recurrence === "daily") {
+      const startDate = dueDate ? new Date(dueDate) : new Date()
+      const endDate = recurrenceEndDate
+        ? new Date(recurrenceEndDate)
+        : (() => { const d = new Date(startDate); d.setDate(d.getDate() + 9); return d })()
+
+      const expandedTasks: Task[] = []
+      const current = new Date(startDate)
+      while (current <= endDate) {
+        expandedTasks.push({
+          ...base,
+          id: generateId(),
+          dueDate: current.toISOString().slice(0, 10),
+        })
+        current.setDate(current.getDate() + 1)
+      }
+      onAdd(expandedTasks)
+    } else {
+      onAdd([{ ...base, id: generateId(), dueDate }])
+    }
   }
 
   return (
@@ -730,8 +751,8 @@ export function TaskListView({ onLogOut }: { onLogOut?: () => void }) {
     }
   }, [tasks, isLoaded])
 
-  const handleAdd = (task: Task) => {
-    setTasks((prev) => [task, ...prev])
+  const handleAdd = (newTasks: Task[]) => {
+    setTasks((prev) => [...newTasks, ...prev])
     setShowAddForm(false)
   }
 
