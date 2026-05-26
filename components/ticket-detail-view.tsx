@@ -468,7 +468,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                         : "text-muted-foreground hover:text-foreground"
                     )}
                   >
-                    All Comments
+                    All Conversations
                   </button>
                   <button
                     onClick={() => setConversationFilter("customer")}
@@ -479,7 +479,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                         : "text-muted-foreground hover:text-foreground"
                     )}
                   >
-                    Customer Comments
+                    Customer Conversations
                   </button>
                 </div>
                 <div className="flex items-center gap-4">
