@@ -195,6 +195,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
   const [mergeCriteriaPostcode, setMergeCriteriaPostcode] = useState("")
   const [mergeCriteriaDate, setMergeCriteriaDate] = useState("")
   const [mergeCriteriaCategory, setMergeCriteriaCategory] = useState("")
+  const [conversationFilter, setConversationFilter] = useState<"all" | "customer">("all")
 
   const mergeCriteriaOptions = [
     { value: "store",     label: "Store" },
@@ -455,17 +456,44 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           <div className="rounded-lg border border-border p-4">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-base font-semibold text-[#1e3a5f]">Conversation</h2>
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <span className="px-2 py-0.5 text-xs border border-blue-200 bg-blue-50 rounded text-[#1e3a5f]">Text</span>
-                  <span className="text-xs text-muted-foreground">Customer Conversation</span>
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 border border-border rounded-md">
+                  <button
+                    onClick={() => setConversationFilter("all")}
+                    className={cn(
+                      "px-3 py-1.5 text-xs font-medium rounded transition-colors",
+                      conversationFilter === "all"
+                        ? "bg-primary text-white"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    All Comments
+                  </button>
+                  <button
+                    onClick={() => setConversationFilter("customer")}
+                    className={cn(
+                      "px-3 py-1.5 text-xs font-medium rounded transition-colors",
+                      conversationFilter === "customer"
+                        ? "bg-primary text-white"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    Customer Comments
+                  </button>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="px-2 py-0.5 text-xs border border-border bg-white rounded text-[#1e3a5f]">Text</span>
-                  <span className="text-xs text-muted-foreground">Team Conversation &amp; Exceptions</span>
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    <span className="px-2 py-0.5 text-xs border border-blue-200 bg-blue-50 rounded text-[#1e3a5f]">Text</span>
+                    <span className="text-xs text-muted-foreground">Customer</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="px-2 py-0.5 text-xs border border-border bg-white rounded text-[#1e3a5f]">Text</span>
+                    <span className="text-xs text-muted-foreground">Team &amp; Exceptions</span>
+                  </div>
                 </div>
               </div>
             </div>
+            {(conversationFilter === "all" || conversationFilter === "customer") && (
             <div className="rounded-lg border border-blue-100 bg-white p-3 mb-3">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-[#1e3a5f]">Agent - OZ-USER</span>
@@ -475,6 +503,8 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 Good morning, Evri are still experiencing delays. We apologise for the inconvenience and will continue to monitor. Kind regards -GFS Customer Care
               </p>
             </div>
+            )}
+            {conversationFilter === "all" && (
             <div className="rounded-lg border border-blue-100 bg-blue-50 p-3 mb-3">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-[#1e3a5f]">CS Team</span>
@@ -486,6 +516,8 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 <span className="text-muted-foreground">Additional Information:</span> What is happening with the delivery? Why is this taking so long?
               </p>
             </div>
+            )}
+            {(conversationFilter === "all" || conversationFilter === "customer") && (
             <div className="rounded-lg border border-blue-100 bg-white p-3 mb-3">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-[#1e3a5f]">Agent - OZ-USER</span>
@@ -495,6 +527,8 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 Hello, Thanks for contacting GFS. I am sorry to advise the parcel has missed connection to the courier which has caused a delay. Evri are aiming to get this parcel back on track to your customer as soon as possible. We will check for further scans and update you daily. Kind regards -GFS Customer Care
               </p>
             </div>
+            )}
+            {conversationFilter === "all" && (
             <div className="rounded-lg border border-blue-100 bg-blue-50 p-3 mb-3">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-[#1e3a5f]">CS Team</span>
@@ -506,6 +540,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 <span className="text-muted-foreground">Additional Information:</span> Parcel unable to be delivered to parcel shop and now shows delayed. Please could we have further information regarding this delay as customer is very unhappy and unsure why delivery failed
               </p>
             </div>
+            )}
             <button className="w-full text-center text-sm text-[#009eff] hover:text-blue-700 font-medium transition-colors py-2 border-t border-blue-100">
               View More
             </button>
