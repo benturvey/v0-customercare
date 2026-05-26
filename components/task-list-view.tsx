@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Plus, Trash2, CheckCircle2, Circle, ChevronDown, MoreHorizontal, Flag, Calendar, User, Repeat, MessageSquare, Send } from "lucide-react"
+import { Plus, Trash2, CheckCircle2, Circle, ChevronDown, MoreHorizontal, Flag, Calendar, User, Repeat, MessageSquare, Send, ChevronUp, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -25,6 +25,12 @@ interface Comment {
   timestamp: string
 }
 
+interface SubTask {
+  taskNo: number
+  carriers: string[]
+  description: string
+}
+
 interface Task {
   id: string
   title: string
@@ -32,10 +38,14 @@ interface Task {
   priority: Priority
   status: Status
   assignee: string
+  raisedDate: string
+  raisedBy: string
+  carriers: string[]
   dueDate: string
   createdAt: string
   recurrence: Recurrence
   comments: Comment[]
+  subTasks: SubTask[]
 }
 
 const RECURRENCE_CONFIG: Record<Recurrence, { label: string; className: string }> = {
@@ -44,6 +54,10 @@ const RECURRENCE_CONFIG: Record<Recurrence, { label: string; className: string }
   weekly:  { label: "Weekly",    className: "bg-cyan-100 text-cyan-700" },
   monthly: { label: "Monthly",   className: "bg-orange-100 text-orange-700" },
 }
+
+const CARRIERS = [
+  "Evri", "DPD", "Royal Mail", "DHL", "FedEx", "UPS", "Yodel", "Parcelforce", "Amazon Logistics", "Other",
+]
 
 const PRIORITY_CONFIG: Record<Priority, { label: string; className: string }> = {
   low:    { label: "Low",    className: "bg-slate-100 text-slate-600" },
@@ -181,6 +195,24 @@ function TaskRow({ task, onStatusToggle, onDelete, onUpdate, onAddComment }: Tas
           </div>
           <div className="flex flex-wrap gap-3">
             <div className="flex flex-col gap-1">
+              <label className="text-xs text-muted-foreground font-medium">Raised Date</label>
+              <Input
+                type="date"
+                value={task.raisedDate ?? ""}
+                onChange={(e) => onUpdate(task.id, { raisedDate: e.target.value })}
+                className="text-xs h-7 w-36"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label className="text-xs text-muted-foreground font-medium">Raised By</label>
+              <Input
+                value={task.raisedBy ?? ""}
+                onChange={(e) => onUpdate(task.id, { raisedBy: e.target.value })}
+                placeholder="Name"
+                className="text-xs h-7 w-32"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
               <label className="text-xs text-muted-foreground font-medium">Priority</label>
               <select
                 value={task.priority}
@@ -214,6 +246,13 @@ function TaskRow({ task, onStatusToggle, onDelete, onUpdate, onAddComment }: Tas
               />
             </div>
             <div className="flex flex-col gap-1">
+              <label className="text-xs text-muted-foreground font-medium">Carrier</label>
+              <CarrierMultiSelect
+                value={task.carriers ?? []}
+                onChange={(v) => onUpdate(task.id, { carriers: v })}
+              />
+            </div>
+            <div className="flex flex-col gap-1">
               <label className="text-xs text-muted-foreground font-medium">Due Date</label>
               <Input
                 type="date"
@@ -236,6 +275,25 @@ function TaskRow({ task, onStatusToggle, onDelete, onUpdate, onAddComment }: Tas
               </select>
             </div>
           </div>
+
+          {/* Sub Tasks */}
+          {task.subTasks && task.subTasks.length > 0 && (
+            <div className="border-t pt-3">
+              <span className="text-xs font-semibold text-foreground block mb-2">Sub Tasks</span>
+              <div className="grid grid-cols-[40px_1fr_1fr] gap-2 px-1 mb-1">
+                <span className="text-[10px] font-semibold uppercase text-muted-foreground">No.</span>
+                <span className="text-[10px] font-semibold uppercase text-muted-foreground">Carrier</span>
+                <span className="text-[10px] font-semibold uppercase text-muted-foreground">Description</span>
+              </div>
+              {task.subTasks.map((st) => (
+                <div key={st.taskNo} className="grid grid-cols-[40px_1fr_1fr] gap-2 items-center bg-muted/40 rounded-md px-1 py-2 mb-1">
+                  <span className="text-xs font-medium text-center text-muted-foreground">{st.taskNo}</span>
+                  <span className="text-xs text-foreground">{st.carriers.join(", ") || "—"}</span>
+                  <span className="text-xs text-foreground">{st.description || "—"}</span>
+                </div>
+              ))}
+            </div>
+          )}
 
           {/* Comments Section */}
           <div className="border-t pt-3 mt-3">
@@ -297,83 +355,156 @@ interface AddTaskFormProps {
   onCancel: () => void
 }
 
+function CarrierMultiSelect({ value, onChange }: { value: string[]; onChange: (v: string[]) => void }) {
+  const [open, setOpen] = useState(false)
+  const toggle = (carrier: string) => {
+    onChange(value.includes(carrier) ? value.filter((c) => c !== carrier) : [...value, carrier])
+  }
+  return (
+    <div className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((p) => !p)}
+        className="flex items-center justify-between gap-2 text-xs border rounded px-2 py-1.5 bg-background text-foreground min-w-[160px] w-full"
+      >
+        <span className="truncate">
+          {value.length === 0 ? "Select carriers..." : value.join(", ")}
+        </span>
+        <ChevronDown className="h-3 w-3 shrink-0 text-muted-foreground" />
+      </button>
+      {open && (
+        <div className="absolute z-50 mt-1 w-full min-w-[180px] rounded-md border bg-background shadow-md">
+          {CARRIERS.map((c) => (
+            <label key={c} className="flex items-center gap-2 px-3 py-1.5 text-xs hover:bg-muted cursor-pointer">
+              <input
+                type="checkbox"
+                checked={value.includes(c)}
+                onChange={() => toggle(c)}
+                className="rounded"
+              />
+              {c}
+            </label>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
   const [title, setTitle] = useState("")
-  const [description, setDescription] = useState("")
+  const [raisedDate, setRaisedDate] = useState(new Date().toISOString().slice(0, 10))
+  const [raisedBy, setRaisedBy] = useState("")
   const [priority, setPriority] = useState<Priority>("medium")
-  const [assignee, setAssignee] = useState("")
+  const [carriers, setCarriers] = useState<string[]>([])
   const [dueDate, setDueDate] = useState("")
   const [recurrence, setRecurrence] = useState<Recurrence>("none")
+  const [subTasks, setSubTasks] = useState<SubTask[]>([])
+
+  const addSubTask = () => {
+    setSubTasks((prev) => [...prev, { taskNo: prev.length + 1, carriers: [], description: "" }])
+  }
+
+  const updateSubTask = (index: number, updates: Partial<SubTask>) => {
+    setSubTasks((prev) => prev.map((st, i) => i === index ? { ...st, ...updates } : st))
+  }
+
+  const removeSubTask = (index: number) => {
+    setSubTasks((prev) => prev.filter((_, i) => i !== index).map((st, i) => ({ ...st, taskNo: i + 1 })))
+  }
 
   const handleSubmit = () => {
     if (!title.trim()) return
     onAdd({
       id: generateId(),
       title: title.trim(),
-      description,
+      description: "",
       priority,
       status: "todo",
-      assignee,
+      assignee: raisedBy,
+      raisedDate,
+      raisedBy,
+      carriers,
       dueDate,
       recurrence,
       createdAt: new Date().toISOString(),
       comments: [],
+      subTasks,
     })
   }
 
   return (
-    <div className="border rounded-lg bg-background p-4 space-y-3">
-      <Input
-        autoFocus
-        placeholder="Task title..."
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        onKeyDown={(e) => { if (e.key === "Enter") handleSubmit(); if (e.key === "Escape") onCancel() }}
-        className="text-sm font-medium"
-      />
-      <Textarea
-        placeholder="Description (optional)..."
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        className="text-sm resize-none min-h-[64px]"
-      />
-      <div className="flex flex-wrap gap-3">
+    <div className="border rounded-lg bg-background p-5 space-y-4">
+      <h3 className="text-sm font-semibold text-foreground">Add Task</h3>
+
+      {/* Row 1 - Title */}
+      <div className="flex flex-col gap-1">
+        <label className="text-xs font-medium text-muted-foreground">Task Title <span className="text-red-500">*</span></label>
+        <Input
+          autoFocus
+          placeholder="Enter task title..."
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Escape") onCancel() }}
+          className="text-sm"
+        />
+      </div>
+
+      {/* Row 2 - Raised Date, Raised By, Priority */}
+      <div className="grid grid-cols-3 gap-3">
         <div className="flex flex-col gap-1">
-          <label className="text-xs text-muted-foreground font-medium">Priority</label>
+          <label className="text-xs font-medium text-muted-foreground">Raised Date</label>
+          <Input
+            type="date"
+            value={raisedDate}
+            onChange={(e) => setRaisedDate(e.target.value)}
+            className="text-xs h-8"
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label className="text-xs font-medium text-muted-foreground">Raised By</label>
+          <Input
+            value={raisedBy}
+            onChange={(e) => setRaisedBy(e.target.value)}
+            placeholder="Name..."
+            className="text-xs h-8"
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label className="text-xs font-medium text-muted-foreground">Priority</label>
           <select
             value={priority}
             onChange={(e) => setPriority(e.target.value as Priority)}
-            className="text-xs border rounded px-2 py-1.5 bg-background text-foreground"
+            className="text-xs border rounded px-2 py-1.5 bg-background text-foreground h-8"
           >
             <option value="low">Low</option>
             <option value="medium">Medium</option>
             <option value="high">High</option>
           </select>
         </div>
+      </div>
+
+      {/* Row 3 - Carrier, Due Date, Recurrence */}
+      <div className="grid grid-cols-3 gap-3">
         <div className="flex flex-col gap-1">
-          <label className="text-xs text-muted-foreground font-medium">Assignee</label>
-          <Input
-            value={assignee}
-            onChange={(e) => setAssignee(e.target.value)}
-            placeholder="Name"
-            className="text-xs h-7 w-32"
-          />
+          <label className="text-xs font-medium text-muted-foreground">Carrier</label>
+          <CarrierMultiSelect value={carriers} onChange={setCarriers} />
         </div>
         <div className="flex flex-col gap-1">
-          <label className="text-xs text-muted-foreground font-medium">Due Date</label>
+          <label className="text-xs font-medium text-muted-foreground">Due Date</label>
           <Input
             type="date"
             value={dueDate}
             onChange={(e) => setDueDate(e.target.value)}
-            className="text-xs h-7 w-36"
+            className="text-xs h-8"
           />
         </div>
         <div className="flex flex-col gap-1">
-          <label className="text-xs text-muted-foreground font-medium">Recurrence</label>
+          <label className="text-xs font-medium text-muted-foreground">Recurrence</label>
           <select
             value={recurrence}
             onChange={(e) => setRecurrence(e.target.value as Recurrence)}
-            className="text-xs border rounded px-2 py-1.5 bg-background text-foreground"
+            className="text-xs border rounded px-2 py-1.5 bg-background text-foreground h-8"
           >
             <option value="none">No Repeat</option>
             <option value="daily">Daily</option>
@@ -382,7 +513,53 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
           </select>
         </div>
       </div>
-      <div className="flex items-center gap-2 pt-1">
+
+      {/* Sub Tasks */}
+      <div className="border-t pt-3 space-y-3">
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-semibold text-foreground">Sub Tasks</span>
+          <Button size="sm" variant="outline" onClick={addSubTask} type="button">
+            <Plus className="h-3 w-3 mr-1" />
+            Add Sub Task
+          </Button>
+        </div>
+        {subTasks.length > 0 && (
+          <div className="space-y-2">
+            {/* Header row */}
+            <div className="grid grid-cols-[40px_1fr_1fr_32px] gap-2 px-2">
+              <span className="text-[10px] font-semibold uppercase text-muted-foreground">No.</span>
+              <span className="text-[10px] font-semibold uppercase text-muted-foreground">Carrier</span>
+              <span className="text-[10px] font-semibold uppercase text-muted-foreground">Description</span>
+              <span />
+            </div>
+            {subTasks.map((st, index) => (
+              <div key={index} className="grid grid-cols-[40px_1fr_1fr_32px] gap-2 items-center bg-muted/40 rounded-md px-2 py-2">
+                <span className="text-xs font-semibold text-muted-foreground text-center">{st.taskNo}</span>
+                <CarrierMultiSelect
+                  value={st.carriers}
+                  onChange={(v) => updateSubTask(index, { carriers: v })}
+                />
+                <Input
+                  placeholder="Description..."
+                  value={st.description}
+                  onChange={(e) => updateSubTask(index, { description: e.target.value })}
+                  className="text-xs h-8"
+                />
+                <button
+                  type="button"
+                  onClick={() => removeSubTask(index)}
+                  className="flex items-center justify-center h-7 w-7 rounded hover:bg-red-50 hover:text-red-500 text-muted-foreground transition-colors"
+                >
+                  <X className="h-3.5 w-3.5" />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Actions */}
+      <div className="flex items-center gap-2 pt-1 border-t">
         <Button size="sm" onClick={handleSubmit} disabled={!title.trim()}>Add Task</Button>
         <Button size="sm" variant="ghost" onClick={onCancel}>Cancel</Button>
       </div>
@@ -398,6 +575,9 @@ const INITIAL_TASKS: Task[] = [
     priority: "high",
     status: "in-progress",
     assignee: "Alex Lucy",
+    raisedDate: "2026-05-14",
+    raisedBy: "Alex Lucy",
+    carriers: ["Evri"],
     dueDate: "2026-05-27",
     recurrence: "daily",
     createdAt: "2026-05-14T10:46:00.000Z",
@@ -408,7 +588,8 @@ const INITIAL_TASKS: Task[] = [
         user: "Alex Lucy",
         timestamp: "2026-05-14T10:46:00.000Z"
       }
-    ]
+    ],
+    subTasks: []
   },
   {
     id: "task-sample-2",
@@ -417,10 +598,14 @@ const INITIAL_TASKS: Task[] = [
     priority: "medium",
     status: "todo",
     assignee: "Alex Lucy",
+    raisedDate: "2026-05-13",
+    raisedBy: "Alex Lucy",
+    carriers: [],
     dueDate: "2026-05-28",
     recurrence: "weekly",
     createdAt: "2026-05-13T09:00:00.000Z",
-    comments: []
+    comments: [],
+    subTasks: []
   }
 ]
 
