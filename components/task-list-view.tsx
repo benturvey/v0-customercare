@@ -41,6 +41,7 @@ interface Task {
   raisedDate: string
   raisedBy: string
   carriers: string[]
+  customer: string
   dueDate: string
   createdAt: string
   recurrence: Recurrence
@@ -57,6 +58,10 @@ const RECURRENCE_CONFIG: Record<Recurrence, { label: string; className: string }
 
 const CARRIERS = [
   "Evri", "DPD", "DPD Local", "Royal Mail", "DHL", "FedEx", "UPS", "Yodel", "Parcelforce", "Amazon Logistics", "Other",
+]
+
+const CUSTOMERS = [
+  "N/A", "Omlet", "VAX", "Amazon", "eBay", "Shopify", "WooCommerce", "Magento", "BigCommerce", "Prestashop",
 ]
 
 const PRIORITY_CONFIG: Record<Priority, { label: string; className: string }> = {
@@ -253,6 +258,18 @@ function TaskRow({ task, onStatusToggle, onDelete, onUpdate, onAddComment }: Tas
               />
             </div>
             <div className="flex flex-col gap-1">
+              <label className="text-xs text-muted-foreground font-medium">Customer</label>
+              <select
+                value={task.customer ?? "N/A"}
+                onChange={(e) => onUpdate(task.id, { customer: e.target.value })}
+                className="text-xs border rounded px-2 py-1.5 bg-background text-foreground"
+              >
+                {CUSTOMERS.map((c) => (
+                  <option key={c} value={c}>{c}</option>
+                ))}
+              </select>
+            </div>
+            <div className="flex flex-col gap-1">
               <label className="text-xs text-muted-foreground font-medium">Due Date</label>
               <Input
                 type="date"
@@ -397,6 +414,7 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
   const [raisedBy, setRaisedBy] = useState("")
   const [priority, setPriority] = useState<Priority>("medium")
   const [carriers, setCarriers] = useState<string[]>([])
+  const [customer, setCustomer] = useState("N/A")
   const [dueDate, setDueDate] = useState("")
   const [recurrence, setRecurrence] = useState<Recurrence>("none")
   const [subTasks, setSubTasks] = useState<SubTask[]>([])
@@ -425,6 +443,7 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
       raisedDate,
       raisedBy,
       carriers,
+      customer,
       dueDate,
       recurrence,
       createdAt: new Date().toISOString(),
@@ -484,7 +503,7 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
         </div>
       </div>
 
-      {/* Row 3 - Carrier, Due Date, Recurrence */}
+      {/* Row 3 - Carrier, Due Date, Customer */}
       <div className="grid grid-cols-3 gap-3">
         <div className="flex flex-col gap-1">
           <label className="text-xs font-medium text-muted-foreground">Carrier</label>
@@ -499,6 +518,22 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
             className="text-xs h-8"
           />
         </div>
+        <div className="flex flex-col gap-1">
+          <label className="text-xs font-medium text-muted-foreground">Customer</label>
+          <select
+            value={customer}
+            onChange={(e) => setCustomer(e.target.value)}
+            className="text-xs border rounded px-2 py-1.5 bg-background text-foreground h-8"
+          >
+            {CUSTOMERS.map((c) => (
+              <option key={c} value={c}>{c}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      {/* Row 4 - Recurrence */}
+      <div className="grid grid-cols-3 gap-3">
         <div className="flex flex-col gap-1">
           <label className="text-xs font-medium text-muted-foreground">Recurrence</label>
           <select
@@ -578,6 +613,7 @@ const INITIAL_TASKS: Task[] = [
     raisedDate: "2026-05-14",
     raisedBy: "Alex Lucy",
     carriers: ["Evri"],
+    customer: "Omlet",
     dueDate: "2026-05-27",
     recurrence: "daily",
     createdAt: "2026-05-14T10:46:00.000Z",
@@ -601,6 +637,7 @@ const INITIAL_TASKS: Task[] = [
     raisedDate: "2026-05-13",
     raisedBy: "Alex Lucy",
     carriers: [],
+    customer: "N/A",
     dueDate: "2026-05-28",
     recurrence: "weekly",
     createdAt: "2026-05-13T09:00:00.000Z",
