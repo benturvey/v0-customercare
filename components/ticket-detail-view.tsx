@@ -467,6 +467,15 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
             </div>
             <div className="rounded-lg border border-blue-100 bg-white p-3 mb-3">
               <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-semibold text-[#1e3a5f]">Agent - OZ-USER</span>
+                <span className="text-xs text-muted-foreground">05/05/2026 15:49</span>
+              </div>
+              <p className="text-sm text-foreground leading-relaxed">
+                Hello, Thanks for contacting GFS. I am sorry to advise the parcel has missed connection to the courier which has caused a delay. Evri are aiming to get this parcel back on track to your customer as soon as possible. We will check for further scans and update you daily. Kind regards -GFS Customer Care
+              </p>
+            </div>
+            <div className="rounded-lg border border-blue-100 bg-white p-3 mb-3">
+              <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-[#1e3a5f]">CS Team</span>
                 <span className="text-xs text-muted-foreground">05/05/2026 15:49</span>
               </div>
