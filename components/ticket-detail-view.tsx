@@ -449,7 +449,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 mb-6">
+      <div className="grid grid-cols-1 gap-4 mb-6">
         {/* Customer Conversation */}
         <div>
           <div className="rounded-lg border border-yellow-200 p-4" style={{ backgroundColor: "#fffacd" }}>
