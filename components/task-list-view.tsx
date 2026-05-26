@@ -45,6 +45,10 @@ interface Task {
   dueDate: string
   createdAt: string
   recurrence: Recurrence
+  recurrenceInterval?: number
+  recurrenceFrequency?: "day" | "week" | "month"
+  recurrenceDays?: string[]
+  recurrenceEndDate?: string
   comments: Comment[]
   subTasks: SubTask[]
 }
@@ -434,6 +438,10 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
   const [customer, setCustomer] = useState("N/A")
   const [dueDate, setDueDate] = useState("")
   const [recurrence, setRecurrence] = useState<Recurrence>("none")
+  const [recurrenceInterval, setRecurrenceInterval] = useState(1)
+  const [recurrenceFrequency, setRecurrenceFrequency] = useState<"day" | "week" | "month">("week")
+  const [recurrenceDays, setRecurrenceDays] = useState<string[]>(["M", "T", "W", "T", "F"])
+  const [recurrenceEndDate, setRecurrenceEndDate] = useState("")
   const [subTasks, setSubTasks] = useState<SubTask[]>([])
 
   const addSubTask = () => {
@@ -463,6 +471,10 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
       customer,
       dueDate,
       recurrence,
+      recurrenceInterval: recurrence !== "none" ? recurrenceInterval : undefined,
+      recurrenceFrequency: recurrence !== "none" ? recurrenceFrequency : undefined,
+      recurrenceDays: recurrence !== "none" ? recurrenceDays : undefined,
+      recurrenceEndDate: recurrence !== "none" ? recurrenceEndDate : undefined,
       createdAt: new Date().toISOString(),
       comments: [],
       subTasks,
@@ -565,6 +577,74 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
           </select>
         </div>
       </div>
+
+      {/* Recurrence Configuration - Shown when recurrence is not "none" */}
+      {recurrence !== "none" && (
+        <div className="border-t pt-3 space-y-3">
+          {/* Repeat Every Row */}
+          <div className="flex items-center gap-3">
+            <span className="text-xs font-medium text-foreground">Repeat every</span>
+            <Input
+              type="number"
+              min="1"
+              max="31"
+              value={recurrenceInterval}
+              onChange={(e) => setRecurrenceInterval(parseInt(e.target.value) || 1)}
+              className="text-xs h-8 w-12"
+            />
+            <select
+              value={recurrenceFrequency}
+              onChange={(e) => setRecurrenceFrequency(e.target.value as "day" | "week" | "month")}
+              className="text-xs border rounded px-2 py-1.5 bg-background text-foreground h-8"
+            >
+              <option value="day">Day</option>
+              <option value="week">Week</option>
+              <option value="month">Month</option>
+            </select>
+          </div>
+
+          {/* Days of Week Selector */}
+          <div className="flex items-center gap-2 flex-wrap">
+            {["M", "T", "W", "T", "F", "S", "S"].map((day, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => {
+                  setRecurrenceDays((prev) =>
+                    prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
+                  )
+                }}
+                className={cn(
+                  "px-3 py-1.5 text-xs font-semibold rounded transition-colors",
+                  recurrenceDays.includes(day)
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-200 text-gray-600 hover:bg-gray-300"
+                )}
+              >
+                {day}
+              </button>
+            ))}
+          </div>
+
+          {/* Until Date Row */}
+          <div className="flex items-center gap-3">
+            <span className="text-xs font-medium text-foreground">Until</span>
+            <Input
+              type="date"
+              value={recurrenceEndDate}
+              onChange={(e) => setRecurrenceEndDate(e.target.value)}
+              className="text-xs h-8"
+            />
+            <button
+              type="button"
+              onClick={() => setRecurrence("none")}
+              className="flex items-center justify-center h-7 w-7 rounded hover:bg-red-50 hover:text-red-500 text-muted-foreground transition-colors"
+            >
+              <Trash2 className="h-3.5 w-3.5" />
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Sub Tasks */}
       <div className="border-t pt-3 space-y-3">
