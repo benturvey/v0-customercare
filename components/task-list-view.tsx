@@ -619,49 +619,7 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
   )
 }
 
-const INITIAL_TASKS: Task[] = [
-  {
-    id: "task-sample-1",
-    title: "Follow up on delayed Evri shipments",
-    description: "Check status of shipments delayed in North West region",
-    priority: "high",
-    status: "in-progress",
-    assignee: "Alex Lucy",
-    raisedDate: "2026-05-14",
-    raisedBy: "Alex Lucy",
-    carriers: ["Evri"],
-    customer: "Omlet",
-    dueDate: "2026-05-27",
-    recurrence: "daily",
-    createdAt: "2026-05-14T10:46:00.000Z",
-    comments: [
-      {
-        id: "comment-1",
-        text: "Contacted Evri support, awaiting response",
-        user: "Alex Lucy",
-        timestamp: "2026-05-14T10:46:00.000Z"
-      }
-    ],
-    subTasks: []
-  },
-  {
-    id: "task-sample-2",
-    title: "Review customer escalations",
-    description: "Process pending customer escalations from last week",
-    priority: "medium",
-    status: "todo",
-    assignee: "Alex Lucy",
-    raisedDate: "2026-05-13",
-    raisedBy: "Alex Lucy",
-    carriers: [],
-    customer: "N/A",
-    dueDate: "2026-05-28",
-    recurrence: "weekly",
-    createdAt: "2026-05-13T09:00:00.000Z",
-    comments: [],
-    subTasks: []
-  }
-]
+const INITIAL_TASKS: Task[] = []
 
 export function TaskListView({ onLogOut }: { onLogOut?: () => void }) {
   const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS)
