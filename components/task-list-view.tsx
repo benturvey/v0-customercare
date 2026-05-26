@@ -624,28 +624,47 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
             </select>
           </div>
 
-          {/* Days of Week Selector */}
-          <div className="flex items-center gap-2 flex-wrap">
-            {["M", "T", "W", "T", "F", "S", "S"].map((day, idx) => (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => {
-                  setRecurrenceDays((prev) =>
-                    prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
-                  )
-                }}
-                className={cn(
-                  "px-3 py-1.5 text-xs font-semibold rounded transition-colors",
-                  recurrenceDays.includes(day)
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-200 text-gray-600 hover:bg-gray-300"
-                )}
-              >
-                {day}
-              </button>
-            ))}
-          </div>
+          {/* Days of Week Selector - For Weekly Recurrence */}
+          {recurrenceFrequency === "week" && (
+            <div className="flex items-center gap-2 flex-wrap">
+              {["M", "T", "W", "T", "F", "S", "S"].map((day, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => {
+                    setRecurrenceDays((prev) =>
+                      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
+                    )
+                  }}
+                  className={cn(
+                    "px-3 py-1.5 text-xs font-semibold rounded transition-colors",
+                    recurrenceDays.includes(day)
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-200 text-gray-600 hover:bg-gray-300"
+                  )}
+                >
+                  {day}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Day of Month Selector - For Monthly Recurrence */}
+          {recurrenceFrequency === "month" && dueDate && (
+            <div className="flex items-center gap-3">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  checked={true}
+                  readOnly
+                  className="w-4 h-4"
+                />
+                <span className="text-xs font-medium text-foreground">
+                  On day {parseInt(dueDate.split("-")[2])}
+                </span>
+              </label>
+            </div>
+          )}
 
           {/* Until Date Row */}
           <div className="flex items-center gap-3">
