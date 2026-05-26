@@ -390,8 +390,42 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
   )
 }
 
+const INITIAL_TASKS: Task[] = [
+  {
+    id: "task-sample-1",
+    title: "Follow up on delayed Evri shipments",
+    description: "Check status of shipments delayed in North West region",
+    priority: "high",
+    status: "in-progress",
+    assignee: "Alex Lucy",
+    dueDate: "2026-05-27",
+    recurrence: "daily",
+    createdAt: "2026-05-14T10:46:00.000Z",
+    comments: [
+      {
+        id: "comment-1",
+        text: "Contacted Evri support, awaiting response",
+        user: "Alex Lucy",
+        timestamp: "2026-05-14T10:46:00.000Z"
+      }
+    ]
+  },
+  {
+    id: "task-sample-2",
+    title: "Review customer escalations",
+    description: "Process pending customer escalations from last week",
+    priority: "medium",
+    status: "todo",
+    assignee: "Alex Lucy",
+    dueDate: "2026-05-28",
+    recurrence: "weekly",
+    createdAt: "2026-05-13T09:00:00.000Z",
+    comments: []
+  }
+]
+
 export function TaskListView({ onLogOut }: { onLogOut?: () => void }) {
-  const [tasks, setTasks] = useState<Task[]>([])
+  const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS)
   const [showAddForm, setShowAddForm] = useState(false)
   const [filterStatus, setFilterStatus] = useState<Status | "all">("all")
   const [isLoaded, setIsLoaded] = useState(false)
@@ -401,7 +435,10 @@ export function TaskListView({ onLogOut }: { onLogOut?: () => void }) {
     const saved = localStorage.getItem("tasks")
     if (saved) {
       try {
-        setTasks(JSON.parse(saved))
+        const parsedTasks = JSON.parse(saved)
+        if (parsedTasks.length > 0) {
+          setTasks(parsedTasks)
+        }
       } catch (e) {
         console.error("Failed to load tasks from localStorage:", e)
       }
@@ -412,13 +449,11 @@ export function TaskListView({ onLogOut }: { onLogOut?: () => void }) {
   // Save tasks to localStorage whenever they change
   useEffect(() => {
     if (isLoaded) {
-      console.log("[v0] Saving tasks to localStorage:", tasks)
       localStorage.setItem("tasks", JSON.stringify(tasks))
     }
   }, [tasks, isLoaded])
 
   const handleAdd = (task: Task) => {
-    console.log("[v0] Adding task:", task)
     setTasks((prev) => [task, ...prev])
     setShowAddForm(false)
   }
