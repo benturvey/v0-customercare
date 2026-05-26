@@ -312,6 +312,24 @@ function TaskRow({ task, onStatusToggle, onDelete, onUpdate, onAddComment }: Tas
             </div>
           )}
 
+          {/* Save Button - Above Comments */}
+          <div className="flex items-center gap-2 pt-3 pb-3 border-t border-b">
+            <Button
+              size="sm"
+              onClick={() => setIsExpanded(false)}
+              className="bg-green-600 hover:bg-green-700"
+            >
+              Save Task
+            </Button>
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={() => setIsExpanded(false)}
+            >
+              Cancel
+            </Button>
+          </div>
+
           {/* Comments Section */}
           <div className="border-t pt-3 mt-3">
             <div className="flex items-center gap-2 mb-3">
@@ -360,24 +378,6 @@ function TaskRow({ task, onStatusToggle, onDelete, onUpdate, onAddComment }: Tas
                 <Send className="h-4 w-4" />
               </Button>
             </div>
-          </div>
-
-          {/* Save Button */}
-          <div className="flex items-center gap-2 pt-3 border-t">
-            <Button
-              size="sm"
-              onClick={() => setIsExpanded(false)}
-              className="bg-green-600 hover:bg-green-700"
-            >
-              Save Task
-            </Button>
-            <Button
-              size="sm"
-              variant="ghost"
-              onClick={() => setIsExpanded(false)}
-            >
-              Cancel
-            </Button>
           </div>
         </div>
       )}
