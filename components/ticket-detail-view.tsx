@@ -482,6 +482,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                     Customer Conversations
                   </button>
                 </div>
+                <span className="text-xs font-medium text-foreground">Legend:</span>
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-2">
                     <span className="px-2 py-0.5 text-xs border border-blue-200 bg-blue-50 rounded text-[#1e3a5f]">Text</span>
