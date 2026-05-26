@@ -412,11 +412,13 @@ export function TaskListView({ onLogOut }: { onLogOut?: () => void }) {
   // Save tasks to localStorage whenever they change
   useEffect(() => {
     if (isLoaded) {
+      console.log("[v0] Saving tasks to localStorage:", tasks)
       localStorage.setItem("tasks", JSON.stringify(tasks))
     }
   }, [tasks, isLoaded])
 
   const handleAdd = (task: Task) => {
+    console.log("[v0] Adding task:", task)
     setTasks((prev) => [task, ...prev])
     setShowAddForm(false)
   }
