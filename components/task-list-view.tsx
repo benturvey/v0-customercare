@@ -56,7 +56,7 @@ const RECURRENCE_CONFIG: Record<Recurrence, { label: string; className: string }
 }
 
 const CARRIERS = [
-  "Evri", "DPD", "Royal Mail", "DHL", "FedEx", "UPS", "Yodel", "Parcelforce", "Amazon Logistics", "Other",
+  "Evri", "DPD", "DPD Local", "Royal Mail", "DHL", "FedEx", "UPS", "Yodel", "Parcelforce", "Amazon Logistics", "Other",
 ]
 
 const PRIORITY_CONFIG: Record<Priority, { label: string; className: string }> = {
