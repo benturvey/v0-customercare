@@ -457,41 +457,41 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           <div className="rounded-lg border border-border p-4">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-base font-semibold text-[#1e3a5f]">Conversation</h2>
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2 border border-border rounded-md">
-                  <button
-                    onClick={() => setConversationFilter("all")}
-                    className={cn(
-                      "px-3 py-1.5 text-xs font-medium rounded transition-colors",
-                      conversationFilter === "all"
-                        ? "bg-primary text-white"
-                        : "text-muted-foreground hover:text-foreground"
-                    )}
-                  >
-                    All Conversations
-                  </button>
-                  <button
-                    onClick={() => setConversationFilter("customer")}
-                    className={cn(
-                      "px-3 py-1.5 text-xs font-medium rounded transition-colors",
-                      conversationFilter === "customer"
-                        ? "bg-primary text-white"
-                        : "text-muted-foreground hover:text-foreground"
-                    )}
-                  >
-                    Customer Conversations
-                  </button>
+            </div>
+            <div className="flex items-center gap-2 border border-border rounded-md mb-4 w-fit">
+              <button
+                onClick={() => setConversationFilter("all")}
+                className={cn(
+                  "px-3 py-1.5 text-xs font-medium rounded transition-colors",
+                  conversationFilter === "all"
+                    ? "bg-primary text-white"
+                    : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                All Conversations
+              </button>
+              <button
+                onClick={() => setConversationFilter("customer")}
+                className={cn(
+                  "px-3 py-1.5 text-xs font-medium rounded transition-colors",
+                  conversationFilter === "customer"
+                    ? "bg-primary text-white"
+                    : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                Customer Conversations
+              </button>
+            </div>
+            <div className="flex items-center gap-4 mb-4">
+              <span className="text-xs font-medium text-foreground">Legend:</span>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                  <span className="px-2 py-0.5 text-xs border border-blue-200 bg-blue-50 rounded text-[#1e3a5f]">Text</span>
+                  <span className="text-xs text-muted-foreground">Customer</span>
                 </div>
-                <span className="text-xs font-medium text-foreground">Legend:</span>
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2">
-                    <span className="px-2 py-0.5 text-xs border border-blue-200 bg-blue-50 rounded text-[#1e3a5f]">Text</span>
-                    <span className="text-xs text-muted-foreground">Customer</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="px-2 py-0.5 text-xs border border-border bg-white rounded text-[#1e3a5f]">Text</span>
-                    <span className="text-xs text-muted-foreground">Team &amp; Exceptions</span>
-                  </div>
+                <div className="flex items-center gap-2">
+                  <span className="px-2 py-0.5 text-xs border border-border bg-white rounded text-[#1e3a5f]">Text</span>
+                  <span className="text-xs text-muted-foreground">Team &amp; Exceptions</span>
                 </div>
               </div>
             </div>
