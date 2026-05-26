@@ -494,7 +494,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
                 </div>
               </div>
             </div>
-            {(conversationFilter === "all" || conversationFilter === "customer") && (
+            {conversationFilter === "all" && (
             <div className="rounded-lg border border-blue-100 bg-white p-3 mb-3">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-[#1e3a5f]">Agent - OZ-USER</span>
@@ -505,7 +505,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               </p>
             </div>
             )}
-            {conversationFilter === "all" && (
+            {(conversationFilter === "all" || conversationFilter === "customer") && (
             <div className="rounded-lg border border-blue-100 bg-blue-50 p-3 mb-3">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-[#1e3a5f]">CS Team</span>
@@ -518,7 +518,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               </p>
             </div>
             )}
-            {(conversationFilter === "all" || conversationFilter === "customer") && (
+            {conversationFilter === "all" && (
             <div className="rounded-lg border border-blue-100 bg-white p-3 mb-3">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-[#1e3a5f]">Agent - OZ-USER</span>
@@ -529,7 +529,7 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
               </p>
             </div>
             )}
-            {conversationFilter === "all" && (
+            {(conversationFilter === "all" || conversationFilter === "customer") && (
             <div className="rounded-lg border border-blue-100 bg-blue-50 p-3 mb-3">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-[#1e3a5f]">CS Team</span>
