@@ -427,7 +427,7 @@ const INITIAL_TASKS: Task[] = [
 export function TaskListView({ onLogOut }: { onLogOut?: () => void }) {
   const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS)
   const [showAddForm, setShowAddForm] = useState(false)
-  const [filterStatus, setFilterStatus] = useState<Status | "all">("all")
+  const [filterStatus, setFilterStatus] = useState<Status | "all" | "due-today" | "uncompleted" | "due-future">("all")
   const [isLoaded, setIsLoaded] = useState(false)
 
   // Load tasks from localStorage on mount
@@ -482,13 +482,26 @@ export function TaskListView({ onLogOut }: { onLogOut?: () => void }) {
     )
   }
 
-  const filteredTasks = filterStatus === "all" ? tasks : tasks.filter((t) => t.status === filterStatus)
+  const filteredTasks = (() => {
+    const today = new Date().toISOString().slice(0, 10)
+    switch (filterStatus) {
+      case "all": return tasks
+      case "due-today": return tasks.filter((t) => t.dueDate === today)
+      case "uncompleted": return tasks.filter((t) => t.status !== "done")
+      case "due-future": return tasks.filter((t) => t.dueDate && t.dueDate > today)
+      default: return tasks.filter((t) => t.status === filterStatus)
+    }
+  })()
 
+  const today = new Date().toISOString().slice(0, 10)
   const counts = {
     all: tasks.length,
     todo: tasks.filter((t) => t.status === "todo").length,
     "in-progress": tasks.filter((t) => t.status === "in-progress").length,
     done: tasks.filter((t) => t.status === "done").length,
+    "due-today": tasks.filter((t) => t.dueDate === today).length,
+    uncompleted: tasks.filter((t) => t.status !== "done").length,
+    "due-future": tasks.filter((t) => t.dueDate && t.dueDate > today).length,
   }
 
   return (
@@ -518,24 +531,32 @@ export function TaskListView({ onLogOut }: { onLogOut?: () => void }) {
         ) : (
           <>
             {/* Filter Tabs */}
-            <div className="flex items-center gap-1 mb-6 border-b border-border">
-              {(["all", "todo", "in-progress", "done"] as const).map((s) => (
+            <div className="flex items-center gap-1 mb-6 border-b border-border flex-wrap">
+              {([
+                { key: "all",         label: "All" },
+                { key: "due-today",   label: "Due Today" },
+                { key: "uncompleted", label: "Uncompleted" },
+                { key: "due-future",  label: "Due in Future" },
+                { key: "todo",        label: STATUS_CONFIG["todo"].label },
+                { key: "in-progress", label: STATUS_CONFIG["in-progress"].label },
+                { key: "done",        label: STATUS_CONFIG["done"].label },
+              ] as const).map(({ key, label }) => (
                 <button
-                  key={s}
-                  onClick={() => setFilterStatus(s)}
+                  key={key}
+                  onClick={() => setFilterStatus(key)}
                   className={cn(
-                    "px-4 py-2.5 text-sm font-medium border-b-2 -mb-px transition-colors capitalize",
-                    filterStatus === s
+                    "px-4 py-2.5 text-sm font-medium border-b-2 -mb-px transition-colors whitespace-nowrap",
+                    filterStatus === key
                       ? "border-primary text-primary"
                       : "border-transparent text-muted-foreground hover:text-foreground"
                   )}
                 >
-                  {s === "all" ? "All" : STATUS_CONFIG[s].label}
+                  {label}
                   <span className={cn(
                     "ml-2 text-xs px-1.5 py-0.5 rounded-full",
-                    filterStatus === s ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"
+                    filterStatus === key ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"
                   )}>
-                    {counts[s]}
+                    {counts[key]}
                   </span>
                 </button>
               ))}
@@ -556,7 +577,11 @@ export function TaskListView({ onLogOut }: { onLogOut?: () => void }) {
                     <Flag className="h-5 w-5 text-muted-foreground" />
                   </div>
                   <p className="text-sm font-medium text-foreground mb-1">
-                    {filterStatus === "all" ? "No tasks yet" : `No ${STATUS_CONFIG[filterStatus as Status]?.label ?? filterStatus} tasks`}
+                    {filterStatus === "all" ? "No tasks yet" :
+                     filterStatus === "due-today" ? "No tasks due today" :
+                     filterStatus === "uncompleted" ? "No uncompleted tasks" :
+                     filterStatus === "due-future" ? "No tasks due in the future" :
+                     `No ${STATUS_CONFIG[filterStatus as Status]?.label ?? filterStatus} tasks`}
                   </p>
                   <p className="text-xs text-muted-foreground mb-4">
                     {filterStatus === "all" ? "Add your first task to get started." : "Try switching to a different filter."}
