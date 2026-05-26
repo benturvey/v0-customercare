@@ -313,17 +313,16 @@ function TaskRow({ task, onStatusToggle, onDelete, onUpdate, onAddComment }: Tas
           )}
 
           {/* Save Button - Above Comments */}
-          <div className="flex items-center gap-2 pt-3 pb-3 border-t border-b">
+          <div className="flex items-center gap-2 pt-3 pb-3 border-t">
             <Button
               size="sm"
               onClick={() => setIsExpanded(false)}
-              className="bg-green-600 hover:bg-green-700"
             >
               Save Task
             </Button>
             <Button
               size="sm"
-              variant="ghost"
+              variant="outline"
               onClick={() => setIsExpanded(false)}
             >
               Cancel
