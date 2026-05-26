@@ -500,67 +500,6 @@ export function TicketDetailView({ ticket, onBack }: TicketDetailViewProps) {
           </div>
         </div>
 
-        {/* Team Conversation & Exceptions */}
-        <div>
-          <div className="rounded-lg border border-purple-200 p-4" style={{ backgroundColor: "#f0e6ff" }}>
-            <h2 className="text-base font-semibold text-[#1e3a5f] mb-4">Team Conversation & Exceptions</h2>
-            {escalationEntries.map((entry, index) => (
-              <div key={`escalation-${index}`} className="rounded-lg border border-gray-200 bg-gray-100 p-3 mb-3">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-semibold text-[#1e3a5f]">{entry.agent}</span>
-                  <span className="text-xs text-muted-foreground">{entry.date}</span>
-                </div>
-                <p className="text-sm text-foreground leading-relaxed">
-                  {entry.text}
-                </p>
-              </div>
-            ))}
-            {internalNoteEntries.map((entry, index) => (
-              <div key={`internalnote-${index}`} className="rounded-lg border border-gray-200 bg-gray-100 p-3 mb-3">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-semibold text-[#1e3a5f]">{entry.agent}</span>
-                  <span className="text-xs text-muted-foreground">{entry.date}</span>
-                </div>
-                <p className="text-sm text-foreground leading-relaxed">
-                  {entry.text}
-                </p>
-              </div>
-            ))}
-            {snoozeEntries.map((entry, index) => (
-              <div key={`snooze-${index}`} className="rounded-lg border border-gray-200 bg-gray-100 p-3 mb-3">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-semibold text-[#1e3a5f]">{entry.agent}</span>
-                  <span className="text-xs text-muted-foreground">{entry.date}</span>
-                </div>
-                <p className="text-sm text-foreground leading-relaxed">
-                  Ticket snoozed: {entry.reason}
-                </p>
-              </div>
-            ))}
-            <div className="rounded-lg border border-yellow-100 bg-white p-3 mb-3">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-semibold text-[#1e3a5f]">Agent - OZ-USER</span>
-                <span className="text-xs text-muted-foreground">06/05/2026 09:49</span>
-              </div>
-              <p className="text-sm text-foreground leading-relaxed">
-                Good morning, Evri are still experiencing delays. We apologise for the inconvenience and will continue to monitor. Kind regards -GFS Customer Care
-              </p>
-            </div>
-            <div className="rounded-lg border border-yellow-100 bg-white p-3 mb-3">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-semibold text-[#1e3a5f]">Agent - OZ-USER</span>
-                <span className="text-xs text-muted-foreground">05/05/2026 15:49</span>
-              </div>
-              <p className="text-sm text-foreground leading-relaxed">
-                Hello, Thanks for contacting GFS. I am sorry to advise the parcel has missed connection to the courier which has caused a delay. Evri are aiming to get this parcel back on track to your customer as soon as possible. We will check for further scans and update you daily. Kind regards -GFS Customer Care
-              </p>
-            </div>
-            <button className="w-full text-center text-sm text-[#009eff] hover:text-blue-700 font-medium transition-colors py-2 border-t border-yellow-100">
-              View More
-            </button>
-          </div>
-        </div>
-
         </div>
       </div>
 
