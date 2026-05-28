@@ -492,7 +492,12 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
   const [subTasks, setSubTasks] = useState<SubTask[]>([])
 
   const addSubTask = () => {
-    setSubTasks((prev) => [...prev, { taskNo: prev.length + 1, carriers: [], customer: "N/A", description: "" }])
+    console.log("[v0] addSubTask function called")
+    setSubTasks((prev) => {
+      const updated = [...prev, { taskNo: prev.length + 1, carriers: [], customer: "N/A", description: "" }]
+      console.log("[v0] subTasks updated to:", updated)
+      return updated
+    })
   }
 
   const updateSubTask = (index: number, updates: Partial<SubTask>) => {
@@ -740,11 +745,16 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
           <Button 
             size="sm" 
             variant="outline" 
-            onClick={(e) => { e.preventDefault(); e.stopPropagation(); addSubTask() }} 
+            onClick={(e) => { 
+              console.log("[v0] Add Sub Task button clicked")
+              e.preventDefault(); 
+              e.stopPropagation(); 
+              addSubTask() 
+            }} 
             type="button"
           >
             <Plus className="h-3 w-3 mr-1" />
-            Add Sub Task
+            + Add Sub Task
           </Button>
         </div>
         {subTasks.length > 0 && (
