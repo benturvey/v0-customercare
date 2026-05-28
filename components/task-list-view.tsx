@@ -818,8 +818,8 @@ const INITIAL_TASKS: Task[] = [
     raisedBy: "Alex Lucy",
     carriers: ["Evri"],
     customer: "Omlet",
-    dueDate: "2026-05-27",
-    recurrence: "daily",
+    dueDate: "2026-05-30",
+    recurrence: "none",
     createdAt: "2026-05-14T10:46:00.000Z",
     comments: [],
     subTasks: []
