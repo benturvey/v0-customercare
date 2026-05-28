@@ -996,6 +996,9 @@ export function TaskListView({ onLogOut }: { onLogOut?: () => void }) {
             )}
 
             {/* Task List */}
+            {showAddForm && (
+              <AddTaskForm onAdd={handleAdd} onCancel={() => setShowAddForm(false)} />
+            )}
             <div className="space-y-2">
               {filteredTasks.length === 0 && !showAddForm && (
                 <div className="flex flex-col items-center justify-center py-20 text-center">
