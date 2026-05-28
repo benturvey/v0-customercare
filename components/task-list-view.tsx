@@ -988,10 +988,7 @@ export function TaskListView({ onLogOut }: { onLogOut?: () => void }) {
               {([
                 { key: "all",         label: "All" },
                 { key: "due-today",   label: "Due Today" },
-                { key: "uncompleted", label: "Uncompleted" },
                 { key: "due-future",  label: "Due in Future" },
-                { key: "todo",        label: STATUS_CONFIG["todo"].label },
-                { key: "in-progress", label: STATUS_CONFIG["in-progress"].label },
                 { key: "done",        label: STATUS_CONFIG["done"].label },
               ] as const).map(({ key, label }) => (
                 <button
