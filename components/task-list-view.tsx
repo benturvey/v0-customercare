@@ -809,8 +809,8 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
 const INITIAL_TASKS: Task[] = [
   {
     id: "task-sample-1",
-    title: "Follow up on delayed shipments",
-    description: "Check status of shipments delayed in North West region",
+    title: "Book Collection for Omlet",
+    description: "Arrange collection booking for Omlet customer order",
     priority: "high",
     status: "in-progress",
     assignee: "Alex Lucy",
