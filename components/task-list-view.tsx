@@ -491,8 +491,7 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
   const [recurrenceEndDate, setRecurrenceEndDate] = useState("")
   const [subTasks, setSubTasks] = useState<SubTask[]>([])
 
-  const addSubTask = (e?: React.MouseEvent) => {
-    if (e) { e.preventDefault(); e.stopPropagation() }
+  const addSubTask = () => {
     setSubTasks((prev) => [...prev, { taskNo: prev.length + 1, carriers: [], customer: "N/A", description: "" }])
   }
 
@@ -738,7 +737,12 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
       <div className="border-t pt-3 space-y-3">
         <div className="flex items-center justify-between">
           <span className="text-xs font-semibold text-foreground">Sub Tasks</span>
-          <Button size="sm" variant="outline" onClick={(e) => addSubTask(e)} type="button">
+          <Button 
+            size="sm" 
+            variant="outline" 
+            onClick={(e) => { e.preventDefault(); e.stopPropagation(); addSubTask() }} 
+            type="button"
+          >
             <Plus className="h-3 w-3 mr-1" />
             Add Sub Task
           </Button>
