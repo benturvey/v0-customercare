@@ -861,7 +861,7 @@ const INITIAL_TASKS: Task[] = [
   {
     id: "task-sample-4",
     title: "Book Collection for Omlet",
-    description: "Arrange collection booking for Omlet customer order",
+    description: "Arrange collection booking for Omlet",
     priority: "high",
     status: "in-progress",
     assignee: "Alex Lucy",
