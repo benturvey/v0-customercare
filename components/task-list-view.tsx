@@ -28,6 +28,7 @@ interface Comment {
 interface SubTask {
   taskNo: number
   carriers: string[]
+  customer: string
   description: string
 }
 
@@ -429,6 +430,52 @@ function CarrierMultiSelect({ value, onChange }: { value: string[]; onChange: (v
   )
 }
 
+function CustomerSearchSelect({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+  const [open, setOpen] = useState(false)
+  const [search, setSearch] = useState("")
+  const filtered = CUSTOMERS.filter((c) => c.toLowerCase().includes(search.toLowerCase()))
+  return (
+    <div className="relative">
+      <button
+        type="button"
+        onClick={(e) => { e.preventDefault(); e.stopPropagation(); setOpen((p) => !p) }}
+        className="flex items-center justify-between gap-2 text-xs border rounded px-2 py-1.5 bg-background text-foreground min-w-[120px] w-full h-8"
+      >
+        <span className="truncate">{value || "Select..."}</span>
+        <ChevronDown className="h-3 w-3 shrink-0 text-muted-foreground" />
+      </button>
+      {open && (
+        <div className="absolute z-50 mt-1 w-full min-w-[150px] rounded-md border bg-background shadow-md">
+          <div className="p-2 border-b">
+            <Input
+              placeholder="Search..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="text-xs h-7"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+          <div className="max-h-[150px] overflow-y-auto">
+            {filtered.map((c) => (
+              <button
+                key={c}
+                type="button"
+                onClick={(e) => { e.preventDefault(); e.stopPropagation(); onChange(c); setOpen(false); setSearch("") }}
+                className={cn(
+                  "w-full text-left px-3 py-1.5 text-xs hover:bg-muted cursor-pointer",
+                  value === c && "bg-primary/10 text-primary"
+                )}
+              >
+                {c}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
 function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
   const [title, setTitle] = useState("")
   const [raisedDate, setRaisedDate] = useState(new Date().toISOString().slice(0, 10))
@@ -445,8 +492,8 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
   const [subTasks, setSubTasks] = useState<SubTask[]>([])
 
   const addSubTask = (e?: React.MouseEvent) => {
-    if (e) e.preventDefault()
-    setSubTasks((prev) => [...prev, { taskNo: prev.length + 1, carriers: [], description: "" }])
+    if (e) { e.preventDefault(); e.stopPropagation() }
+    setSubTasks((prev) => [...prev, { taskNo: prev.length + 1, carriers: [], customer: "N/A", description: "" }])
   }
 
   const updateSubTask = (index: number, updates: Partial<SubTask>) => {
@@ -699,18 +746,23 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
         {subTasks.length > 0 && (
           <div className="space-y-2">
             {/* Header row */}
-            <div className="grid grid-cols-[40px_1fr_1fr_32px] gap-2 px-2">
+            <div className="grid grid-cols-[40px_1fr_1fr_1fr_32px] gap-2 px-2">
               <span className="text-[10px] font-semibold uppercase text-muted-foreground">No.</span>
               <span className="text-[10px] font-semibold uppercase text-muted-foreground">Carrier</span>
+              <span className="text-[10px] font-semibold uppercase text-muted-foreground">Customer</span>
               <span className="text-[10px] font-semibold uppercase text-muted-foreground">Description</span>
               <span />
             </div>
             {subTasks.map((st, index) => (
-              <div key={index} className="grid grid-cols-[40px_1fr_1fr_32px] gap-2 items-center bg-muted/40 rounded-md px-2 py-2">
+              <div key={index} className="grid grid-cols-[40px_1fr_1fr_1fr_32px] gap-2 items-center bg-muted/40 rounded-md px-2 py-2">
                 <span className="text-xs font-semibold text-muted-foreground text-center">{st.taskNo}</span>
                 <CarrierMultiSelect
                   value={st.carriers}
                   onChange={(v) => updateSubTask(index, { carriers: v })}
+                />
+                <CustomerSearchSelect
+                  value={st.customer}
+                  onChange={(v) => updateSubTask(index, { customer: v })}
                 />
                 <Input
                   placeholder="Description..."
@@ -720,7 +772,7 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
                 />
                 <button
                   type="button"
-                  onClick={() => removeSubTask(index)}
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); removeSubTask(index) }}
                   className="flex items-center justify-center h-7 w-7 rounded hover:bg-red-50 hover:text-red-500 text-muted-foreground transition-colors"
                 >
                   <X className="h-3.5 w-3.5" />
