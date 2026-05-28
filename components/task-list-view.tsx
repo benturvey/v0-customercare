@@ -857,7 +857,24 @@ const INITIAL_TASKS: Task[] = [
     createdAt: "2026-05-12T14:00:00.000Z",
     comments: [],
     subTasks: []
-  }
+  },
+  {
+    id: "task-sample-4",
+    title: "Book Collection for Omlet",
+    description: "Arrange collection booking for Omlet customer order",
+    priority: "high",
+    status: "in-progress",
+    assignee: "Alex Lucy",
+    raisedDate: "2026-05-14",
+    raisedBy: "Alex Lucy",
+    carriers: ["Evri"],
+    customer: "Omlet",
+    dueDate: "2026-05-30",
+    recurrence: "none",
+    createdAt: "2026-05-14T10:46:00.000Z",
+    comments: [],
+    subTasks: []
+  },
 ]
 
 export function TaskListView({ onLogOut }: { onLogOut?: () => void }) {
