@@ -340,7 +340,7 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
 
       {/* Edit Customer Sheet */}
       <Sheet open={editSheetOpen} onOpenChange={setEditSheetOpen}>
-        <SheetContent className="w-[400px] sm:w-[500px]">
+        <SheetContent className="w-[440px] sm:w-[600px] px-6">
           <SheetHeader>
             <SheetTitle className="text-xl font-semibold text-[#1e3a5f]">Edit Customer Details</SheetTitle>
           </SheetHeader>
