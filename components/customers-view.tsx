@@ -210,7 +210,7 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
                       ? "bg-green-100 text-green-800"
                       : "bg-gray-100 text-gray-600"
                   }`}>
-                    {(customer.status ?? "active") === "active" ? "Active" : "Inactive"}
+                    {(customer.status ?? "active") === "active" ? "Live" : "Inactive"}
                   </span>
                 </td>
                 <td className="py-4 px-4 text-sm text-foreground">{customer.accountManager || "—"}</td>
