@@ -13,6 +13,8 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet"
 import { X, Pencil, Search, MoreVertical, Menu } from "lucide-react"
+import { Switch } from "@/components/ui/switch"
+import { Label } from "@/components/ui/label"
 import {
   Select,
   SelectContent,
@@ -55,6 +57,7 @@ const initialCustomers: Customer[] = [
 export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
   const [customers, setCustomers] = useState<Customer[]>(initialCustomers)
   const [searchQuery, setSearchQuery] = useState("")
+  const [liveOnly, setLiveOnly] = useState(false)
   const [editingId, setEditingId] = useState<string | null>(null)
   const [tagInput, setTagInput] = useState("")
   const [editSheetOpen, setEditSheetOpen] = useState(false)
@@ -142,12 +145,13 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
   // Filter customers based on search query
   const filteredCustomers = customers.filter((customer) => {
     const query = searchQuery.toLowerCase()
-    return (
+    const matchesSearch =
       customer.company.toLowerCase().includes(query) ||
       customer.contact.toLowerCase().includes(query) ||
       customer.telephone.toLowerCase().includes(query) ||
       customer.emails.some(email => email.toLowerCase().includes(query))
-    )
+    const matchesLive = !liveOnly || (customer.status ?? "active") === "active"
+    return matchesSearch && matchesLive
   })
 
   const handleRemoveEmailFromForm = (index: number) => {
@@ -169,8 +173,8 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
       </div>
 
       {/* Search Bar */}
-      <div className="mb-4">
-        <div className="relative max-w-md">
+      <div className="mb-4 flex items-center justify-between gap-4">
+        <div className="relative max-w-md flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             type="text"
@@ -179,6 +183,16 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10"
           />
+        </div>
+        <div className="flex items-center gap-2 shrink-0">
+          <Switch
+            id="live-only"
+            checked={liveOnly}
+            onCheckedChange={setLiveOnly}
+          />
+          <Label htmlFor="live-only" className="text-sm whitespace-nowrap cursor-pointer">
+            Live Customers Only
+          </Label>
         </div>
       </div>
 
