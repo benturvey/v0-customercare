@@ -185,6 +185,7 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
         <table className="w-full">
           <thead>
             <tr className="border-b border-border">
+              <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">ID</th>
               <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Company</th>
               <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Account Manager</th>
               <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Contact</th>
@@ -199,6 +200,7 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
           <tbody>
             {filteredCustomers.map((customer) => (
               <tr key={customer.id} className="border-b border-border last:border-b-0">
+                <td className="py-4 px-4 text-sm text-muted-foreground">{customer.id}</td>
                 <td className="py-4 px-4 text-sm font-medium text-foreground">{customer.company}</td>
                 <td className="py-4 px-4 text-sm text-foreground">{customer.accountManager || "—"}</td>
                 <td className="py-4 px-4 text-sm text-foreground">{customer.contact}</td>
