@@ -62,10 +62,13 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
   const [editSheetOpen, setEditSheetOpen] = useState(false)
   const [editingCustomer, setEditingCustomer] = useState<Customer | null>(null)
   const [editForm, setEditForm] = useState({
+    status: "active" as "active" | "inactive",
+    accountManager: "",
     contact: "",
     telephone: "",
     emails: [] as string[],
     receiveEmails: false,
+    skillLevel: "",
   })
   const [newEmailInput, setNewEmailInput] = useState("")
   const [customerDetailsOpen, setCustomerDetailsOpen] = useState(false)
@@ -104,10 +107,13 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
   const handleEditCustomer = (customer: Customer) => {
     setEditingCustomer(customer)
     setEditForm({
+      status: customer.status ?? "active",
+      accountManager: customer.accountManager,
       contact: customer.contact,
       telephone: customer.telephone,
       emails: [...customer.emails],
       receiveEmails: customer.receiveEmails,
+      skillLevel: customer.customTags[0] || "",
     })
     setNewEmailInput("")
     setEditSheetOpen(true)
@@ -119,10 +125,13 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
         c.id === editingCustomer.id
           ? {
             ...c,
+            status: editForm.status,
+            accountManager: editForm.accountManager,
             contact: editForm.contact,
             telephone: editForm.telephone,
             emails: editForm.emails,
             receiveEmails: editForm.receiveEmails,
+            customTags: editForm.skillLevel ? [editForm.skillLevel] : [],
           }
           : c
       ))
@@ -349,6 +358,34 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
                 />
               </div>
 
+              {/* Status */}
+              <div className="space-y-2">
+                <Label htmlFor="status">Status</Label>
+                <Select
+                  value={editForm.status}
+                  onValueChange={(value) => setEditForm(prev => ({ ...prev, status: value as "active" | "inactive" }))}
+                >
+                  <SelectTrigger id="status">
+                    <SelectValue placeholder="Select status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="active">Live</SelectItem>
+                    <SelectItem value="inactive">Inactive</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Account Manager */}
+              <div className="space-y-2">
+                <Label htmlFor="accountManager">Account Manager</Label>
+                <Input
+                  id="accountManager"
+                  value={editForm.accountManager}
+                  onChange={(e) => setEditForm(prev => ({ ...prev, accountManager: e.target.value }))}
+                  placeholder="Enter account manager"
+                />
+              </div>
+
               {/* Contact */}
               <div className="space-y-2">
                 <Label htmlFor="contact">Contact</Label>
@@ -424,6 +461,26 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
                 <Label htmlFor="receiveEmails" className="cursor-pointer">
                   Receive Emails
                 </Label>
+              </div>
+
+              {/* Skill Level */}
+              <div className="space-y-2">
+                <Label htmlFor="skillLevel">Skill Level</Label>
+                <Select
+                  value={editForm.skillLevel}
+                  onValueChange={(value) => setEditForm(prev => ({ ...prev, skillLevel: value }))}
+                >
+                  <SelectTrigger id="skillLevel">
+                    <SelectValue placeholder="Select skill level" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {SKILL_LEVELS.map((level) => (
+                      <SelectItem key={level} value={level}>
+                        {level}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               {/* Action Buttons */}
