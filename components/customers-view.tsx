@@ -27,6 +27,7 @@ const SKILL_LEVELS = ["L1", "L2", "L3", "L4", "MGM", "ADM"]
 interface Customer {
   id: string
   company: string
+  status?: "active" | "inactive"
   accountManager: string
   contact: string
   telephone: string
@@ -187,6 +188,7 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
             <tr className="border-b border-border">
               <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">ID</th>
               <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Company</th>
+              <th className="text-center py-3 px-4 font-medium text-muted-foreground text-sm">Status</th>
               <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Account Manager</th>
               <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Contact</th>
               <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Telephone</th>
@@ -202,6 +204,15 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
               <tr key={customer.id} className="border-b border-border last:border-b-0">
                 <td className="py-4 px-4 text-sm text-muted-foreground">{customer.id}</td>
                 <td className="py-4 px-4 text-sm font-medium text-foreground">{customer.company}</td>
+                <td className="py-4 px-4 text-sm text-center">
+                  <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
+                    (customer.status ?? "active") === "active"
+                      ? "bg-green-100 text-green-800"
+                      : "bg-gray-100 text-gray-600"
+                  }`}>
+                    {(customer.status ?? "active") === "active" ? "Active" : "Inactive"}
+                  </span>
+                </td>
                 <td className="py-4 px-4 text-sm text-foreground">{customer.accountManager || "—"}</td>
                 <td className="py-4 px-4 text-sm text-foreground">{customer.contact}</td>
                 <td className="py-4 px-4 text-sm text-foreground">{customer.telephone}</td>
