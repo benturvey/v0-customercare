@@ -247,7 +247,7 @@ function TaskRow({ task, onStatusToggle, onDelete, onUpdate, onAddComment }: Tas
               </select>
             </div>
             <div className="flex flex-col gap-1">
-              <label className="text-xs text-muted-foreground font-medium">Assignee</label>
+              <label className="text-xs text-muted-foreground font-medium">Updated By</label>
               <Input
                 value={task.assignee}
                 onChange={(e) => onUpdate(task.id, { assignee: e.target.value })}
