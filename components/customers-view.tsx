@@ -242,22 +242,24 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
                 <td className="py-4 px-4 text-sm text-foreground">{customer.telephone}</td>
                 <td className="py-4 px-4 text-sm text-foreground">
                   <div className="flex flex-wrap gap-1">
-                    {customer.emails.map((email, index) => (
-                      <span
-                        key={index}
-                        className="inline-flex items-center gap-1 px-2 py-0.5 bg-muted rounded text-xs"
-                      >
-                        {email}
-                        <button
-                          onClick={() => handleRemoveEmail(customer.id, index)}
-                          className="hover:text-destructive"
-                          title="Remove email"
+                    {customer.emails
+                      .map((email, index) => ({ email, index }))
+                      .filter(({ email }) => email.trim() !== "")
+                      .map(({ email, index }) => (
+                        <span
+                          key={index}
+                          className="inline-flex items-center gap-1 px-2 py-0.5 bg-muted rounded text-xs"
                         >
-                          <X className="h-3 w-3" />
-                        </button>
-                      </span>
-                    ))}
-                    {customer.emails.length === 0 && <span className="text-muted-foreground">—</span>}
+                          {email}
+                          <button
+                            onClick={() => handleRemoveEmail(customer.id, index)}
+                            className="hover:text-destructive"
+                            title="Remove email"
+                          >
+                            <X className="h-3 w-3" />
+                          </button>
+                        </span>
+                      ))}
                   </div>
                 </td>
                 <td className="py-4 px-4 text-sm text-center text-foreground">
