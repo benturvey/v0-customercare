@@ -21,7 +21,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { CustomerDetailsModal } from "@/components/customer-details-modal"
 
 const SKILL_LEVELS = ["L1", "L2", "L3", "L4", "MGM", "ADM"]
 
@@ -36,6 +35,12 @@ interface Customer {
   receiveEmails: boolean
   tickets: number
   customTags: string[]
+  addressLine1?: string
+  addressLine2?: string
+  town?: string
+  county?: string
+  postcode?: string
+  country?: string
 }
 
 const initialCustomers: Customer[] = [
@@ -504,17 +509,49 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
         </SheetContent>
       </Sheet>
 
-      {/* Customer Details Modal */}
-      {selectedCustomerForDetails && (
-        <CustomerDetailsModal
-          open={customerDetailsOpen}
-          onClose={() => {
-            setCustomerDetailsOpen(false)
-            setSelectedCustomerForDetails(null)
-          }}
-          customer={selectedCustomerForDetails}
-        />
-      )}
+      {/* Customer Address Sheet */}
+      <Sheet
+        open={customerDetailsOpen}
+        onOpenChange={(open) => {
+          setCustomerDetailsOpen(open)
+          if (!open) setSelectedCustomerForDetails(null)
+        }}
+      >
+        <SheetContent className="w-[440px] sm:w-[600px] px-6">
+          <SheetHeader>
+            <SheetTitle className="text-xl font-semibold text-[#1e3a5f]">Customer Address</SheetTitle>
+          </SheetHeader>
+
+          {selectedCustomerForDetails && (
+            <div className="space-y-6 mt-6">
+              <div className="space-y-2">
+                <Label htmlFor="addressLine1">Address Line 1</Label>
+                <Input id="addressLine1" value={selectedCustomerForDetails.addressLine1 ?? ""} readOnly />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="addressLine2">Address Line 2</Label>
+                <Input id="addressLine2" value={selectedCustomerForDetails.addressLine2 ?? ""} readOnly />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="town">Town</Label>
+                <Input id="town" value={selectedCustomerForDetails.town ?? ""} readOnly />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="county">County</Label>
+                <Input id="county" value={selectedCustomerForDetails.county ?? ""} readOnly />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="postcode">Postcode</Label>
+                <Input id="postcode" value={selectedCustomerForDetails.postcode ?? ""} readOnly />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="country">Country</Label>
+                <Input id="country" value={selectedCustomerForDetails.country ?? ""} readOnly />
+              </div>
+            </div>
+          )}
+        </SheetContent>
+      </Sheet>
     </div>
   )
 }
