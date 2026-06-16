@@ -308,27 +308,30 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
                   )}
                 </td>
                 <td className="py-4 px-4 text-center">
-                  <div className="flex items-center justify-center gap-1">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-8 w-8 text-muted-foreground hover:text-foreground"
-                      onClick={() => handleEditCustomer(customer)}
-                      title="Edit customer"
-                    >
-                      <Pencil className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-8 w-8 text-muted-foreground hover:text-foreground"
-                      onClick={() => handleViewCustomerDetails(customer)}
-                      title="View address"
-                    >
-                      <MapPin className="h-4 w-4" />
-                    </Button>
-                  </div>
+                  {(customer.status ?? "LIVE") !== "TERM" && (
+                    <div className="flex items-center justify-center gap-1">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8 text-muted-foreground hover:text-foreground"
+                        onClick={() => handleEditCustomer(customer)}
+                        title="Edit customer"
+                      >
+                        <Pencil className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8 text-muted-foreground hover:text-foreground"
+                        onClick={() => handleViewCustomerDetails(customer)}
+                        title="View address"
+                      >
+                        <MapPin className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  )}
                 </td>
+
               </tr>
             ))}
           </tbody>
