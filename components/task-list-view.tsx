@@ -518,7 +518,7 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
       title: title.trim(),
       description: "",
       priority,
-      status: "pending" as const,
+      status: (recurrence !== "none" ? "in-progress" : "pending") as Status,
       assignee: raisedBy,
       raisedDate,
       raisedBy,
