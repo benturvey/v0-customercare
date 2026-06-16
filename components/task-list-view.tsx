@@ -811,6 +811,23 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
 
 const INITIAL_TASKS: Task[] = [
   {
+    id: "task-vax-collection",
+    title: "Book VAX collection",
+    description: "",
+    priority: "medium",
+    status: "pending",
+    assignee: "Jacquie Cadger",
+    raisedDate: "2026-06-16",
+    raisedBy: "Jacquie Cadger",
+    carriers: ["DPD"],
+    customer: "VAX LIMITED",
+    dueDate: "2026-06-17",
+    recurrence: "none",
+    createdAt: "2026-06-16T14:39:00.000Z",
+    comments: [],
+    subTasks: []
+  },
+  {
     id: "task-sample-1",
     title: "Book Collection for Omlet",
     description: "Arrange collection booking for Omlet customer order",
