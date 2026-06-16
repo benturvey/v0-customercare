@@ -28,7 +28,7 @@ const SKILL_LEVELS = ["L1", "L2", "L3", "L4", "MGM", "ADM"]
 interface Customer {
   id: string
   company: string
-  status?: "active" | "inactive"
+  status?: "LIVE" | "TERM" | "TECH"
   accountManager: string
   contact: string
   telephone: string
