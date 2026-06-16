@@ -15,7 +15,7 @@ import {
 import { cn } from "@/lib/utils"
 
 type Priority = "low" | "medium" | "high"
-type Status = "todo" | "in-progress" | "done"
+type Status = "pending" | "todo" | "in-progress" | "done"
 type Recurrence = "none" | "daily" | "weekly" | "monthly"
 
 interface Comment {
@@ -76,6 +76,7 @@ const PRIORITY_CONFIG: Record<Priority, { label: string; className: string }> = 
 }
 
 const STATUS_CONFIG: Record<Status, { label: string; className: string }> = {
+  "pending":     { label: "Pending",     className: "bg-amber-100 text-amber-700" },
   "todo":        { label: "To Do",       className: "bg-slate-100 text-slate-600" },
   "in-progress": { label: "In Progress", className: "bg-blue-100 text-blue-700" },
   "done":        { label: "Done",        className: "bg-green-100 text-green-700" },
@@ -182,7 +183,8 @@ function TaskRow({ task, onStatusToggle, onDelete, onUpdate, onAddComment }: Tas
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => onUpdate(task.id, { status: "todo" })}>Mark as To Do</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => onUpdate(task.id, { status: "pending" })}>Mark as Pending</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => onUpdate(task.id, { status: "todo" })}>Mark as To Do</DropdownMenuItem>
               <DropdownMenuItem onClick={() => onUpdate(task.id, { status: "in-progress" })}>Mark as In Progress</DropdownMenuItem>
               <DropdownMenuItem onClick={() => onUpdate(task.id, { status: "done" })}>Mark as Done</DropdownMenuItem>
               <DropdownMenuItem onClick={() => onDelete(task.id)} className="text-destructive focus:text-destructive">
@@ -241,6 +243,7 @@ function TaskRow({ task, onStatusToggle, onDelete, onUpdate, onAddComment }: Tas
                 onChange={(e) => onUpdate(task.id, { status: e.target.value as Status })}
                 className="text-xs border rounded px-2 py-1.5 bg-background text-foreground"
               >
+                <option value="pending">Pending</option>
                 <option value="todo">To Do</option>
                 <option value="in-progress">In Progress</option>
                 <option value="done">Done</option>
@@ -515,7 +518,7 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
       title: title.trim(),
       description: "",
       priority,
-      status: "todo" as const,
+      status: "pending" as const,
       assignee: raisedBy,
       raisedDate,
       raisedBy,
