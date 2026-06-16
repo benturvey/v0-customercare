@@ -1023,10 +1023,10 @@ export function TaskListView({ onLogOut }: { onLogOut?: () => void }) {
             {/* Filter Tabs */}
             <div className="flex items-center gap-1 mb-6 border-b border-border flex-wrap">
               {([
-                { key: "all",         label: "All" },
                 { key: "due-today",   label: "Due Today" },
                 { key: "due-future",  label: "Due in Future" },
                 { key: "done",        label: STATUS_CONFIG["done"].label },
+                { key: "all",         label: "All" },
               ] as const).map(({ key, label }) => (
                 <button
                   key={key}
