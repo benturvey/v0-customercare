@@ -270,7 +270,7 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
                     {customer.receiveEmails ? "Yes" : "No"}
                   </span>
                 </td>
-                <td className="py-4 px-4 text-sm text-center text-foreground">{customer.tickets}</td>
+                <td className="py-4 px-4 text-sm text-center text-foreground">{customer.tickets === 0 ? "" : customer.tickets}</td>
                 <td className="py-4 px-4 text-sm text-center">
                   {editingId === customer.id ? (
                     <div className="flex items-center justify-center gap-2">
