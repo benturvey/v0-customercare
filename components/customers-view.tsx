@@ -86,7 +86,7 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
   const [editSheetOpen, setEditSheetOpen] = useState(false)
   const [editingCustomer, setEditingCustomer] = useState<Customer | null>(null)
   const [editForm, setEditForm] = useState({
-    status: "active" as "active" | "inactive",
+    status: "LIVE" as "LIVE" | "TERM" | "TECH",
     accountManager: "",
     contact: "",
     telephone: "",
@@ -131,7 +131,7 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
   const handleEditCustomer = (customer: Customer) => {
     setEditingCustomer(customer)
     setEditForm({
-      status: customer.status ?? "active",
+      status: customer.status ?? "LIVE",
       accountManager: customer.accountManager,
       contact: customer.contact,
       telephone: customer.telephone,
@@ -182,7 +182,7 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
       customer.contact.toLowerCase().includes(query) ||
       customer.telephone.toLowerCase().includes(query) ||
       customer.emails.some(email => email.toLowerCase().includes(query))
-    const matchesLive = !liveOnly || (customer.status ?? "active") === "active"
+    const matchesLive = !liveOnly || (customer.status ?? "LIVE") === "LIVE"
     return matchesSearch && matchesLive
   })
 
@@ -252,11 +252,13 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
                 <td className="py-4 px-4 text-sm font-medium text-foreground">{customer.company}</td>
                 <td className="py-4 px-4 text-sm text-center">
                   <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
-                    (customer.status ?? "active") === "active"
+                    (customer.status ?? "LIVE") === "LIVE"
                       ? "bg-green-100 text-green-800"
-                      : "bg-gray-100 text-gray-600"
+                      : (customer.status ?? "LIVE") === "TERM"
+                        ? "bg-red-100 text-red-800"
+                        : "bg-blue-100 text-blue-800"
                   }`}>
-                    {(customer.status ?? "active") === "active" ? "Live" : "Inactive"}
+                    {customer.status ?? "LIVE"}
                   </span>
                 </td>
                 <td className="py-4 px-4 text-sm text-foreground">{customer.accountManager || "—"}</td>
@@ -387,14 +389,15 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
                 <Label htmlFor="status">Status</Label>
                 <Select
                   value={editForm.status}
-                  onValueChange={(value) => setEditForm(prev => ({ ...prev, status: value as "active" | "inactive" }))}
+                  onValueChange={(value) => setEditForm(prev => ({ ...prev, status: value as "LIVE" | "TERM" | "TECH" }))}
                 >
                   <SelectTrigger id="status">
                     <SelectValue placeholder="Select status" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="active">Live</SelectItem>
-                    <SelectItem value="inactive">Inactive</SelectItem>
+                    <SelectItem value="LIVE">LIVE</SelectItem>
+                    <SelectItem value="TERM">TERM</SelectItem>
+                    <SelectItem value="TECH">TECH</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
