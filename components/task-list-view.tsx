@@ -815,7 +815,7 @@ const INITIAL_TASKS: Task[] = [
     title: "Book OMLET collection",
     description: "",
     priority: "medium",
-    status: "pending",
+    status: "in-progress",
     assignee: "Jacquie Cadger",
     raisedDate: "2026-06-16",
     raisedBy: "Jacquie Cadger",
