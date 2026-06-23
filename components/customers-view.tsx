@@ -44,6 +44,18 @@ interface Customer {
   country?: string
 }
 
+const GROUP_COLORS: Record<string, string> = {
+  P1: "bg-rose-100 text-rose-700",
+  P2: "bg-amber-100 text-amber-700",
+  P3: "bg-emerald-100 text-emerald-700",
+  P4: "bg-sky-100 text-sky-700",
+  P5: "bg-indigo-100 text-indigo-700",
+}
+
+function getGroupColor(group: string): string {
+  return GROUP_COLORS[group.toUpperCase()] ?? "bg-slate-100 text-slate-700"
+}
+
 const initialCustomers: Customer[] = [
   { id: "2684",  company: "11 DEGREES LIMITED",  status: "TERM",  accountManager: "",        contact: "", telephone: "", emails: [""], receiveEmails: false, tickets: "", customTags: [""] },
   { id: "3360",  company: "1973 LIMITED",     status: "TERM",      accountManager: "",           contact: "", telephone: "", emails: [""], receiveEmails: false, tickets: 0, customTags: [""] },
@@ -319,7 +331,15 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
                     </span>
                   )}
                 </td>
-                <td className="py-4 px-4 text-sm text-foreground">{customer.group || "—"}</td>
+                <td className="py-4 px-4 text-sm">
+                  {customer.group ? (
+                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${getGroupColor(customer.group)}`}>
+                      {customer.group}
+                    </span>
+                  ) : (
+                    <span className="text-muted-foreground">—</span>
+                  )}
+                </td>
                 <td className="py-4 px-4 text-center">
                   {(customer.status ?? "LIVE") !== "TERM" && (
                     <div className="flex items-center justify-center gap-1">
