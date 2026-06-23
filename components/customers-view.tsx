@@ -27,6 +27,7 @@ const SKILL_LEVELS = ["L1", "L2", "L3", "L4", "MGM", "ADM"]
 interface Customer {
   id: string
   company: string
+  group?: string
   status?: "LIVE" | "TERM" | "TECH"
   accountManager: string
   contact: string
@@ -63,6 +64,7 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
   const [editingCustomer, setEditingCustomer] = useState<Customer | null>(null)
   const [editForm, setEditForm] = useState({
     status: "LIVE" as "LIVE" | "TERM" | "TECH",
+    group: "",
     accountManager: "",
     contact: "",
     telephone: "",
@@ -108,6 +110,7 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
     setEditingCustomer(customer)
     setEditForm({
       status: customer.status ?? "LIVE",
+      group: customer.group ?? "",
       accountManager: customer.accountManager,
       contact: customer.contact,
       telephone: customer.telephone,
@@ -126,6 +129,7 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
           ? {
             ...c,
             status: editForm.status,
+            group: editForm.group,
             accountManager: editForm.accountManager,
             contact: editForm.contact,
             telephone: editForm.telephone,
@@ -210,6 +214,7 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
             <tr className="border-b border-border">
               <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">ID</th>
               <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Company</th>
+              <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Group</th>
               <th className="text-center py-3 px-4 font-medium text-muted-foreground text-sm">Status</th>
               <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Account Manager</th>
               <th className="text-left py-3 px-4 font-medium text-muted-foreground text-sm">Contact</th>
@@ -226,6 +231,7 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
               <tr key={customer.id} className="border-b border-border last:border-b-0">
                 <td className="py-4 px-4 text-sm text-muted-foreground">{customer.id}</td>
                 <td className="py-4 px-4 text-sm font-medium text-foreground">{customer.company}</td>
+                <td className="py-4 px-4 text-sm text-foreground">{customer.group || "—"}</td>
                 <td className="py-4 px-4 text-sm text-center">
                   <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
                     (customer.status ?? "LIVE") === "LIVE"
@@ -381,6 +387,17 @@ export function CustomersView({ onLogOut }: { onLogOut?: () => void }) {
                     <SelectItem value="TECH">TECH</SelectItem>
                   </SelectContent>
                 </Select>
+              </div>
+
+              {/* Group */}
+              <div className="space-y-2">
+                <Label htmlFor="group">Group</Label>
+                <Input
+                  id="group"
+                  value={editForm.group}
+                  onChange={(e) => setEditForm(prev => ({ ...prev, group: e.target.value }))}
+                  placeholder="Enter group"
+                />
               </div>
 
               {/* Account Manager */}
