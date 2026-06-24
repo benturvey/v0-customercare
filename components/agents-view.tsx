@@ -152,7 +152,7 @@ const initialAgents: Agent[] = [
     name: "George Lilliston",
     email: "george.lilliston@gfsdeliver.com",
     primaryFunction: "Exceptions & Queries",
-    role: "agent",
+    role: "TRK",
     skillLevel: "L2",
     status: "active",
     currentTickets: 0,
