@@ -118,7 +118,7 @@ const initialAgents: Agent[] = [
     id: "8",
     name: "Ben Lund",
     email: "ben.lund@gfsdeliver.com",
-    primaryFunction: "Managemer",
+    primaryFunction: "Manager",
     role: "ADM",
     skillLevel: "L4",
     status: "active",
